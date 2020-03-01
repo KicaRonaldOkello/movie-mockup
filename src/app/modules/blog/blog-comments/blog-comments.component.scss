@@ -1,0 +1,64 @@
+.comments {
+    display: flex;
+    flex-direction: column;
+    text-align: justify;
+    .commentor {
+        width: 60px;
+        height: 60px;
+        border-radius: 60%;
+        object-fit: cover;
+        border: 2px solid rgb(92, 89, 89);
+    }
+
+    .comment {
+        display: flex;
+        margin-bottom: 30px;
+    }
+
+    .comment-align-right {
+        margin-left: 5px;
+
+        p {
+            font-size: 10px;
+            font-weight: 500;
+        }
+    }
+
+    .comment-thumbs-up {
+        display: flex;
+        font-size: 8px;
+        font-weight: bold;
+        color: rgb(170, 165, 165);
+        align-items: center;
+        height: 20px;
+
+        img {
+            margin-left: 5px;
+        }
+
+        p {
+            padding-top: 7px;
+        }
+    }
+
+    .sub-comments {
+        width: 80%;
+        display: flex;
+        align-self: flex-end;
+
+        .sub-commentor {
+            width: 40px;
+            height: 40px;
+            border-radius: 60%;
+            object-fit: cover;
+            border: 2px solid rgb(92, 89, 89);
+            flex: 0 0 40px;
+        }
+
+        p {
+            font-size: 10px;
+            font-weight: 500;
+            margin-left: 5px;
+        }
+    }
+}

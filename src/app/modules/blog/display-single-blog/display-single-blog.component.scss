@@ -1,0 +1,123 @@
+.single-blog-body {
+    display: flex;
+    width: 80vw;
+    background-color: #f5f6f8;
+
+
+    .side-bar {
+        flex: 0 0 30%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 160px;
+
+        img {
+            width: 120px;
+            height: 120px;
+            border-radius: 60%;
+            object-fit: cover;
+            border: 5px solid rgb(92, 89, 89);
+        }
+
+        .author-name {
+            font-weight: bold;
+            margin: 10px 0px;
+        }
+
+        .author-stats {
+            display: flex;
+            font-size: 9px;
+            font-weight: 600;
+            justify-content: space-around;
+            width: 230px;
+            margin-bottom: 10px;
+        }
+
+        .author-bio {
+            font-size: 11px;
+            width: 230px;
+            text-align: justify;
+            margin-bottom: 30px;
+        }
+    }
+
+    .main-content {
+        flex: 0 0 70%;
+        margin-top: 50px;
+        padding-right: 10px;
+        
+        .blog-title {
+            font-size: 30px;
+            font-weight: 400;
+            color: #77222d;
+            margin-bottom: 40px;
+        }
+
+        .blog-body {
+            background-color: white;
+            padding: 30px;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .likes-and-comments {
+            background-color: white;
+            width: 100%;
+            .dislike-icon {
+                transform: rotate(-180deg);
+                margin-right: 7px;
+            }
+
+            .social {
+                display: flex;
+                width: 30%;
+                justify-content: space-between;
+                margin-left: 30px;
+                
+                .social-sharing {
+                    display: flex;
+                    justify-content: space-between;
+                    flex: 0 0 60%;
+                }
+            }
+            
+            .write-comment {
+                margin-left: 30px;
+                width: 50%;
+                display: flex;
+                flex-direction: column;
+
+                textarea {
+                    background-color: #f5f6f8;
+                    border: none;
+                    resize: none;
+                    padding-top: 20px;
+                    padding-left: 15px;
+                    margin-bottom: 5px;
+                    margin-top: 20px;
+                }
+
+                button {
+                    width: 70px;
+                    color: gray;
+                    align-self: flex-end;
+                }
+
+            }
+
+            .comments {
+                width: 80%;
+                margin-left: 30px;
+            }
+        }
+    }
+}
+
+.spinner {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+}

@@ -1,0 +1,69 @@
+.body {
+    width: 100%;
+    background-color: #f5f6f8;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .center-align {
+        width: 75%;
+        display: flex;
+        flex-direction: column;
+        margin-top: 50px;
+        margin-right: 20px;
+
+    }
+
+
+    .icons {
+        align-self: flex-end;
+        color: gray;
+
+
+        .previousPage {
+            &:hover {
+                color: #77222d;
+                transform: scale(1.3);
+            }
+        }
+        
+        .nextPage {
+            &:hover {
+                color: #77222d;
+                transform: scale(1.3);
+            }
+        }
+    }
+
+    .cards {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        background-color: white;
+        width: 100%;
+
+    }
+    
+    .title {
+        font-size: 50px;
+        font-weight: 600;
+        color: #77222d;
+    }
+    
+}
+
+.spinner {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+}
+
+.button {
+    width: 100px;
+    font-weight: bold;
+    margin-top: 10px;
+}

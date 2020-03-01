@@ -1,0 +1,51 @@
+<div class="full-page__header">
+    <div class="full-page__header__top">
+      <img src="{{iconLoaded}}" alt="icon">
+      <div class="right-part">
+        <span>
+          <input name="Search" />
+          <button>{{'NAV.search' | translate }}</button>
+        </span>
+        <span class="globe">
+        <select #langSelect (change)="translate.use(langSelect.value)">
+          <option *ngFor="let lang of translate.getLangs()" [value]="lang" [selected]="lang === translate.currentLang">{{
+            lang | uppercase }}</option>
+        </select>
+        
+          <img class="align-globe" src="assets/www.svg" alt="globe">
+        </span>
+        <span class="signin">
+          <p>Hello Sign in</p>
+          <strong>Accounts & Lists</strong>
+        </span>
+      </div>
+    </div>
+    <div class="full-page__header__bottom">
+      <p
+        class="menu-item"
+        routerLinkActive="menu-item__checked"
+        (click)="changeNavBarIcon('/tv')"
+        [routerLink]="['tv']">
+        TV Stations
+      </p>
+      <p
+        class="menu-item">
+        Tours & Travels
+    </p>
+      <p
+        class="menu-item">
+        Investor Matching
+      </p>
+      <p
+        class="menu-item">
+        Calendar
+      </p>
+      <p
+        class="menu-item"
+        routerLinkActive="menu-item__checked"
+        (click)="changeNavBarIcon('/blog')"
+        [routerLink]="['blog']">
+        Blogging
+      </p>
+    </div>
+  </div>

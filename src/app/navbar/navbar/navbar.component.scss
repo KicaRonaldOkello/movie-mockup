@@ -1,0 +1,119 @@
+.full-page {
+    &__header {
+    background-color: #ED1C24;
+    height: 80px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+    &__top {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+
+
+        img {
+            margin: 20px 0px 0px 20px;
+        }
+
+        input {
+            width: 700px;
+            margin-top: 15px;
+            box-shadow: 5px 3px 10px;
+            border: none;
+            height: 20px;
+            margin-left: -50px;
+
+            &:focus {
+                width: 750px;
+                outline: none;
+                transition: all .2s;
+            }
+        }
+
+        button {
+            outline: none;
+            box-shadow: 5px 3px 10px black;
+            border: none;
+            height: 22px;
+            background-color: rgb(105, 28, 28);
+            color: #fff;
+            font-size: 12px;
+        }
+    }
+
+    &__bottom {
+        display: flex;
+        justify-content: center;
+        color: #fff;
+        
+    }
+}
+}
+
+
+.menu-item {
+    margin-right: 25px;
+    font-size: 13px;
+
+
+    &__checked {
+        color: #ffb229;
+        font-weight: bold;
+    }
+
+    &:hover {
+        cursor: pointer;
+        text-decoration: underline;
+        font-weight: bolder;
+    }
+
+    &:active, &:focus {
+        outline: none;
+    }
+}
+
+
+.globe {
+    display: flex;
+    flex-direction: column;
+    height: 50px;
+    color: #fff;
+    font-size: 10px;
+    padding-top: 15px;
+    align-items: flex-start;
+
+    .align-globe {
+        margin-left: 5px;
+    }
+
+    select {
+        background-color: #c5343f;
+        color: white;
+        border: none;
+    }
+
+    select:focus, select:active {
+        outline: none;
+    }
+
+    
+}
+.globe img {
+    margin-top: -2px;
+    margin-left: -1px;
+}
+
+.signin {
+    color: #fff;
+    font-size: 10px;
+    margin-right: 50px;
+    margin-top: 15px;
+}
+
+
+.right-part {
+    display: flex;
+    justify-content: space-around;
+    flex-basis: 80%;
+}

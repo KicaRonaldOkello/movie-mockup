@@ -1,0 +1,10 @@
+<span class="card">
+    <img [src]="data.coverImage"
+        alt="">
+    <div class="card__title">
+        <p>{{data.title}}</p>
+    </div>
+    <div class="card__body" [innerHTML]="truncateHTML(data.htmlBody)">
+    </div>
+    <button class="button" [routerLink]="[data.id]">Read more</button>
+</span>
