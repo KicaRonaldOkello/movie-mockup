@@ -1,0 +1,204 @@
+.full-page {
+    &__header {
+    background-color: #ED1C24;
+    height: 80px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+
+    &__top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+
+
+            .right-icon {
+            flex-basis: 0 0 20%;
+            padding-left: 60px;
+            padding-right: 170px;
+            }
+
+        input {
+            width: 900px;
+            margin-top: 15px;
+            box-shadow: 5px 3px 10px;
+            border: none;
+            height: 20px;
+
+            &:focus {
+                width: 750px;
+                outline: none;
+                transition: all .2s;
+            }
+        }
+
+        @media only screen and (max-width: 1400px) {
+            input {
+                width: 700px;
+            }
+
+            .right-icon {
+                padding-right: 50px;
+            }
+        }
+
+        @media only screen and (max-width: 1100px) {
+            input {
+                width: 500px;
+            }
+        }
+
+        @media only screen and (max-width: 900px) {
+            input {
+                width: 300px;
+            }
+        }
+
+        @media only screen and (max-width: 700px) {
+            .right-icon {
+                padding-right: 100px;
+            }
+            input {
+                margin-left: 50px;
+            
+            }
+        }
+
+        @media only screen and (max-width: 450px) {
+            input {
+                width: 200px;
+            }
+        }
+
+        @media only screen and (max-width: 370px) {
+            .right-icon {
+                padding-right: 30px;
+            }
+        }
+
+        button {
+            outline: none;
+            box-shadow: 5px 3px 10px black;
+            border: none;
+            height: 22px;
+            background-color: rgb(105, 28, 28);
+            color: #fff;
+            font-size: 12px;
+        }
+
+        .search-button {
+            width: 60px;
+        }
+    }
+
+    @media only screen and (max-width: 700px) {
+        justify-content: space-around;
+        &__top :nth-child(2) {
+            order: 3;
+        }
+
+        &__top :nth-child(4) {
+            order: 1;
+        }
+    }
+
+    &__bottom {
+        display: flex;
+        justify-content: center;
+        color: #fff;
+        
+    }
+
+    @media only screen and (max-width: 450px) {
+        &__bottom {
+            margin-left: 10px;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 10px;
+        }
+    }
+}
+
+    @media only screen and (max-width: 700px) {
+        &__header {
+        height: 150px;
+        }
+    }
+
+    @media only screen and (max-width: 450px) {
+        &__header {
+        height: 240px;
+        }
+    }
+}
+
+
+.menu-item {
+    margin-right: 25px;
+    font-size: 13px;
+    margin-top: 10px;
+
+
+    &__checked {
+        color: #ffb229;
+        font-weight: bold;
+    }
+
+    &:hover {
+        cursor: pointer;
+        text-decoration: underline;
+        font-weight: bolder;
+    }
+
+    &:active, &:focus {
+        outline: none;
+    }
+}
+
+
+
+.globe {
+    display: flex;
+    flex-direction: column;
+    height: 50px;
+    color: #fff;
+    font-size: 10px;
+    padding-top: 15px;
+    align-items: flex-start;
+
+    .align-globe {
+        margin-left: 5px;
+    }
+
+    select {
+        background-color: #c5343f;
+        color: white;
+        border: none;
+    }
+
+    select:focus, select:active {
+        outline: none;
+    }
+
+    
+}
+.globe img {
+    margin-top: -2px;
+    margin-left: -1px;
+}
+
+.signin {
+    color: #fff;
+    font-size: 10px;
+    margin-right: 50px;
+    margin-top: 15px;
+}
+
+
+.right-part {
+    display: flex;
+    justify-content: space-around;
+    flex-basis: 80%;
+}

@@ -1,0 +1,20 @@
+<div class="comments">
+    <div class="comment" *ngFor="let comment of comments">
+        <img class="commentor" [src]="comment.profilePic" alt="">
+        <span class="comment-align-right">
+            <span class="comment-thumbs-up">
+                <p>{{comment.userId}}</p>
+                <!-- <img src="assets/like-small.svg" alt=""> -->
+            </span>
+            <p>{{comment.comment}}</p>
+        </span>
+    </div>
+    <!-- <div class="sub-comments">
+        <img class="sub-commentor" src="assets/ThanosWasRight.jpg" alt="">
+        <p>A Human Resource Specialist with a decade of successful experience
+            in hiring and employee management. Thane specializes in Human Resource technologies
+            and regularly attends national training sessions to showcase new HR trends,
+            such as self service, wellness apps and, people analytics tools.
+        </p>
+    </div> -->
+</div>

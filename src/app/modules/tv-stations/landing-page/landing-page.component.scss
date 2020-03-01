@@ -1,0 +1,259 @@
+.full-page {
+    &__body {
+    height: 1130px;
+    display: flex;
+    width: 1020px;
+
+    .sidebar {
+        background-color: #000000;
+        color: rgb(143, 134, 134);
+        flex: 0 0 20%;
+
+        .side-nav {
+            display: flex;
+            flex-direction: column;
+            list-style: none;
+            font-size: 12px;
+
+            &__group {
+                border-bottom: .1px solid #333;
+            }
+
+            &__item {
+                padding: 20px 30px;
+                font-weight: 100;
+                &:not(:last-child) {
+                    margin-bottom: 15px;
+                }
+
+                &:hover {
+                    cursor: pointer;
+                    background-color: #333;
+                }
+
+            }
+        }
+    }
+
+    .movie-covers {
+        flex: 0 0 80%;
+        display: flex;
+        flex-direction: column;
+
+        &__head {
+            display: flex;
+            flex-direction: column;
+            color: #fff;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.8)),url("/assets/planet_ape_final.jpg");
+            background-size: cover;
+            p {
+                padding: 40px 20px;
+            }
+
+            p:nth-child(1) {
+                font-family: 'Enriqueta', ;
+                text-transform: uppercase;
+                font-size: 12px;
+            }
+
+            .movie {
+                font-size: 50px;
+                font-weight: 100;
+                margin-top: -70px;
+            }
+
+            span {
+                align-self: center;
+                font-size: 10px;
+                font-family: 'Enriqueta', ;
+
+                p {
+                    margin-top: -60px;
+                    margin-left:-10px;
+                }
+            }
+
+            p:last-child {
+                font-family: 'Enriqueta', ;
+                letter-spacing: 4px;
+            }
+        }
+
+        &__title {
+            display: flex;
+            background-color: rgb(26, 25, 25);
+            color: #fff;
+            font-size: 13px;
+            font-weight: lighter;
+            padding: 20px 0px;
+            line-height: 1.6;
+
+            img {
+                padding: 0px 20px;
+            }
+        }
+
+        &__footer {
+            display: flex;
+            height: 605px;
+
+            .soccer {
+                flex: 0 0 33%;
+                background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.1)),url("/assets/soccer-ball.jpg");
+                background-size: cover;
+                background-position: center;
+                color: #fff;
+                // height: 100%;
+
+                p:first-child {
+                    font-family: 'Enriqueta', ;
+                    text-transform: uppercase;
+                    font-size: 8px;
+                    letter-spacing: 5px;
+                    margin: 10px 0px 0px 10px;
+
+                }
+                p:last-child {
+                    margin: 10px 0px 0px 10px;
+                    font-size: 30px;
+                    font-weight: lighter;
+                }
+            }
+
+            .newsAndMovie {
+                display: flex;
+                flex-direction: column;
+                flex: 0 0 33%;
+                height: inherit;
+
+                .movie-face {
+                    background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.1)),url("/assets/dinklage.jpg");
+                    background-size: cover;
+                    color: #fff;
+                    height: 50%;
+
+
+                    p:first-child {
+                        font-family: 'Enriqueta', ;
+                        text-transform: uppercase;
+                        font-size: 8px;
+                        letter-spacing: 5px;
+                        margin: 10px 0px 0px 10px;
+
+                    }
+                    p:last-child {
+                        margin: 10px 0px 250px 10px;
+                        font-size: 30px;
+                        font-weight: lighter;
+                    }
+                }
+
+                .news-anchor-face {
+                    background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.1)),url("/assets/news-anchor.jpg");
+                    background-size: cover;
+                    background-position: center;
+                    color: #fff;
+                    height: 50%;
+
+
+                    p:first-child {
+                        font-family: 'Enriqueta', ;
+                        text-transform: uppercase;
+                        font-size: 8px;
+                        letter-spacing: 5px;
+                        margin: 10px 0px 0px 10px;
+
+                    }
+                    p:last-child {
+                        margin: 10px 0px 250px 10px;
+                        font-size: 30px;
+                        font-weight: lighter;
+                    }
+                }
+            }
+
+            .cartoonsAndSeries {
+                display: flex;
+                flex-direction: column;
+                flex: 0 0 34%;
+                height: inherit;
+
+                .cartoon-face {
+                    background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.1)),url("/assets/simpsons.jpg");
+                    background-size: cover;
+                    background-position: center;
+                    color: #fff;
+                    height: 33%;
+
+                    p:first-child {
+                        font-family: 'Enriqueta', ;
+                        text-transform: uppercase;
+                        font-size: 8px;
+                        letter-spacing: 5px;
+                        margin: 10px 0px 0px 10px;
+
+                    }
+                    p:last-child {
+                        margin: 10px 0px 166px 10px;
+                        font-size: 30px;
+                        font-weight: lighter;
+                    }
+                }
+
+                .current-series-face {
+                    background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.1)),url("/assets/donald-draper.jpeg");
+                    background-size: cover;
+                    background-position: center;
+                    color: #fff;
+                    height: 33%;
+
+                    p:first-child {
+                        font-family: 'Enriqueta', ;
+                        text-transform: uppercase;
+                        font-size: 8px;
+                        letter-spacing: 5px;
+                        margin: 10px 0px 0px 10px;
+
+                    }
+                    p:last-child {
+                        margin: 10px 0px 166px 10px;
+                        font-size: 30px;
+                        font-weight: lighter;
+                    }
+                }
+
+                .complete-series-face {
+                    background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.1)),url("/assets/matrix.jpg");
+                    background-size: cover;
+                    background-position: center;
+                    color: #fff;
+                    height: 34%;
+
+                    p:first-child {
+                        font-family: 'Enriqueta', ;
+                        text-transform: uppercase;
+                        font-size: 8px;
+                        letter-spacing: 5px;
+                        margin: 10px 0px 0px 10px;
+
+                    }
+                    p:last-child {
+                        margin: 10px 0px 166px 10px;
+                        font-size: 30px;
+                        font-weight: lighter;
+                    }
+                }
+            }
+        }
+    }
+
+}
+}
+
+
+.movie-title {
+    font-weight: bold;
+}
+.movie-title-arrange {
+    display: flex;
+}
