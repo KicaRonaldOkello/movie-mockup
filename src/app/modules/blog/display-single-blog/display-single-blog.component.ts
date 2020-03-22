@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { GetBlogsService } from 'src/app/services/blog/get-blogs.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CommentsService } from 'src/app/services/comments/comments.service';
+import { DomSanitizer } from '@angular/platform-browser';
+import { AuthService } from 'src/app/services/guards/auth.service';
+import Helpers from 'src/app/helpers/helpers';
+import { ShareDataService } from 'src/app/services/share-data/share-data.service';
 
 @Component({
   selector: 'app-display-single-blog',
@@ -19,13 +23,24 @@ export class DisplaySingleBlogComponent implements OnInit {
   constructor(
     private blogService: GetBlogsService,
     private activatedRoute: ActivatedRoute,
-    private commentService: CommentsService) { }
+    private sanitizer: DomSanitizer,
+    private router: Router,
+    private auth: AuthService,
+    private sharedService: ShareDataService,
+    private commentService: CommentsService) {
+      this.sharedService.showAd('true');
+    }
 
   ngOnInit() {
     this.blogService.getBlogs(1, 2).subscribe(blog => {
       this.blogs = blog.articles;
     });
-    this.id = Number(this.activatedRoute.snapshot.paramMap.get('id'));
+
+    if (isNaN(Number(this.activatedRoute.snapshot.paramMap.get('id')))) {
+      this.router.navigateByUrl('/**');
+    } else {
+      this.id = Number(this.activatedRoute.snapshot.paramMap.get('id'));
+    }
 
     this.blogService.getSingleBlog(this.id).subscribe(blog => {
       if (blog.status.statusCode == '100') {
@@ -33,6 +48,7 @@ export class DisplaySingleBlogComponent implements OnInit {
         this.errorMessage = blog.status.statusDesc;
       } else {
       this.singleBlog = blog;
+      this.singleBlog.htmlBody = this.sanitizer.bypassSecurityTrustHtml(this.singleBlog.htmlBody);
       }
     })
 
@@ -42,11 +58,12 @@ export class DisplaySingleBlogComponent implements OnInit {
     if (text.trim() === '') {
       return;
     } else {
+      const data = Helpers.getUserData();
       const comment = {
         PageId: `Blog_${this.id}`,
         Comment: text,
         profilePic: "https://placeimg.com/300/300/people",
-        UserId:"testUser",
+        UserId: data.authToken.userId,
       }
       this.commentService.saveComment(comment).subscribe(result => {
         this.commentPosted = true;
@@ -56,6 +73,15 @@ export class DisplaySingleBlogComponent implements OnInit {
 
   commentsRecalled(event) {
     this.commentPosted = false;
+  }
+
+  checkIfUserIsLoggedIn() {
+    
+    if (this.auth.isAuthenticated(this.router.url)) {
+      return true;
+    } else {
+      this.auth.isAuthenticated(this.router.url);
+    };
   }
 
 }

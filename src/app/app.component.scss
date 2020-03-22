@@ -6,12 +6,31 @@
     .body {
         display: flex;
 
+        &:nth-child(1) {
+            width: 90vw;
+        }
+
+    }
+
+    @media only screen and (max-width: 975px) {
+        .body {
+            flex-direction: column;
+            justify-content: center;
+
+            &:nth-child(2) {
+                width: 100vw;
+            }
+        }
     }
     &__footer {
         background-color: #ED1C24;
         height: 5%;
         display: flex;
         justify-content: space-between;
+        position: fixed;
+        // left: 0;
+        bottom: 0;
+        width: 100vw;
 
         .footer-icon {
             position: relative;

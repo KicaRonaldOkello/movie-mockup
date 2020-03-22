@@ -1,0 +1,73 @@
+<div class="body">
+    <p class="title" *ngIf="updateVideoItemId ==''">Create Video</p>
+    <p class="title" *ngIf="updateVideoItemId !=''">Edit Video</p>
+    <span class="upload-form" [formGroup]="videoForm">
+        <input type="text" placeholder="Video Name" formControlName="Name" class="input-title">
+        <textarea name="description" formControlName="Description" placeholder="Video Description" rows="3"></textarea>
+        <div class="radio-button-groups">
+            <span class="radio-button-items">
+                <label class="radio-button-title">Choose your genre</label>
+                <mat-radio-group class="radio-button-items" formControlName="Genre" aria-label="Select an option">
+                    <mat-radio-button value="Sports">Sports</mat-radio-button>
+                    <mat-radio-button value="Romance">Romance</mat-radio-button>
+                    <mat-radio-button value="Comedy">Comedy</mat-radio-button>
+                    <mat-radio-button value="Thriller">Thriller</mat-radio-button>
+                    <mat-radio-button value="Adventure">Adventure</mat-radio-button>
+                    <mat-radio-button value="Action">Action</mat-radio-button>
+                    <mat-radio-button value="Drama">Drama</mat-radio-button>
+                    <mat-radio-button value="Fantasy">Fantasy</mat-radio-button>
+                </mat-radio-group>
+            </span>
+            <span class="radio-button-items">
+                <label class="radio-button-title">Choose a recommended age</label>
+                <mat-radio-group class="radio-button-items" formControlName="RecommendedAge" aria-label="Select an option">
+                    <mat-radio-button value="G">G</mat-radio-button>
+                    <mat-radio-button value="PG">PG</mat-radio-button>
+                    <mat-radio-button value="PG-13">PG-13</mat-radio-button>
+                    <mat-radio-button value="R">R</mat-radio-button>
+                    <mat-radio-button value="18+">18+</mat-radio-button>
+                </mat-radio-group>
+            </span>
+        </div>
+        <span class="radio-button-items">
+            <label class="radio-button-title">Choose your category</label>
+            <mat-radio-group class="radio-button-items" formControlName="CategoryId" aria-label="Select an option">
+                <mat-radio-button value="Parody">Parody</mat-radio-button>
+                <mat-radio-button value="Fantasy">Fantasy</mat-radio-button>
+                <mat-radio-button value="Courtroom drama">Courtroom drama</mat-radio-button>
+                <mat-radio-button value="Mystery">Mystery</mat-radio-button>
+                <mat-radio-button value="Political">Political</mat-radio-button>
+            </mat-radio-group>
+        </span>
+        <span class="upload-button-location">
+            <button class="button upload-button" (click)="upload()">Upload Video</button>
+            <p class="videoUrl">{{videoForm.value.FileUrl}}</p>
+        </span>
+        <!-- <input type="file" #videoUpload (change)="videoInputChange($event)" hidden="true" accept="video/mp4,video/x-m4v,video/*"> -->
+        <!-- <input type="text" class="input-title" placeholder="Video Url" formControlName="FileUrl"> -->
+        <button
+        class="button submit-button"
+        [disabled]="!videoForm.valid"
+        (click)="submitVideo(videoForm.value)"
+        >
+        <span *ngIf="!savingVideo">
+            Submit Video
+        </span>
+            <mat-icon *ngIf="savingVideo">
+                <mat-spinner diameter="20"></mat-spinner>
+            </mat-icon>
+        </button>
+    </span>
+    <p class="title">Videos</p>
+    <!-- <app-display-videos
+    [reload]="reloadVideos"
+    (updateVideoItem)="updateVideo($event)"
+    ></app-display-videos> -->
+    <app-display-blogs
+        [videos]="videos"
+        [displayVideos]="true"
+        [displayBlogInAdmin]="true"
+        [reload]="false"
+        [pageCounts]="pageCount"
+></app-display-blogs>
+</div>

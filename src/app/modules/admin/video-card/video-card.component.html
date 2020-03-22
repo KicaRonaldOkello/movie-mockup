@@ -1,0 +1,28 @@
+<div class="video-card">
+    <video
+    width="230px"
+    height="120px"
+    (mouseenter) ="mouseEnter()"
+    (mouseleave) ="mouseLeave()"
+    [controls]="controls"
+    >
+        <source [src]="data.fileUrl">
+    </video>
+    <p class="video-title">{{data.name}}</p>
+    <p class="video-description">{{data.description}}</p>
+    <span>
+        <span class="genre">
+            <p>Genre:</p>
+            <p class="genre-item">{{data.genre}}</p>
+        </span>
+        <span class="genre">
+            <p>Rating:</p>
+            <p class="genre-item">{{data.recommendedAge}}</p>
+        </span>
+    </span>
+    <span class="bottom-icons">
+        <mat-icon class="deleteIcon" (click)="deleteVideoItem(data.id)" svgIcon="delete"></mat-icon>
+        <mat-icon class="deleteIcon" (click)="updateVideoItem(data)" svgIcon="refresh"></mat-icon>
+    </span>
+
+</div>

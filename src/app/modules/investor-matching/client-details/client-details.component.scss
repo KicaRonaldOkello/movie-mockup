@@ -1,0 +1,115 @@
+.body {
+    width: 80vw;
+    background-color: #f5f6f8;
+    display: flex;
+    justify-content: flex-end;
+
+    .cover-body {
+        width: 80%;
+        background-color: white;
+        padding-top: 30px;
+        padding-left: 20px;
+        padding-right: 10px;
+    }
+    &__top {
+
+        display: flex;
+        flex-wrap: wrap;
+        margin-bottom: 10px;
+
+        .client-cover {
+            width: 450px;
+        }
+
+        .company-info {
+            margin-left: 10px;
+        }
+
+        .company-name {
+            font-size: 35px;
+            font-weight: 700;
+            margin: 15px 0px;
+        }
+
+        .card-body {
+            font-size: 10px;
+            width: 200px;
+            font-weight: 500;
+            word-wrap: break-word;
+            color: gray;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .card-company-type {
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .buttons {
+
+            .button {
+                font-size: 10px;
+            }
+
+            .first-button {
+                margin-right: 5px;
+                width: 100px;
+            }
+
+            .second-button {
+                width: 80px;
+            }
+        }
+    }
+
+    &__office-images {
+        margin-bottom: 20px;
+
+        .office-image {
+            width: 180px;
+            margin-right: 5px;
+            margin-left: 5px;
+        }
+    }
+
+    .create-client {
+
+        
+
+        .button {
+            width: 100px;
+            align-self: center;
+            margin-top: 20px;
+        }
+    }
+
+    &__bottom {
+        text-align: center;
+        font-weight: 600;
+        font-size: 25px;
+        color: #6D6E71;
+        margin-top: 30px;
+    }
+
+    .toggle-body {
+        background-color: #F1F2F2;
+        font-size: 10px;
+        color: gray;
+        text-align: left;
+        padding: 10px;
+        border-radius: 8px;
+        margin-bottom: 50px;
+    }
+
+    ::ng-deep .mat-button-toggle-group-appearance-standard {
+        border: none;
+    }
+}
+
+@media only screen and (max-width: 975px) {
+    .body {
+        width: 100vw;
+    }
+}

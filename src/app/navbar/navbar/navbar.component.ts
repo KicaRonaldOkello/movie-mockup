@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import Helpers from 'src/app/helpers/helpers';
+import { ShareDataService } from 'src/app/services/share-data/share-data.service';
 
 @Component({
   selector: 'app-navbar',
@@ -9,13 +11,27 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class NavbarComponent implements OnInit {
 
+  username = 'Hello Sign In';
   iconLoaded = 'assets/screen.svg';
-  constructor(private router: Router, public translate: TranslateService) {
+  showSignout: boolean;
+  constructor(
+    private router: Router,
+    private shareDataService: ShareDataService,
+    public translate: TranslateService,
+    ) {
 
     translate.addLangs(['en', 'fr']);
     translate.setDefaultLang('en');
     const browserLang = translate.getBrowserLang();
     translate.use(browserLang.match(/en|fr/) ? browserLang : 'en');
+
+    this.shareDataService.username.subscribe(res => {
+      if (res === 'true') {
+        const userData = Helpers.getUserData();
+        this.username = userData.authToken.userId;
+        this.showSignout = true;
+      }
+    })
   }
 
   ngOnInit() {
@@ -24,6 +40,13 @@ export class NavbarComponent implements OnInit {
           this.changeNavBarIcon(event['url']);
       }
   });
+  if(Helpers.getUserData()) {
+    const userData = Helpers.getUserData();
+    this.username = userData.authToken.userId;
+    this.showSignout = true;
+  } else {
+    this.showSignout = false;
+  }
   }
 
   changeNavBarIcon(navBarItem) {
@@ -31,7 +54,22 @@ export class NavbarComponent implements OnInit {
       this.iconLoaded = 'assets/screen.svg';
     } else if (navBarItem.startsWith('/blog')) {
       this.iconLoaded = 'assets/blog.svg';
+    } else if (navBarItem.startsWith('/investor-matching')) {
+      this.iconLoaded = 'assets/investor.svg'
     }
+  }
+
+  login() {
+    if(!Helpers.getUserData()) {
+    this.router.navigateByUrl('/auth');
+    }
+  }
+
+  logout() {
+    this.username = 'Hello Sign In';
+    Helpers.deleteUserData();
+    this.router.navigateByUrl('/');
+    this.showSignout = false;
   }
 
 }

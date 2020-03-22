@@ -27,7 +27,7 @@ export class BlogCommentsComponent implements OnInit, OnChanges {
   }
 
   getComments() {
-    this.commentsService.getComments(this.commentId).subscribe(comments =>{
+    this.commentsService.getComments(`Blog_${this.commentId}`).subscribe(comments =>{
       this.comments = comments.comments;
     })
   }

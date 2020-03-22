@@ -1,29 +1,35 @@
-<div class="adsAndComments" [style.background-color]="displayComments == true ? 'black' : '#f5f6f8'">
-    <span>
+<div class="adsAndComments" [style.background-color]="displayComments == true ? '#4B1322' : '#f5f6f8'">
+    <span class="images">
       <img src="assets/toyota.jpg" alt="toyota">
       <img src="assets/camry.jpg" alt="toyota">
     </span>
-    <span *ngIf="displayComments">
-      <p>Comments</p>
-      <div class="speech-bubble">
-        this is just some dummy text that could not be generated automatically,
-        so I had to type all of this. It was such an annoying experience.
-      </div>
-      <div class="speech-bubble">
-        this is just some dummy text that could not be generated automatically,
-        so I had to type all of this. It was such an annoying experience.
-      </div>
-      <div class="speech-bubble">
-        this is just some dummy text that could not be generated automatically,
-        so I had to type all of this. It was such an annoying experience.
-      </div>
-      <div class="speech-bubble">
-        this is just some dummy text that could not be generated automatically,
-        so I had to type all of this. It was such an annoying experience.
-      </div>
-      <div class="speech-bubble">
-        this is just some dummy text that could not be generated automatically,
-        so I had to type all of this. It was such an annoying experience.
-      </div>
+    <p *ngIf="displayComments">Comments</p>
+    <span class="comments" *ngIf="displayComments">
+
+      <p class="no-comments" *ngIf="noComments && !loadingComments">
+        There are no comments for this video
+      </p>
+
+      <span *ngIf="loadingComments" class="spinner">
+        <mat-spinner diameter="40"></mat-spinner>
+      </span>
+      <span *ngIf="!noComments && !loadingComments">
+        <span *ngFor="let comment of comments">
+          <div class="speech-bubble">
+            {{comment.comment}}
+          </div>
+        </span>
+      </span>
+    </span>
+    <span *ngIf="displayComments" class="post-comments">
+      <textarea placeholder="Enter comment here" [formControl]="writtenComment"></textarea>
+      <button (click)="submitComment()" class="button comment-button">
+        <span *ngIf="!postingComment">
+          Comment
+        </span>
+        <span *ngIf="postingComment">
+          <mat-spinner diameter="20"></mat-spinner>
+        </span>
+      </button>
     </span>
   </div>

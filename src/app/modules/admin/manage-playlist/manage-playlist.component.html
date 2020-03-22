@@ -1,0 +1,79 @@
+
+<div class="body">
+    <p class="title" >Update Playlist</p>
+    <div class="load-spinner" *ngIf="loadingVideoLists">
+        <mat-spinner></mat-spinner>
+    </div>
+    <div class="align-drag-drop" *ngIf="!loadingVideoLists">
+        <div class="example-container">
+            <h2>Playlist</h2>
+            <p class="instruction">*In order for the changes in the playlist to be effected, please click the
+                update playlist button at the bottom.
+            </p>
+            <div
+              cdkDropList
+              #todoList="cdkDropList"
+              [cdkDropListData]="selectedVideos"
+              [cdkDropListConnectedTo]="[doneList]"
+              class="example-list"
+              (cdkDropListDropped)="drop($event)">
+              <div class="example-box videos-box" *ngFor="let video of selectedVideos; let i = index" cdkDrag>
+                <div class="video-item">
+                    <p class="video-position">{{i + 1}}</p>
+                    <video
+                    width="180px"
+                    height="100px"
+                    (mouseenter) ="mouseEnter()"
+                    (mouseleave) ="mouseLeave()"
+                    [controls]="controls"
+                    >
+                        <source [src]="video.fileUrl">
+                    </video>
+                    <span class="video-body">
+                        <p class="video-body__title">{{video.name}}</p>
+                        <p class="video-body__description">{{video.description}}</p>
+                    </span>
+                </div> 
+              </div>
+            </div>
+        </div>
+          
+        <div class="example-container">
+            <h2 class="last-child">Videos</h2>
+          
+            <div
+              cdkDropList
+              #doneList="cdkDropList"
+              [cdkDropListData]="videos"
+              [cdkDropListConnectedTo]="[todoList]"
+              class="example-list"
+              (cdkDropListDropped)="drop($event)">
+              <div class="example-box videos-box" *ngFor="let video of videos" cdkDrag>
+                  <div class="video-item">
+                      <video
+                      width="180px"
+                      height="100px"
+                      (mouseenter) ="mouseEnter()"
+                      (mouseleave) ="mouseLeave()"
+                      [controls]="controls"
+                      >
+                          <source [src]="video.fileUrl">
+                      </video>
+                      <span class="video-body">
+                          <p class="video-body__title">{{video.name}}</p>
+                          <p class="video-body__description">{{video.description}}</p>
+                      </span>
+                  </div>
+            </div>
+            </div>
+        </div>
+    </div>
+    <button class="button" *ngIf="!loadingVideoLists" (click)="submitVideos()">
+        <span *ngIf="!uploadingVideoList">
+            Update Playlist
+        </span>
+        <mat-icon *ngIf="uploadingVideoList">
+            <mat-spinner diameter="20"></mat-spinner>
+        </mat-icon>
+    </button>
+</div>

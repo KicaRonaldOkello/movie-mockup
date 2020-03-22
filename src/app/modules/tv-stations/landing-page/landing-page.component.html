@@ -1,4 +1,7 @@
-<div class="full-page__body">
+<div *ngIf="loadingPage" class="landing-page-spinner">
+  <mat-spinner></mat-spinner>
+</div>
+<div class="full-page__body" *ngIf="!loadingPage">
     <nav class="sidebar">
       <ul class="side-nav">
         <span class="side-nav__group">
@@ -17,26 +20,44 @@
     </nav>
     <div class="movie-covers">
       <div class="movie-covers__head">
-        <p>Now Showing</p>
-        <p class="movie">Movie</p>
-        <span>
-          <img src="assets/eye.svg" alt="">
-          <p>Watch Now</p>
+        <span class="no-video" *ngIf="noPlaylistItems">
+          <p>There are no videos at the moment.</p>
         </span>
-        <p>Planet of the Apes</p>
+        <span class="no-video" *ngIf="!noPlaylistItems && !initiallyDisplayPlayButton">
+          <mat-spinner></mat-spinner>
+        </span>
+        <span class="video-player" *ngIf="!noPlaylistItems && initiallyDisplayPlayButton">
+          <vg-player (onPlayerReady)="onPlayerReady($event)">
+            <video
+            [vgMedia]="media"
+            #media
+            id="singleVideo"
+            preload="auto"
+            [controls]="controls"
+            [autoplay]="true"
+            (mouseenter) ="mouseEnter()"
+            (mouseleave) ="mouseLeave()"
+            >
+              <source *ngFor="let video of sources" [src]="video">
+            </video>
+          </vg-player>
+        </span>
+          <span (click)="playVideo()" class="vidBtn" *ngIf="!noPlaylistItems">
+            <img *ngIf="displayPlayButton && initiallyDisplayPlayButton" src="assets/play.svg" alt="play">
+          </span>
       </div>
       <div class="movie-covers__title">
         <img src="assets/eye-small.svg" alt="watch-small">
         <span>
           <div>
             <span class="movie-title-arrange">
-              <p class="movie-title">Title:</p>
-              <p>Planet of the Apes</p>
+              <p class="movie-title">Title: </p>
+              <p>{{videoTitle}}</p>
             </span>
           </div>
-          <p>Genre: Action</p>
-          <p>Rating: Action</p>
-          <p>Age: 15LS</p>
+          <p>Genre: {{videoGenre}}</p>
+          <p>Rating: {{videoCategory}}</p>
+          <p>Age: {{videoRecommendedAge}}</p>
         </span>
       </div>
       <div class="movie-covers__footer">

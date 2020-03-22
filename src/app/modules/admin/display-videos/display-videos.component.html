@@ -1,0 +1,17 @@
+<span class="spinner-space" *ngIf="videosLoading">
+    <mat-spinner></mat-spinner>
+</span>
+<div class="body" *ngIf="!videosLoading">
+    <div class="icons">
+        <mat-icon [class.previousPage]="page > 0" (click)="previousPage()" svgIcon="previous-page"></mat-icon>
+        <mat-icon [class.nextPage]="page < pageCount" (click)="nextPage()" svgIcon="next-page"></mat-icon>
+    </div>
+    <div class="cards">
+        <app-video-card *ngFor="let video of videos"
+        [data]="video"
+        (deletedItemId)="deletedItem($event)"
+        (updateVideo)="updateVideo($event)"
+        >
+        </app-video-card>
+    </div>
+</div>

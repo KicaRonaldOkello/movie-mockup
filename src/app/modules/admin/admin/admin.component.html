@@ -1,0 +1,23 @@
+<span class="spinner" *ngIf="displayAdminComponent">
+    <mat-spinner></mat-spinner>
+</span>
+<div class="body" *ngIf="!displayAdminComponent">
+    <mat-sidenav-container class="example-container">
+        <mat-sidenav [style.width]="smallScreensize? '250px': '25%'" #sidenav mode="{{modes}}" opened>
+            <h2>Dashboard</h2>
+            <mat-list role="list">
+                <mat-list-item role="listitem" (click)="loadBlog()">Manage Blogs</mat-list-item>
+                <mat-list-item role="listitem" (click)="loadVideo()">Manage Videos</mat-list-item>
+                <mat-list-item role="listitem" (click)="loadPlaylist()">Manage Playlists</mat-list-item>
+              </mat-list>
+        </mat-sidenav>
+        <mat-sidenav-content class="content">
+            <span class="open-button">
+                <button class="button" id="toggleButton" *ngIf="smallScreensize" (click)="sidenav.open()">Open Menu</button>
+            </span>
+            <app-manage-videos *ngIf="loadManageVideo"></app-manage-videos>
+            <app-manage-blog *ngIf="loadManageBlog"></app-manage-blog>
+            <app-manage-playlist *ngIf="loadManagePlaylist"></app-manage-playlist>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+</div>

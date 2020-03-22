@@ -1,0 +1,107 @@
+.body {
+  width: 80vw;
+  // height: 100%;
+  // background-color: #f5f6f8;
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+
+  .input-title {
+    margin-bottom: 20px;
+    height: 50px;
+    font-size: 18px;
+    border: none;
+    padding-left: 15px;
+    border-radius: 4px;
+  }
+  .title {
+    font-size: 50px;
+    font-weight: 600;
+    color: #D4B867;
+    margin-top: 30px;
+}
+
+  .editor {
+    background-color: white;
+  }
+
+  .text-editor {
+    padding-top: 30px;
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .editor-spinner {
+    width: 100%;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .publish-blog {
+    width: 100%;
+    margin-top: 50px;
+    height: 50px;
+    background-color: #D4B867;
+    color: black;
+    font-weight: bold;
+  }
+
+  .upload-cover-image {
+    ::ng-deep .mat-radio-outer-circle {
+      border-color: white;
+  }
+
+  ::ng-deep .mat-radio-button.mat-accent .mat-radio-inner-circle {
+      background-color: white;
+  }
+  
+  .radio-button-items {
+      display: flex;
+      flex-direction: column;
+      margin-top: 20px;
+      color: white;
+
+      .space-radio-button {
+        margin-bottom: 10px;
+      }
+  }
+  .radio-button-title {
+      font-weight: bold;
+      color: white;
+  }
+  }
+
+  .upload-button-location {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+
+    .button {
+      width: 200px;
+      background-color: #D4B867;
+    }
+
+    .videoUrl {
+      color: white;
+      width: 60%;
+      word-break: break-word;
+    }
+  }
+
+}
+
+::ng-deep .green-snackbar {
+  background-color: green !important;
+}
+
+::ng-deep .red-snackbar {
+  background-color: red !important;
+}

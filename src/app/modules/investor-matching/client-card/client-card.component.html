@@ -1,0 +1,45 @@
+<span class="card">
+    <img class="cover-photo" [src]="cardData.coverImage"
+        alt="">
+    <div class="card__title">
+        <p>{{cardData.title}}</p>
+    </div>
+    <div class="card__sub-title">
+        <img src="assets/clock.svg" alt="">
+        <p>12h</p>
+    </div>
+    <div class="card__body">
+        <p>Owner: John Doe</p>
+        <p>Location: {{cardData.location}}</p>
+        <p>Amount Required: {{cardData.currencyCode}} {{cardData.amountRequested | number}}</p>
+        <p>Project Returns: {{cardData.projectedReturns}}</p>
+    </div>
+    <div class="card__company-type">
+        <p>{{cardData.category}} Company</p>
+    </div>
+    <button
+    class="button"
+    [routerLink]="['details']"
+    *ngIf="!showEditable"
+    >Invest</button>
+    <span class="action-buttons">
+        <mat-icon
+        class="deleteButton"
+        matTooltip="Delete blog"
+        *ngIf="showEditable"
+        (click)="deleteBlog(data.id)"
+        svgIcon="delete"></mat-icon>
+    
+        <mat-icon
+        class="deleteButton"
+        *ngIf="showEditable"
+        (click)="readThisBlog(data.id)"
+        svgIcon="read"></mat-icon>
+    
+        <mat-icon
+        class="deleteButton"
+        *ngIf="showEditable"
+        (click)="updateThisBlog(data)"
+        svgIcon="refresh"></mat-icon>
+    </span>
+</span>

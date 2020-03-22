@@ -25,15 +25,15 @@
         <div class="blog-body" [innerHTML]="singleBlog.htmlBody"></div>
         <div class="likes-and-comments">
             <div class="social">
-                <span class="social-sharing">
+                <!-- <span class="social-sharing">
                     <mat-icon (click)="routeTo(singleBlog.author.facebookLink)" class="facebook" svgIcon="facebook"></mat-icon>
                     <mat-icon (click)="routeTo(singleBlog.author.instagramLink)" class="instagram" svgIcon="instagram"></mat-icon>
                     <mat-icon (click)="routeTo(singleBlog.author.twitterLink)" class="twitter" svgIcon="twitter"></mat-icon>
                     <mat-icon (click)="routeTo(singleBlog.author.linkedInLink)" class="linkedin" svgIcon="linkedin"></mat-icon>
-                </span>
+                </span> -->
             </div>
             <div class="write-comment">
-                <textarea name="add-comment" #commentValue placeholder="Comment..." id="" rows="5"></textarea>
+                <textarea name="add-comment" (focus)="checkIfUserIsLoggedIn()" #commentValue placeholder="Comment..." id="" rows="5"></textarea>
                 <button class="button" (click)="sendComment(commentValue.value); commentValue.value=''" >Post</button>
             </div>
             <div class="comments">
