@@ -1,0 +1,22 @@
+<div class="body">
+    <div class="login-form">
+        <span class="login-form-body" [formGroup]="signupForm">
+            <p>Signup</p>
+            <input type="text" formControlName="name" placeholder="Username">
+            <input type="text" formControlName="email" placeholder="Email">
+            <input type="password" formControlName="password" placeholder="Password">
+            <input type="password" formControlName="confirmedPassword" placeholder="Confirm Password">
+            <button class="button" (click)="sumitData()">
+                <span *ngIf="!submitUserDetail">
+                    Signup
+                </span>
+                <span *ngIf="submitUserDetail">
+                    <mat-icon>
+                        <mat-spinner diameter="20" class="white"></mat-spinner>
+                    </mat-icon>
+                </span>
+            </button>
+        </span>
+    </div>
+</div>
+

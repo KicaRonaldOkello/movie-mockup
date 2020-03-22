@@ -1,0 +1,154 @@
+.body {
+    width: 80vw;
+    display: flex;
+    justify-content: flex-end;
+    background-color: #f5f6f8;
+
+    .items {
+        width: 80%;
+        background-color: white;
+        padding-top: 30px;
+        padding-left: 20px;
+        padding-right: 20px;
+
+        .details {
+            display: flex;
+            flex-wrap: wrap;
+            width: 100%;
+        }
+
+        @media only screen and (max-width: 850px) {
+            .details {
+                flex-direction: column;
+                align-items: center;
+
+                .company-info {
+                    border-right: none;
+                }
+            }
+        }
+
+        .cover-image {
+            width: 100%;
+        }
+
+        .company-info {
+            width: 30%;
+            border-right: 0.2px solid #A7A9AC;
+            margin-right: 15px;
+        }
+
+        .company-name {
+            font-size: 35px;
+            font-weight: 700;
+            margin: 15px 0px;
+        }
+
+        .card-body {
+            font-size: 10px;
+            width: 200px;
+            font-weight: 500;
+            word-wrap: break-word;
+            color: gray;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .card-company-type {
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .buttons {
+
+            .button {
+                font-size: 10px;
+            }
+
+            .first-button {
+                margin-right: 5px;
+                width: 100px;
+            }
+
+            .second-button {
+                width: 80px;
+            }
+        }
+
+        .order-details {
+            width: 65%;
+            p {
+                font-weight: 600;
+                font-size: 25px;
+                color: #6D6E71;
+                margin: 15px 0px;
+            }
+
+            .select-inputs {
+                display: flex;
+                flex-direction: column;
+                width: 90%;
+            }
+
+            .exchange-rate {
+                font-size: 12px;
+                font-weight: 700;
+                margin-top: 25px;
+                margin-bottom: 15px;
+            }
+
+            select {
+                width: 100%;
+                height: 30px;
+                border: none;
+                -webkit-appearance: none;
+                background: url('/assets/down-arrow.svg') no-repeat right #F4F4F4;
+                background-size: 10px;
+                margin-right: 20px;
+                border-radius: 5px;
+                background-position-x: 95%;
+                padding-left: 10px;
+                margin: 5px 5px;
+    
+                &:focus {
+                    outline: none;
+                }
+    
+            }
+    
+            select:required:invalid {
+                color: gray;
+                font-size: 12px;
+            }
+            option[value=""][disabled] {
+                display: none;
+            }
+            option {
+                color: black;
+                font-size: 12px;
+    
+                &:focus {
+                    outline: none;
+                }
+            }
+        }
+
+        .bottom {
+            p {
+                font-weight: 600;
+                font-size: 25px;
+                color: #6D6E71;
+                margin: 20px 0px;
+                text-align: center;
+            }
+        }
+    }
+}
+
+
+@media only screen and (max-width: 975px) {
+    .body {
+        width: 100vw;
+    }
+}

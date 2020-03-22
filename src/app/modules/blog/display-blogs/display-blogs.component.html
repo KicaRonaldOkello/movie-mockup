@@ -9,19 +9,31 @@
 <span class="spinner" *ngIf="noBlogError">
     <h2>There are no blogs!</h2>
 </span>
-<div class="body">
+<div class="body" [style.background-color]="displayBlogInAdmin == true ? 'black' : '#f5f6f8'">
     <div class="center-align" *ngIf="blogs.length > 0 && blog !== ''">
         <div>
-            <p class="title">Our Blog</p>
+            <p class="title" *ngIf="!displayBlogInAdmin">Our Blog</p>
         </div>
         <div class="icons">
             <mat-icon [class.previousPage]="page > 0" (click)="previousPage()" svgIcon="previous-page"></mat-icon>
             <mat-icon [class.nextPage]="page < pageCount" (click)="nextPage()" svgIcon="next-page"></mat-icon>
         </div>
-        <div class="cards">
-            <app-blog-card *ngFor="let blog of blogs"
-                [data]="blog">
-            </app-blog-card>
+        <div [style.background-color]="displayBlogInAdmin == true ? 'black' : 'white'">
+            <span class="cards" *ngIf="!displayVideos">
+                <app-blog-card *ngFor="let blog of blogs"
+                    [data]="blog"
+                    (deletedItemId)="deletedItem($event)"
+                    (updateBlogItem)="updateBlogItem($event)"
+                    [displayDeleteButton]="displayBlogInAdmin">
+                </app-blog-card>
+            </span>
+            <span class="cards" *ngIf="displayVideos">
+                <app-blog-card *ngFor="let video of videos"
+                    [data]="video"
+                    [displayVideo]="true"
+                    [displayDeleteButton]="displayBlogInAdmin">
+                </app-blog-card>
+            </span>
         </div>
     </div>
 

@@ -34,4 +34,20 @@ export class GetBlogsService {
       map(data => data)
     )
   }
+
+  createBlog(blog):Observable<any> {
+    return this.http.post(
+      `https://hebertazurefunctions.azurewebsites.net/api/SaveBlogArticle?code=tjNVpZgpeDGDhSfGWpOHsV25A0T7EFOzkPigTNsoE7NpLQxfqtEIRA==`, blog
+    ).pipe(
+      map(data => data)
+    )
+  }
+
+  deleteBlog(id):Observable<any> {
+    return this.http.delete(
+      `https://hebertazurefunctions.azurewebsites.net/api/DeleteBlogArticle?Id=${id}&code=tjNVpZgpeDGDhSfGWpOHsV25A0T7EFOzkPigTNsoE7NpLQxfqtEIRA==`
+    ).pipe(
+      map(data => data)
+    )
+  }
 }

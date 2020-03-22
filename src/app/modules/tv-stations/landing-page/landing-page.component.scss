@@ -1,12 +1,12 @@
 .full-page {
+    
     &__body {
-    height: 1130px;
     display: flex;
-    width: 1020px;
+    width: 80vw;
 
     .sidebar {
-        background-color: #000000;
-        color: rgb(143, 134, 134);
+        background-color: #4B1322;
+        color: #D4B867;
         flex: 0 0 20%;
 
         .side-nav {
@@ -15,11 +15,10 @@
             list-style: none;
             font-size: 12px;
 
-            &__group {
-                border-bottom: .1px solid #333;
-            }
-
             &__item {
+                margin-left: 10px;
+                margin-right: 10px;
+                border-bottom: .1px solid gray;
                 padding: 20px 30px;
                 font-weight: 100;
                 &:not(:last-child) {
@@ -28,7 +27,7 @@
 
                 &:hover {
                     cursor: pointer;
-                    background-color: #333;
+                    background-color: rgb(47, 10, 20);
                 }
 
             }
@@ -44,10 +43,38 @@
             display: flex;
             flex-direction: column;
             color: #fff;
-            background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.8)),url("/assets/planet_ape_final.jpg");
-            background-size: cover;
+            position: relative;
+            // background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.8)),url("/assets/planet_ape_final.jpg");
+            // background-size: cover;
             p {
                 padding: 40px 20px;
+            }
+
+            video {
+                width: 100%;
+            }
+            .video-player {
+                height: 400px;
+            }
+
+            .vidBtn {
+                position: absolute;
+                top: 40%;
+                left: 45%;
+            }
+
+            .no-video {
+                height: 400px;
+                background-color: black;
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            video:active, video:focus {
+                outline: none;
+                border: none;
             }
 
             p:nth-child(1) {
@@ -81,7 +108,7 @@
 
         &__title {
             display: flex;
-            background-color: rgb(26, 25, 25);
+            background-color: rgb(58, 29, 36);
             color: #fff;
             font-size: 13px;
             font-weight: lighter;
@@ -95,7 +122,7 @@
 
         &__footer {
             display: flex;
-            height: 605px;
+            // height: 605px;
 
             .soccer {
                 flex: 0 0 33%;
@@ -248,12 +275,56 @@
     }
 
 }
+
+@media only screen and (max-width: 975px) {
+    &__body {
+        width: 100vw;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    &__body {
+        flex-direction: column;
+
+        .sidebar {
+            order: 1;
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+    }
+}
+
+@media only screen and (max-width: 460px) {
+    &__body {
+
+        .movie-covers {
+            &__footer {
+                flex-direction: column;
+
+                .soccer {
+                    min-height: 300px;
+                }
+            }
+        }
+    }
+}
 }
 
 
 .movie-title {
-    font-weight: bold;
+    margin-right: 5px;
 }
 .movie-title-arrange {
     display: flex;
+    color: #D4B867;
+    font-weight: bold;
+}
+
+.landing-page-spinner {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
 }

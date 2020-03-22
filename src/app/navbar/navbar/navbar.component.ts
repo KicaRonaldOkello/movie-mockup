@@ -31,7 +31,13 @@ export class NavbarComponent implements OnInit {
       this.iconLoaded = 'assets/screen.svg';
     } else if (navBarItem.startsWith('/blog')) {
       this.iconLoaded = 'assets/blog.svg';
+    } else if (navBarItem.startsWith('/investor-matching')) {
+      this.iconLoaded = 'assets/investor.svg'
     }
+  }
+
+  login() {
+    this.router.navigateByUrl('/auth');
   }
 
 }

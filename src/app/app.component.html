@@ -1,8 +1,8 @@
-<div class="full-page">
+<div class="full-page" >
   <app-navbar></app-navbar>
   <div class="body">
     <router-outlet></router-outlet>
-    <app-ad-component></app-ad-component>
+    <app-ad-component *ngIf="displayAdComponent"></app-ad-component>
   </div>
   <div class="full-page__footer">
     <img class="footer-icon" src="assets/rat.svg" alt="">

@@ -12,7 +12,7 @@ export class CommentsService {
 
   getComments(commentId):Observable<any> {
     return this.http.get(
-      `https://hebertazurefunctions.azurewebsites.net/api/GetAllPageComments?PageId=Blog_${commentId}&code=tjNVpZgpeDGDhSfGWpOHsV25A0T7EFOzkPigTNsoE7NpLQxfqtEIRA==`
+      `https://hebertazurefunctions.azurewebsites.net/api/GetAllPageComments?PageId=${commentId}&code=tjNVpZgpeDGDhSfGWpOHsV25A0T7EFOzkPigTNsoE7NpLQxfqtEIRA==`
     ).pipe(
       map(data => data)
     )

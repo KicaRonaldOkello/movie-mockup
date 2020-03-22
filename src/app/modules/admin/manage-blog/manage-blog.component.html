@@ -1,0 +1,37 @@
+<div class="body">
+    <p class="title" *ngIf="blogToUpdate ==''">Create Blog</p>
+    <p class="title" *ngIf="blogToUpdate !=''">Edit Blog</p>
+    <span class="text-editor" [formGroup]="editorForm">
+        <input class="input-title" placeholder="Title" formControlName="title">
+        <span class="editor-spinner" *ngIf="loadEditor">
+            <mat-spinner></mat-spinner>
+        </span>
+        <span class="editor" *ngIf="!loadEditor">
+            <quill-editor
+            [styles]="{height: '250px'}"
+            placeholder="Type your blog here..."
+            formControlName="editor"
+            required
+            ></quill-editor>
+        </span>
+        <button
+            class="button publish-blog"
+            (click)="submitBlog()"
+            [disabled]='!editorForm.valid'>
+            <span *ngIf="!uploadingBlog">
+                Publish
+            </span>
+            <mat-icon *ngIf="uploadingBlog">
+                <mat-spinner diameter="20"></mat-spinner>
+            </mat-icon>
+        </button>
+    </span>
+    <p class="title">Blogs</p>
+    <div class="blogs">
+        <app-display-blogs
+            [displayBlogInAdmin]="true"
+            [reload]="reloadBlogs"
+            (updateBlog)="updateBlogItem($event)"
+        ></app-display-blogs>
+    </div>
+</div>

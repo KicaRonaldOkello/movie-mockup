@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { GetBlogsService } from 'src/app/services/blog/get-blogs.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CommentsService } from 'src/app/services/comments/comments.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-display-single-blog',
@@ -19,13 +20,22 @@ export class DisplaySingleBlogComponent implements OnInit {
   constructor(
     private blogService: GetBlogsService,
     private activatedRoute: ActivatedRoute,
-    private commentService: CommentsService) { }
+    private sanitizer: DomSanitizer,
+    private route: Router,
+    private commentService: CommentsService) {
+      
+    }
 
   ngOnInit() {
     this.blogService.getBlogs(1, 2).subscribe(blog => {
       this.blogs = blog.articles;
     });
-    this.id = Number(this.activatedRoute.snapshot.paramMap.get('id'));
+
+    if (isNaN(Number(this.activatedRoute.snapshot.paramMap.get('id')))) {
+      this.route.navigateByUrl('/**');
+    } else {
+      this.id = Number(this.activatedRoute.snapshot.paramMap.get('id'));
+    }
 
     this.blogService.getSingleBlog(this.id).subscribe(blog => {
       if (blog.status.statusCode == '100') {
@@ -33,6 +43,7 @@ export class DisplaySingleBlogComponent implements OnInit {
         this.errorMessage = blog.status.statusDesc;
       } else {
       this.singleBlog = blog;
+      this.singleBlog.htmlBody = this.sanitizer.bypassSecurityTrustHtml(this.singleBlog.htmlBody);
       }
     })
 

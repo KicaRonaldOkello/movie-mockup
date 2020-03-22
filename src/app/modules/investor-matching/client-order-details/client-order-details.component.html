@@ -1,0 +1,52 @@
+<div class="body">
+    <div class="items">
+        <img class="cover-image" src="assets/client-cover.jpg" alt="">
+        <span class="details">
+            <span class="company-info">
+                <p class="company-name">Vihlix</p>
+                <div class="card-body">
+                    <p>Owner: John Doe</p>
+                    <p>Location: Kampala, Uganda</p>
+                    <p>Amount Required: 1m UGX</p>
+                    <p>Project Returns: 10%</p>
+                </div>
+                <div class="card-company-type">
+                    <p>Technology Company</p>
+                </div>
+                <div class="buttons">
+                    <button class="button first-button" [routerLink]="['../order-details']">Contact Owner</button>
+                    <button class="button second-button">Invest Now</button>
+                </div>
+            </span>
+            <span class="order-details">
+                <p>Order Details</p>
+                <span class="select-inputs">
+                    <select name="location" required id="location">
+                        <option value="" class="place-holder-style" disabled selected>Investment Amount</option>
+                        <option value="Kampala">Kampala</option>
+                        <option value="Lira">Lira</option>
+                    </select>
+                    <select name="location" required id="location">
+                        <option value="" class="place-holder-style" disabled selected>Currency</option>
+                        <option value="Kampala">Kampala</option>
+                        <option value="Lira">Lira</option>
+                    </select>
+                </span>
+                <span>
+                    <div class="exchange-rate">Exchange Rate 1USD = 3,700UGX</div>
+                </span>
+                <div class="buttons">
+                    <button class="button first-button" [routerLink]="['../order-details']">Contact Owner</button>
+                    <button class="button second-button">Invest Now</button>
+                </div>
+            </span>
+        </span>
+
+        <div class="bottom">
+            <p>Related</p>
+            <app-display-client-cards
+            [data]="[]"
+            ></app-display-client-cards>
+        </div>
+    </div>
+</div>

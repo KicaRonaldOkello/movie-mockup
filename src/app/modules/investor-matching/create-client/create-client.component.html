@@ -1,0 +1,130 @@
+<div class="body">
+    <div class="form-body" [formGroup]="clientForm">
+        <div class="upload-form">
+            <span class="upload">
+                <span class="upload-avatar" *ngIf="!displayCoverImage">
+                  <mat-icon
+                    class="cover-image-avatar"
+                    matTooltip="Click to upload cover image"
+                    (click)="upload()"
+                    svgIcon="photo"></mat-icon>
+                    <p>UPLOAD COVER IMAGE</p>
+                </span>
+                <span *ngIf="displayCoverImage">
+                  <mat-icon class="load-cover-image-spinner" *ngIf="imageLoader">
+                    <mat-spinner></mat-spinner>
+                  </mat-icon>
+                  <img [hidden]="imageLoader" (load)="this.imageLoader = false;" [src]="coverImage" class="cover-image" alt="">
+                </span>
+            </span>
+            <span class="input-fields">
+                <input class="input-company-title" formControlName="title" placeholder="Title" type="text">
+                <span>
+                  <label for="">Location: </label>
+                  <input class="input-fields-others" placeholder="e.g. Kampala, Uganda" formControlName="location" type="text">
+                </span>
+                <span>
+                  <label for="">Currency Code: </label>
+                  <input class="input-fields-others" placeholder="e.g. UGX" formControlName="currencyCode" type="text">
+                </span>
+                <span>
+                  <label for="">Amount Requested: </label>
+                  <input class="input-fields-others" #hi placeholder="e.g. 10000000" formControlName="amountRequested" type="text" (keyup)="addCommas(hi.value)" (keydown)='isNumber(event)'>
+                </span>
+                <span>
+                  <label for="">Projected Returns: </label>
+                  <input class="input-fields-others" placeholder="e.g. 10%" formControlName="projectedReturns" type="text">
+                </span>
+                <span>
+                  <input class="input-fields-company-type" placeholder="Category e.g. Technology Company" formControlName="category" type="text">
+                </span>
+                <p class="error"
+                  *ngIf="clientForm.controls.category.invalid && (clientForm.controls.category.dirty || clientForm.controls.category.touched)">
+                    *Category is required
+                  </p>
+                <div class="buttons">
+                    <button disabled class="button first-button">Contact Owner</button>
+                    <button disabled class="button second-button">Invest Now</button>
+                </div>
+            </span>
+        </div>
+        <div class="office-images">
+              <span *ngIf="officeImages.length > 0">
+                  <span *ngFor="let image of officeImages; let i = index">
+                    <!-- <mat-icon *ngIf="'officeImage' + i">
+                      <mat-spinner diameter="30"></mat-spinner>
+                    </mat-icon> -->
+                      <img class="uploaded-office-image" [src]="image" alt="">
+                  </span>
+              </span>
+          <span class="image">
+            <span class="avatar-background" *ngIf="officeImages.length == 0">
+              <mat-icon
+                [inline]="true"
+                class="office-image-avatar"
+                (click)="uploadOfficeImages()"
+                svgIcon="plus"
+                matTooltip="Click to upload office images"
+                ></mat-icon>
+                <p>Add Image</p>
+            </span>
+            <span class="avatar-background" *ngIf="officeImages.length < 2">
+              <mat-icon
+                [inline]="true"
+                class="office-image-avatar"
+                (click)="uploadOfficeImages()"
+                svgIcon="plus"
+                matTooltip="Click to upload office images"
+                ></mat-icon>
+              <p>Add Image</p>
+            </span>
+            <span class="avatar-background" *ngIf="officeImages.length < 3">
+              <mat-icon
+                [inline]="true"
+                class="office-image-avatar"
+                (click)="uploadOfficeImages()"
+                svgIcon="plus"
+                matTooltip="Click to upload office images"
+                ></mat-icon>
+              <p>Add Image</p>
+            </span>
+            <span class="avatar-background" *ngIf="officeImages.length < 4">
+              <mat-icon
+                [inline]="true"
+                class="office-image-avatar"
+                (click)="uploadOfficeImages()"
+                svgIcon="plus"
+                matTooltip="Click to upload office images"
+                ></mat-icon>
+              <p>Add Image</p>
+            </span>
+          </span>
+        </div>
+        <div class="description">
+            <p>Description</p>
+            <textarea formControlName="description" cols="30" rows="10"></textarea>
+            <p class="error"
+                *ngIf="clientForm.controls.description.invalid && (clientForm.controls.description.dirty || clientForm.controls.description.touched)">
+                *Description is required
+            </p>
+        </div>
+        <span >
+          <button
+            (click)="submitClientForm()"
+            class="button submit-button">
+            <span *ngIf="!uploadingInvestmentProjectDetail">
+              Submit
+            </span>
+            <mat-icon *ngIf="uploadingInvestmentProjectDetail">
+              <mat-spinner diameter="20"></mat-spinner>
+            </mat-icon>
+          </button>
+        </span>
+    </div>
+    <div class="bottom">
+        <p>Other Clients</p>
+        <app-display-client-cards
+        [data]="[]"
+        ></app-display-client-cards>
+    </div>
+</div>

@@ -1,0 +1,22 @@
+<div class="body">
+    <div class="login-form">
+        <span class="login-form-body" [formGroup]="loginForm">
+            <p>Login</p>
+            <input type="text" formControlName="userId" placeholder="Username">
+            <input type="password" formControlName="password" placeholder="Password">
+            <button class="button" (click)="submitLoginData()">
+                <span *ngIf="!submitUserDetail">
+                    Login
+                </span>
+                <span class="white" *ngIf="submitUserDetail">
+                    <mat-icon>
+                        <mat-spinner diameter="20" class="white"></mat-spinner>
+                    </mat-icon>
+                </span>
+            </button>
+            <span class="signup-link">
+                <a href="" routerLink="/auth/signup">Or Signup</a>
+            </span>
+        </span>
+    </div>
+</div>

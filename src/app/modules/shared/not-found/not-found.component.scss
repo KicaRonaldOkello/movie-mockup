@@ -1,0 +1,21 @@
+.body {
+    width: 80vw;
+    height: 100vh;
+    background-color: #F2F2F3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    p {
+        margin-top: -100px;
+        color: black;
+        font-weight: bold;
+        font-size: 18px;
+    }
+}
+
+@media only screen and (max-width: 975px) {
+    .body {
+        width: 100vw;
+    }
+}

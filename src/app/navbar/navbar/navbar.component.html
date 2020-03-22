@@ -1,10 +1,10 @@
 <div class="full-page__header">
     <div class="full-page__header__top">
-      <img src="{{iconLoaded}}" alt="icon">
-      <div class="right-part">
+      <img src="{{iconLoaded}}" alt="icon" class="right-icon">
+      <!-- <div class="right-part"> -->
         <span>
           <input name="Search" />
-          <button>{{'NAV.search' | translate }}</button>
+          <button class="search-button">Search</button>
         </span>
         <span class="globe">
         <select #langSelect (change)="translate.use(langSelect.value)">
@@ -14,28 +14,30 @@
         
           <img class="align-globe" src="assets/www.svg" alt="globe">
         </span>
-        <span class="signin">
+        <span class="signin" (click)="login()">
           <p>Hello Sign in</p>
           <strong>Accounts & Lists</strong>
         </span>
-      </div>
+      <!-- </div> -->
     </div>
     <div class="full-page__header__bottom">
       <p
         class="menu-item"
         routerLinkActive="menu-item__checked"
-        (click)="changeNavBarIcon('/tv')"
-        [routerLink]="['tv']">
+        >
         TV Stations
+      </p>
+      <p
+        class="menu-item"
+        routerLinkActive="menu-item__checked"
+        
+        >
+        Investor Matching
       </p>
       <p
         class="menu-item">
         Tours & Travels
     </p>
-      <p
-        class="menu-item">
-        Investor Matching
-      </p>
       <p
         class="menu-item">
         Calendar
