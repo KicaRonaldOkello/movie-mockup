@@ -11,18 +11,18 @@ import Helpers from 'src/app/helpers/helpers';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
-    constructor() {}
+  constructor() { }
 
-    intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-      if (request.headers.get("skip")) {
-        return next.handle(request);
+  intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    if (request.headers.get("skip")) {
+      return next.handle(request);
+    }
+    const data = Helpers.getUserData();
+    request = request.clone({
+      setHeaders: {
+        token: `${data.authToken.tokenValue}`
       }
-        const data = Helpers.getUserData();
-        request = request.clone({
-          setHeaders: {
-            token: `${data.authToken.tokenValue}`
-          }
-        });
-        return next.handle(request);
-      }
+    });
+    return next.handle(request);
+  }
 }
