@@ -3,17 +3,20 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, TimeoutError, throwError } from 'rxjs';
 import { retry, catchError, map } from 'rxjs/operators';
 
+import { environment } from '../../../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
+
+  base_url = environment.base_url;
 
   constructor(private http: HttpClient) { }
 
 
   signupUser(userData):Observable<any> {
     return this.http.post(
-      `https://hebertazurefunctions.azurewebsites.net/api/RegisterUser`, userData,{headers:{skip:"true"} }
+      `${this.base_url}RegisterUser`, userData,{headers:{skip:"true"} }
     ).pipe(
       map(data => data),
       // catchError((error) => {
@@ -27,7 +30,7 @@ export class AuthenticationService {
 
   loginUser(userData):Observable<any> {
     return this.http.post(
-      `https://hebertazurefunctions.azurewebsites.net/api/LoginUser`, userData,{headers:{skip:"true"} }
+      `${this.base_url}LoginUser`, userData,{headers:{skip:"true"} }
     ).pipe(
       map(data => data),
       // catchError((error) => {
