@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  base_url: 'https://hebertazurefunctions.azurewebsites.net/api/'
+  base_url: 'https://herbertazurefunctionsprod.azurewebsites.net/api/'
 };
