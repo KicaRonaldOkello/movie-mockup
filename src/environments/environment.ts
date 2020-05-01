@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  base_url: 'https://hebertazurefunctions.azurewebsites.net/api/'
+  base_url: 'https://herbertazurefunctionsprod.azurewebsites.net/api/'
 };
 
 /*
