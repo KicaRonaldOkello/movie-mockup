@@ -1,22 +1,27 @@
 <div class="body">
     <div class="search-bar" [formGroup]="projectsForm">
-        <select name="location" required id="location">
-            <option value="" class="place-holder-style" disabled selected>Location</option>
-            <option value="Kampala">Kampala</option>
-            <option value="Lira">Lira</option>
-        </select>
+        <span class="name">
+            <input type="text" class="input-name" formControlName="username" placeholder="Location">
+        </span>
 
-        <select name="location" required id="">
-            <option value="" disabled selected>Amount Required</option>
-            <option value="Kampala">Above $ 1M</option>
-            <option value="Lira">$ 300,000</option>
-        </select>
 
-        <select name="location" required id="">
-            <option value="" disabled selected>Returns</option>
-            <option value="Kampala">Above $ 1M</option>
-            <option value="Lira">$ 300,000</option>
-        </select>
+        <span class="name">
+            <input type="text" class="input-amount" #amountMin formControlName="amountMin" placeholder="Amount (Min)" (keyup)="addCommas(amountMin.value, 'amountMin')" (keydown)='isNumber(event)'>
+        </span>
+        <p>-</p>
+        <span class="name">
+            <input type="text" #amountMax class="input-amount" formControlName="amountMax" placeholder="Amount (Max)" (keyup)="addCommas(amountMax.value, 'amountMax')" (keydown)='isNumber(event)'>
+        </span>
+
+        <span class="name">
+            <input type="text" class="input-amount" #returnsMin formControlName="returnsMin" placeholder="Returns (Min)" (keyup)="addCommas(returnsMin.value, 'returnsMin')" (keydown)='isNumber(event)'>
+        </span>
+        <p>-</p>
+        <span class="name">
+            <input type="text" class="input-amount" #returnsMax formControlName="returnsMax" placeholder="Returns (Max)" (keyup)="addCommas(returnsMax.value, 'returnsMax')" (keydown)='isNumber(event)'>
+        </span>
+
+
         <span class="name">
             <input type="text" class="input-name" formControlName="username" placeholder="Name">
             <img src="assets/search.svg" alt="">

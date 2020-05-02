@@ -25,20 +25,25 @@ export class DispplayClientsComponent implements OnInit {
       if (page !== '') {
         this.loadingInvestmentProjects = true;
         this.page = Number(page);
-        this.getAllInvestmentProjects();
+        this.getAllInvestmentProjects({});
       }
     })
   }
 
   ngOnInit() {
-   this.getAllInvestmentProjects();
+   this.getAllInvestmentProjects({});
    this.projectsForm = this.fb.group({
-     username: ['']
+     username: [''],
+     location: [''],
+     amountMin: [''],
+     amountMax: [''],
+     returnsMin: [''],
+     returnsMax: ['']
    })
   }
 
-  getAllInvestmentProjects(title?) {
-    this.getAllInvestmentProjectsService.getAllInvestmentProjects(this.page, this.limit,title).subscribe(res => {
+  getAllInvestmentProjects(queryParams) {
+    this.getAllInvestmentProjectsService.getAllInvestmentProjects(this.page, this.limit, queryParams).subscribe(res => {
       this.loadingInvestmentProjects = false;
       this.data = res.projects;
       this.pageCount = res.pageCount;
@@ -47,7 +52,50 @@ export class DispplayClientsComponent implements OnInit {
 
   searchInvestmentProject() {
     this.loadingInvestmentProjects = true;
-    this.getAllInvestmentProjects(this.projectsForm.value.username);
+    let { location, username, amountMax, amountMin, returnsMax, returnsMin } = this.projectsForm.value;
+    if (amountMin !== '') {
+      amountMin = amountMin.replace(/\,/g,'');
+    }
+    if (amountMax !== '') {
+      amountMax = amountMax.replace(/\,/g,'');
+    }
+    if (returnsMin !== '') {
+      returnsMin = returnsMin.replace(/\,/g,'');
+    }
+    if (returnsMax !== '') {
+      returnsMax = returnsMax.replace(/\,/g,'');
+    }
+    const data ={
+      Title: username,
+      Location: location,
+      AmountRequested: `${amountMin}-${amountMax}`,
+      Returns: `${returnsMin}-${returnsMax}`
+      
+    }
+    this.getAllInvestmentProjects(data);
   }
+
+  isNumber(evt) {
+    var theEvent = evt || window.event;
+    var key = theEvent.keyCode || theEvent.which;
+    key = String.fromCharCode(key);
+    if (key.length == 0) return;
+    var regex = /^[0-9,\b]+$/;
+    if (!regex.test(key)) {
+        theEvent.returnValue = false;
+        if (theEvent.preventDefault) theEvent.preventDefault();
+      }
+  }
+
+  addCommas(value, inputField) {
+    if (value === '') {
+      this.projectsForm.patchValue({ [inputField]: value })
+    } else {
+    const num1 = value.replace(/,/g, '');
+      const num2 = Number(num1).toLocaleString('en-US');
+      this.projectsForm.patchValue({ [inputField]: num2 })
+    }
+  }
+
 
 }

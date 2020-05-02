@@ -5,6 +5,7 @@ import { InvestmentProjectService } from 'src/app/services/investment-project/in
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
+import Helpers from 'src/app/helpers/helpers';
 
 
 declare var cloudinary: any
@@ -26,6 +27,7 @@ export class CreateClientComponent implements OnInit {
   officeImage1 = true;
   officeImage2 = true;
   officeImage3 = true;
+  myIvestmentProjects = [];
   constructor(
     private shareDataService: ShareDataService,
     private fb: FormBuilder,
@@ -50,12 +52,14 @@ export class CreateClientComponent implements OnInit {
     this.clientForm = this.fb.group({
       location: [''],
       amountRequested: ['0'],
-      projectedReturns: [''],
+      projectedReturnsType: [''],
+      projectedReturns: ['0'],
       title: [''],
       description: [''],
       currencyCode: [''],
       category: [''],
     });
+    this.getInvestmentProjects();
   }
 
   upload() {
@@ -76,11 +80,13 @@ export class CreateClientComponent implements OnInit {
 
 
   submitClientForm() {
+    const userData = Helpers.getUserData();
     this.uploadingInvestmentProjectDetail = true;
     this.clientForm.value.amountRequested = this.clientForm.value.amountRequested.replace(/\,/g,'');
+    this.clientForm.value.projectedReturns = this.clientForm.value.projectedReturns.replace(/\,/g,'');
     const formData = {
       id: 0,
-      userId: "john doe",
+      userId: userData.userId,
       ...this.clientForm.value,
       coverImage: this.coverImage,
       otherImages: this.officeImages
@@ -96,12 +102,15 @@ export class CreateClientComponent implements OnInit {
           amountRequested: '',
           projectedReturns: '',
           title: '',
-          description: ''
+          description: '',
+          category: ''
         });
         this.clientForm.markAsPristine();
         this.clientForm.markAsUntouched();
         this.coverImage = '';
         this.officeImages = [];
+        this.displayCoverImage = false;
+        this.getInvestmentProjects();
       } else {
         this.snackBar.open(res.statusDesc, '', {
           duration: 6000,
@@ -144,22 +153,22 @@ export class CreateClientComponent implements OnInit {
       }
     }
     
-    addCommas(value) {
+    addCommas(value, inputField) {
       const num1 = value.replace(/,/g, '');
         const num2 = Number(num1).toLocaleString('en-US');
+        if (inputField === 'projectedReturns') {
+        this.clientForm.patchValue({ projectedReturns: num2 });
+      } else if (inputField === 'amountRequested') {
         this.clientForm.patchValue({ amountRequested: num2 });
+        }
     }
 
-    // loaded(index) {
-    //   console.log('hi>>>>>', index);
-    //   if (Number(index) === 0) {
-    //     this.officeImage0 = false;
-    //   } else if (Number(index) === 1) {
-    //     this.officeImage1 = false;
-    //   } else if (Number(index) === 2) {
-    //     this.officeImage2 = false;
-    //   } else if (Number(index) === 3) {
-    //     this.officeImage3 = false;
-    //   }
-    // }
+
+    getInvestmentProjects() {
+      const userData = Helpers.getUserData();
+      this.investmentProjectService.getAllInvestmentProjects(0, 12, { UserId: userData.userId })
+      .subscribe(res => {
+        this.myIvestmentProjects = res.projects;
+      });
+    }
 }

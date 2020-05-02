@@ -29,19 +29,23 @@
                 </span>
                 <span>
                   <label for="">Amount Requested: </label>
-                  <input class="input-fields-others" #hi placeholder="e.g. 10000000" formControlName="amountRequested" type="text" (keyup)="addCommas(hi.value)" (keydown)='isNumber(event)'>
+                  <input class="input-fields-others" #amountRequested placeholder="e.g. 10000000" formControlName="amountRequested" type="text" (keyup)="addCommas(amountRequested.value, 'amountRequested')" (keydown)='isNumber(event)'>
+                </span>
+                <span>
+                  <label for="">Projected Returns Type: </label>
+                  <select formControlName="projectedReturnsType" name="location" required id="">
+                    <option value="" disabled selected>e.g 10%</option>
+                    <option value="Percentage">Percentage(%)</option>
+                    <option value="Fixed">Fixed</option>
+                </select>
                 </span>
                 <span>
                   <label for="">Projected Returns: </label>
-                  <input class="input-fields-others" placeholder="e.g. 10%" formControlName="projectedReturns" type="text">
+                  <input class="input-fields-others" #projectedReturns placeholder="e.g. 10" formControlName="projectedReturns" (keyup)="addCommas(projectedReturns.value, 'projectedReturns')" (keydown)='isNumber(event)' type="text">
                 </span>
                 <span>
                   <input class="input-fields-company-type" placeholder="Category e.g. Technology Company" formControlName="category" type="text">
                 </span>
-                <p class="error"
-                  *ngIf="clientForm.controls.category.invalid && (clientForm.controls.category.dirty || clientForm.controls.category.touched)">
-                    *Category is required
-                  </p>
                 <div class="buttons">
                     <button disabled class="button first-button">Contact Owner</button>
                     <button disabled class="button second-button">Invest Now</button>
@@ -51,9 +55,6 @@
         <div class="office-images">
               <span *ngIf="officeImages.length > 0">
                   <span *ngFor="let image of officeImages; let i = index">
-                    <!-- <mat-icon *ngIf="'officeImage' + i">
-                      <mat-spinner diameter="30"></mat-spinner>
-                    </mat-icon> -->
                       <img class="uploaded-office-image" [src]="image" alt="">
                   </span>
               </span>
@@ -124,7 +125,7 @@
     <div class="bottom">
         <p>Other Clients</p>
         <app-display-client-cards
-        [data]="[]"
+        [data]="myIvestmentProjects"
         ></app-display-client-cards>
     </div>
 </div>

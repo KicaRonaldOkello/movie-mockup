@@ -154,7 +154,7 @@
             font-weight: 700;
             width: 80%;
             border: none;
-            margin-top: 25px;
+            margin-top: 10px;
 
             &:focus {
                 outline: none;
@@ -183,6 +183,27 @@
             .second-button {
                 width: 80px;
             }
+        }
+
+        select {
+            width: 100px;
+            height: 20px;
+            border: none;
+            -webkit-appearance: none;
+            background: url('/assets/down-arrow.svg') no-repeat right white;
+            background-size: 10px;
+            margin-right: 20px;
+            border-radius: 5px;
+            background-position-x: 90px;
+            padding-left: 10px;
+            margin: 5px 5px;
+            font-size: 10px;
+            color: gray;
+
+            &:focus {
+                outline: none;
+            }
+
         }
 
         @media only screen and (max-width: 500px) {
@@ -288,6 +309,7 @@
     .bottom {
         width: 80%;
         background-color: white;
+        margin-bottom: 30px;
 
         p {
             text-align: center;

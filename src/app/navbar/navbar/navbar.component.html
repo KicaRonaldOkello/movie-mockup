@@ -34,7 +34,8 @@
       <p
         class="menu-item"
         routerLinkActive="menu-item__checked"
-        
+        (click)="changeNavBarIcon('/investor-matching')"
+        [routerLink]="['investor-matching']"
         >
         Investor Matching
       </p>

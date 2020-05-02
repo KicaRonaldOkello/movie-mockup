@@ -12,7 +12,13 @@
         <p>Owner: John Doe</p>
         <p>Location: {{cardData.location}}</p>
         <p>Amount Required: {{cardData.currencyCode}} {{cardData.amountRequested | number}}</p>
-        <p>Project Returns: {{cardData.projectedReturns}}</p>
+        <span class="card__body__returns">
+            <p>Project Returns:</p>
+            <p *ngIf="cardData.projectedReturnsType === 'Fixed'">{{cardData.currencyCode}}</p>
+            <p>{{cardData.projectedReturns | number}}</p>
+            <p *ngIf="cardData.projectedReturnsType === 'Percentage'">%</p>
+        </span>
+        <p>+ initial investment</p>
     </div>
     <div class="card__company-type">
         <p>{{cardData.category}} Company</p>

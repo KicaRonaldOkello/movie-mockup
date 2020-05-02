@@ -49,6 +49,11 @@
         word-wrap: break-word;
         color: gray;
         line-height: 1.6;
+
+        &__returns {
+            display: flex;
+            word-wrap: none;
+        }
     }
 
     &__company-type {
