@@ -44,6 +44,7 @@ export class BlogCardComponent implements OnInit {
     }
 
   ngOnInit() {
+    this.data.id = this.data.id.replace('/', '_');
   }
 
   truncateHTML(text: string): string {

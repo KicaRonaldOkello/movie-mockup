@@ -31,19 +31,28 @@
         </span>
     </div>
 
-    <span class="grid-slider">
+    <!-- <span class="grid-slider">
         <p>Grid</p>
         <mat-slide-toggle></mat-slide-toggle>
+    </span> -->
+    <span class="create-investment-project-button">
+        <button class="button" routerLink="/investor-matching/create-investment-project">Add Investment Project</button>
     </span>
 
     <div class="cards">
-        <span class="display-investment-project-spinner" *ngIf="loadingInvestmentProjects">
+        <span class="display-investment-project-spinner" *ngIf="loadingInvestmentProjects && !timeoutError">
             <mat-spinner></mat-spinner>
         </span>
-        <span class="display-investment-project-spinner" *ngIf="!loadingInvestmentProjects && data.length <= 0">
+        <span class="display-investment-project-spinner" *ngIf="!loadingInvestmentProjects && data.length <= 0 && !timeoutError">
             <p>The investment project you are searching for does not exist.</p>
         </span>
-        <span *ngIf="!loadingInvestmentProjects && data.length > 0">
+        <span class="display-investment-project-spinner" *ngIf="timeoutError">
+            <span class="align-error-message">
+                <p>Something went wrong!!</p>
+                <button class="button" (click)="reloadInvestmentProjects()">Retry</button>
+            </span>
+        </span>
+        <span *ngIf="!loadingInvestmentProjects && data.length > 0 && !timeoutError">
             <app-display-client-cards
             [data]="data"
             [pageCount]="pageCount"

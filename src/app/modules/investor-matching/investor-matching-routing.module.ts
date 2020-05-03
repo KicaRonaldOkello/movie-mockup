@@ -9,9 +9,9 @@ import { AuthGuardService as AuthGuard } from 'src/app/services/guards/auth-guar
 
 const routes: Routes = [
   { path: '', component: DispplayClientsComponent},
-  { path: 'details', component: ClientDetailsComponent},
-  { path: 'order-details', component: ClientOrderDetailsComponent},
   { path: 'create-investment-project', component: CreateClientComponent, canActivate:[AuthGuard]},
+  { path: 'order-details', component: ClientOrderDetailsComponent},
+  { path: ':id', component: ClientDetailsComponent},
 ];
 
 @NgModule({

@@ -26,6 +26,12 @@ export class ShareDataService {
 
   private displayUsername = new BehaviorSubject('');
   username = this.displayUsername.asObservable();
+
+  private investmentProject = new BehaviorSubject('');
+  editInvestmentProject = this.investmentProject.asObservable();
+
+  private projectId = new BehaviorSubject('');
+  deletedProjectId = this.projectId.asObservable();
   
   constructor() { }
 
@@ -55,5 +61,13 @@ export class ShareDataService {
 
   loggedIn() {
     this.displayUsername.next('true');
+  }
+
+  editProject(data: any) {
+    this.investmentProject.next(data);
+  }
+
+  deleteProject(id) {
+    this.projectId.next(id);
   }
 }

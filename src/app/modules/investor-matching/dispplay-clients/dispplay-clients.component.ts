@@ -16,6 +16,7 @@ export class DispplayClientsComponent implements OnInit {
   data = [];
   limit =12;
   projectsForm: FormGroup;
+  timeoutError = false;
   constructor(
     private shareDataService: ShareDataService,
     private fb: FormBuilder,
@@ -47,7 +48,16 @@ export class DispplayClientsComponent implements OnInit {
       this.loadingInvestmentProjects = false;
       this.data = res.projects;
       this.pageCount = res.pageCount;
+    },
+    (error) => {
+      this.timeoutError = true;
     });
+  }
+
+  reloadInvestmentProjects() {
+    this.timeoutError = false;
+    this.getAllInvestmentProjects({});
+
   }
 
   searchInvestmentProject() {

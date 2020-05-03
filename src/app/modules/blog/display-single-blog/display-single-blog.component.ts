@@ -15,7 +15,7 @@ import { ShareDataService } from 'src/app/services/share-data/share-data.service
 export class DisplaySingleBlogComponent implements OnInit {
 
   blogs: any;
-  id: number;
+  id: any;
   singleBlog: any;
   commentPosted = false;
   articleDoesNotExist = false;
@@ -36,11 +36,9 @@ export class DisplaySingleBlogComponent implements OnInit {
       this.blogs = blog.articles;
     });
 
-    if (isNaN(Number(this.activatedRoute.snapshot.paramMap.get('id')))) {
-      this.router.navigateByUrl('/**');
-    } else {
-      this.id = Number(this.activatedRoute.snapshot.paramMap.get('id'));
-    }
+      this.id = this.activatedRoute.snapshot.paramMap.get('id');
+      this.id = this.id.replace('_', '/');
+   
 
     this.blogService.getSingleBlog(this.id).subscribe(blog => {
       if (blog.status.statusCode == '100') {

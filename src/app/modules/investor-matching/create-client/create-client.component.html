@@ -14,7 +14,7 @@
                   <mat-icon class="load-cover-image-spinner" *ngIf="imageLoader">
                     <mat-spinner></mat-spinner>
                   </mat-icon>
-                  <img [hidden]="imageLoader" (load)="this.imageLoader = false;" [src]="coverImage" class="cover-image" alt="">
+                  <img [hidden]="imageLoader" (load)="this.imageLoader = false;" (click)="upload()" [src]="coverImage" class="cover-image" alt="">
                 </span>
             </span>
             <span class="input-fields">
@@ -34,7 +34,6 @@
                 <span>
                   <label for="">Projected Returns Type: </label>
                   <select formControlName="projectedReturnsType" name="location" required id="">
-                    <option value="" disabled selected>e.g 10%</option>
                     <option value="Percentage">Percentage(%)</option>
                     <option value="Fixed">Fixed</option>
                 </select>
@@ -44,7 +43,7 @@
                   <input class="input-fields-others" #projectedReturns placeholder="e.g. 10" formControlName="projectedReturns" (keyup)="addCommas(projectedReturns.value, 'projectedReturns')" (keydown)='isNumber(event)' type="text">
                 </span>
                 <span>
-                  <input class="input-fields-company-type" placeholder="Category e.g. Technology Company" formControlName="category" type="text">
+                  <input class="input-fields-company-type" placeholder="Category e.g. Technology" formControlName="category" type="text">
                 </span>
                 <div class="buttons">
                     <button disabled class="button first-button">Contact Owner</button>
@@ -55,7 +54,7 @@
         <div class="office-images">
               <span *ngIf="officeImages.length > 0">
                   <span *ngFor="let image of officeImages; let i = index">
-                      <img class="uploaded-office-image" [src]="image" alt="">
+                      <img class="uploaded-office-image" (click)="uploadOfficeImages()" [src]="image" alt="">
                   </span>
               </span>
           <span class="image">
@@ -112,6 +111,7 @@
         <span >
           <button
             (click)="submitClientForm()"
+            [disabled]="uploadingInvestmentProjectDetail"
             class="button submit-button">
             <span *ngIf="!uploadingInvestmentProjectDetail">
               Submit
@@ -124,8 +124,13 @@
     </div>
     <div class="bottom">
         <p>Other Clients</p>
-        <app-display-client-cards
-        [data]="myIvestmentProjects"
-        ></app-display-client-cards>
+        <span class="bottom-spinner" *ngIf="loadingMyInvestmentProjects">
+          <mat-spinner diameter="60"></mat-spinner>
+        </span>
+        <span *ngIf="!loadingMyInvestmentProjects">
+          <app-display-client-cards
+          [data]="myIvestmentProjects"
+          ></app-display-client-cards>
+        </span>
     </div>
 </div>

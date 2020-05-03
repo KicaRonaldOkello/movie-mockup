@@ -310,6 +310,10 @@
         width: 80%;
         background-color: white;
         margin-bottom: 30px;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        flex-direction: column;
 
         p {
             text-align: center;
@@ -317,6 +321,10 @@
             font-size: 25px;
             color: #6D6E71;
             margin-top: 30px
+        }
+
+        .bottom-spinner {
+            margin-top: 50px;
         }
     }
 

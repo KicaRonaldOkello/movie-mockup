@@ -25,27 +25,29 @@
     </div>
     <button
     class="button"
-    [routerLink]="['details']"
+    [routerLink]="[cardData.id]"
     *ngIf="!showEditable"
     >Invest</button>
     <span class="action-buttons">
         <mat-icon
         class="deleteButton"
-        matTooltip="Delete blog"
+        matTooltip="Delete project"
         *ngIf="showEditable"
-        (click)="deleteBlog(data.id)"
+        (click)="deleteProject(cardData.id)"
         svgIcon="delete"></mat-icon>
     
         <mat-icon
         class="deleteButton"
+        matTooltip="View project details"
         *ngIf="showEditable"
-        (click)="readThisBlog(data.id)"
+        (click)="displayInvestmentProject(cardData.id)"
         svgIcon="read"></mat-icon>
     
         <mat-icon
         class="deleteButton"
         *ngIf="showEditable"
-        (click)="updateThisBlog(data)"
+        matTooltip="Edit project"
+        (click)="updateThisProject(cardData)"
         svgIcon="refresh"></mat-icon>
     </span>
 </span>

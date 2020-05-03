@@ -2,6 +2,9 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ShareDataService } from 'src/app/services/share-data/share-data.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatIconRegistry } from '@angular/material/icon';
+import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { ModalComponent } from '../../shared/modal/modal.component';
 
 @Component({
   selector: 'app-client-card',
@@ -15,6 +18,8 @@ export class ClientCardComponent implements OnInit {
   constructor(
     private shareDataService: ShareDataService,
     private matIconRegistry: MatIconRegistry,
+    private router: Router,
+    public dialog: MatDialog,
     private domSanitizer: DomSanitizer,) {
     this.shareDataService.makeClientCardEditable.subscribe(res => {
       if (res == 'true') {
@@ -36,6 +41,33 @@ export class ClientCardComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.cardData.id = this.cardData.id.replace('/', '_');
+  }
+
+  displayInvestmentProject(id) {
+    this.router.navigateByUrl(`/investor-matching/${id}`);
+  }
+
+  updateThisProject(cardData) {
+    this.shareDataService.editProject(cardData);
+  }
+
+  deleteProject(id) {
+    this.openDialog(id, 'project');
+  }
+
+
+  openDialog(actionData, dataType): void {
+    const dialogRef = this.dialog.open(ModalComponent, {
+      width: '500px', height: '150px',
+      data: {dataType}
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'delete project') {
+        this.shareDataService.deleteProject(actionData);
+      }
+    });
   }
 
 }

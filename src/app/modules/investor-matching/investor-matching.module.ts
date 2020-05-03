@@ -16,6 +16,7 @@ import { ClientDetailsComponent } from './client-details/client-details.componen
 import { ClientOrderDetailsComponent } from './client-order-details/client-order-details.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CreateClientComponent } from './create-client/create-client.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 
@@ -39,6 +40,7 @@ import { CreateClientComponent } from './create-client/create-client.component';
     MatIconModule,
     MatTooltipModule,
     MatProgressSpinnerModule,
+    MatDialogModule
   ]
 })
 export class InvestorMatchingModule { }

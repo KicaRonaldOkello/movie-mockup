@@ -110,17 +110,27 @@
 
     }
 
-    .grid-slider {
-        margin: 15px 40px 15px 0px;
-        color: gray;
-        display: flex;
-        font-size: 12px;
+    // .grid-slider {
+    //     margin: 15px 40px 15px 0px;
+    //     color: gray;
+    //     display: flex;
+    //     font-size: 12px;
 
-        p {
-            vertical-align: baseline;
-            margin-top: 5px;
-            margin-right: 5px;
+    //     p {
+    //         vertical-align: baseline;
+    //         margin-top: 5px;
+    //         margin-right: 5px;
+    //     }
+    // }
+
+    .create-investment-project-button {
+        margin-top: 30px;
+        margin-bottom: 15px;
+
+        .button {
+            width: 160px;
         }
+
     }
 
     .cards {
@@ -138,6 +148,19 @@
                 color: black;
                 font-weight: bold;
                 font-size: 18px;
+            }
+
+            .button {
+                width: 100px;
+                align-self: center;
+                margin-top: 10px;
+            }
+
+            .align-error-message {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
             }
         }
     }

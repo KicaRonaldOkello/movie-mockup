@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { ShareDataService } from 'src/app/services/share-data/share-data.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { InvestmentProjectService } from 'src/app/services/investment-project/investment-project.service';
@@ -28,6 +28,10 @@ export class CreateClientComponent implements OnInit {
   officeImage2 = true;
   officeImage3 = true;
   myIvestmentProjects = [];
+  editData:any = '';
+  isShow: boolean;
+  topPosToStartShowing = 100;
+  loadingMyInvestmentProjects:boolean;
   constructor(
     private shareDataService: ShareDataService,
     private fb: FormBuilder,
@@ -46,13 +50,20 @@ export class CreateClientComponent implements OnInit {
       "plus",
       this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/plus.svg")
     );
+
+    this.shareDataService.deletedProjectId.subscribe(res => {
+      if (res !== '') {
+        this.loadingMyInvestmentProjects = true;
+        this.deleteProject(res);
+      }
+    });
   }
 
   ngOnInit() {
     this.clientForm = this.fb.group({
       location: [''],
       amountRequested: ['0'],
-      projectedReturnsType: [''],
+      projectedReturnsType: ['Percentage'],
       projectedReturns: ['0'],
       title: [''],
       description: [''],
@@ -60,6 +71,38 @@ export class CreateClientComponent implements OnInit {
       category: [''],
     });
     this.getInvestmentProjects();
+
+    this.shareDataService.editInvestmentProject.subscribe(res => {
+      this.editData = res;
+      if (this.editData !== '') {
+        const {
+          location,
+          title,
+          amountRequested,
+          projectedReturns,
+          projectedReturnsType,
+          description,
+          currencyCode,
+          category,
+          otherImages,
+          coverImage
+        } = this.editData
+        this.clientForm.patchValue({
+          location,
+          title,
+          amountRequested:amountRequested.toLocaleString('en-us'),
+          projectedReturnsType,
+          projectedReturns: projectedReturns.toLocaleString('en-us'),
+          description,
+          currencyCode,
+          category
+        });
+        this.coverImage = coverImage;
+        this.officeImages = otherImages;
+        this.displayCoverImage = true;
+        this.gotoTop()
+      }
+    });
   }
 
   upload() {
@@ -85,15 +128,17 @@ export class CreateClientComponent implements OnInit {
     this.clientForm.value.amountRequested = this.clientForm.value.amountRequested.replace(/\,/g,'');
     this.clientForm.value.projectedReturns = this.clientForm.value.projectedReturns.replace(/\,/g,'');
     const formData = {
-      id: 0,
+      id: this.editData === '' ? 0 : this.editData.id,
       userId: userData.userId,
       ...this.clientForm.value,
       coverImage: this.coverImage,
       otherImages: this.officeImages
     };
+    const message = this.editData === '' ? 'Project has been created successfully' : 
+    'Project has been updated successfully';
     this.investmentProjectService.saveInvestmentProject(formData).subscribe(res => {
       if (res.statusDesc === "SUCCESS") {
-        this.snackBar.open('Client has been created successfully', '', {
+        this.snackBar.open(message, '', {
           duration: 5000,
           panelClass: ['green-snackbar']
         });
@@ -165,10 +210,41 @@ export class CreateClientComponent implements OnInit {
 
 
     getInvestmentProjects() {
+      this.loadingMyInvestmentProjects = true;
       const userData = Helpers.getUserData();
       this.investmentProjectService.getAllInvestmentProjects(0, 12, { UserId: userData.userId })
       .subscribe(res => {
+        this.loadingMyInvestmentProjects = false;
         this.myIvestmentProjects = res.projects;
+      });
+    }
+
+    @HostListener('window:scroll')
+    checkScroll() {
+      const scrollPosition = window.pageYOffset
+      || document.documentElement.scrollTop
+      || document.body.scrollTop || 0;
+      
+      if (scrollPosition >= this.topPosToStartShowing) {
+        this.isShow = true;
+      } else {
+        this.isShow = false;
+      }
+    }
+
+    gotoTop() {
+      window.scroll({ 
+        top: 0, 
+        left: 0, 
+        behavior: 'smooth' 
+      });
+    }
+
+    deleteProject(id) {
+      this.investmentProjectService.deleteInvestmentProject(id).subscribe(res => {
+        if (res.statusCode) {
+          this.getInvestmentProjects();
+        };
       });
     }
 }
