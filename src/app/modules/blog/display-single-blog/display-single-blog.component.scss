@@ -83,11 +83,52 @@
                 width: 30%;
                 justify-content: space-between;
                 margin-left: 30px;
+
+                .social-text {
+                    margin-left: 10px;
+                }
+
+                .social-icon {
+                    height: 12px;
+                    width: 12px;
+                }
                 
                 .social-sharing {
                     display: flex;
                     justify-content: space-between;
-                    flex: 0 0 60%;
+                    flex: 0 0 100%;
+
+                    .social-button {
+                        color: white;
+                        width: 80px;
+
+                        &:hover {
+                            transform: translateY(-3px);
+                        }
+
+                        a {
+                            text-decoration: none;
+                            color: white;
+                        }
+                    }
+
+                    .social-button-facebook {
+                        background-color: #3b5998;
+                    }
+
+                    .social-button-twitter {
+                        background-color: #00acee;
+                    }
+
+                    .social-button-whatsapp {
+                        background-color: #128C7E;
+                    }
+                    .social-button-wechat {
+                        background-color: #7bb32e;
+                    }
+                    .social-button-weibo {
+                        background-color: #df2029;
+                    }
                 }
             }
             
@@ -143,4 +184,18 @@
     justify-content: center;
     align-items: center;
     font-weight: bold;
+}
+
+.st-custom-button[data-network] {
+    background-color: #0adeff;
+    display: inline-block;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-weight: bold;
+    color: #fff;
+    
+    &:hover, &:focus {
+       text-decoration: underline;
+       background-color: #00c7ff;
+    }
 }

@@ -1,3 +1,6 @@
+<span>
+    <div data-network="sharethis" class="st-custom-button">Share</div>
+</span>
 <div class="spinner" *ngIf="!singleBlog && !articleDoesNotExist">
     <mat-spinner
         [color]="accent">
@@ -25,12 +28,58 @@
         <div class="blog-body" [innerHTML]="singleBlog.htmlBody"></div>
         <div class="likes-and-comments">
             <div class="social">
-                <!-- <span class="social-sharing">
-                    <mat-icon (click)="routeTo(singleBlog.author.facebookLink)" class="facebook" svgIcon="facebook"></mat-icon>
-                    <mat-icon (click)="routeTo(singleBlog.author.instagramLink)" class="instagram" svgIcon="instagram"></mat-icon>
-                    <mat-icon (click)="routeTo(singleBlog.author.twitterLink)" class="twitter" svgIcon="twitter"></mat-icon>
-                    <mat-icon (click)="routeTo(singleBlog.author.linkedInLink)" class="linkedin" svgIcon="linkedin"></mat-icon>
-                </span> -->
+                <span class="social-sharing">
+                    <!-- <div data-network="sharethis" class="st-custom-button">Share</div> -->
+
+                <!-- <button class="button social-button social-button-facebook">
+                    <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{currentUrl}}" class="fb-xfbml-parse-ignore">
+                    <span class="social-icon">
+                        <mat-icon inline="true" svgIcon="facebook"></mat-icon>
+                    </span>
+                    <span class="social-text">Share</span>
+                </a>
+                </button>
+
+                <button class="button social-button social-button-twitter">
+                    <a class="twitter-share-button"
+                        href="https://twitter.com/intent/tweet?text={{currentUrl}}">
+                    <span class="social-icon">
+                        <mat-icon inline="true" svgIcon="twitter"></mat-icon>
+                    </span>
+                    <span class="social-text">Share</span>
+                    </a>
+                </button> -->
+
+                <!-- <button class="button social-button social-button-whatsapp">
+                    <a href="https://web.whatsapp.com/send?text={{encodedUrl}}" data-action="share/whatsapp/share">
+                    <span class="social-icon">
+                        <mat-icon inline="true" svgIcon="whatsapp"></mat-icon>
+                    </span>
+                    <span class="social-text">Share</span>
+                </a>
+                </button> -->
+
+                <!-- <button class="button social-button social-button-wechat">
+                    <a href="https://chart.apis.google.com/chart?cht=qr&chs=154x154&chld=Q%7C0&chl={{currentUrl}}">
+                    <span class="social-icon">
+                        <mat-icon inline="true" svgIcon="wechat"></mat-icon>
+                    </span>
+                    <span class="social-text">Share</span>
+                </a>
+                </button>
+
+                <button class="button social-button social-button-weibo">
+                    <a [href]=weiboUrl>
+                    <span class="social-icon">
+                        <mat-icon inline="true" svgIcon="weibo"></mat-icon>
+                    </span>
+                    <span class="social-text">Share</span>
+                </a>
+                </button> -->
+                <!-- <div class="sharethis-inline-share-buttons" data-url="https://elegant-darwin-9dd7df.netlify.app/blog/BlogArticle_405">
+                </div> -->
+                </span>
+
             </div>
             <div class="write-comment">
                 <textarea name="add-comment" (focus)="checkIfUserIsLoggedIn()" #commentValue placeholder="Comment..." id="" rows="5"></textarea>
