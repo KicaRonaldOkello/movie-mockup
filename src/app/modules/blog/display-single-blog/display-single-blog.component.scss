@@ -80,23 +80,19 @@
 
             .social {
                 display: flex;
-                width: 70%;
+                width: 75%;
                 // justify-content: space-between;
                 margin-left: 30px;
-
-                // .social-text {
-                //     margin-left: 10px;
-                // }
-
-                // .social-icon {
-                //     height: 12px;
-                //     width: 12px;
-                // }
                 
                 .social-sharing {
                     display: flex;
                     justify-content: space-between;
                     flex: 0 0 100%;
+
+                    .sharer {
+                      cursor: pointer;
+                      min-width: 75px;
+                    }
 
                     mat-icon {
                       width: 15px;
@@ -105,37 +101,7 @@
                       height: 12px;
                     }
 
-                    // .social-button {
-                    //     color: white;
-                    //     width: 80px;
-
-                    //     &:hover {
-                    //         transform: translateY(-3px);
-                    //     }
-
-                    //     a {
-                    //         text-decoration: none;
-                    //         color: white;
-                    //     }
-                    // }
-
-                    // .social-button-facebook {
-                    //     background-color: #3b5998;
-                    // }
-
-                    // .social-button-twitter {
-                    //     background-color: #00acee;
-                    // }
-
-                    // .social-button-whatsapp {
-                    //     background-color: #128C7E;
-                    // }
-                    // .social-button-wechat {
-                    //     background-color: #7bb32e;
-                    // }
-                    // .social-button-weibo {
-                    //     background-color: #df2029;
-                    // }
+                   
 
 
                     .resp-sharing-button__link,
@@ -214,12 +180,12 @@
   background-color: #bb3e3e
 }
 
-.resp-sharing-button--reddit {
-  background-color: #5f99cf
+.resp-sharing-button--sharer {
+  background-color: #812a35
 }
 
-.resp-sharing-button--reddit:hover {
-  background-color: #3a80c1
+.resp-sharing-button--sharer:hover {
+  background-color: #77222d
 }
 
 .resp-sharing-button--google {

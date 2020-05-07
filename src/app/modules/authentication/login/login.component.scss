@@ -68,6 +68,17 @@
         width: 100vw;
     }
 }
+@media only screen and (max-width: 480px) {
+    .login-form {
+        .login-form-body {
+            .button {
+                width: 80% !important;
+                margin-left: 20px;
+                margin-right: 20px;
+            }
+        }
+    }
+}
     ::ng-deep .green-snackbar {
         background-color: green !important;
       }

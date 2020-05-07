@@ -55,6 +55,10 @@ export class DisplaySingleBlogComponent implements OnInit {
         "weibo",
         this.sanitizer.bypassSecurityTrustResourceUrl("../assets/weibo.svg")
       );
+      this.matIconRegistry.addSvgIcon(
+        "share",
+        this.sanitizer.bypassSecurityTrustResourceUrl("../assets/share.svg")
+      );
     }
 
   ngOnInit() {
@@ -112,13 +116,5 @@ export class DisplaySingleBlogComponent implements OnInit {
       this.auth.isAuthenticated(this.router.url);
     };
   }
-
-  loadDynmicallyScript() {
-    var script = document.createElement('script');
-    script.src = 'https://platform-api.sharethis.com/js/sharethis.js#property=5eb01404b892d40012e344a0&product=inline-share-buttons';
-    script.async =false;
-    document.head.appendChild(script);
-    script.onload = () => this.displayShare = true;
- }
 
 }
