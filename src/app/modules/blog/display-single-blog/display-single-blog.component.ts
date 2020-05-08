@@ -59,13 +59,16 @@ export class DisplaySingleBlogComponent implements OnInit {
         "share",
         this.sanitizer.bypassSecurityTrustResourceUrl("../assets/share.svg")
       );
+      this.matIconRegistry.addSvgIcon(
+        "renren",
+        this.sanitizer.bypassSecurityTrustResourceUrl("../assets/renren.svg")
+      );
     }
 
   ngOnInit() {
     this.blogService.getBlogs(1, 2).subscribe(blog => {
       this.blogs = blog.articles;
     });
-    // this.loadDynmicallyScript();
 
       this.id = this.activatedRoute.snapshot.paramMap.get('id');
       this.id = this.id.replace('_', '/');
