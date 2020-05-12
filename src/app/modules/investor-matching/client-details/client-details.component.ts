@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ShareDataService } from 'src/app/services/share-data/share-data.service';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { InvestmentProjectService } from 'src/app/services/investment-project/investment-project.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -30,12 +29,11 @@ export class ClientDetailsComponent implements OnInit {
       this.id = this.activatedRoute.snapshot.paramMap.get('id');
       this.id = this.id.replace('_', '/');
 
-    this.investmentProjectService.getSingleInvestmentProject(this.id).subscribe(res => {
-      if (res.status.statusCode === "100") {
+      this.investmentProjectService.getSingleInvestmentProject(this.id).subscribe(res => {
+      if (res.status.statusCode === '100') {
         this.notFound = res.status.statusDesc;
         this.loadingInvestmentProject = false;
-        console.log(res.status, '>>>');
-      } else if (res.status.statusCode === "0") {
+      } else if (res.status.statusCode === '0') {
         this.data = res;
         this.loadingInvestmentProject = false;
       }
@@ -44,6 +42,10 @@ export class ClientDetailsComponent implements OnInit {
 
   coverImageLoaded() {
     this.loadingCoverImage = false;
+  }
+
+  sendDataToOrderDetails() {
+    this.shareDataService.sendInvestorMatchingData(this.data.id);
   }
 
 

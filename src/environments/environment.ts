@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
   // base_url: 'https://herbertazurefunctionsprod.azurewebsites.net/api/'
-  base_url: 'https://hebertazurefunctions.azurewebsites.net/api/'
+  base_url: 'https://hebertazurefunctions.azurewebsites.net/api/',
+  rave_publicKey: 'FLWPUBK_TEST-b7a6d0a478d201ceae721033e1f39c95-X',
 };
 
 /*

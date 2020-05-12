@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
-import { MatIconModule } from "@angular/material/icon";
+import { MatIconModule } from '@angular/material/icon';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 

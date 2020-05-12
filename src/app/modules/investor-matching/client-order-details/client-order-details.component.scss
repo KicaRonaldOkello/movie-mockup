@@ -1,3 +1,10 @@
+.spinner {
+  width: 80vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .body {
     width: 80vw;
     display: flex;
@@ -11,10 +18,22 @@
         padding-left: 20px;
         padding-right: 20px;
 
+        .client-cover-spinner {
+          width: 100%;
+          height: 350px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+
         .details {
             display: flex;
             flex-wrap: wrap;
             width: 100%;
+
+          .card-body-returns {
+            display: flex;
+          }
         }
 
         @media only screen and (max-width: 850px) {
@@ -30,6 +49,7 @@
 
         .cover-image {
             width: 100%;
+            height: 350px;
         }
 
         .company-info {
@@ -61,17 +81,19 @@
         }
 
         .buttons {
-
+            display: flex;
             .button {
                 font-size: 10px;
             }
 
             .first-button {
                 margin-right: 5px;
-                width: 100px;
+              padding-top: 5px;
+                width: 80px;
             }
 
             .second-button {
+                padding-top: 5px;
                 width: 80px;
             }
         }
@@ -80,10 +102,20 @@
             width: 65%;
             p {
                 font-weight: 600;
-                font-size: 25px;
                 color: #6D6E71;
-                margin: 15px 0px;
             }
+
+            .order-details-title {
+              font-size: 25px;
+              margin-top: 15px;
+              margin-bottom: 50px;
+            }
+
+          .input-currency {
+            font-size: 14px;
+            margin-bottom: 15px;
+          }
+
 
             .select-inputs {
                 display: flex;
@@ -98,43 +130,23 @@
                 margin-bottom: 15px;
             }
 
-            select {
-                width: 100%;
-                height: 30px;
-                border: none;
-                -webkit-appearance: none;
-                background: url('/assets/down-arrow.svg') no-repeat right #F4F4F4;
-                background-size: 10px;
-                margin-right: 20px;
-                border-radius: 5px;
-                background-position-x: 95%;
-                padding-left: 10px;
-                margin: 5px 5px;
-    
-                &:focus {
-                    outline: none;
-                }
-    
-            }
-    
-            select:required:invalid {
-                color: gray;
-                font-size: 12px;
-            }
-            option[value=""][disabled] {
-                display: none;
-            }
-            option {
-                color: black;
-                font-size: 12px;
-    
-                &:focus {
-                    outline: none;
-                }
+            input {
+              width: 100%;
+              height: 30px;
+              border: none;
+              background-color: #F4F4F4;
+              color: gray;
+              padding-left: 10px;
+              margin-bottom: 35px;
+
+              &:focus {
+                outline: none;
+              }
             }
         }
 
         .bottom {
+          margin-top: 30px;
             p {
                 font-weight: 600;
                 font-size: 25px;
@@ -151,4 +163,13 @@
     .body {
         width: 100vw;
     }
+}
+
+
+::ng-deep .green-snackbar {
+  background-color: green !important;
+}
+
+::ng-deep .red-snackbar {
+  background-color: red !important;
 }

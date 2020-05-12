@@ -53,6 +53,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     multi: true
   }],
   bootstrap: [AppComponent],
-  entryComponents:[ModalComponent]
+  entryComponents: [ModalComponent]
 })
 export class AppModule { }

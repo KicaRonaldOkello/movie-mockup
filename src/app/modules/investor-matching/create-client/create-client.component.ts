@@ -8,7 +8,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import Helpers from 'src/app/helpers/helpers';
 
 
-declare var cloudinary: any
+declare var cloudinary: any;
 @Component({
   selector: 'app-create-client',
   templateUrl: './create-client.component.html',
@@ -18,7 +18,7 @@ export class CreateClientComponent implements OnInit {
 
   displayCoverImage = false;
   coverImage: any = '';
-  officeImages:string[] = [];
+  officeImages: string[] = [];
   clientForm: FormGroup;
   data = [1, 2, 3];
   uploadingInvestmentProjectDetail = false;
@@ -28,10 +28,10 @@ export class CreateClientComponent implements OnInit {
   officeImage2 = true;
   officeImage3 = true;
   myIvestmentProjects = [];
-  editData:any = '';
+  editData: any = '';
   isShow: boolean;
   topPosToStartShowing = 100;
-  loadingMyInvestmentProjects:boolean;
+  loadingMyInvestmentProjects: boolean;
   constructor(
     private shareDataService: ShareDataService,
     private fb: FormBuilder,
@@ -43,12 +43,12 @@ export class CreateClientComponent implements OnInit {
     this.shareDataService.showAd('true');
     this.shareDataService.showEditable();
     this.matIconRegistry.addSvgIcon(
-      "photo",
-      this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/photo.svg")
+      'photo',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/photo.svg')
     );
     this.matIconRegistry.addSvgIcon(
-      "plus",
-      this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/plus.svg")
+      'plus',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/plus.svg')
     );
 
     this.shareDataService.deletedProjectId.subscribe(res => {
@@ -86,11 +86,11 @@ export class CreateClientComponent implements OnInit {
           category,
           otherImages,
           coverImage
-        } = this.editData
+        } = this.editData;
         this.clientForm.patchValue({
           location,
           title,
-          amountRequested:amountRequested.toLocaleString('en-us'),
+          amountRequested: amountRequested.toLocaleString('en-us'),
           projectedReturnsType,
           projectedReturns: projectedReturns.toLocaleString('en-us'),
           description,
@@ -100,18 +100,18 @@ export class CreateClientComponent implements OnInit {
         this.coverImage = coverImage;
         this.officeImages = otherImages;
         this.displayCoverImage = true;
-        this.gotoTop()
+        this.gotoTop();
       }
     });
   }
 
   upload() {
-    var myWidget = cloudinary.createUploadWidget({
+    let myWidget = cloudinary.createUploadWidget({
       cloudName: 'do6g6dwlz',
       uploadPreset: 'vdoc0rsk',
       multiple: false
     }, (error, result) => {
-      if (!error && result && result.event === "success") {
+      if (!error && result && result.event === 'success') {
         this.displayCoverImage = true;
         this.coverImage = result.info.secure_url;
       }
@@ -125,8 +125,8 @@ export class CreateClientComponent implements OnInit {
   submitClientForm() {
     const userData = Helpers.getUserData();
     this.uploadingInvestmentProjectDetail = true;
-    this.clientForm.value.amountRequested = this.clientForm.value.amountRequested.replace(/\,/g,'');
-    this.clientForm.value.projectedReturns = this.clientForm.value.projectedReturns.replace(/\,/g,'');
+    this.clientForm.value.amountRequested = this.clientForm.value.amountRequested.replace(/\,/g, '');
+    this.clientForm.value.projectedReturns = this.clientForm.value.projectedReturns.replace(/\,/g, '');
     const formData = {
       id: this.editData === '' ? 0 : this.editData.id,
       userId: userData.userId,
@@ -134,10 +134,10 @@ export class CreateClientComponent implements OnInit {
       coverImage: this.coverImage,
       otherImages: this.officeImages
     };
-    const message = this.editData === '' ? 'Project has been created successfully' : 
+    const message = this.editData === '' ? 'Project has been created successfully' :
     'Project has been updated successfully';
     this.investmentProjectService.saveInvestmentProject(formData).subscribe(res => {
-      if (res.statusDesc === "SUCCESS") {
+      if (res.statusDesc === 'SUCCESS') {
         this.snackBar.open(message, '', {
           duration: 5000,
           panelClass: ['green-snackbar']
@@ -167,14 +167,14 @@ export class CreateClientComponent implements OnInit {
   }
 
   uploadOfficeImages() {
-    var myWidget = cloudinary.createUploadWidget({
+    let myWidget = cloudinary.createUploadWidget({
       cloudName: 'do6g6dwlz',
       uploadPreset: 'vdoc0rsk',
       multiple: true,
       maxImageWidth: 180,
       maxImageHeight: 160,
     }, (error, result) => {
-      if (!error && result && result.event === "success") {
+      if (!error && result && result.event === 'success') {
         this.officeImages.push(result.info.secure_url);
         if (this.officeImages.length > 4) {
           this.officeImages.shift();
@@ -186,22 +186,22 @@ export class CreateClientComponent implements OnInit {
     myWidget.open();
   }
 
-  isNumber(evt, values) {
-    var theEvent = evt || window.event;
-    var key = theEvent.keyCode || theEvent.which;
+  isNumber(evt) {
+    let theEvent = evt || window.event;
+    let key = theEvent.keyCode || theEvent.which;
     key = String.fromCharCode(key);
-    if (key.length == 0) return;
-    var regex = /^[0-9,\b]+$/;
+    if (key.length == 0) { return; }
+    let regex = /^[0-9,\b]+$/;
     if (!regex.test(key)) {
         theEvent.returnValue = false;
-        if (theEvent.preventDefault) theEvent.preventDefault();
+        if (theEvent.preventDefault) { theEvent.preventDefault(); }
       }
     }
-    
+
     addCommas(value, inputField) {
       const num1 = value.replace(/,/g, '');
-        const num2 = Number(num1).toLocaleString('en-US');
-        if (inputField === 'projectedReturns') {
+      const num2 = Number(num1).toLocaleString('en-US');
+      if (inputField === 'projectedReturns') {
         this.clientForm.patchValue({ projectedReturns: num2 });
       } else if (inputField === 'amountRequested') {
         this.clientForm.patchValue({ amountRequested: num2 });
@@ -224,7 +224,7 @@ export class CreateClientComponent implements OnInit {
       const scrollPosition = window.pageYOffset
       || document.documentElement.scrollTop
       || document.body.scrollTop || 0;
-      
+
       if (scrollPosition >= this.topPosToStartShowing) {
         this.isShow = true;
       } else {
@@ -233,10 +233,10 @@ export class CreateClientComponent implements OnInit {
     }
 
     gotoTop() {
-      window.scroll({ 
-        top: 0, 
-        left: 0, 
-        behavior: 'smooth' 
+      window.scroll({
+        top: 0,
+        left: 0,
+        behavior: 'smooth'
       });
     }
 
@@ -244,7 +244,7 @@ export class CreateClientComponent implements OnInit {
       this.investmentProjectService.deleteInvestmentProject(id).subscribe(res => {
         if (res.statusCode) {
           this.getInvestmentProjects();
-        };
+        }
       });
     }
 }

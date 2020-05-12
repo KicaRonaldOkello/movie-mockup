@@ -171,3 +171,11 @@
         width: 100vw;
     }
 }
+
+::ng-deep .green-snackbar {
+  background-color: green !important;
+}
+
+::ng-deep .red-snackbar {
+  background-color: red !important;
+}

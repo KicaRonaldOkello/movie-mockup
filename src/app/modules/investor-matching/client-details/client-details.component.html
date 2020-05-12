@@ -26,8 +26,8 @@
                     <p>{{data.category}} Company</p>
                 </div>
                 <div class="buttons">
-                    <button class="button first-button" [routerLink]="['../order-details']">Contact Owner</button>
-                    <button class="button second-button">Invest Now</button>
+                    <button class="button first-button">Contact Owner</button>
+                    <button class="button second-button" (click)="sendDataToOrderDetails()" [routerLink]="['../order-details', data.id]">Invest Now</button>
                 </div>
             </span>
         </div>

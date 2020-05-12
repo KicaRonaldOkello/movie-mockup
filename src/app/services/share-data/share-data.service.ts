@@ -32,7 +32,10 @@ export class ShareDataService {
 
   private projectId = new BehaviorSubject('');
   deletedProjectId = this.projectId.asObservable();
-  
+
+  private  investorMatching = new BehaviorSubject('');
+  investorMatchingData = this.investorMatching.asObservable();
+
   constructor() { }
 
   newVideoId(id) {
@@ -69,5 +72,9 @@ export class ShareDataService {
 
   deleteProject(id) {
     this.projectId.next(id);
+  }
+
+  sendInvestorMatchingData(data) {
+    this.investorMatching.next(data);
   }
 }
