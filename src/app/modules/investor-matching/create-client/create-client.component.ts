@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import {Component, OnInit, HostListener, OnDestroy} from '@angular/core';
 import { ShareDataService } from 'src/app/services/share-data/share-data.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { InvestmentProjectService } from 'src/app/services/investment-project/investment-project.service';
@@ -14,7 +14,7 @@ declare var cloudinary: any;
   templateUrl: './create-client.component.html',
   styleUrls: ['./create-client.component.scss']
 })
-export class CreateClientComponent implements OnInit {
+export class CreateClientComponent implements OnInit, OnDestroy {
 
   displayCoverImage = false;
   coverImage: any = '';
@@ -41,7 +41,7 @@ export class CreateClientComponent implements OnInit {
     private domSanitizer: DomSanitizer,
   ) {
     this.shareDataService.showAd('true');
-    this.shareDataService.showEditable();
+    this.shareDataService.showEditable('true');
     this.matIconRegistry.addSvgIcon(
       'photo',
       this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/photo.svg')
@@ -246,5 +246,9 @@ export class CreateClientComponent implements OnInit {
           this.getInvestmentProjects();
         }
       });
+    }
+
+    ngOnDestroy(): void {
+      this.shareDataService.showEditable('false');
     }
 }

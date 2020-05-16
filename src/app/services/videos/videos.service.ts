@@ -2,61 +2,63 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import {environment} from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class VideosService {
 
+  base_url = environment.base_url;
   constructor(private http: HttpClient) { }
 
 
-  getPlaylist(playlistId=1):Observable<any> {
+  getPlaylist(playlistId= 1): Observable<any> {
     return this.http.get(
-      `https://hebertazurefunctions.azurewebsites.net/api/GetPlaylist?Id=${playlistId}&code=tjNVpZgpeDGDhSfGWpOHsV25A0T7EFOzkPigTNsoE7NpLQxfqtEIRA==`
+      `${this.base_url}GetPlaylist?Id=${playlistId}`
     ).pipe(
       map(data => data)
-    )
+    );
   }
 
-  getSingleVideo(videoId):Observable<any> {
+  getSingleVideo(videoId): Observable<any> {
     return this.http.get(
-      `https://hebertazurefunctions.azurewebsites.net/api/GetVideo?Id=${videoId}&code=tjNVpZgpeDGDhSfGWpOHsV25A0T7EFOzkPigTNsoE7NpLQxfqtEIRA==`
+      `${this.base_url}GetVideo?Id=${videoId}`
     ).pipe(
       map(data => data)
-    )
+    );
   }
 
-  getAllVideos(page, limit=12):Observable<any> {
+  getAllVideos(page, limit= 12, category): Observable<any> {
     return this.http.get(
-      `https://hebertazurefunctions.azurewebsites.net/api/GetAllVideos?limit=${limit}&page=${page}&code=tjNVpZgpeDGDhSfGWpOHsV25A0T7EFOzkPigTNsoE7NpLQxfqtEIRA==`
+      `${this.base_url}GetAllVideos?limit=${limit}`, { params: { page, category}}
     ).pipe(
       map(data => data)
-    )
+    );
   }
 
-  saveVideo(video):Observable<any> {
+  saveVideo(video): Observable<any> {
     return this.http.post(
-      `https://hebertazurefunctions.azurewebsites.net/api/SaveVideo?code=tjNVpZgpeDGDhSfGWpOHsV25A0T7EFOzkPigTNsoE7NpLQxfqtEIRA==`, video
+      `${this.base_url}SaveVideo`, video
     ).pipe(
       map(data => data)
-    )
+    );
   }
 
-  deleteVideo(videoId):Observable<any> {
+  deleteVideo(videoId): Observable<any> {
     return this.http.delete(
-      `https://hebertazurefunctions.azurewebsites.net/api/DeleteVideo?Id=${videoId}&code=tjNVpZgpeDGDhSfGWpOHsV25A0T7EFOzkPigTNsoE7NpLQxfqtEIRA==`,
+      `${this.base_url}DeleteVideo?Id=${videoId}`,
     ).pipe(
       map(data => data)
-    )
+    );
   }
 
-  savePlaylistItems(video):Observable<any> {
+  savePlaylistItems(video): Observable<any> {
     return this.http.post(
-      `https://hebertazurefunctions.azurewebsites.net/api/SavePlaylistItems?code=tjNVpZgpeDGDhSfGWpOHsV25A0T7EFOzkPigTNsoE7NpLQxfqtEIRA==`, video
+      `${this.base_url}SavePlaylistItems`, video
     ).pipe(
       map(data => data)
-    )
+    );
   }
 
 

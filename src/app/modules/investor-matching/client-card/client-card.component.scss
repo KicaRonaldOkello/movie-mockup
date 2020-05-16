@@ -34,7 +34,7 @@
         display: flex;
         font-size: 10px;
         color: gray;
-        
+
         img {
             vertical-align: text-top;
             margin-right: 5px;
@@ -71,10 +71,11 @@
     button {
         width: 100px;
         font-weight: bold;
-        
+      //height: 28px !important;
+
     }
 
-    
+
     .action-buttons {
         display: flex;
         justify-content: space-around;

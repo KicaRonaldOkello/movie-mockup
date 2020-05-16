@@ -11,7 +11,7 @@
           <option *ngFor="let lang of translate.getLangs()" [value]="lang" [selected]="lang === translate.currentLang">{{
             lang | uppercase }}</option>
         </select>
-        
+
           <img class="align-globe" src="assets/www.svg" alt="globe">
         </span>
         <span class="signin">
@@ -28,13 +28,14 @@
       <p
         class="menu-item"
         routerLinkActive="menu-item__checked"
+        [routerLink]="['tv']"
         >
         TV Stations
       </p>
       <p
         class="menu-item"
         routerLinkActive="menu-item__checked"
-        (click)="changeNavBarIcon('/investor-matching')"
+        (click)="changeNavBarIcon('/blog')"
         [routerLink]="['investor-matching']"
         >
         Investor Matching
@@ -45,7 +46,7 @@
     </p>
       <p
         class="menu-item">
-        Calendar
+        Translator Services
       </p>
       <p
         class="menu-item"

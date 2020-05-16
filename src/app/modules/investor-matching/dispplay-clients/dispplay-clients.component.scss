@@ -98,7 +98,7 @@
 
         .button {
             width: 100px;
-            background-color: #792029;
+            background-color: red;
             color: white;
             margin-top: 5px;
             height: 30px;
@@ -110,25 +110,13 @@
 
     }
 
-    // .grid-slider {
-    //     margin: 15px 40px 15px 0px;
-    //     color: gray;
-    //     display: flex;
-    //     font-size: 12px;
-
-    //     p {
-    //         vertical-align: baseline;
-    //         margin-top: 5px;
-    //         margin-right: 5px;
-    //     }
-    // }
-
     .create-investment-project-button {
         margin-top: 30px;
         margin-bottom: 15px;
 
         .button {
-            width: 160px;
+            padding: 0px 10px;
+            width: 170px;
         }
 
     }

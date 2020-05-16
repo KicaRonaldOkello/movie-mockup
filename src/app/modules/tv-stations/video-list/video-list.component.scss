@@ -1,0 +1,92 @@
+.spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 500px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  img {
+    width: 80px;
+    height: 80px;
+    animation: spin 2s linear infinite;
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+}
+.body {
+  width: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  h2 {
+    text-align: center;
+    padding-top: 30px;
+    color: var(--gold-color);
+  }
+
+  .videos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 20px 20px;
+  }
+
+  .example-box {
+    width: 47%;
+    margin-top: 20px;
+    padding: 20px 10px;
+    border-bottom: solid 1px #ccc;
+    color: rgba(0, 0, 0, 0.87);
+    display: flex;
+    border-radius: 3px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    cursor: pointer;
+    background: white;
+    font-size: 14px;
+  }
+
+  .videos-box {
+    padding: 0px !important;
+  }
+
+  .video-body {
+    display: flex;
+    flex-direction: column;
+
+    &__title {
+      font-weight: 700;
+      font-size: 12px;
+      width: 85%;
+      text-align: center;
+      height: 30px;
+      margin-top: 10px;
+    }
+
+    &__description {
+      margin-top: 20px;
+      font-size: 10px;
+      font-weight: 500;
+      word-wrap: break-word;
+      margin-left: 5px;
+    }
+  }
+
+  .video-item {
+    display: flex;
+
+    .video-position {
+      margin-top: 40px;
+      font-weight: bold;
+      margin-right: 5px;
+    }
+  }
+}

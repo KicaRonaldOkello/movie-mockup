@@ -25,13 +25,11 @@
             <div class="social">
                 <span class="social-sharing">
                     <span>
-                        <button class="social-button social-button-share">
-                        <a target="_blank" (click)="displayShare=!displayShare" class="fb-xfbml-parse-ignore">
+                        <button class="social-button social-button-share" (click)="displayShare=!displayShare">
                         <span class="social-icon">
                             <mat-icon inline="true" svgIcon="share"></mat-icon>
                         </span>
                         <span class="social-text">Share</span>
-                    </a>
                     </button>
                     </span>
 
@@ -44,7 +42,7 @@
                         <span class="social-text">Facebook</span>
                     </a>
                     </button>
-    
+
                     <button class="social-button social-button-twitter">
                         <a class="twitter-share-button"
                             href="https://twitter.com/intent/tweet?text={{currentUrl}}">
@@ -54,7 +52,7 @@
                         <span class="social-text">Twitter</span>
                         </a>
                     </button>
-    
+
                         <button class="social-button social-button-whatsapp">
                         <a href="https://web.whatsapp.com/send?text={{encodedUrl}}" data-action="share/whatsapp/share">
                         <span class="social-icon">
@@ -63,7 +61,7 @@
                         <span class="social-text">Whatsapp</span>
                     </a>
                     </button>
-    
+
                         <button class="social-button social-button-wechat">
                         <a href="https://chart.apis.google.com/chart?cht=qr&chs=154x154&chld=Q%7C0&chl={{currentUrl}}">
                         <span class="social-icon">
@@ -72,7 +70,7 @@
                         <span class="social-text">WeChat</span>
                     </a>
                     </button>
-    
+
                     <button class="social-button social-button-weibo">
                         <a [href]=weiboUrl>
                         <span class="social-icon">

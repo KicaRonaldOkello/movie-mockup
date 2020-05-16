@@ -7,7 +7,7 @@ import { NotFoundComponent } from 'src/app/modules/shared/not-found/not-found.co
 
 const routes: Routes = [
   { path: '', component: DisplayBlogsComponent },
-  { path: ':id', component: DisplaySingleBlogComponent },
+  { path: 'single-blog', component: DisplaySingleBlogComponent },
   { path: '**', component: NotFoundComponent }
 ];
 

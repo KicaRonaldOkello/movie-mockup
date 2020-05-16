@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalComponent } from '../../shared/modal/modal.component';
 
+import * as moment from 'moment';
+
 @Component({
   selector: 'app-client-card',
   templateUrl: './client-card.component.html',
@@ -13,35 +15,35 @@ import { ModalComponent } from '../../shared/modal/modal.component';
 })
 export class ClientCardComponent implements OnInit {
 
-  @Input() cardData:any;
-  showEditable:boolean = false;
+  @Input() cardData: any;
+  showEditable = false;
   constructor(
     private shareDataService: ShareDataService,
     private matIconRegistry: MatIconRegistry,
     private router: Router,
     public dialog: MatDialog,
-    private domSanitizer: DomSanitizer,) {
+    private domSanitizer: DomSanitizer,
+    ) {
     this.shareDataService.makeClientCardEditable.subscribe(res => {
-      if (res == 'true') {
+      if (res === 'true') {
         this.showEditable = true;
       }
     });
     this.matIconRegistry.addSvgIcon(
-      "delete",
-      this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/delete.svg")
+      'delete',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/delete.svg')
     );
     this.matIconRegistry.addSvgIcon(
-      "read",
-      this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/book.svg")
+      'read',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/book.svg')
     );
     this.matIconRegistry.addSvgIcon(
-      "refresh",
-      this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/refresh.svg")
+      'refresh',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/refresh.svg')
     );
   }
 
   ngOnInit() {
-    this.cardData.id = this.cardData.id.replace('/', '_');
   }
 
   displayInvestmentProject(id) {
@@ -62,7 +64,7 @@ export class ClientCardComponent implements OnInit {
       width: '500px', height: '150px',
       data: {dataType}
     });
-  
+
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'delete project') {
         this.shareDataService.deleteProject(actionData);

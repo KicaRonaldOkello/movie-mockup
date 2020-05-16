@@ -1,5 +1,5 @@
 .full-page {
-    
+
     &__body {
     display: flex;
     width: 80vw;
@@ -16,10 +16,12 @@
             font-size: 12px;
 
             &__item {
+                display: flex;
+                justify-content: space-around;
                 margin-left: 10px;
                 margin-right: 10px;
                 border-bottom: .1px solid gray;
-                padding: 20px 30px;
+                padding: 10px 0px;
                 font-weight: 100;
                 &:not(:last-child) {
                     margin-bottom: 15px;
@@ -29,6 +31,28 @@
                     cursor: pointer;
                     background-color: rgb(47, 10, 20);
                 }
+
+              li {
+                margin-top: 10px;
+                width: 40%;
+                word-wrap: break-word;
+              }
+
+              .button {
+                margin-top: 4px;
+                background-color: transparent;
+                color: #D4B867;
+                font-size: 10px !important;
+                padding: 5px;
+                border-color: #D4B867;
+                cursor: pointer;
+                transition: .2s;
+
+
+                &:hover {
+                  transform: scale(1.1);
+                }
+              }
 
             }
         }
@@ -272,6 +296,10 @@
                 }
             }
         }
+
+      &__movie-list {
+        padding-bottom: 40px;
+      }
     }
 
 }

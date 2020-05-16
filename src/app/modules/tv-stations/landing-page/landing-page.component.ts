@@ -1,8 +1,9 @@
-import { Component, OnInit, AfterViewInit, AfterViewChecked } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { VgAPI } from 'videogular2/core';
 import { VideosService } from 'src/app/services/videos/videos.service';
 import { Observable, forkJoin } from 'rxjs';
 import { ShareDataService } from 'src/app/services/share-data/share-data.service';
+import {VideoCategoriesService} from '../../../services/videoCategories/video-categories.service';
 
 @Component({
   selector: 'app-landing-page',
@@ -11,7 +12,9 @@ import { ShareDataService } from 'src/app/services/share-data/share-data.service
 })
 export class LandingPageComponent implements OnInit, AfterViewInit {
   controls = false;
-  displayPlayButton: boolean = true;
+  defaultTvDisplay = true;
+  chosenCategory;
+  displayPlayButton = true;
   myVideo: any;
   api: VgAPI;
   isPlaying: any;
@@ -28,26 +31,29 @@ export class LandingPageComponent implements OnInit, AfterViewInit {
   videoCategory = '';
   videoRecommendedAge = '';
   loadingPage = true;
+  videoCategories = [];
+  loadCategories = true;
 
   constructor(
     private videoService: VideosService,
     private shareDataService: ShareDataService,
+    private videoCategoryService: VideoCategoriesService
     ) {
 
-    this.sources = new Array<Object>()
+    this.sources = new Array<Object>();
 
     this.videoService.getPlaylist().subscribe(data => {
-      if (data.playlistsItems.length == 0) {
+      if (data.playlistsItems.length === 0) {
         this.noPlaylistItems = true;
       } else {
       data.playlistsItems.map(videoItem => {
         return this.playlistIds.push(videoItem.videoId);
       });
-      
+
       this.getAllVideos(this.playlistIds);
     }
-    })
-    
+    });
+
   }
 
   getAllVideos(videoIds) {
@@ -73,16 +79,17 @@ export class LandingPageComponent implements OnInit, AfterViewInit {
     this.videoTitle = source.name;
     this.videoGenre = source.genre;
     this.videoCategory = source.categoryId;
-    this.videoRecommendedAge = source.recommendedAge; 
+    this.videoRecommendedAge = source.recommendedAge;
     this.api.getDefaultMedia().currentTime = 0;
     this.shareDataService.videoComments(source.id);
   }
 
   ngOnInit() {
+    this.getVideoCategories();
   }
 
   ngAfterViewInit() {
-    
+
   }
 
   mouseEnter() {
@@ -137,12 +144,28 @@ export class LandingPageComponent implements OnInit, AfterViewInit {
   }
 
   playVideo() {
-    var myVideo: any = document.getElementById('singleVideo');
+    const myVideo: any = document.getElementById('singleVideo');
 
     if (myVideo.paused) {
       myVideo.play();
       this.displayPlayButton = false;
     }
+  }
+
+  displayCategoryVideos(category) {
+    this.chosenCategory = category;
+    this.defaultTvDisplay = false;
+  }
+
+  getVideoCategories() {
+    this.videoCategoryService.getAllVideoCategories().subscribe(res => {
+      this.videoCategories = res.items;
+      this.loadCategories = false;
+
+    });
+  }
+  playCurrentVideo(event) {
+    this.setCurrentVideo(event);
   }
 
 }

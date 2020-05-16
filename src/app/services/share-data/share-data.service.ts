@@ -58,8 +58,8 @@ export class ShareDataService {
     this.videoComment.next(id);
   }
 
-  showEditable() {
-    this.editClientCard.next('true');
+  showEditable(value) {
+    this.editClientCard.next(value);
   }
 
   loggedIn() {

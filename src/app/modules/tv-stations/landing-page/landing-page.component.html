@@ -1,20 +1,17 @@
-<div *ngIf="loadingPage" class="landing-page-spinner">
+<div *ngIf="loadingPage || loadCategories" class="landing-page-spinner">
   <mat-spinner></mat-spinner>
 </div>
-<div class="full-page__body" *ngIf="!loadingPage">
+<div class="full-page__body" *ngIf="!loadingPage || !loadCategories">
     <nav class="sidebar">
-      <ul class="side-nav">
-        <span class="side-nav__group">
-          <li class="side-nav__item">Movies</li>
-          <li class="side-nav__item">Series</li>
-        </span>
-        <span class="side-nav__group">
-          <li class="side-nav__item">Live TV</li>
-          <li class="side-nav__item">Sports</li>
-        </span>
-        <span class="side-nav__group">
-          <li class="side-nav__item">Documentary</li>
-          <li class="side-nav__item">News</li>
+      <ul class="side-nav" *ngFor="let category of videoCategories">
+<!--        <span class="side-nav__item" (click)="displayCategoryVideos('Movies')">-->
+<!--          <li>Movies</li>-->
+<!--          <button class="button">SUBSCRIBE</button>-->
+<!--        </span>-->
+
+        <span class="side-nav__item" (click)="displayCategoryVideos(category)">
+          <li>{{category.categoryCode | titlecase}}</li>
+          <button class="button">SUBSCRIBE</button>
         </span>
       </ul>
     </nav>
@@ -60,7 +57,7 @@
           <p>Age: {{videoRecommendedAge}}</p>
         </span>
       </div>
-      <div class="movie-covers__footer">
+      <div class="movie-covers__footer" *ngIf="defaultTvDisplay">
         <div class="soccer">
           <p>More Action</p>
           <p>Sports</p>
@@ -89,6 +86,12 @@
             <p>Series</p>
           </div>
         </div>
+      </div>
+      <div class="movie-covers__movie-list" *ngIf="!defaultTvDisplay">
+        <app-video-list
+          [category]="chosenCategory"
+          (videoToBePlayed)="playCurrentVideo($event)"
+        ></app-video-list>
       </div>
     </div>
 

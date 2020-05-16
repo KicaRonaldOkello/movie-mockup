@@ -123,7 +123,7 @@
         </span>
     </div>
     <div class="bottom">
-        <p>Other Clients</p>
+        <p  *ngIf="myIvestmentProjects.length > 0 && !loadingMyInvestmentProjects">Other Clients</p>
         <span class="bottom-spinner" *ngIf="loadingMyInvestmentProjects">
           <mat-spinner diameter="60"></mat-spinner>
         </span>

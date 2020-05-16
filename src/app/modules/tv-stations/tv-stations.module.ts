@@ -8,11 +8,12 @@ import { VgCoreModule } from 'videogular2/core';
 import { VgControlsModule } from 'videogular2/controls';
 import { VgOverlayPlayModule } from 'videogular2/overlay-play';
 import { VgBufferingModule } from 'videogular2/buffering';
+import { VideoListComponent } from './video-list/video-list.component';
 
 
 
 @NgModule({
-  declarations: [LandingPageComponent],
+  declarations: [LandingPageComponent, VideoListComponent],
   imports: [
     CommonModule,
     VgCoreModule,

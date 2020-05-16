@@ -6,26 +6,27 @@
     </div>
     <div class="card__sub-title">
         <img src="assets/clock.svg" alt="">
-        <p>12h</p>
+        <p>{{cardData.timeSinceCreation}}</p>
     </div>
     <div class="card__body">
-        <p>Owner: John Doe</p>
+        <p>Owner: {{(cardData.userId.length>23)? (cardData.userId | slice:0:23)+'..':(cardData.userId)}}</p>
         <p>Location: {{cardData.location}}</p>
         <p>Amount Required: {{cardData.currencyCode}} {{cardData.amountRequested | number}}</p>
         <span class="card__body__returns">
             <p>Project Returns:</p>
-            <p *ngIf="cardData.projectedReturnsType === 'Fixed'">{{cardData.currencyCode}}</p>
-            <p>{{cardData.projectedReturns | number}}</p>
-            <p *ngIf="cardData.projectedReturnsType === 'Percentage'">%</p>
+            <p *ngIf="cardData.projectedReturnsType.toLowerCase() === 'fixed'">{{cardData.currencyCode}}</p>
+            <p>&nbsp;{{cardData.projectedReturns | number}}</p>
+            <p *ngIf="cardData.projectedReturnsType.toLowerCase() === 'percentage'">%</p>
         </span>
-        <p>+ initial investment</p>
+        <p *ngIf="cardData.projectedReturnsType.toLowerCase() === 'fixed'">+ initial investment</p>
     </div>
     <div class="card__company-type">
         <p>{{cardData.category}} Company</p>
     </div>
     <button
     class="button"
-    [routerLink]="[cardData.id]"
+    [routerLink]="['view-project-details']"
+    [queryParams]="{ id: cardData.id }"
     *ngIf="!showEditable"
     >Invest</button>
     <span class="action-buttons">
@@ -35,14 +36,14 @@
         *ngIf="showEditable"
         (click)="deleteProject(cardData.id)"
         svgIcon="delete"></mat-icon>
-    
+
         <mat-icon
         class="deleteButton"
         matTooltip="View project details"
         *ngIf="showEditable"
         (click)="displayInvestmentProject(cardData.id)"
         svgIcon="read"></mat-icon>
-    
+
         <mat-icon
         class="deleteButton"
         *ngIf="showEditable"

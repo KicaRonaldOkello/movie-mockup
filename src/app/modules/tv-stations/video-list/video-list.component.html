@@ -1,0 +1,23 @@
+<div class="spinner" *ngIf="videos.length==0 || loadVideos" [style.background]="'url('+ coverImageUrl+ ')'">
+  <img src="assets/loader.svg">
+</div>
+<div class="body" *ngIf="videos.length>0" [style.background]="'url('+ coverImageUrl+ ')'">
+  <h2>{{currentCategory | titlecase}}</h2>
+  <div class="videos">
+    <div class="example-box" *ngFor="let video of videos; index as i" (click)="playVideo(video)">
+      <div class="video-item">
+        <video
+          width="180px"
+          height="100px"
+          (loadedmetadata)="onMetadata($event, i)"
+        >
+          <source [src]="video.fileUrl">
+        </video>
+        <span class="video-body">
+          <p class="video-body__title">{{video.name}}</p>
+          <p class="video-body__description" *ngIf="duration[i]">Duration: {{duration[i]}}s</p>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

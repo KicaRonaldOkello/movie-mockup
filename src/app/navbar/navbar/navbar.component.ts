@@ -36,11 +36,11 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit() {
     this.router.events.subscribe((event) => {
-      if(event['url']) {
+      if (event['url']) {
           this.changeNavBarIcon(event['url']);
       }
   });
-  if(Helpers.getUserData()) {
+  if (Helpers.getUserData()) {
     const userData = Helpers.getUserData();
     this.username = userData.authToken.userId;
     this.showSignout = true;
@@ -51,11 +51,11 @@ export class NavbarComponent implements OnInit {
 
   changeNavBarIcon(navBarItem) {
     if (navBarItem.startsWith('/tv')) {
-      this.iconLoaded = 'assets/screen.svg';
+      this.iconLoaded = 'assets/blog.svg';
     } else if (navBarItem.startsWith('/blog')) {
       this.iconLoaded = 'assets/blog.svg';
     } else if (navBarItem.startsWith('/investor-matching')) {
-      this.iconLoaded = 'assets/investor.svg'
+      this.iconLoaded = 'assets/blog.svg';
     }
   }
 

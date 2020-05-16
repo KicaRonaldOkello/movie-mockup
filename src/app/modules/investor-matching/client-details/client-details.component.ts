@@ -26,8 +26,10 @@ export class ClientDetailsComponent implements OnInit {
 
   ngOnInit() {
 
-      this.id = this.activatedRoute.snapshot.paramMap.get('id');
-      this.id = this.id.replace('_', '/');
+      this.activatedRoute.queryParams.subscribe(params => {
+        this.id = params.id;
+      });
+
 
       this.investmentProjectService.getSingleInvestmentProject(this.id).subscribe(res => {
       if (res.status.statusCode === '100') {

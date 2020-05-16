@@ -36,32 +36,32 @@ export class DisplaySingleBlogComponent implements OnInit {
     private commentService: CommentsService) {
       this.sharedService.showAd('true');
       this.matIconRegistry.addSvgIcon(
-        "facebook",
-        this.sanitizer.bypassSecurityTrustResourceUrl("../assets/facebook.svg")
+        'facebook',
+        this.sanitizer.bypassSecurityTrustResourceUrl('../assets/facebook.svg')
       );
       this.matIconRegistry.addSvgIcon(
-        "twitter",
-        this.sanitizer.bypassSecurityTrustResourceUrl("../assets/tweet.svg")
+        'twitter',
+        this.sanitizer.bypassSecurityTrustResourceUrl('../assets/tweet.svg')
       );
       this.matIconRegistry.addSvgIcon(
-        "whatsapp",
-        this.sanitizer.bypassSecurityTrustResourceUrl("../assets/whatsapp.svg")
+        'whatsapp',
+        this.sanitizer.bypassSecurityTrustResourceUrl('../assets/whatsapp.svg')
       );
       this.matIconRegistry.addSvgIcon(
-        "wechat",
-        this.sanitizer.bypassSecurityTrustResourceUrl("../assets/wechat.svg")
+        'wechat',
+        this.sanitizer.bypassSecurityTrustResourceUrl('../assets/wechat.svg')
       );
       this.matIconRegistry.addSvgIcon(
-        "weibo",
-        this.sanitizer.bypassSecurityTrustResourceUrl("../assets/weibo.svg")
+        'weibo',
+        this.sanitizer.bypassSecurityTrustResourceUrl('../assets/weibo.svg')
       );
       this.matIconRegistry.addSvgIcon(
-        "share",
-        this.sanitizer.bypassSecurityTrustResourceUrl("../assets/share.svg")
+        'share',
+        this.sanitizer.bypassSecurityTrustResourceUrl('../assets/share.svg')
       );
       this.matIconRegistry.addSvgIcon(
-        "renren",
-        this.sanitizer.bypassSecurityTrustResourceUrl("../assets/renren.svg")
+        'renren',
+        this.sanitizer.bypassSecurityTrustResourceUrl('../assets/renren.svg')
       );
     }
 
@@ -69,19 +69,19 @@ export class DisplaySingleBlogComponent implements OnInit {
     this.blogService.getBlogs(1, 2).subscribe(blog => {
       this.blogs = blog.articles;
     });
-
-      this.id = this.activatedRoute.snapshot.paramMap.get('id');
-      this.id = this.id.replace('_', '/');
-   
+    this.activatedRoute.queryParams.subscribe(params => {
+      this.id = params.id;
+    });
 
     this.blogService.getSingleBlog(this.id).subscribe(blog => {
-      if (blog.status.statusCode == '100') {
+      if (blog.status.statusCode === '100') {
         this.articleDoesNotExist = true;
         this.errorMessage = blog.status.statusDesc;
       } else {
       this.singleBlog = blog;
       this.singleBlog.htmlBody = this.sanitizer.bypassSecurityTrustHtml(this.singleBlog.htmlBody);
-      this.weiboUrl = this.sanitizer.bypassSecurityTrustUrl(`http://service.weibo.com/share/share.php?title=${this.singleBlog.title}&url=${this.currentUrl}`);
+      this.weiboUrl = this.sanitizer.bypassSecurityTrustUrl(
+        `http://service.weibo.com/share/share.php?title=${this.singleBlog.title}&url=${this.currentUrl}`);
       }
     });
 
@@ -98,9 +98,9 @@ export class DisplaySingleBlogComponent implements OnInit {
       const comment = {
         PageId: `Blog_${this.id}`,
         Comment: text,
-        profilePic: "https://placeimg.com/300/300/people",
+        profilePic: 'https://placeimg.com/300/300/people',
         UserId: data.authToken.userId,
-      }
+      };
       this.commentService.saveComment(comment).subscribe(result => {
         this.commentPosted = true;
       });
@@ -112,12 +112,12 @@ export class DisplaySingleBlogComponent implements OnInit {
   }
 
   checkIfUserIsLoggedIn() {
-    
+
     if (this.auth.isAuthenticated(this.router.url)) {
       return true;
     } else {
       this.auth.isAuthenticated(this.router.url);
-    };
+    }
   }
 
 }
