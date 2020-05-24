@@ -36,6 +36,9 @@ export class ShareDataService {
   private  investorMatching = new BehaviorSubject('');
   investorMatchingData = this.investorMatching.asObservable();
 
+  private logout = new BehaviorSubject('');
+  logoutState = this.logout.asObservable();
+
   constructor() { }
 
   newVideoId(id) {
@@ -76,5 +79,9 @@ export class ShareDataService {
 
   sendInvestorMatchingData(data) {
     this.investorMatching.next(data);
+  }
+
+  loggedOut() {
+    this.logout.next('true');
   }
 }

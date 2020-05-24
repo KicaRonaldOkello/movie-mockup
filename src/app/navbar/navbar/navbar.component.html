@@ -55,5 +55,13 @@
         [routerLink]="['blog']">
         Blogging
       </p>
+      <p
+        *ngIf="isAdmin"
+        class="menu-item"
+        routerLinkActive="menu-item__checked"
+        (click)="changeNavBarIcon('/blog')"
+        [routerLink]="['admin']">
+        Admin
+      </p>
     </div>
   </div>

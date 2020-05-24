@@ -14,6 +14,7 @@ export class NavbarComponent implements OnInit {
   username = 'Hello Sign In';
   iconLoaded = 'assets/screen.svg';
   showSignout: boolean;
+  isAdmin: boolean;
   constructor(
     private router: Router,
     private shareDataService: ShareDataService,
@@ -29,6 +30,7 @@ export class NavbarComponent implements OnInit {
       if (res === 'true') {
         const userData = Helpers.getUserData();
         this.username = userData.authToken.userId;
+        this.isAdmin = userData.roleId.toUpperCase() === 'ADMIN' ? true : false;
         this.showSignout = true;
       }
     })
@@ -43,10 +45,16 @@ export class NavbarComponent implements OnInit {
   if (Helpers.getUserData()) {
     const userData = Helpers.getUserData();
     this.username = userData.authToken.userId;
+    this.isAdmin = userData.roleId.toUpperCase() === 'ADMIN' ? true : false;
     this.showSignout = true;
   } else {
     this.showSignout = false;
   }
+    this.shareDataService.logoutState.subscribe(res => {
+      if (res === 'true') {
+        this.isAdmin = false;
+      }
+    });
   }
 
   changeNavBarIcon(navBarItem) {
@@ -70,6 +78,8 @@ export class NavbarComponent implements OnInit {
     Helpers.deleteUserData();
     this.router.navigateByUrl('/');
     this.showSignout = false;
+    this.isAdmin = false;
+    this.shareDataService.loggedOut();
   }
 
 }

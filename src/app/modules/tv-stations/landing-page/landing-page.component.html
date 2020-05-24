@@ -1,17 +1,39 @@
 <div *ngIf="loadingPage || loadCategories" class="landing-page-spinner">
   <mat-spinner></mat-spinner>
 </div>
-<div class="full-page__body" *ngIf="!loadingPage || !loadCategories">
+<div class="full-page__body" *ngIf="!loadingPage && !loadCategories">
     <nav class="sidebar">
+      <ul class="side-nav">
+        <span  class="side-nav__item" (click)="defaultTvDisplay=true">
+          <li>Home</li>
+        </span>
+      </ul>
       <ul class="side-nav" *ngFor="let category of videoCategories">
-<!--        <span class="side-nav__item" (click)="displayCategoryVideos('Movies')">-->
-<!--          <li>Movies</li>-->
-<!--          <button class="button">SUBSCRIBE</button>-->
-<!--        </span>-->
-
-        <span class="side-nav__item" (click)="displayCategoryVideos(category)">
-          <li>{{category.categoryCode | titlecase}}</li>
-          <button class="button">SUBSCRIBE</button>
+        <span class="side-nav__item">
+          <li (click)="checkIfUserIsLoggedIn(category)">{{category.categoryCode | titlecase}}</li>
+          <button
+            *ngIf="userLoggedIn && category.isSubscribed"
+            class="button"
+            (click)="unSubscribeFromCategory(category.categoryCode)"
+          ><span *ngIf="!subscribing || category.categoryCode!=subscribedCategoryId">
+            SUBSCRIBED
+          </span>
+            <mat-icon *ngIf="subscribing && category.categoryCode==subscribedCategoryId">
+              <mat-spinner diameter="20"></mat-spinner>
+            </mat-icon>
+          </button>
+          <button
+            *ngIf="userLoggedIn && !category.isSubscribed"
+            class="button"
+            (click)="subscribeToCategory(category.categoryCode)"
+          >
+            <span *ngIf="!subscribing || category.categoryCode!=subscribedCategoryId">
+            SUBSCRIBE
+            </span>
+            <mat-icon *ngIf="subscribing && category.categoryCode==subscribedCategoryId">
+              <mat-spinner diameter="20"></mat-spinner>
+            </mat-icon>
+          </button>
         </span>
       </ul>
     </nav>
@@ -58,30 +80,30 @@
         </span>
       </div>
       <div class="movie-covers__footer" *ngIf="defaultTvDisplay">
-        <div class="soccer">
+        <div class="soccer" (click)="checkIfUserIsLoggedIn(preselectedCategories.sports)">
           <p>More Action</p>
           <p>Sports</p>
         </div>
         <div class="newsAndMovie">
-          <div class="movie-face">
+          <div class="movie-face" (click)="checkIfUserIsLoggedIn(preselectedCategories.movies)">
             <p>More Action</p>
             <p>Movies</p>
           </div>
-          <div class="news-anchor-face">
+          <div class="news-anchor-face" (click)="checkIfUserIsLoggedIn(preselectedCategories.news)">
             <p>More Action</p>
             <p>News</p>
           </div>
         </div>
         <div class="cartoonsAndSeries">
-          <div class="cartoon-face">
+          <div class="cartoon-face" (click)="checkIfUserIsLoggedIn(preselectedCategories.cartoons)">
             <p>More Action</p>
             <p>Cartoons</p>
           </div>
-          <div class="current-series-face">
+          <div class="current-series-face" (click)="checkIfUserIsLoggedIn(preselectedCategories.series_current)">
             <p>Current</p>
             <p>Series</p>
           </div>
-          <div class="complete-series-face">
+          <div class="complete-series-face" (click)="checkIfUserIsLoggedIn(preselectedCategories.series_complete)">
             <p>Complete</p>
             <p>Series</p>
           </div>

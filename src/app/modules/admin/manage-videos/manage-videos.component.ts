@@ -5,7 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ShareDataService } from 'src/app/services/share-data/share-data.service';
 
 
-declare var cloudinary: any
+declare var cloudinary: any;
 @Component({
   selector: 'app-manage-videos',
   templateUrl: './manage-videos.component.html',
@@ -30,14 +30,14 @@ export class ManageVideosComponent implements OnInit {
     private shareDataService: ShareDataService
     ) {
       this.shareDataService.deletedVideoId.subscribe(id => {
-        if (id != '') {
+        if (id !== '') {
         this.deleteVideoItem(id);
         this.removeDeletedItemFromCurrentData(id);
         }
       });
 
       this.shareDataService.updateVideo.subscribe(video => {
-        if (video != '') {
+        if (video !== '') {
           this.updateVideo(video);
         }
       });
@@ -65,14 +65,14 @@ export class ManageVideosComponent implements OnInit {
   submitVideo(video) {
     this.savingVideo = true;
     let message = '';
-    if (this.updateVideoItemId != '') {
+    if (this.updateVideoItemId !== '') {
       video.Id = this.updateVideoItemId;
       message = 'Video has been updated successfully';
     } else {
-      message = 'Video has been created successfully'
+      message = 'Video has been created successfully';
     }
     this.videoService.saveVideo(video).subscribe(data => {
-      if (data.statusDesc == "SUCCESS") {
+      if (data.statusDesc === 'SUCCESS') {
         this.snackBar.open(message, '', {
           duration: 5000,
           panelClass: ['green-snackbar']
@@ -103,7 +103,7 @@ export class ManageVideosComponent implements OnInit {
       cloudName: 'do6g6dwlz',
       uploadPreset: 'vdoc0rsk',
       multiple: false}, (error, result) => {
-        if (!error && result && result.event === "success") {
+        if (!error && result && result.event === 'success') {
           this.videoForm.patchValue({
                 FileUrl: result.info.secure_url
               });
@@ -149,7 +149,7 @@ export class ManageVideosComponent implements OnInit {
     }
 
     loadVideos() {
-      this.videoService.getAllVideos(this.page, this.limit, {}).subscribe(response => {
+      this.videoService.getAllVideos(this.page, this.limit, {}, {}).subscribe(response => {
         this.videos = response.videos;
         this.pageCount = response.pageCount;
         // this.videosLoading = false;
@@ -166,7 +166,7 @@ export class ManageVideosComponent implements OnInit {
     }
 
     removeDeletedItemFromCurrentData(videoId) {
-      const nonDeletedBlogs = this.videos.filter(item => item.id != videoId);
+      const nonDeletedBlogs = this.videos.filter(item => item.id !== videoId);
       this.videos = nonDeletedBlogs;
     }
 }

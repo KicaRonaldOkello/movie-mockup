@@ -7,10 +7,15 @@
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  img {
+  mat-icon {
+    color: var(--gold-color);
     width: 80px;
     height: 80px;
     animation: spin 2s linear infinite;
+  }
+
+  p {
+    color: var(--gold-color);
   }
 
   @keyframes spin {
@@ -23,6 +28,51 @@
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
+  padding-bottom: 50px;
+
+  .headers {
+    display: flex;
+    justify-content: space-between;
+    margin: 0px 20px;
+    align-items: center;
+    flex-wrap: wrap;
+
+    .icons, .dropDown-button {
+      margin-top: 30px;
+    }
+
+    .icons {
+      color: var(--gold-color);
+      .previousPage, .nextPage {
+        &:hover {
+          color: var(--gold-color);
+          transform: scale(1.3);
+        }
+      }
+    }
+
+    .dropDown-button {
+
+      mat-icon {
+        width: 10px;
+        height: 10px;
+      }
+      button {
+        color: var(--gold-color);
+        background-color: transparent;
+        border: none;
+
+        &:focus {
+          outline: none;
+        }
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+
+  }
 
   h2 {
     text-align: center;
@@ -38,10 +88,10 @@
   }
 
   .example-box {
-    width: 47%;
+    min-width: 47%;
     margin-top: 20px;
-    padding: 20px 10px;
-    border-bottom: solid 1px #ccc;
+    margin-right: 10px;
+    padding: 10px 10px;
     color: rgba(0, 0, 0, 0.87);
     display: flex;
     border-radius: 3px;
@@ -52,6 +102,12 @@
     cursor: pointer;
     background: white;
     font-size: 14px;
+    box-shadow: 0px 0px 10px black;
+
+    &:hover {
+      box-shadow: 0px 0px 20px black;
+      z-index: 4;
+    }
   }
 
   .videos-box {
@@ -65,7 +121,7 @@
     &__title {
       font-weight: 700;
       font-size: 12px;
-      width: 85%;
+      width: 90%;
       text-align: center;
       height: 30px;
       margin-top: 10px;
@@ -82,11 +138,5 @@
 
   .video-item {
     display: flex;
-
-    .video-position {
-      margin-top: 40px;
-      font-weight: bold;
-      margin-right: 5px;
-    }
   }
 }

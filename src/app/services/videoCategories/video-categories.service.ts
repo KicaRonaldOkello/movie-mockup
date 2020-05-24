@@ -12,9 +12,9 @@ export class VideoCategoriesService {
   base_url = environment.base_url;
   constructor(private http: HttpClient) { }
 
-  getAllVideoCategories(page= 0, limit= 20): Observable<any> {
+  getAllVideoCategories(page= 0, limit= 20, id): Observable<any> {
     return this.http.get(
-      `${this.base_url}GetAllVideoCategorys?Page=${page}&limit=${limit}`
+      `${this.base_url}GetAllVideoCategorys?Page=${page}&limit=${limit}`, { params: id}
     ).pipe(
       map(data => data)
     );

@@ -37,7 +37,7 @@ export class DisplayVideosComponent implements OnInit, OnChanges {
   }
 
   loadVideos() {
-    this.videoService.getAllVideos(this.page, this.limit, {}).subscribe(response => {
+    this.videoService.getAllVideos(this.page, this.limit, {}, {}).subscribe(response => {
       this.videos = response.videos;
       this.pageCount = response.pageCount;
       this.videosLoading = false;

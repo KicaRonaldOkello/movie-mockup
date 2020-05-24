@@ -1,0 +1,9 @@
+<span class="modal-body">
+  <p>Hi, it seems there is a problem with your subscription status for this feature</p>
+  <p>ERROR: {{modalData.error}}</p>
+  <P>You need to pay amount [{{modalData.amount}} {{modalData.currency}}] to unlock this feature</P>
+  <span class="modal-buttons">
+    <button class="button" (click)="onNoClick('pay')">Pay Now</button>
+    <button class="button button-red"  (click)="onNoClick('')">Cancel</button>
+  </span>
+</span>

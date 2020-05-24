@@ -29,9 +29,9 @@ export class VideosService {
     );
   }
 
-  getAllVideos(page, limit= 12, category): Observable<any> {
+  getAllVideos(page, limit= 12, category, orderBy): Observable<any> {
     return this.http.get(
-      `${this.base_url}GetAllVideos?limit=${limit}`, { params: { page, category}}
+      `${this.base_url}GetAllVideos?limit=${limit}`, { params: { page, ...category, ...orderBy}}
     ).pipe(
       map(data => data)
     );
