@@ -18,7 +18,7 @@
           ><span *ngIf="!subscribing || category.categoryCode!=subscribedCategoryId">
             SUBSCRIBED
           </span>
-            <mat-icon *ngIf="subscribing && category.categoryCode==subscribedCategoryId">
+            <mat-icon *ngIf="subscribing && category.categoryCode==subscribedCategoryId"  class="gold">
               <mat-spinner diameter="20"></mat-spinner>
             </mat-icon>
           </button>
@@ -30,7 +30,7 @@
             <span *ngIf="!subscribing || category.categoryCode!=subscribedCategoryId">
             SUBSCRIBE
             </span>
-            <mat-icon *ngIf="subscribing && category.categoryCode==subscribedCategoryId">
+            <mat-icon *ngIf="subscribing && category.categoryCode==subscribedCategoryId"  class="gold">
               <mat-spinner diameter="20"></mat-spinner>
             </mat-icon>
           </button>
