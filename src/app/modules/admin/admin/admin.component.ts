@@ -6,7 +6,7 @@ import { BreakpointObserver } from '@angular/cdk/layout';
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.scss']
 })
-export class AdminComponent implements OnInit, AfterViewInit {
+export class AdminComponent implements OnInit {
 
   loadManageBlog = true;
   loadManageVideo = false;
@@ -27,13 +27,13 @@ export class AdminComponent implements OnInit, AfterViewInit {
         this.modes = 'side';
         this.smallScreensize = false;
       }
-    })
+    });
+
+    setTimeout(() => {
+      this.displayAdminComponent = false;
+    }, 3000);
   }
 
-  ngAfterViewInit() {
-    this.displayAdminComponent = false;
-    this.cdRef.detectChanges();
-  }
 
 
   loadBlog() {

@@ -17,6 +17,8 @@ import { ClientOrderDetailsComponent } from './client-order-details/client-order
 import { ReactiveFormsModule } from '@angular/forms';
 import { CreateClientComponent } from './create-client/create-client.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import {ImageModalComponent} from '../shared/image-modal/image-modal.component';
+import {SharedModule} from '../shared/shared.module';
 
 
 
@@ -39,8 +41,12 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatSnackBarModule,
     MatIconModule,
     MatTooltipModule,
+    SharedModule,
     MatProgressSpinnerModule,
     MatDialogModule
+  ],
+  entryComponents: [
+    ImageModalComponent
   ]
 })
 export class InvestorMatchingModule { }

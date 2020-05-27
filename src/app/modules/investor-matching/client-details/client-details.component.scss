@@ -33,6 +33,10 @@
         .client-cover {
             width: 450px;
             height: 250px;
+
+          &:hover {
+            cursor: pointer;
+          }
         }
 
         .client-cover-spinner {
@@ -96,12 +100,15 @@
             height: 160px;
             margin-right: 5px;
             margin-left: 5px;
+            &:hover {
+              cursor: pointer;
+            }
         }
     }
 
     .create-client {
 
-        
+
 
         .button {
             width: 100px;
