@@ -26,7 +26,19 @@ export class ShareDataService {
 
   private displayUsername = new BehaviorSubject('');
   username = this.displayUsername.asObservable();
-  
+
+  private investmentProject = new BehaviorSubject('');
+  editInvestmentProject = this.investmentProject.asObservable();
+
+  private projectId = new BehaviorSubject('');
+  deletedProjectId = this.projectId.asObservable();
+
+  private  investorMatching = new BehaviorSubject('');
+  investorMatchingData = this.investorMatching.asObservable();
+
+  private logout = new BehaviorSubject('');
+  logoutState = this.logout.asObservable();
+
   constructor() { }
 
   newVideoId(id) {
@@ -49,11 +61,27 @@ export class ShareDataService {
     this.videoComment.next(id);
   }
 
-  showEditable() {
-    this.editClientCard.next('true');
+  showEditable(value) {
+    this.editClientCard.next(value);
   }
 
   loggedIn() {
     this.displayUsername.next('true');
+  }
+
+  editProject(data: any) {
+    this.investmentProject.next(data);
+  }
+
+  deleteProject(id) {
+    this.projectId.next(id);
+  }
+
+  sendInvestorMatchingData(data) {
+    this.investorMatching.next(data);
+  }
+
+  loggedOut() {
+    this.logout.next('true');
   }
 }

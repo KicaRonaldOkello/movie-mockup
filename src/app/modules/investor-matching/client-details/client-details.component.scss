@@ -1,3 +1,11 @@
+.spinner {
+    width: 80vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+}
 .body {
     width: 80vw;
     background-color: #f5f6f8;
@@ -11,6 +19,11 @@
         padding-left: 20px;
         padding-right: 10px;
     }
+
+    .card-body-returns {
+        display: flex;
+    }
+
     &__top {
 
         display: flex;
@@ -19,6 +32,15 @@
 
         .client-cover {
             width: 450px;
+            height: 250px;
+        }
+
+        .client-cover-spinner {
+            width: 450px;
+            height: 250px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .company-info {
@@ -29,6 +51,8 @@
             font-size: 35px;
             font-weight: 700;
             margin: 15px 0px;
+            word-wrap: break-word;
+            width: 250px;
         }
 
         .card-body {
@@ -69,6 +93,7 @@
 
         .office-image {
             width: 180px;
+            height: 160px;
             margin-right: 5px;
             margin-left: 5px;
         }
@@ -93,14 +118,22 @@
         margin-top: 30px;
     }
 
-    .toggle-body {
-        background-color: #F1F2F2;
-        font-size: 10px;
-        color: gray;
-        text-align: left;
-        padding: 10px;
-        border-radius: 8px;
-        margin-bottom: 50px;
+    &__description {
+
+        .title {
+            margin-bottom: 10px;
+        }
+
+        .toggle-body {
+            background-color: #F1F2F2;
+            font-size: 10px;
+            color: gray;
+            text-align: left;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 50px;
+            height: 140px;
+        }
     }
 
     ::ng-deep .mat-button-toggle-group-appearance-standard {
@@ -110,6 +143,10 @@
 
 @media only screen and (max-width: 975px) {
     .body {
+        width: 100vw;
+    }
+
+    .spinner {
         width: 100vw;
     }
 }

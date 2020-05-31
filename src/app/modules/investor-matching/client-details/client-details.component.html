@@ -1,66 +1,52 @@
-<div class="body">
+<div class="spinner" *ngIf="loadingInvestmentProject && notFound === ''">
+    <mat-spinner></mat-spinner>
+</div>
+<div class="spinner" *ngIf="notFound !== ''">
+    <p>{{notFound}}</p>
+</div>
+<div class="body" *ngIf="!loadingInvestmentProject && notFound === ''">
     <div class="cover-body">
         <div class="body__top">
-            <img class="client-cover" src="assets/client-cover.jpg" alt="">
-            
+            <img class="client-cover" [hidden]="loadingCoverImage" [src]="data.coverImage" (load)="coverImageLoaded()" alt="">
+            <span *ngIf="loadingCoverImage" class="client-cover-spinner"><mat-spinner diameter="40"></mat-spinner></span>
             <span class="company-info">
-                <p class="company-name">Vihlix</p>
+                <p class="company-name">{{data.title}}</p>
                 <div class="card-body">
-                    <p>Owner: John Doe</p>
-                    <p>Location: Kampala, Uganda</p>
-                    <p>Amount Required: 1m UGX</p>
-                    <p>Project Returns: 10%</p>
+                    <p>Owner: {{data.userId}}</p>
+                    <p>Location: {{data.location}}</p>
+                    <p>Amount Required: {{data.currencyCode}} {{data.amountRequested | number}}</p>
+                    <span class="card-body-returns">
+                        <p>Project Returns: </p>
+                        <p *ngIf="data.projectedReturnsType == 'FIXED'"> {{data.currencyCode}}</p>
+                        <p> {{data.projectedReturns | number}}</p>
+                        <p *ngIf="data.projectedReturnsType == 'PERCENTAGE'">%</p>
+                    </span>
                 </div>
                 <div class="card-company-type">
-                    <p>Technology Company</p>
+                    <p>{{data.category}} Company</p>
                 </div>
                 <div class="buttons">
-                    <button class="button first-button" [routerLink]="['../order-details']">Contact Owner</button>
-                    <button class="button second-button">Invest Now</button>
+                    <button class="button first-button">Contact Owner</button>
+                    <button class="button second-button" (click)="sendDataToOrderDetails()" [routerLink]="['../order-details', data.id]">Invest Now</button>
                 </div>
             </span>
         </div>
         <div class="body__office-images">
-            <img class="office-image" src="assets/office-space.jpg" alt="">
-            <img class="office-image" src="assets/office-space.jpg" alt="">
-            <img class="office-image" src="assets/office-space.jpg" alt="">
-            <img class="office-image" src="assets/office-space.jpg" alt="">
+            <span *ngFor="let image of data.otherImages">
+                <img class="office-image" [src]="image" alt="">
+            </span>
         </div>
         <div class="body__description">
-            <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
-                <mat-button-toggle value="bold">Location</mat-button-toggle>
-                <mat-button-toggle value="italic">Location</mat-button-toggle>
-                <mat-button-toggle value="underline">Location</mat-button-toggle>
-            </mat-button-toggle-group>
+           <p class="title">Description</p>
             <p class="toggle-body">
-                Through this tiny lens we see the ambient background of life:
-                people working in kitchens, bedrooms or spare rooms,
-                the hoarded detritus of life piled behind them.
-                A colleague, I learned from a video call, uses an ironing board as a desk.
-                Another works from the sofa. One collects stuffed hedgehogs.
-                You’ve probably had similar insights about your colleagues.
-                Quite possibly you’ve learned many of these things through Zoom.
-                Through this tiny lens we see the ambient background of life:
-                people working in kitchens, bedrooms or spare rooms,
-                the hoarded detritus of life piled behind them.
-                A colleague, I learned from a video call, uses an ironing board as a desk.
-                Another works from the sofa. One collects stuffed hedgehogs.
-                You’ve probably had similar insights about your colleagues.
-                Quite possibly you’ve learned many of these things through Zoom.
-                Through this tiny lens we see the ambient background of life:
-                people working in kitchens, bedrooms or spare rooms,
-                the hoarded detritus of life piled behind them.
-                A colleague, I learned from a video call, uses an ironing board as a desk.
-                Another works from the sofa. One collects stuffed hedgehogs.
-                You’ve probably had similar insights about your colleagues.
-                Quite possibly you’ve learned many of these things through Zoom.
+                {{data.description}}
             </p>
         </div>
-        <div class="body__bottom">
+        <!-- <div class="body__bottom">
             <p>Related</p>
             <app-display-client-cards
                 [data]="[]"
             ></app-display-client-cards>
-        </div>
+        </div> -->
     </div>
 </div>

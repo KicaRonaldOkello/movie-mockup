@@ -6,6 +6,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { AuthService } from 'src/app/services/guards/auth.service';
 import Helpers from 'src/app/helpers/helpers';
 import { ShareDataService } from 'src/app/services/share-data/share-data.service';
+import { MatIconRegistry } from '@angular/material/icon';
 
 @Component({
   selector: 'app-display-single-blog',
@@ -15,42 +16,77 @@ import { ShareDataService } from 'src/app/services/share-data/share-data.service
 export class DisplaySingleBlogComponent implements OnInit {
 
   blogs: any;
-  id: number;
+  id: any;
   singleBlog: any;
   commentPosted = false;
   articleDoesNotExist = false;
   errorMessage = '';
+  currentUrl;
+  encodedUrl;
+  weiboUrl;
+  displayShare = false;
   constructor(
     private blogService: GetBlogsService,
     private activatedRoute: ActivatedRoute,
     private sanitizer: DomSanitizer,
     private router: Router,
     private auth: AuthService,
+    private matIconRegistry: MatIconRegistry,
     private sharedService: ShareDataService,
     private commentService: CommentsService) {
       this.sharedService.showAd('true');
+      this.matIconRegistry.addSvgIcon(
+        'facebook',
+        this.sanitizer.bypassSecurityTrustResourceUrl('../assets/facebook.svg')
+      );
+      this.matIconRegistry.addSvgIcon(
+        'twitter',
+        this.sanitizer.bypassSecurityTrustResourceUrl('../assets/tweet.svg')
+      );
+      this.matIconRegistry.addSvgIcon(
+        'whatsapp',
+        this.sanitizer.bypassSecurityTrustResourceUrl('../assets/whatsapp.svg')
+      );
+      this.matIconRegistry.addSvgIcon(
+        'wechat',
+        this.sanitizer.bypassSecurityTrustResourceUrl('../assets/wechat.svg')
+      );
+      this.matIconRegistry.addSvgIcon(
+        'weibo',
+        this.sanitizer.bypassSecurityTrustResourceUrl('../assets/weibo.svg')
+      );
+      this.matIconRegistry.addSvgIcon(
+        'share',
+        this.sanitizer.bypassSecurityTrustResourceUrl('../assets/share.svg')
+      );
+      this.matIconRegistry.addSvgIcon(
+        'renren',
+        this.sanitizer.bypassSecurityTrustResourceUrl('../assets/renren.svg')
+      );
     }
 
   ngOnInit() {
     this.blogService.getBlogs(1, 2).subscribe(blog => {
       this.blogs = blog.articles;
     });
-
-    if (isNaN(Number(this.activatedRoute.snapshot.paramMap.get('id')))) {
-      this.router.navigateByUrl('/**');
-    } else {
-      this.id = Number(this.activatedRoute.snapshot.paramMap.get('id'));
-    }
+    this.activatedRoute.queryParams.subscribe(params => {
+      this.id = params.id;
+    });
 
     this.blogService.getSingleBlog(this.id).subscribe(blog => {
-      if (blog.status.statusCode == '100') {
+      if (blog.status.statusCode === '100') {
         this.articleDoesNotExist = true;
         this.errorMessage = blog.status.statusDesc;
       } else {
       this.singleBlog = blog;
       this.singleBlog.htmlBody = this.sanitizer.bypassSecurityTrustHtml(this.singleBlog.htmlBody);
+      this.weiboUrl = this.sanitizer.bypassSecurityTrustUrl(
+        `http://service.weibo.com/share/share.php?title=${this.singleBlog.title}&url=${this.currentUrl}`);
       }
-    })
+    });
+
+    this.currentUrl = window.location.href;
+    this.encodedUrl = encodeURIComponent(this.currentUrl);
 
   }
 
@@ -62,9 +98,9 @@ export class DisplaySingleBlogComponent implements OnInit {
       const comment = {
         PageId: `Blog_${this.id}`,
         Comment: text,
-        profilePic: "https://placeimg.com/300/300/people",
+        profilePic: 'https://placeimg.com/300/300/people',
         UserId: data.authToken.userId,
-      }
+      };
       this.commentService.saveComment(comment).subscribe(result => {
         this.commentPosted = true;
       });
@@ -76,12 +112,12 @@ export class DisplaySingleBlogComponent implements OnInit {
   }
 
   checkIfUserIsLoggedIn() {
-    
+
     if (this.auth.isAuthenticated(this.router.url)) {
       return true;
     } else {
       this.auth.isAuthenticated(this.router.url);
-    };
+    }
   }
 
 }

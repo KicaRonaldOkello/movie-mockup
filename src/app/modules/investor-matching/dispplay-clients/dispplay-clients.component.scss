@@ -75,6 +75,22 @@
             }
         }
 
+        .input-amount {
+            width: 120px;
+            border: none;
+            height: 30px;
+            padding-left: 10px;
+            border-radius: 5px;
+            margin-right: 20px;
+            margin: 5px 5px;
+
+
+
+            &:focus {
+                outline: none;
+            }
+        }
+
         .button-cover {
             margin-top: 5px;
             margin-left: 5px;
@@ -82,7 +98,7 @@
 
         .button {
             width: 100px;
-            background-color: #792029;
+            background-color: red;
             color: white;
             margin-top: 5px;
             height: 30px;
@@ -94,17 +110,15 @@
 
     }
 
-    .grid-slider {
-        margin: 15px 40px 15px 0px;
-        color: gray;
-        display: flex;
-        font-size: 12px;
+    .create-investment-project-button {
+        margin-top: 30px;
+        margin-bottom: 15px;
 
-        p {
-            vertical-align: baseline;
-            margin-top: 5px;
-            margin-right: 5px;
+        .button {
+            padding: 0px 10px;
+            width: 170px;
         }
+
     }
 
     .cards {
@@ -112,6 +126,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        background-color: white;
 
         .display-investment-project-spinner {
             height: 100vh;
@@ -122,6 +137,19 @@
                 font-weight: bold;
                 font-size: 18px;
             }
+
+            .button {
+                width: 100px;
+                align-self: center;
+                margin-top: 10px;
+            }
+
+            .align-error-message {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
         }
     }
 }
@@ -130,4 +158,12 @@
     .body {
         width: 100vw;
     }
+}
+
+::ng-deep .green-snackbar {
+  background-color: green !important;
+}
+
+::ng-deep .red-snackbar {
+  background-color: red !important;
 }

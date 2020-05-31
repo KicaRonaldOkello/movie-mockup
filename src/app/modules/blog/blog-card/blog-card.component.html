@@ -9,7 +9,8 @@
     <button
     class="button"
     *ngIf="!displayDeleteButton"
-    [routerLink]="[data.id]"
+    [routerLink]="['single-blog']"
+    [queryParams]="{ id: data.id }"
     >Read more</button>
     <span class="action-buttons">
         <mat-icon
@@ -18,14 +19,14 @@
         *ngIf="displayDeleteButton"
         (click)="deleteBlog(data.id)"
         svgIcon="delete"></mat-icon>
-    
+
         <mat-icon
         class="deleteButton"
         matTooltip="Read blog"
         *ngIf="displayDeleteButton"
         (click)="readThisBlog(data.id)"
         svgIcon="read"></mat-icon>
-    
+
         <mat-icon
         class="deleteButton"
         matTooltip="Update blog"
@@ -57,7 +58,7 @@
         *ngIf="displayDeleteButton"
         (click)="deleteVideoItem(data.id)"
         svgIcon="delete"></mat-icon>
-    
+
         <mat-icon
         class="deleteButton"
         *ngIf="displayDeleteButton"

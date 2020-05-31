@@ -15,7 +15,7 @@ import { ModalComponent } from '../../shared/modal/modal.component';
 })
 export class BlogCardComponent implements OnInit {
 
-  @Input() data: any
+  @Input() data: any;
   @Input() displayDeleteButton = false;
   @Input() displayVideo = false;
   @Output() deletedItemId = new EventEmitter();
@@ -30,16 +30,16 @@ export class BlogCardComponent implements OnInit {
     public dialog: MatDialog,
     private shareDataService: ShareDataService) {
       this.matIconRegistry.addSvgIcon(
-        "delete",
-        this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/delete.svg")
+        'delete',
+        this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/delete.svg')
       );
       this.matIconRegistry.addSvgIcon(
-        "read",
-        this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/book.svg")
+        'read',
+        this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/book.svg')
       );
       this.matIconRegistry.addSvgIcon(
-        "refresh",
-        this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/refresh.svg")
+        'refresh',
+        this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/refresh.svg')
       );
     }
 
@@ -48,14 +48,14 @@ export class BlogCardComponent implements OnInit {
 
   truncateHTML(text: string): string {
 
-    let charlimit = 300;
+    const charlimit = 300;
     if (!text || text.length <= charlimit) {
       return text;
     }
 
 
-    let without_html = text.replace(/<(?:.|\n)*?>/gm, '');
-    let shortened = without_html.substring(0, charlimit) + "...";
+    const without_html = text.replace(/<(?:.|\n)*?>/gm, '');
+    const shortened = without_html.substring(0, charlimit) + '...';
     return shortened;
   }
 
@@ -102,7 +102,7 @@ export class BlogCardComponent implements OnInit {
       width: '500px', height: '150px',
       data: {dataType}
     });
-  
+
     dialogRef.afterClosed().subscribe(result => {
       if (result == 'delete video') {
         this.shareDataService.newVideoId(actionData);

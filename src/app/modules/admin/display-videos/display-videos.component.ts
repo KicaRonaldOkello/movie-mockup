@@ -12,7 +12,8 @@ export class DisplayVideosComponent implements OnInit, OnChanges {
 
   page = 0;
   pageCount: number;
-  videos:any = ''
+  videos:any = '';
+  limit;
   videosLoading = true;
   @Input() reload: any;
   @Output() updateVideoItem = new EventEmitter();
@@ -32,11 +33,11 @@ export class DisplayVideosComponent implements OnInit, OnChanges {
     }
 
   ngOnInit() {
-    this.loadVideos()
+    this.loadVideos();
   }
 
   loadVideos() {
-    this.videoService.getAllVideos(this.page).subscribe(response => {
+    this.videoService.getAllVideos(this.page, this.limit, {}, {}).subscribe(response => {
       this.videos = response.videos;
       this.pageCount = response.pageCount;
       this.videosLoading = false;

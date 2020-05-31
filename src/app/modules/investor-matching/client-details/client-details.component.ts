@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ShareDataService } from 'src/app/services/share-data/share-data.service';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { InvestmentProjectService } from 'src/app/services/investment-project/investment-project.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-client-details',
@@ -11,14 +10,44 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class ClientDetailsComponent implements OnInit {
 
-  data = [1, 2, 3];
+  data;
+  id: any;
+  loadingInvestmentProject = true;
+  loadingCoverImage = true;
+  notFound = '';
   constructor(
     private shareDataService: ShareDataService,
+    private activatedRoute: ActivatedRoute,
+    private investmentProjectService: InvestmentProjectService,
+    private router: Router,
     ) {
     this.shareDataService.showAd('true');
   }
 
   ngOnInit() {
+
+      this.activatedRoute.queryParams.subscribe(params => {
+        this.id = params.id;
+      });
+
+
+      this.investmentProjectService.getSingleInvestmentProject(this.id).subscribe(res => {
+      if (res.status.statusCode === '100') {
+        this.notFound = res.status.statusDesc;
+        this.loadingInvestmentProject = false;
+      } else if (res.status.statusCode === '0') {
+        this.data = res;
+        this.loadingInvestmentProject = false;
+      }
+    });
+  }
+
+  coverImageLoaded() {
+    this.loadingCoverImage = false;
+  }
+
+  sendDataToOrderDetails() {
+    this.shareDataService.sendInvestorMatchingData(this.data.id);
   }
 
 

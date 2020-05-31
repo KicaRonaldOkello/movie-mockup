@@ -1,20 +1,39 @@
-<div *ngIf="loadingPage" class="landing-page-spinner">
+<div *ngIf="loadingPage || loadCategories" class="landing-page-spinner">
   <mat-spinner></mat-spinner>
 </div>
-<div class="full-page__body" *ngIf="!loadingPage">
+<div class="full-page__body" *ngIf="!loadingPage && !loadCategories">
     <nav class="sidebar">
       <ul class="side-nav">
-        <span class="side-nav__group">
-          <li class="side-nav__item">Movies</li>
-          <li class="side-nav__item">Series</li>
+        <span  class="side-nav__item" (click)="defaultTvDisplay=true">
+          <li>Home</li>
         </span>
-        <span class="side-nav__group">
-          <li class="side-nav__item">Live TV</li>
-          <li class="side-nav__item">Sports</li>
-        </span>
-        <span class="side-nav__group">
-          <li class="side-nav__item">Documentary</li>
-          <li class="side-nav__item">News</li>
+      </ul>
+      <ul class="side-nav" *ngFor="let category of videoCategories">
+        <span class="side-nav__item">
+          <li (click)="checkIfUserIsLoggedIn(category)">{{category.categoryCode | titlecase}}</li>
+          <button
+            *ngIf="userLoggedIn && category.isSubscribed"
+            class="button"
+            (click)="unSubscribeFromCategory(category.categoryCode)"
+          ><span *ngIf="!subscribing || category.categoryCode!=subscribedCategoryId">
+            SUBSCRIBED
+          </span>
+            <mat-icon *ngIf="subscribing && category.categoryCode==subscribedCategoryId"  class="gold">
+              <mat-spinner diameter="20"></mat-spinner>
+            </mat-icon>
+          </button>
+          <button
+            *ngIf="userLoggedIn && !category.isSubscribed"
+            class="button"
+            (click)="subscribeToCategory(category.categoryCode)"
+          >
+            <span *ngIf="!subscribing || category.categoryCode!=subscribedCategoryId">
+            SUBSCRIBE
+            </span>
+            <mat-icon *ngIf="subscribing && category.categoryCode==subscribedCategoryId"  class="gold">
+              <mat-spinner diameter="20"></mat-spinner>
+            </mat-icon>
+          </button>
         </span>
       </ul>
     </nav>
@@ -60,35 +79,41 @@
           <p>Age: {{videoRecommendedAge}}</p>
         </span>
       </div>
-      <div class="movie-covers__footer">
-        <div class="soccer">
+      <div class="movie-covers__footer" *ngIf="defaultTvDisplay">
+        <div class="soccer" (click)="checkIfUserIsLoggedIn(preselectedCategories.sports)">
           <p>More Action</p>
           <p>Sports</p>
         </div>
         <div class="newsAndMovie">
-          <div class="movie-face">
+          <div class="movie-face" (click)="checkIfUserIsLoggedIn(preselectedCategories.movies)">
             <p>More Action</p>
             <p>Movies</p>
           </div>
-          <div class="news-anchor-face">
+          <div class="news-anchor-face" (click)="checkIfUserIsLoggedIn(preselectedCategories.news)">
             <p>More Action</p>
             <p>News</p>
           </div>
         </div>
         <div class="cartoonsAndSeries">
-          <div class="cartoon-face">
+          <div class="cartoon-face" (click)="checkIfUserIsLoggedIn(preselectedCategories.cartoons)">
             <p>More Action</p>
             <p>Cartoons</p>
           </div>
-          <div class="current-series-face">
+          <div class="current-series-face" (click)="checkIfUserIsLoggedIn(preselectedCategories.series_current)">
             <p>Current</p>
             <p>Series</p>
           </div>
-          <div class="complete-series-face">
+          <div class="complete-series-face" (click)="checkIfUserIsLoggedIn(preselectedCategories.series_complete)">
             <p>Complete</p>
             <p>Series</p>
           </div>
         </div>
+      </div>
+      <div class="movie-covers__movie-list" *ngIf="!defaultTvDisplay">
+        <app-video-list
+          [category]="chosenCategory"
+          (videoToBePlayed)="playCurrentVideo($event)"
+        ></app-video-list>
       </div>
     </div>
 

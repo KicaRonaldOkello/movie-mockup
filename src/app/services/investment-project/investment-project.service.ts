@@ -1,33 +1,52 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import {HttpParams} from "@angular/common/http";
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, throwError, TimeoutError } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
+
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class InvestmentProjectService {
 
+  base_url = environment.base_url;
+
   constructor(private http: HttpClient) { }
 
-  saveInvestmentProject(client):Observable<any> {
+  saveInvestmentProject(client): Observable<any> {
     return this.http.post(
-      `https://hebertazurefunctions.azurewebsites.net/api/SaveInvestmentProject?code=tjNVpZgpeDGDhSfGWpOHsV25A0T7EFOzkPigTNsoE7NpLQxfqtEIRA==`, client
+      `${this.base_url}SaveInvestmentProject`, client
     ).pipe(
       map(data => data)
-    )
+    );
+  }
+  getSingleInvestmentProject(id): Observable<any> {
+    return this.http.get(
+      `${this.base_url}GetInvestmentProject`, {params: { Id : id } }
+    ).pipe(
+      map(data => data)
+    );
+  }
+  deleteInvestmentProject(id): Observable<any> {
+    return this.http.delete(
+      `${this.base_url}DeleteInvestmentProject`, {params: { Id : id } }
+    ).pipe(
+      map(data => data)
+    );
   }
 
-  getAllInvestmentProjects(page, limit, title?):Observable<any> {
-    let filters = new HttpParams().set('page', page).set('limit', limit);
-    if (title) {
-      filters = filters.append('title', title);
-    }
+  getAllInvestmentProjects(page, limit, params): Observable<any> {
     return this.http.get(
-      `https://hebertazurefunctions.azurewebsites.net/api/GetAllInvestmentProjects?&code=tjNVpZgpeDGDhSfGWpOHsV25A0T7EFOzkPigTNsoE7NpLQxfqtEIRA==`, {params: filters}
+      `${this.base_url}GetAllInvestmentProjects`, {params: {...params, page, limit }}
     ).pipe(
-      map(data => data)
-    )
+      map(data => data),
+      catchError((error) => {
+        if (error instanceof TimeoutError) {
+           return throwError('Timeout Exception');
+        }
+        return throwError(error);
+      })
+    );
   }
 }

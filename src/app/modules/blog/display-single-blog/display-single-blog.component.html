@@ -1,6 +1,5 @@
 <div class="spinner" *ngIf="!singleBlog && !articleDoesNotExist">
-    <mat-spinner
-        [color]="accent">
+    <mat-spinner [color]="accent">
     </mat-spinner>
 </div>
 <div class="spinner" *ngIf="articleDoesNotExist">
@@ -16,8 +15,7 @@
             <p>{{singleBlog.author.authorBio}}</p>
         </div>
 
-        <app-blog-card *ngFor="let blog of blogs"
-            [data]="blog">
+        <app-blog-card *ngFor="let blog of blogs" [data]="blog">
         </app-blog-card>
     </div>
     <div class="main-content">
@@ -25,22 +23,82 @@
         <div class="blog-body" [innerHTML]="singleBlog.htmlBody"></div>
         <div class="likes-and-comments">
             <div class="social">
-                <!-- <span class="social-sharing">
-                    <mat-icon (click)="routeTo(singleBlog.author.facebookLink)" class="facebook" svgIcon="facebook"></mat-icon>
-                    <mat-icon (click)="routeTo(singleBlog.author.instagramLink)" class="instagram" svgIcon="instagram"></mat-icon>
-                    <mat-icon (click)="routeTo(singleBlog.author.twitterLink)" class="twitter" svgIcon="twitter"></mat-icon>
-                    <mat-icon (click)="routeTo(singleBlog.author.linkedInLink)" class="linkedin" svgIcon="linkedin"></mat-icon>
-                </span> -->
+                <span class="social-sharing">
+                    <span>
+                        <button class="social-button social-button-share" (click)="displayShare=!displayShare">
+                        <span class="social-icon">
+                            <mat-icon inline="true" svgIcon="share"></mat-icon>
+                        </span>
+                        <span class="social-text">Share</span>
+                    </button>
+                    </span>
+
+                    <span *ngIf="displayShare">
+                        <button class="social-button social-button-facebook">
+                        <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{currentUrl}}" class="fb-xfbml-parse-ignore">
+                        <span class="social-icon">
+                            <mat-icon inline="true" svgIcon="facebook"></mat-icon>
+                        </span>
+                        <span class="social-text">Facebook</span>
+                    </a>
+                    </button>
+
+                    <button class="social-button social-button-twitter">
+                        <a class="twitter-share-button"
+                            href="https://twitter.com/intent/tweet?text={{currentUrl}}">
+                        <span class="social-icon">
+                            <mat-icon inline="true" svgIcon="twitter"></mat-icon>
+                        </span>
+                        <span class="social-text">Twitter</span>
+                        </a>
+                    </button>
+
+                        <button class="social-button social-button-whatsapp">
+                        <a href="https://web.whatsapp.com/send?text={{encodedUrl}}" data-action="share/whatsapp/share">
+                        <span class="social-icon">
+                            <mat-icon inline="true" svgIcon="whatsapp"></mat-icon>
+                        </span>
+                        <span class="social-text">Whatsapp</span>
+                    </a>
+                    </button>
+
+                        <button class="social-button social-button-wechat">
+                        <a href="https://chart.apis.google.com/chart?cht=qr&chs=154x154&chld=Q%7C0&chl={{currentUrl}}">
+                        <span class="social-icon">
+                            <mat-icon inline="true" svgIcon="wechat"></mat-icon>
+                        </span>
+                        <span class="social-text">WeChat</span>
+                    </a>
+                    </button>
+
+                    <button class="social-button social-button-weibo">
+                        <a [href]=weiboUrl>
+                        <span class="social-icon">
+                            <mat-icon inline="true" svgIcon="weibo"></mat-icon>
+                        </span>
+                        <span class="social-text">Weibo</span>
+                    </a>
+                    </button>
+                    <button class="social-button social-button-renren">
+                        <a href="http://widget.renren.com/dialog/share?resourceUrl={{currentUrl}}">
+                        <span class="social-icon">
+                            <mat-icon inline="true" svgIcon="renren"></mat-icon>
+                        </span>
+                        <span class="social-text">RenRen</span>
+                    </a>
+                    </button>
+                    </span>
+                </span>
+
             </div>
             <div class="write-comment">
-                <textarea name="add-comment" (focus)="checkIfUserIsLoggedIn()" #commentValue placeholder="Comment..." id="" rows="5"></textarea>
-                <button class="button" (click)="sendComment(commentValue.value); commentValue.value=''" >Post</button>
+                <textarea name="add-comment" (focus)="checkIfUserIsLoggedIn()" #commentValue placeholder="Comment..."
+                    id="" rows="5"></textarea>
+                <button class="button" (click)="sendComment(commentValue.value); commentValue.value=''">Post</button>
             </div>
             <div class="comments">
-                <app-blog-comments
-                [commentPosted]="commentPosted"
-                (commentsRecalled)="commentsRecalled($event)"
-                [commentId]="id"></app-blog-comments>
+                <app-blog-comments [commentPosted]="commentPosted" (commentsRecalled)="commentsRecalled($event)"
+                    [commentId]="id"></app-blog-comments>
             </div>
         </div>
     </div>

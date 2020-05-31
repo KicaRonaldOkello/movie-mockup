@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges, Output } from '@angular/core';
-import { MatIconRegistry } from "@angular/material/icon";
+import { MatIconRegistry } from '@angular/material/icon';
 import { GetBlogsService } from 'src/app/services/blog/get-blogs.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { EventEmitter } from '@angular/core';
@@ -21,7 +21,7 @@ export class DisplayBlogsComponent implements OnInit, OnChanges {
   @Input() videos: any;
   @Input() displayVideos = false;
   @Input() pageCounts;
-  @Output() updateBlog = new EventEmitter;
+  @Output() updateBlog = new EventEmitter();
   constructor(
     private blogService: GetBlogsService,
     private matIconRegistry: MatIconRegistry,
@@ -60,7 +60,7 @@ export class DisplayBlogsComponent implements OnInit, OnChanges {
     if (changes.reload.currentValue == true) {
       this.loadBlogs();
     }
-    if(changes.pageCounts.currentValue != 'undefined') {
+    if(changes.pageCounts.currentValue !== 'undefined') {
       this.pageCount = this.pageCounts;
     }
   }
@@ -73,7 +73,7 @@ export class DisplayBlogsComponent implements OnInit, OnChanges {
 
   loadBlogs() {
     this.blogService.getBlogs(this.page).subscribe(blog => {
-      
+
       if (blog.articles.length < 1) {
         this.noBlogError = true;
       } else {

@@ -11,8 +11,8 @@ export class BlogCommentsComponent implements OnInit, OnChanges {
   @Input() commentPosted;
   @Output() commentsRecalled = new EventEmitter();
   comments: any;
-  constructor(private commentsService: CommentsService) { 
-    
+  constructor(private commentsService: CommentsService) {
+
   }
 
   ngOnInit() {
@@ -20,7 +20,7 @@ export class BlogCommentsComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.commentPosted.currentValue == true) {
+    if (changes.commentPosted.currentValue === true) {
       this.getComments();
       this.commentsRecalled.emit('Comments recalled');
     }

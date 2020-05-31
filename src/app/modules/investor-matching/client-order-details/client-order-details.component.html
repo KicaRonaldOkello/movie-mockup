@@ -1,49 +1,52 @@
-<div class="body">
+<span class="spinner" *ngIf="loadingData">
+  <mat-spinner></mat-spinner>
+</span>
+<div *ngIf="!loadingData" class="body">
     <div class="items">
-        <img class="cover-image" src="assets/client-cover.jpg" alt="">
+        <img class="cover-image" [hidden]="loadingCoverImage" (load)="loadingCoverImage=false;" [src]="data.coverImage" alt="">
+      <span *ngIf="loadingCoverImage" class="client-cover-spinner"><mat-spinner diameter="40"></mat-spinner></span>
         <span class="details">
             <span class="company-info">
-                <p class="company-name">Vihlix</p>
+                <p class="company-name">{{data.title}}</p>
                 <div class="card-body">
-                    <p>Owner: John Doe</p>
-                    <p>Location: Kampala, Uganda</p>
-                    <p>Amount Required: 1m UGX</p>
-                    <p>Project Returns: 10%</p>
+                    <p>Owner: {{data.userId}}</p>
+                    <p>Location: {{data.location}}</p>
+                    <p>Amount Required: {{data.currencyCode}} {{data.amountRequested | number}}</p>
+                    <span class="card-body-returns">
+                        <p>Project Returns: </p>
+                        <p *ngIf="data.projectedReturnsType == 'FIXED'"> {{data.currencyCode}}</p>
+                        <p> {{data.projectedReturns | number}}</p>
+                        <p *ngIf="data.projectedReturnsType == 'PERCENTAGE'">%</p>
+                    </span>
                 </div>
                 <div class="card-company-type">
-                    <p>Technology Company</p>
-                </div>
-                <div class="buttons">
-                    <button class="button first-button" [routerLink]="['../order-details']">Contact Owner</button>
-                    <button class="button second-button">Invest Now</button>
+                    <p>{{data.category}} Company</p>
                 </div>
             </span>
             <span class="order-details">
-                <p>Order Details</p>
+                <p class="order-details-title">Order Details</p>
                 <span class="select-inputs">
-                    <select name="location" required id="location">
-                        <option value="" class="place-holder-style" disabled selected>Investment Amount</option>
-                        <option value="Kampala">Kampala</option>
-                        <option value="Lira">Lira</option>
-                    </select>
-                    <select name="location" required id="location">
-                        <option value="" class="place-holder-style" disabled selected>Currency</option>
-                        <option value="Kampala">Kampala</option>
-                        <option value="Lira">Lira</option>
-                    </select>
-                </span>
-                <span>
-                    <div class="exchange-rate">Exchange Rate 1USD = 3,700UGX</div>
+                  <span class="input-currency">
+                    <p>Currency: {{data.currencyCode}}</p>
+                  </span>
+                  <input placeholder="Investment Amount" [formControl]="amountPaid" #amount (keyup)="addCommas(amount.value)" (keydown)='isNumber(event)'>
                 </span>
                 <div class="buttons">
-                    <button class="button first-button" [routerLink]="['../order-details']">Contact Owner</button>
-                    <button class="button second-button">Invest Now</button>
+                    <button class="button first-button" (click)="goBack()">Go Back</button>
+                    <button class="button second-button" [disabled]="amountPaid.value === ''" (click)="submitOrderData()">
+                      <span *ngIf="!submitData">
+                        Pay Now
+                      </span>
+                      <mat-icon *ngIf="submitData">
+                        <mat-spinner diameter="15"></mat-spinner>
+                      </mat-icon>
+                    </button>
                 </div>
             </span>
         </span>
 
         <div class="bottom">
-            <p>Related</p>
+<!--            <p>Related</p>-->
             <app-display-client-cards
             [data]="[]"
             ></app-display-client-cards>

@@ -17,6 +17,7 @@ import { ModalComponent } from './modules/shared/modal/modal.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from './modules/shared/shared.module';
 import { TokenInterceptor } from './services/guards/token.interceptor';
+import {PaymentModalComponent} from './modules/shared/payment-modal/payment-modal.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -46,13 +47,13 @@ export function HttpLoaderFactory(http: HttpClient) {
     }),
     BlogModule,
   ],
-  exports: [],
+    exports: [],
   providers: [{
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptor,
     multi: true
   }],
   bootstrap: [AppComponent],
-  entryComponents:[ModalComponent]
+  entryComponents: [ModalComponent]
 })
 export class AppModule { }

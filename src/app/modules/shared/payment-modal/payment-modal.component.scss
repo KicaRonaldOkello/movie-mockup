@@ -1,0 +1,17 @@
+.modal-body {
+  font-size: 13px;
+  text-align: center;
+
+  p {
+    margin-bottom: 10px;
+  }
+
+  .button {
+    width: 80px;
+  }
+
+  .modal-buttons {
+    display: flex;
+    justify-content: space-around;
+  }
+}

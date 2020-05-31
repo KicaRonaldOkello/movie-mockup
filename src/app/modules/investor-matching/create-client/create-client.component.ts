@@ -1,23 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, HostListener, OnDestroy} from '@angular/core';
 import { ShareDataService } from 'src/app/services/share-data/share-data.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { InvestmentProjectService } from 'src/app/services/investment-project/investment-project.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
+import Helpers from 'src/app/helpers/helpers';
 
 
-declare var cloudinary: any
+declare var cloudinary: any;
 @Component({
   selector: 'app-create-client',
   templateUrl: './create-client.component.html',
   styleUrls: ['./create-client.component.scss']
 })
-export class CreateClientComponent implements OnInit {
+export class CreateClientComponent implements OnInit, OnDestroy {
 
   displayCoverImage = false;
   coverImage: any = '';
-  officeImages:string[] = [];
+  officeImages: string[] = [];
   clientForm: FormGroup;
   data = [1, 2, 3];
   uploadingInvestmentProjectDetail = false;
@@ -26,6 +27,11 @@ export class CreateClientComponent implements OnInit {
   officeImage1 = true;
   officeImage2 = true;
   officeImage3 = true;
+  myIvestmentProjects = [];
+  editData: any = '';
+  isShow: boolean;
+  topPosToStartShowing = 100;
+  loadingMyInvestmentProjects: boolean;
   constructor(
     private shareDataService: ShareDataService,
     private fb: FormBuilder,
@@ -35,36 +41,77 @@ export class CreateClientComponent implements OnInit {
     private domSanitizer: DomSanitizer,
   ) {
     this.shareDataService.showAd('true');
-    this.shareDataService.showEditable();
+    this.shareDataService.showEditable('true');
     this.matIconRegistry.addSvgIcon(
-      "photo",
-      this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/photo.svg")
+      'photo',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/photo.svg')
     );
     this.matIconRegistry.addSvgIcon(
-      "plus",
-      this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/plus.svg")
+      'plus',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/plus.svg')
     );
+
+    this.shareDataService.deletedProjectId.subscribe(res => {
+      if (res !== '') {
+        this.loadingMyInvestmentProjects = true;
+        this.deleteProject(res);
+      }
+    });
   }
 
   ngOnInit() {
     this.clientForm = this.fb.group({
       location: [''],
       amountRequested: ['0'],
-      projectedReturns: [''],
+      projectedReturnsType: ['Percentage'],
+      projectedReturns: ['0'],
       title: [''],
       description: [''],
       currencyCode: [''],
       category: [''],
     });
+    this.getInvestmentProjects();
+
+    this.shareDataService.editInvestmentProject.subscribe(res => {
+      this.editData = res;
+      if (this.editData !== '') {
+        const {
+          location,
+          title,
+          amountRequested,
+          projectedReturns,
+          projectedReturnsType,
+          description,
+          currencyCode,
+          category,
+          otherImages,
+          coverImage
+        } = this.editData;
+        this.clientForm.patchValue({
+          location,
+          title,
+          amountRequested: amountRequested.toLocaleString('en-us'),
+          projectedReturnsType,
+          projectedReturns: projectedReturns.toLocaleString('en-us'),
+          description,
+          currencyCode,
+          category
+        });
+        this.coverImage = coverImage;
+        this.officeImages = otherImages;
+        this.displayCoverImage = true;
+        this.gotoTop();
+      }
+    });
   }
 
   upload() {
-    var myWidget = cloudinary.createUploadWidget({
+    let myWidget = cloudinary.createUploadWidget({
       cloudName: 'do6g6dwlz',
       uploadPreset: 'vdoc0rsk',
       multiple: false
     }, (error, result) => {
-      if (!error && result && result.event === "success") {
+      if (!error && result && result.event === 'success') {
         this.displayCoverImage = true;
         this.coverImage = result.info.secure_url;
       }
@@ -76,18 +123,22 @@ export class CreateClientComponent implements OnInit {
 
 
   submitClientForm() {
+    const userData = Helpers.getUserData();
     this.uploadingInvestmentProjectDetail = true;
-    this.clientForm.value.amountRequested = this.clientForm.value.amountRequested.replace(/\,/g,'');
+    this.clientForm.value.amountRequested = this.clientForm.value.amountRequested.replace(/\,/g, '');
+    this.clientForm.value.projectedReturns = this.clientForm.value.projectedReturns.replace(/\,/g, '');
     const formData = {
-      id: 0,
-      userId: "john doe",
+      id: this.editData === '' ? 0 : this.editData.id,
+      userId: userData.userId,
       ...this.clientForm.value,
       coverImage: this.coverImage,
       otherImages: this.officeImages
     };
+    const message = this.editData === '' ? 'Project has been created successfully' :
+    'Project has been updated successfully';
     this.investmentProjectService.saveInvestmentProject(formData).subscribe(res => {
-      if (res.statusDesc === "SUCCESS") {
-        this.snackBar.open('Client has been created successfully', '', {
+      if (res.statusDesc === 'SUCCESS') {
+        this.snackBar.open(message, '', {
           duration: 5000,
           panelClass: ['green-snackbar']
         });
@@ -96,12 +147,15 @@ export class CreateClientComponent implements OnInit {
           amountRequested: '',
           projectedReturns: '',
           title: '',
-          description: ''
+          description: '',
+          category: ''
         });
         this.clientForm.markAsPristine();
         this.clientForm.markAsUntouched();
         this.coverImage = '';
         this.officeImages = [];
+        this.displayCoverImage = false;
+        this.getInvestmentProjects();
       } else {
         this.snackBar.open(res.statusDesc, '', {
           duration: 6000,
@@ -113,14 +167,14 @@ export class CreateClientComponent implements OnInit {
   }
 
   uploadOfficeImages() {
-    var myWidget = cloudinary.createUploadWidget({
+    let myWidget = cloudinary.createUploadWidget({
       cloudName: 'do6g6dwlz',
       uploadPreset: 'vdoc0rsk',
       multiple: true,
       maxImageWidth: 180,
       maxImageHeight: 160,
     }, (error, result) => {
-      if (!error && result && result.event === "success") {
+      if (!error && result && result.event === 'success') {
         this.officeImages.push(result.info.secure_url);
         if (this.officeImages.length > 4) {
           this.officeImages.shift();
@@ -132,34 +186,69 @@ export class CreateClientComponent implements OnInit {
     myWidget.open();
   }
 
-  isNumber(evt, values) {
-    var theEvent = evt || window.event;
-    var key = theEvent.keyCode || theEvent.which;
+  isNumber(evt) {
+    let theEvent = evt || window.event;
+    let key = theEvent.keyCode || theEvent.which;
     key = String.fromCharCode(key);
-    if (key.length == 0) return;
-    var regex = /^[0-9,\b]+$/;
+    if (key.length == 0) { return; }
+    let regex = /^[0-9,\b]+$/;
     if (!regex.test(key)) {
         theEvent.returnValue = false;
-        if (theEvent.preventDefault) theEvent.preventDefault();
+        if (theEvent.preventDefault) { theEvent.preventDefault(); }
       }
     }
-    
-    addCommas(value) {
+
+    addCommas(value, inputField) {
       const num1 = value.replace(/,/g, '');
-        const num2 = Number(num1).toLocaleString('en-US');
+      const num2 = Number(num1).toLocaleString('en-US');
+      if (inputField === 'projectedReturns') {
+        this.clientForm.patchValue({ projectedReturns: num2 });
+      } else if (inputField === 'amountRequested') {
         this.clientForm.patchValue({ amountRequested: num2 });
+        }
     }
 
-    // loaded(index) {
-    //   console.log('hi>>>>>', index);
-    //   if (Number(index) === 0) {
-    //     this.officeImage0 = false;
-    //   } else if (Number(index) === 1) {
-    //     this.officeImage1 = false;
-    //   } else if (Number(index) === 2) {
-    //     this.officeImage2 = false;
-    //   } else if (Number(index) === 3) {
-    //     this.officeImage3 = false;
-    //   }
-    // }
+
+    getInvestmentProjects() {
+      this.loadingMyInvestmentProjects = true;
+      const userData = Helpers.getUserData();
+      this.investmentProjectService.getAllInvestmentProjects(0, 12, { UserId: userData.userId })
+      .subscribe(res => {
+        this.loadingMyInvestmentProjects = false;
+        this.myIvestmentProjects = res.projects;
+      });
+    }
+
+    @HostListener('window:scroll')
+    checkScroll() {
+      const scrollPosition = window.pageYOffset
+      || document.documentElement.scrollTop
+      || document.body.scrollTop || 0;
+
+      if (scrollPosition >= this.topPosToStartShowing) {
+        this.isShow = true;
+      } else {
+        this.isShow = false;
+      }
+    }
+
+    gotoTop() {
+      window.scroll({
+        top: 0,
+        left: 0,
+        behavior: 'smooth'
+      });
+    }
+
+    deleteProject(id) {
+      this.investmentProjectService.deleteInvestmentProject(id).subscribe(res => {
+        if (res.statusCode) {
+          this.getInvestmentProjects();
+        }
+      });
+    }
+
+    ngOnDestroy(): void {
+      this.shareDataService.showEditable('false');
+    }
 }

@@ -34,7 +34,7 @@
         display: flex;
         font-size: 10px;
         color: gray;
-        
+
         img {
             vertical-align: text-top;
             margin-right: 5px;
@@ -49,6 +49,11 @@
         word-wrap: break-word;
         color: gray;
         line-height: 1.6;
+
+        &__returns {
+            display: flex;
+            word-wrap: none;
+        }
     }
 
     &__company-type {
@@ -66,10 +71,11 @@
     button {
         width: 100px;
         font-weight: bold;
-        
+      //height: 28px !important;
+
     }
 
-    
+
     .action-buttons {
         display: flex;
         justify-content: space-around;

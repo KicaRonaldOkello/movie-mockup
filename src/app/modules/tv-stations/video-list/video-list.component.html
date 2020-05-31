@@ -1,0 +1,44 @@
+<div class="cover" [ngStyle]="{'background-image': getBackgroundImageUrl()}">
+<div class="spinner" *ngIf="loadVideos && !notPaid">
+  <mat-icon svgIcon="loader"></mat-icon>
+</div>
+  <div class="spinner" *ngIf="!loadVideos && videos.length==0 && !notPaid">
+    <p>THERE ARE NO VIDEOS IN THIS CATEGORY</p>
+  </div>
+  <div class="spinner" *ngIf="loadVideos && notPaid">
+    <p>YOU HAVE NOT PAID FOR VIDEOS IN THIS CATEGORY</p>
+  </div>
+<div class="body" *ngIf="videos.length>0">
+  <span class="headers">
+    <div class="icons">
+      <mat-icon [class.previousPage]="page > 0" (click)="previousPage()" svgIcon="previous-page"></mat-icon>
+      <mat-icon [class.nextPage]="page < pageCount-1" (click)="nextPage()" svgIcon="next-page"></mat-icon>
+    </div>
+    <h2>{{currentCategory | titlecase}} Tv Shows</h2>
+    <span class="dropDown-button">
+      <button mat-button [matMenuTriggerFor]="menu" xPosition="before">Sort By <mat-icon svgIcon="drop-down"></mat-icon></button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="ascendingOrder()">Ascending Order</button>
+          <button mat-menu-item (click)="descendingOrder()">Descending Order</button>
+        </mat-menu>
+    </span>
+  </span>
+  <div class="videos">
+    <div class="example-box" *ngFor="let video of videos; index as i" (click)="playVideo(video)">
+      <div class="video-item">
+        <video
+          width="180px"
+          height="100px"
+          (loadedmetadata)="onMetadata($event, i)"
+        >
+          <source [src]="video.fileUrl">
+        </video>
+        <span class="video-body">
+          <p class="video-body__title">{{(video.name.length>12)? (video.name | slice:0:25)+'..':(video.name)}}</p>
+          <p class="video-body__description" *ngIf="duration[i]">Duration: {{duration[i] | minuteSeconds }}</p>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

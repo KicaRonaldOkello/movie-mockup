@@ -19,6 +19,7 @@ export class ManagePlaylistComponent implements OnInit {
   loadingVideoLists = true;
   newPlaylistIds = [];
   uploadingVideoList = false;
+  limit = 12;
   constructor(private videoService: VideosService, private snackBar: MatSnackBar,) {
   }
 
@@ -38,7 +39,7 @@ export class ManagePlaylistComponent implements OnInit {
 
   getPlaylistItems() {
     this.videoService.getPlaylist().subscribe(data => {
-      if (data.playlistsItems.length == 0) {
+      if (data.playlistsItems.length === 0) {
         this.loadingVideoLists = false;
       } else {
       data.playlistsItems.map(videoItem => {
@@ -63,7 +64,7 @@ export class ManagePlaylistComponent implements OnInit {
   }
 
   loadVideos() {
-    this.videoService.getAllVideos(this.page).subscribe(response => {
+    this.videoService.getAllVideos(this.page, this.limit, {}, {}).subscribe(response => {
       this.videos = response.videos;
       this.getPlaylistItems();
     });
@@ -80,7 +81,7 @@ export class ManagePlaylistComponent implements OnInit {
 
     this.videoService.savePlaylistItems(data).subscribe(res => {
       this.uploadingVideoList = false;
-      if (res.statusDesc == "SUCCESS") {
+      if (res.statusDesc === 'SUCCESS') {
         this.snackBar.open('Playlist has been updated succesfully', '', {
           duration: 5000,
           panelClass: ['green-snackbar']
