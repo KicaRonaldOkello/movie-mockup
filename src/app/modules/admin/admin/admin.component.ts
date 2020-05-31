@@ -13,8 +13,8 @@ export class AdminComponent implements OnInit {
   loadManagePlaylist = false;
   displayAdminComponent = true;
   smallScreensize = false;
-  modes = 'side'
-  constructor(private cdRef:ChangeDetectorRef, public breakpointObserver: BreakpointObserver) {
+  modes = 'side';
+  constructor(private cdRef: ChangeDetectorRef, public breakpointObserver: BreakpointObserver) {
   }
 
   ngOnInit() {
@@ -23,7 +23,7 @@ export class AdminComponent implements OnInit {
         this.smallScreensize = true;
         this.modes = 'over';
       } else {
-        document.getElementById("toggleButton").click();
+        document.getElementById('toggleButton').click();
         this.modes = 'side';
         this.smallScreensize = false;
       }
