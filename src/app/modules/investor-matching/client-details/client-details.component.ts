@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ShareDataService } from 'src/app/services/share-data/share-data.service';
 import { InvestmentProjectService } from 'src/app/services/investment-project/investment-project.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import {MatDialog} from '@angular/material/dialog';
+import {ImageModalComponent} from '../../shared/image-modal/image-modal.component';
 
 @Component({
   selector: 'app-client-details',
@@ -18,6 +20,7 @@ export class ClientDetailsComponent implements OnInit {
   constructor(
     private shareDataService: ShareDataService,
     private activatedRoute: ActivatedRoute,
+    public dialog: MatDialog,
     private investmentProjectService: InvestmentProjectService,
     private router: Router,
     ) {
@@ -48,6 +51,14 @@ export class ClientDetailsComponent implements OnInit {
 
   sendDataToOrderDetails() {
     this.shareDataService.sendInvestorMatchingData(this.data.id);
+  }
+
+  zoomImage(url): void {
+    const dialogRef = this.dialog.open(ImageModalComponent, {
+      width: '80vw', height: '80vh',
+      data: {imageUrl: url},
+      panelClass: 'my-dialog'
+    });
   }
 
 

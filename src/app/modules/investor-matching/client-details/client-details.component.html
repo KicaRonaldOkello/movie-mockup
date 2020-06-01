@@ -7,8 +7,19 @@
 <div class="body" *ngIf="!loadingInvestmentProject && notFound === ''">
     <div class="cover-body">
         <div class="body__top">
-            <img class="client-cover" [hidden]="loadingCoverImage" [src]="data.coverImage" (load)="coverImageLoaded()" alt="">
-            <span *ngIf="loadingCoverImage" class="client-cover-spinner"><mat-spinner diameter="40"></mat-spinner></span>
+            <img
+              class="client-cover"
+              matTooltip="Click to enlarge the picture"
+              [hidden]="loadingCoverImage"
+              (click)="zoomImage(data.coverImage)"
+              [src]="data.coverImage"
+              (load)="coverImageLoaded()"
+              alt="">
+            <span
+              *ngIf="loadingCoverImage"
+              class="client-cover-spinner">
+              <mat-spinner diameter="40"></mat-spinner>
+            </span>
             <span class="company-info">
                 <p class="company-name">{{data.title}}</p>
                 <div class="card-body">
@@ -33,7 +44,12 @@
         </div>
         <div class="body__office-images">
             <span *ngFor="let image of data.otherImages">
-                <img class="office-image" [src]="image" alt="">
+                <img
+                  class="office-image"
+                  (click)="zoomImage(image)"
+                  matTooltip="Click to enlarge the picture"
+                  [src]="image"
+                  alt="">
             </span>
         </div>
         <div class="body__description">
@@ -42,11 +58,5 @@
                 {{data.description}}
             </p>
         </div>
-        <!-- <div class="body__bottom">
-            <p>Related</p>
-            <app-display-client-cards
-                [data]="[]"
-            ></app-display-client-cards>
-        </div> -->
     </div>
 </div>

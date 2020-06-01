@@ -43,21 +43,10 @@ export class DisplayBlogsComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this.loadBlogs();
-    // if (this.videos == 'undefined') {
-    //   this.loadBlogs();
-    // } else {
-    //   // this.blogs = this.videos;
-    //   // console.log(this.pageCounts, '>><<<<');
-    //   // this.pageCount = this.pageCounts;
-    //   // console.log(this.blogs, '?>>>>>');
-    //   this.loadBlogs();
-    //   // this.blogs = ['hello'];
-    // }
-
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.reload.currentValue == true) {
+    if (changes.reload.currentValue === true) {
       this.loadBlogs();
     }
     if(changes.pageCounts.currentValue !== 'undefined') {
@@ -114,7 +103,7 @@ export class DisplayBlogsComponent implements OnInit, OnChanges {
 }
 
 deletedItem(BlogId) {
-  const nonDeletedBlogs = this.blogs.filter(item => item.id != BlogId);
+  const nonDeletedBlogs = this.blogs.filter(item => item.id !== BlogId);
   this.blogs = nonDeletedBlogs;
 }
 

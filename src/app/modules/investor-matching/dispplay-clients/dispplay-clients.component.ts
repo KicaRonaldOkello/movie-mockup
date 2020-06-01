@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import { ShareDataService } from 'src/app/services/share-data/share-data.service';
 import { InvestmentProjectService } from 'src/app/services/investment-project/investment-project.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import {OrderService} from '../../../services/order/order.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {ActivatedRoute} from '@angular/router';
-import {isNumber} from 'util';
+import {findLast} from '@angular/compiler/src/directive_resolver';
 
 @Component({
   selector: 'app-dispplay-clients',
@@ -22,6 +22,7 @@ export class DispplayClientsComponent implements OnInit {
   projectsForm: FormGroup;
   timeoutError = false;
   payment;
+  loadingPage = true;
   constructor(
     private shareDataService: ShareDataService,
     private fb: FormBuilder,
@@ -38,7 +39,6 @@ export class DispplayClientsComponent implements OnInit {
         this.getAllInvestmentProjects({});
       }
     });
-
   }
 
   ngOnInit() {
@@ -60,6 +60,7 @@ export class DispplayClientsComponent implements OnInit {
   getAllInvestmentProjects(queryParams) {
     this.getAllInvestmentProjectsService.getAllInvestmentProjects(this.page, this.limit, queryParams).subscribe(res => {
       this.loadingInvestmentProjects = false;
+      this.loadingPage = false;
       this.data = res.projects;
       this.pageCount = res.pageCount;
     },

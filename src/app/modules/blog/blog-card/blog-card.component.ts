@@ -104,9 +104,9 @@ export class BlogCardComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result == 'delete video') {
+      if (result === 'delete video') {
         this.shareDataService.newVideoId(actionData);
-      } else if (result == 'delete blog') {
+      } else if (result === 'delete blog') {
         this.deleteBlogItem(actionData);
       }
     });

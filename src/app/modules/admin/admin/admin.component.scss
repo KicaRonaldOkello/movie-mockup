@@ -1,6 +1,6 @@
 .body {
     display: flex;
-    width: 100%;
+    width: 100vw;
     height: 100%;
     background-color: black;
 .example-container {
@@ -15,7 +15,7 @@
             margin-left: 15px;
             margin-top: 30px;
         }
-        
+
         mat-list-item {
             color: #D4B867;
             border-bottom: .1px solid gray;
@@ -44,6 +44,8 @@
 .spinner {
     height: 100vh;
     width: 100vw;
+    display: flex;
     justify-content: center;
     align-items: center;
+    background-color: black;
 }

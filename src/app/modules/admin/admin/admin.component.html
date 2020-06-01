@@ -1,7 +1,7 @@
 <span class="spinner" *ngIf="displayAdminComponent">
     <mat-spinner></mat-spinner>
 </span>
-<div class="body" *ngIf="!displayAdminComponent">
+<div class="body" [hidden]="!displayAdminComponent">
     <mat-sidenav-container class="example-container">
         <mat-sidenav [style.width]="smallScreensize? '250px': '25%'" #sidenav mode="{{modes}}" opened>
             <h2>Dashboard</h2>

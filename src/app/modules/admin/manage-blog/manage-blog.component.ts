@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { GetBlogsService } from 'src/app/services/blog/get-blogs.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
-declare var cloudinary: any
+declare var cloudinary: any;
 @Component({
   selector: 'app-manage-blog',
   templateUrl: './manage-blog.component.html',
@@ -14,24 +14,24 @@ export class ManageBlogComponent implements OnInit, AfterViewInit {
   editorForm: FormGroup;
   durationInSeconds = 5;
   reloadBlogs = false;
-  blogToUpdate: any = ''
+  blogToUpdate: any = '';
   isShow: boolean;
   topPosToStartShowing = 100;
   loadEditor = true;
   uploadingBlog = false;
   coverImage = '';
-  displayUploadButton: boolean = false;
+  displayUploadButton = false;
   constructor(
     private blogService: GetBlogsService,
     private snackBar: MatSnackBar,
     private fb: FormBuilder,
-    private cdRef:ChangeDetectorRef) { }
+    private cdRef: ChangeDetectorRef) { }
 
   ngOnInit() {
     this.editorForm = this.fb.group({
       editor: ['', Validators.required],
       title: ['', Validators.required]
-    })
+    });
   }
 
   ngAfterViewInit() {
@@ -44,7 +44,7 @@ export class ManageBlogComponent implements OnInit, AfterViewInit {
     if (this.blogToUpdate !== '') {
       this.blogToUpdate.title = this.editorForm.value.title;
       this.blogToUpdate.htmlBody = this.editorForm.value.editor;
-      if (this.coverImage != '') {
+      if (this.coverImage !== '') {
         this.blogToUpdate.coverImage = this.coverImage;
       }
       this.updateBlog(this.blogToUpdate);
@@ -52,23 +52,23 @@ export class ManageBlogComponent implements OnInit, AfterViewInit {
       const blog = {
         author: {
           id: 0,
-          authorName: "Mwooyo Gwa Janzi",
-          authorId: "@kanzukazaha",
-          authorBio: "Mwooyo Gwa Janzi is a leading Author on Medium with over 5 years of experience in the field",
-          profilePic: "https://placeimg.com/300/300/people",
-          facebookLink: "#",
-          twitterLink: "#",
-          instagramLink: "#",
-          linkedInLink: "#",
-          modifiedOn: "2020-03-29T18:34:23.6606922+00:00",
-          createdOn: "2020-03-29T18:34:23.6606901+00:00"
+          authorName: 'Mwooyo Gwa Janzi',
+          authorId: '@kanzukazaha',
+          authorBio: 'Mwooyo Gwa Janzi is a leading Author on Medium with over 5 years of experience in the field',
+          profilePic: 'https://placeimg.com/300/300/people',
+          facebookLink: '#',
+          twitterLink: '#',
+          instagramLink: '#',
+          linkedInLink: '#',
+          modifiedOn: '2020-03-29T18:34:23.6606922+00:00',
+          createdOn: '2020-03-29T18:34:23.6606901+00:00'
         },
         id: 0,
-        coverImage: "https://placeimg.com/800/300/nature",
+        coverImage: 'https://placeimg.com/800/300/nature',
         htmlBody: this.editorForm.value.editor,
         title: this.editorForm.value.title
-      }
-      if (this.coverImage != '') {
+      };
+      if (this.coverImage !== '') {
         blog.coverImage = this.coverImage;
       }
       this.createBlog(blog);
@@ -88,7 +88,7 @@ export class ManageBlogComponent implements OnInit, AfterViewInit {
 
   createBlog(blog) {
     this.blogService.createBlog(blog).subscribe(data => {
-      if (data.statusDesc == "SUCCESS") {
+      if (data.statusDesc === 'SUCCESS') {
         this.snackBar.open('Blog has been created successfully', '', {
           duration: 5000,
           panelClass: ['green-snackbar']
@@ -110,7 +110,7 @@ export class ManageBlogComponent implements OnInit, AfterViewInit {
 
   updateBlog(blog) {
     this.blogService.createBlog(blog).subscribe(data => {
-      if (data.statusDesc == "SUCCESS") {
+      if (data.statusDesc === 'SUCCESS') {
         this.snackBar.open('Blog has been updated successfully', '', {
           duration: 5000,
           panelClass: ['green-snackbar']
@@ -136,7 +136,7 @@ export class ManageBlogComponent implements OnInit, AfterViewInit {
       const scrollPosition = window.pageYOffset
       || document.documentElement.scrollTop
       || document.body.scrollTop || 0;
-      
+
       if (scrollPosition >= this.topPosToStartShowing) {
         this.isShow = true;
       } else {
@@ -145,10 +145,10 @@ export class ManageBlogComponent implements OnInit, AfterViewInit {
     }
 
     gotoTop() {
-      window.scroll({ 
-        top: 0, 
-        left: 0, 
-        behavior: 'smooth' 
+      window.scroll({
+        top: 0,
+        left: 0,
+        behavior: 'smooth'
       });
     }
 
@@ -162,16 +162,16 @@ export class ManageBlogComponent implements OnInit, AfterViewInit {
     }
 
     upload() {
-      var myWidget = cloudinary.createUploadWidget({
-        cloudName: 'do6g6dwlz', 
+      let myWidget = cloudinary.createUploadWidget({
+        cloudName: 'do6g6dwlz',
         uploadPreset: 'vdoc0rsk',
-        multiple: false}, (error, result) => { 
-          if (!error && result && result.event === "success") { 
+        multiple: false}, (error, result) => {
+          if (!error && result && result.event === 'success') {
             this.coverImage = result.info.secure_url;
           }
         }
       );
-  
+
       myWidget.open();
       }
 

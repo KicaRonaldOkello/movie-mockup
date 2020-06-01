@@ -6,15 +6,15 @@ import { BreakpointObserver } from '@angular/cdk/layout';
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.scss']
 })
-export class AdminComponent implements OnInit, AfterViewInit {
+export class AdminComponent implements OnInit {
 
   loadManageBlog = true;
   loadManageVideo = false;
   loadManagePlaylist = false;
   displayAdminComponent = true;
   smallScreensize = false;
-  modes = 'side'
-  constructor(private cdRef:ChangeDetectorRef, public breakpointObserver: BreakpointObserver) {
+  modes = 'side';
+  constructor(private cdRef: ChangeDetectorRef, public breakpointObserver: BreakpointObserver) {
   }
 
   ngOnInit() {
@@ -23,17 +23,17 @@ export class AdminComponent implements OnInit, AfterViewInit {
         this.smallScreensize = true;
         this.modes = 'over';
       } else {
-        document.getElementById("toggleButton").click();
+        document.getElementById('toggleButton').click();
         this.modes = 'side';
         this.smallScreensize = false;
       }
-    })
+    });
+
+    setTimeout(() => {
+      this.displayAdminComponent = false;
+    }, 3000);
   }
 
-  ngAfterViewInit() {
-    this.displayAdminComponent = false;
-    this.cdRef.detectChanges();
-  }
 
 
   loadBlog() {
