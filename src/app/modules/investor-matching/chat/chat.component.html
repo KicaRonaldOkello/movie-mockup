@@ -1,0 +1,117 @@
+<div class="spinner" *ngIf="loadUserNames && loadConversations">
+  <mat-spinner></mat-spinner>
+</div>
+<div class="body" *ngIf="!loadUserNames || !loadConversations">
+  <div class="my-account">
+    <img src="https://placeimg.com/800/300/nature">
+    <img class="settings-image" src="/assets/settings.svg">
+  </div>
+  <div class="my-chats">
+    <div class="my-chats__top">
+      <p>Chat</p>
+      <button class="button" (click)="refreshChatPage()">NEW</button>
+    </div>
+    <mat-divider></mat-divider>
+    <div *ngFor="let conversation of myConversations">
+      <div class="my-chats__body" (click)="loadConversation(conversation)">
+        <div class="chat-avatar">
+          <img
+            [src]="conversation.toUserDetails.profilePicUrl">
+          <div class="badge">{{conversation.numOfNewMessages}}</div>
+        </div>
+        <div class="my-chats__body__message">
+          <p class="chat-name">
+            {{ (conversation.toUserDetails.name.length > 15) ? (conversation.toUserDetails.name | slice:0:15) + '..' : (conversation.toUserDetails.name) }}</p>
+          <p class="chat-message">
+            {{
+            (conversation.chatMessages[conversation.chatMessages.length - 1].message.length > 22) ?
+              (conversation.chatMessages[conversation.chatMessages.length - 1].message | slice:0:22) +
+              '...' : (conversation.chatMessages[conversation.chatMessages.length - 1].message)
+            }}
+          </p>
+        </div>
+        <div class="my-chats__body__status">
+          <div class="dot"></div>
+          <p class="chat-time">{{conversation.lastCommunicationsDetails.lastComDateTimeString}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="main-chat">
+    <div class="main-chat__top">
+      <div class="name">
+        <form class="example-form">
+          <input [formControl]="myControl"
+                 [matAutocomplete]="auto"
+                 aria-label="Number"
+                 class="name-input"
+                 matInput
+                 placeholder="Name"
+                 type="text">
+          <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectedUser($event)">
+            <mat-option *ngFor="let option of filteredOptions | async" [value]="option.name">
+              {{option.name}}
+            </mat-option>
+          </mat-autocomplete>
+        </form>
+        <div class="dot"></div>
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="main-chat__body" #scrollMe>
+      <div class="chat-messages-spinner" *ngIf="loadingMessages">
+        <mat-spinner diameter="50"></mat-spinner>
+      </div>
+      <div *ngIf="!loadingMessages">
+        <div *ngFor="let chatMessage of chatMessages">
+          <div *ngIf="chatMessage.toUserId==userData.userId" class="my-chat">
+            <div class="single-chat">
+              <img
+                src="https://placeimg.com/800/300/nature">
+              <div class="my-speech-bubble">
+                {{chatMessage.message}}
+              </div>
+            </div>
+            <div *ngIf="chatMessage.attachments && chatMessage.attachments.length>0" class="attachments">
+              <img
+                src="https://placeimg.com/800/300/nature">
+              <div class="my-speech-bubble">
+                <div *ngFor="let attachment of chatMessage.attachments">
+                  <mat-icon [matTooltip]="attachment" class="color-gray" (click)="openAttachment(attachment)">attachment</mat-icon>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="chatMessage.toUserId!=userData.userId" class="your-chat">
+            <div class="single-chat">
+              <div class="your-speech-bubble">
+                {{chatMessage.message}}
+              </div>
+              <img
+                [src]="myChatDetails.profilePicUrl">
+            </div>
+            <div *ngIf="chatMessage.attachments && chatMessage.attachments.length>0" class="attachments">
+              <div class="your-speech-bubble">
+                <div *ngFor="let attachment of chatMessage.attachments">
+                  <mat-icon [matTooltip]="attachment" class="color-gray" (click)="openAttachment(attachment)">attachment</mat-icon>
+                </div>
+              </div>
+              <img
+                [src]="myChatDetails.profilePicUrl">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="main-chat__type-message">
+      <textarea  [formControl]="message" class="textArea" placeholder="Type your message ..."></textarea>
+      <div class="send-message">
+        <mat-icon class="color-gray" (click)="upload()">attachment</mat-icon>
+        <div>
+          <img (click)="sendMessage()"  *ngIf="!sendingMessageStatus" class="telegram-logo" src="assets/telegram.svg" alt="send-message">
+          <mat-spinner *ngIf="sendingMessageStatus" diameter="30"></mat-spinner>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -13,6 +13,8 @@ export class ManagePlaylistComponent implements OnInit {
 
   videos: any = '';
   page = 0;
+  duration = {};
+  unselectedDuration = {};
   selectedVideos: any = [];
   playlistIds = [];
   noPlaylistItems = false;
@@ -20,11 +22,19 @@ export class ManagePlaylistComponent implements OnInit {
   newPlaylistIds = [];
   uploadingVideoList = false;
   limit = 12;
-  constructor(private videoService: VideosService, private snackBar: MatSnackBar,) {
+  constructor(private videoService: VideosService, private snackBar: MatSnackBar, ) {
   }
 
   ngOnInit() {
     this.loadVideos();
+  }
+
+  onMetadata(e, index) {
+    this.duration[index] = parseInt(e.target.duration, 10);
+  }
+
+  onUnselectedMetadata(e, index) {
+    this.unselectedDuration[index] = parseInt(e.target.duration, 10);
   }
 
   getAllVideos(videoIds) {

@@ -18,6 +18,7 @@ import { ManageVideosComponent } from './manage-videos/manage-videos.component';
 import { VideoCardComponent } from './video-card/video-card.component';
 import { DisplayVideosComponent } from './display-videos/display-videos.component';
 import { ManagePlaylistComponent } from './manage-playlist/manage-playlist.component';
+import {TvStationsModule} from '../tv-stations/tv-stations.module';
 
 
 
@@ -32,32 +33,33 @@ import { ManagePlaylistComponent } from './manage-playlist/manage-playlist.compo
       ManagePlaylistComponent,
 
   ],
-  imports: [
-    CommonModule,
-    AdminRoutingModule,
-    MatProgressSpinnerModule,
-    MatIconModule,
-    MatListModule,
-    MatSidenavModule,
-    MatInputModule,
-    ReactiveFormsModule,
-    MatRadioModule,
-    DragDropModule,
-    BlogModule,
-    QuillModule.forRoot({
-        // modules: {
-        //   toolbar: [
-        //     ['bold', 'italic', 'underline', 'strike'],
-        //     ['blockquote', 'code-block'],
-        //     [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-        //     [{ 'script': 'sub'}, { 'script': 'super' }],
-        //     [{ 'indent': '-1'}, { 'indent': '+1' }],
-        //     [{ 'direction': 'rtl' }],
-        //     [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-        //   ]
-        // }
-      }),
-  ],
+    imports: [
+        CommonModule,
+        AdminRoutingModule,
+        MatProgressSpinnerModule,
+        MatIconModule,
+        MatListModule,
+        MatSidenavModule,
+        MatInputModule,
+        ReactiveFormsModule,
+        MatRadioModule,
+        DragDropModule,
+        BlogModule,
+        QuillModule.forRoot({
+            // modules: {
+            //   toolbar: [
+            //     ['bold', 'italic', 'underline', 'strike'],
+            //     ['blockquote', 'code-block'],
+            //     [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+            //     [{ 'script': 'sub'}, { 'script': 'super' }],
+            //     [{ 'indent': '-1'}, { 'indent': '+1' }],
+            //     [{ 'direction': 'rtl' }],
+            //     [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+            //   ]
+            // }
+        }),
+        TvStationsModule,
+    ],
   exports: [
   ]
 })
