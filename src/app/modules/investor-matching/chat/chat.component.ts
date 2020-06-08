@@ -165,7 +165,6 @@ export class ChatComponent implements OnInit, AfterViewChecked {
         }
       }
     );
-
     myWidget.open();
   }
 
