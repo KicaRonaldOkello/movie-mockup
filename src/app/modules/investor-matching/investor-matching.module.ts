@@ -14,11 +14,13 @@ import { DisplayClientCardsComponent } from './display-client-cards/display-clie
 import { ClientCardComponent } from './client-card/client-card.component';
 import { ClientDetailsComponent } from './client-details/client-details.component';
 import { ClientOrderDetailsComponent } from './client-order-details/client-order-details.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { CreateClientComponent } from './create-client/create-client.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import {ImageModalComponent} from '../shared/image-modal/image-modal.component';
 import {SharedModule} from '../shared/shared.module';
+import { ChatComponent } from './chat/chat.component';
+import {MatAutocompleteModule, MatBadgeModule, MatDividerModule, MatFormFieldModule, MatInputModule} from '@angular/material';
 
 
 
@@ -30,10 +32,12 @@ import {SharedModule} from '../shared/shared.module';
     ClientDetailsComponent,
     ClientOrderDetailsComponent,
     CreateClientComponent,
+    ChatComponent,
   ],
   imports: [
     CommonModule,
     InvestorMatchingRoutingModule,
+    FormsModule,
     ReactiveFormsModule,
     MatSlideToggleModule,
     MatButtonToggleModule,
@@ -43,7 +47,12 @@ import {SharedModule} from '../shared/shared.module';
     MatTooltipModule,
     SharedModule,
     MatProgressSpinnerModule,
-    MatDialogModule
+    MatDialogModule,
+    MatDividerModule,
+    MatBadgeModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatAutocompleteModule
   ],
   entryComponents: [
     ImageModalComponent

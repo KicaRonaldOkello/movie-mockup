@@ -26,21 +26,22 @@
                     (mouseenter) ="mouseEnter()"
                     (mouseleave) ="mouseLeave()"
                     [controls]="controls"
+                    (loadedmetadata)="onMetadata($event, i)"
                     >
                         <source [src]="video.fileUrl">
                     </video>
                     <span class="video-body">
                         <p class="video-body__title">{{video.name}}</p>
-                        <p class="video-body__description">{{video.description}}</p>
+                        <p class="video-body__description" *ngIf="duration[i]">Duration: {{duration[i] | minuteSeconds }}</p>
                     </span>
-                </div> 
+                </div>
               </div>
             </div>
         </div>
-          
+
         <div class="example-container">
             <h2 class="last-child">Videos</h2>
-          
+
             <div
               cdkDropList
               #doneList="cdkDropList"
@@ -48,7 +49,7 @@
               [cdkDropListConnectedTo]="[todoList]"
               class="example-list"
               (cdkDropListDropped)="drop($event)">
-              <div class="example-box videos-box" *ngFor="let video of videos" cdkDrag>
+              <div class="example-box videos-box" *ngFor="let video of videos; let i = index" cdkDrag>
                   <div class="video-item">
                       <video
                       width="180px"
@@ -56,12 +57,13 @@
                       (mouseenter) ="mouseEnter()"
                       (mouseleave) ="mouseLeave()"
                       [controls]="controls"
+                      (loadedmetadata)="onUnselectedMetadata($event, i)"
                       >
                           <source [src]="video.fileUrl">
                       </video>
                       <span class="video-body">
                           <p class="video-body__title">{{video.name}}</p>
-                          <p class="video-body__description">{{video.description}}</p>
+                          <p class="video-body__description"*ngIf="unselectedDuration[i]">Duration: {{unselectedDuration[i] | minuteSeconds }}</p>
                       </span>
                   </div>
             </div>

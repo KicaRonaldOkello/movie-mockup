@@ -19,22 +19,25 @@ import {PaymentModalComponent} from '../shared/payment-modal/payment-modal.compo
 
 
 @NgModule({
-  declarations: [LandingPageComponent, VideoListComponent, MinuteSecondsPipe, ],
-  imports: [
-    CommonModule,
-    VgCoreModule,
-    TvStationsRoutingModule,
-    VgControlsModule,
-    VgOverlayPlayModule,
-    MatIconModule,
-    VgBufferingModule,
-    MatProgressSpinnerModule,
-    MatMenuModule,
-    SharedModule,
-    MatDialogModule
+    declarations: [LandingPageComponent, VideoListComponent, MinuteSecondsPipe,],
+    imports: [
+        CommonModule,
+        VgCoreModule,
+        TvStationsRoutingModule,
+        VgControlsModule,
+        VgOverlayPlayModule,
+        MatIconModule,
+        VgBufferingModule,
+        MatProgressSpinnerModule,
+        MatMenuModule,
+        SharedModule,
+        MatDialogModule
 
-  ],
-  bootstrap: [PaymentModalComponent],
-  entryComponents: [PaymentModalComponent]
+    ],
+    bootstrap: [PaymentModalComponent],
+    exports: [
+        MinuteSecondsPipe
+    ],
+    entryComponents: [PaymentModalComponent]
 })
 export class TvStationsModule { }
