@@ -41,9 +41,14 @@ export class BlogCardComponent implements OnInit {
         'refresh',
         this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/refresh.svg')
       );
+
     }
 
   ngOnInit() {
+    if(this.data.isYoutubeVideo) {
+      this.data.fileUrl = this.data.fileUrl.replace('watch?v=', 'embed/');
+      this.data.fileUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(this.data.fileUrl);
+    }
   }
 
   truncateHTML(text: string): string {

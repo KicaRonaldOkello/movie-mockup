@@ -94,7 +94,7 @@ export class LandingPageComponent implements OnInit {
     this.sources = [];
 
     this.videoService.getPlaylist().subscribe(data => {
-      if (data.playlistsItems.length === 0) {
+      if (data.playlistsItems && data.playlistsItems.length === 0) {
         this.noPlaylistItems = true;
       } else {
       data.playlistsItems.map(videoItem => {
@@ -140,6 +140,7 @@ export class LandingPageComponent implements OnInit {
     this.videoRecommendedAge = source.recommendedAge;
     this.api.getDefaultMedia().currentTime = 0;
     this.shareDataService.videoComments(source.id);
+    this.api.play();
   }
 
   ngOnInit() {
@@ -189,7 +190,7 @@ export class LandingPageComponent implements OnInit {
           this.numberOfPlay = 0;
         }
         this.setCurrentVideo(this.videos[this.numberOfPlay]);
-        this.api.play();
+        // this.api.play();
       }
     );
 

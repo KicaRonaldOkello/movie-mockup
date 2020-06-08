@@ -37,18 +37,21 @@ export class AdminComponent implements OnInit {
 
 
   loadBlog() {
+    window.scroll(0, 0);
     this.loadManageBlog = true;
     this.loadManageVideo = false;
     this.loadManagePlaylist = false;
   }
 
   loadVideo() {
+    window.scroll(0, 0);
     this.loadManageVideo = true;
     this.loadManageBlog = false;
     this.loadManagePlaylist = false;
   }
 
   loadPlaylist() {
+    window.scroll(0, 0);
     this.loadManagePlaylist = true;
     this.loadManageVideo = false;
     this.loadManageBlog = false;

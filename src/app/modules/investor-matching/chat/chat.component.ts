@@ -142,6 +142,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
   }
 
   loadConversation(conversation) {
+    window.scrollTo(0, 0);
     this.disabledTextArea = false;
     this.myControl.patchValue(conversation.toUserDetails.name);
     this.chatMessages = conversation.chatMessages;
@@ -165,7 +166,6 @@ export class ChatComponent implements OnInit, AfterViewChecked {
         }
       }
     );
-
     myWidget.open();
   }
 

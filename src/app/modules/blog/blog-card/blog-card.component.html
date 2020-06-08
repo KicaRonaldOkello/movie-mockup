@@ -37,6 +37,7 @@
 </span>
 <span class="card" *ngIf="displayVideo">
     <video
+      *ngIf="!data.isYoutubeVideo"
     width="230px"
     height="120px"
     (mouseenter) ="mouseEnter()"
@@ -45,6 +46,15 @@
     >
         <source [src]="data.fileUrl">
     </video>
+  <iframe
+    frameborder="0"
+    allowfullscreen
+    width="230px"
+    height="120px"
+    *ngIf="data.isYoutubeVideo"
+    [src]="data.fileUrl"
+  >
+  </iframe>
 
     <div class="card__title">
         <p>{{data.name}}</p>

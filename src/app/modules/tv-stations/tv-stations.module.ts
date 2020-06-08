@@ -15,6 +15,7 @@ import {MatMenuModule} from '@angular/material';
 import {MinuteSecondsPipe} from '../../utils/minute-seconds.pipe';
 import {SharedModule} from '../shared/shared.module';
 import {PaymentModalComponent} from '../shared/payment-modal/payment-modal.component';
+import {YouTubePlayerModule} from '@angular/youtube-player';
 
 
 
@@ -31,7 +32,8 @@ import {PaymentModalComponent} from '../shared/payment-modal/payment-modal.compo
         MatProgressSpinnerModule,
         MatMenuModule,
         SharedModule,
-        MatDialogModule
+        MatDialogModule,
+        YouTubePlayerModule
 
     ],
     bootstrap: [PaymentModalComponent],

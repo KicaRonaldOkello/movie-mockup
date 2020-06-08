@@ -25,43 +25,47 @@
       <!-- </div> -->
     </div>
     <div class="full-page__header__bottom">
-      <p
+      <a
         class="menu-item"
-        routerLinkActive="menu-item__checked"
+        href="/tv"
+        [routerLinkActive]="'menu-item__checked'"
         [routerLink]="['tv']"
         >
-        TV Stations
-      </p>
-      <p
+        <p>TV Stations</p>
+      </a>
+      <a
         class="menu-item"
-        routerLinkActive="menu-item__checked"
+        href="/investor-matching"
+        [routerLinkActive]="'menu-item__checked'"
         (click)="changeNavBarIcon('/blog')"
         [routerLink]="['investor-matching']"
         >
-        Investor Matching
-      </p>
-      <p
+        <p>Investor Matching</p>
+      </a>
+      <a
         class="menu-item">
-        Tours & Travels
-    </p>
-      <p
+        <p>Tours & Travels</p>
+    </a>
+      <a
         class="menu-item">
-        Translator Services
-      </p>
-      <p
+        <p>Translator Services</p>
+      </a>
+      <a
         class="menu-item"
         routerLinkActive="menu-item__checked"
         (click)="changeNavBarIcon('/blog')"
+        href="/blog"
         [routerLink]="['blog']">
-        Blogging
-      </p>
-      <p
+        <p>Blogging</p>
+      </a>
+      <a
         *ngIf="isAdmin"
         class="menu-item"
         routerLinkActive="menu-item__checked"
         (click)="changeNavBarIcon('/blog')"
+        href="/admin"
         [routerLink]="['admin']">
-        Admin
-      </p>
+        <p>Admin</p>
+      </a>
     </div>
   </div>
