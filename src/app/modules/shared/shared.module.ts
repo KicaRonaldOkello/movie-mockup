@@ -4,8 +4,9 @@ import { ModalComponent } from './modal/modal.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { PaymentModalComponent } from './payment-modal/payment-modal.component';
 import { ImageModalComponent } from './image-modal/image-modal.component';
-import {MatButtonModule, MatDialogModule, MatIconModule} from '@angular/material';
-
+import {MatButtonModule} from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
+import {MatIconModule} from '@angular/material/icon';
 
 
 @NgModule({

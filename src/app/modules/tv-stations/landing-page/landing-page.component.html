@@ -47,31 +47,33 @@
         </span>
         <span class="video-player" *ngIf="!noPlaylistItems && initiallyDisplayPlayButton">
           <youtube-player
-            suggestedQuality="highres"
-            [height]="600"
-            [width]="1080"
-            [startSeconds]="43"
-            [endSeconds]="60"
-            videoId="dQw4w9WgXcQ">
+            *ngIf="sources[0].isYoutubeVideo"
+            (ready)="onYoutubePlayerReady($event)"
+            suggestedQuality="default"
+            [height]="400"
+            [showBeforeIframeApiLoads]="true"
+            (stateChange)="onStateChange($event)"
+            [startSeconds]="0"
+            [videoId]="sources[0].fileUrl">
 
           </youtube-player>
-<!--          <vg-player (onPlayerReady)="onPlayerReady($event)">-->
-<!--            <video-->
-<!--            [vgMedia]="media"-->
-<!--            #media-->
-<!--            id="singleVideo"-->
-<!--            preload="auto"-->
-<!--            [controls]="controls"-->
-<!--            [autoplay]="true"-->
-<!--            (mouseenter) ="mouseEnter()"-->
-<!--            (mouseleave) ="mouseLeave()"-->
-<!--            >-->
-<!--              <source *ngFor="let video of sources" [src]="video">-->
-<!--            </video>-->
-<!--          </vg-player>-->
+          <vg-player (onPlayerReady)="onPlayerReady($event)" *ngIf="!sources[0].isYoutubeVideo">
+            <video
+            [vgMedia]="media"
+            #media
+            id="singleVideo"
+            preload="auto"
+            [controls]="controls"
+            [autoplay]="true"
+            (mouseenter) ="mouseEnter()"
+            (mouseleave) ="mouseLeave()"
+            >
+              <source *ngFor="let video of sources" [src]="sources[0].fileUrl">
+            </video>
+          </vg-player>
         </span>
           <span (click)="playVideo()" class="vidBtn" *ngIf="!noPlaylistItems">
-            <img *ngIf="displayPlayButton && initiallyDisplayPlayButton" src="assets/play.svg" alt="play">
+            <img *ngIf="displayPlayButton && initiallyDisplayPlayButton && !sources[0].isYoutubeVideo" src="assets/play.svg" alt="play">
           </span>
       </div>
       <div class="movie-covers__title">

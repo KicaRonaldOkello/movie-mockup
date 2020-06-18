@@ -20,7 +20,11 @@ import { MatDialogModule } from '@angular/material/dialog';
 import {ImageModalComponent} from '../shared/image-modal/image-modal.component';
 import {SharedModule} from '../shared/shared.module';
 import { ChatComponent } from './chat/chat.component';
-import {MatAutocompleteModule, MatBadgeModule, MatDividerModule, MatFormFieldModule, MatInputModule} from '@angular/material';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatBadgeModule} from '@angular/material/badge';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
 
 
 
