@@ -21,7 +21,7 @@
     "@angular/platform-browser": "~9.1.11",
     "@angular/platform-browser-dynamic": "~9.1.11",
     "@angular/router": "~9.1.11",
-    "@angular/youtube-player": "^9.2.4",
+    "@angular/youtube-player": "^10.0.0-rc.2",
     "@ckeditor/ckeditor5-angular": "^1.2.3",
     "@ngx-translate/core": "^12.1.2",
     "@ngx-translate/http-loader": "^4.0.0",

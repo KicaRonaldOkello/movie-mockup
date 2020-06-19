@@ -48,12 +48,11 @@
         <span class="video-player" *ngIf="!noPlaylistItems && initiallyDisplayPlayButton">
           <youtube-player
             *ngIf="sources[0].isYoutubeVideo"
-            (ready)="onYoutubePlayerReady($event)"
             suggestedQuality="default"
             [height]="400"
             [showBeforeIframeApiLoads]="true"
             (stateChange)="onStateChange($event)"
-            [startSeconds]="0"
+            (ready)="onYoutubePlayerReady($event)"
             [videoId]="sources[0].fileUrl">
 
           </youtube-player>

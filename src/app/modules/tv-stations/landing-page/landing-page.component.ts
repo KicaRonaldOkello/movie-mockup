@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { VgAPI } from 'videogular2/core';
 import { VideosService } from 'src/app/services/videos/videos.service';
-import { forkJoin } from 'rxjs';
 import { ShareDataService } from 'src/app/services/share-data/share-data.service';
 import {VideoCategoriesService} from '../../../services/videoCategories/video-categories.service';
 import Helpers from '../../../helpers/helpers';
@@ -93,7 +92,7 @@ export class LandingPageComponent implements OnInit {
     ) {
 
     this.sources = [];
-
+    this.shareDataService.showAd('true');
     this.videoService.getPlaylist().subscribe(data => {
       if (data.playlistsItems.length === 0) {
         this.noPlaylistItems = true;
@@ -101,8 +100,7 @@ export class LandingPageComponent implements OnInit {
       data.playlistsItems.map(videoItem => {
         return this.playlistIds.push(videoItem.videoId);
       });
-
-      this.getAllVideos(this.playlistIds);
+      this.getVideo(this.playlistIds[0]);
     }
     });
 
@@ -115,18 +113,16 @@ export class LandingPageComponent implements OnInit {
 
   }
 
-  getAllVideos(videoIds) {
-    return forkJoin(
-      videoIds.map(
-        i => this.videoService.getSingleVideo(i))
-    ).subscribe(videos => {
-      this.videos = videos;
-      this.setCurrentVideo(this.videos[0]);
+  getVideo(videoId) {
+    this.videoService.getSingleVideo(videoId).subscribe(res => {
+      this.videos = [res];
       this.initiallyDisplayPlayButton = true;
+      this.setCurrentVideo(this.videos[0]);
       this.loadingPage = false;
-      this.shareDataService.showAd('true');
     });
   }
+
+
   setCurrentVideo(source) {
     this.sources = [];
     if (source.isYoutubeVideo) {
@@ -137,7 +133,6 @@ export class LandingPageComponent implements OnInit {
     this.videoGenre = source.genre;
     this.videoCategory = source.categoryId;
     this.videoRecommendedAge = source.recommendedAge;
-    this.numberOfPlay > 0 ? this.api.getDefaultMedia().currentTime = 0 : null;
     this.shareDataService.videoComments(source.id);
   }
 
@@ -186,13 +181,13 @@ export class LandingPageComponent implements OnInit {
     this.api.getDefaultMedia().subscriptions.ended.subscribe(
       (event) => {
 
-        if (this.numberOfPlay < this.videos.length - 1) {
+        if (this.numberOfPlay < this.playlistIds.length - 1) {
           this.numberOfPlay = this.numberOfPlay + 1;
         } else {
           this.numberOfPlay = 0;
         }
-        this.setCurrentVideo(this.videos[this.numberOfPlay]);
-        this.api.play();
+        this.initiallyDisplayPlayButton = false;
+        this.getVideo(this.playlistIds[this.numberOfPlay]);
       }
     );
 
@@ -238,7 +233,6 @@ export class LandingPageComponent implements OnInit {
 
   checkIfUserIsLoggedIn(category) {
     if (this.auth.isAuthenticated(this.router.url)) {
-      // this.checkPayTvSubscriptionStatus(category);
       this.displayCategoryVideos(category);
     } else {
       this.auth.isAuthenticated(this.router.url);
@@ -313,20 +307,21 @@ export class LandingPageComponent implements OnInit {
     });
 }
 
+
+  onYoutubePlayerReady(event) {
+    event.target.playVideo();
+  }
+
   onStateChange(event) {
     if (event.data === 0) {
-      if (this.numberOfPlay < this.videos.length - 1) {
+      if (this.numberOfPlay < this.playlistIds.length - 1) {
         this.numberOfPlay = this.numberOfPlay + 1;
       } else {
         this.numberOfPlay = 0;
       }
-      this.setCurrentVideo(this.videos[this.numberOfPlay]);
+      this.initiallyDisplayPlayButton = false;
+      this.getVideo(this.playlistIds[this.numberOfPlay]);
     }
-  }
-
-  onYoutubePlayerReady(event) {
-    console.log(event, '<<<<<<<<');
-    event.target.playVideo();
   }
 
 }
