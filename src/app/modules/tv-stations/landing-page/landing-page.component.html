@@ -56,19 +56,21 @@
             [videoId]="sources[0].fileUrl">
 
           </youtube-player>
-          <vg-player (onPlayerReady)="onPlayerReady($event)" *ngIf="!sources[0].isYoutubeVideo">
-            <video
-            [vgMedia]="media"
-            #media
-            id="singleVideo"
-            preload="auto"
-            [controls]="controls"
-            [autoplay]="true"
-            (mouseenter) ="mouseEnter()"
-            (mouseleave) ="mouseLeave()"
-            >
-              <source *ngFor="let video of sources" [src]="sources[0].fileUrl">
-            </video>
+          <vg-player
+            (onPlayerReady)="onPlayerReady($event)"
+            *ngIf="!sources[0].isYoutubeVideo">
+              <video
+              [vgMedia]="media"
+              #media
+              id="singleVideo"
+              preload="auto"
+              [controls]="controls"
+              [autoplay]="true"
+              (mouseenter) ="mouseEnter()"
+              (mouseleave) ="mouseLeave()"
+              >
+                <source *ngFor="let video of sources" [src]="sources[0].fileUrl">
+              </video>
           </vg-player>
         </span>
           <span (click)="playVideo()" class="vidBtn" *ngIf="!noPlaylistItems">
