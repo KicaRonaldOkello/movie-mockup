@@ -1,0 +1,115 @@
+<div class="component-body">
+  <div class="top">
+    <div class="search-bar" [formGroup]="paymentSearchForm">
+        <span class="name">
+            <input type="text" class="input-name" formControlName="username" placeholder="Location">
+        </span>
+      <span class="name">
+            <input type="text" class="input-amount" #amountMin formControlName="amountMin" placeholder="Amount (Min)" (keyup)="addCommas(amountMin.value, 'amountMin')" (keydown)='isNumber(event)'>
+        </span>
+      <p>-</p>
+      <span class="name">
+            <input type="text" #amountMax class="input-amount" formControlName="amountMax" placeholder="Amount (Max)" (keyup)="addCommas(amountMax.value, 'amountMax')" (keydown)='isNumber(event)'>
+        </span>
+
+      <span class="name">
+            <input type="text" class="input-amount" #returnsMin formControlName="returnsMin" placeholder="Returns (Min)" (keyup)="addCommas(returnsMin.value, 'returnsMin')" (keydown)='isNumber(event)'>
+        </span>
+      <p>-</p>
+      <span class="name">
+            <input type="text" class="input-amount" #returnsMax formControlName="returnsMax" placeholder="Returns (Max)" (keyup)="addCommas(returnsMax.value, 'returnsMax')" (keydown)='isNumber(event)'>
+        </span>
+
+
+      <span class="name">
+            <input type="text" class="input-name" formControlName="username" placeholder="Name">
+            <img src="assets/search.svg" alt="">
+        </span>
+      <span class="button-cover">
+            <button class="button " (click)="searchInvestmentProject()">Search</button>
+        </span>
+    </div>
+  </div>
+  <div class="middle">
+    <div class="details-image">
+      <img src="https://res.cloudinary.com/grohealth/image/upload/v1583756529/DCUK/Content/iStock-577978980.jpg">
+    </div>
+    <div class="details">
+      <div class="title">
+        Tour Details
+      </div>
+      <div class="details-data">
+        <p>Package Name:</p>
+        <P class="details-data-value">Zanzibar experience</P>
+      </div>
+      <div class="details-data">
+        <p>Location:</p>
+        <p class="details-data-value">Zr, Zanzibar</p>
+      </div>
+      <div class="details-data">
+        <p>Price:</p>
+        <p class="details-data-value">1m UGX</p>
+      </div>
+      <div class="details-data">
+        <p>Number of people:</p>
+        <p class="details-data-value">5</p>
+      </div>
+      <div class="details-data">
+        <p>Start Date:</p>
+        <p class="details-data-value">21.03.2020</p>
+      </div>
+      <div class="buttons">
+        <button class="button button-red button-first">Message Owner</button>
+        <button class="button button-red" [routerLink]="['/tours/package-payment']">Book Now</button>
+      </div>
+    </div>
+  </div>
+  <div class="payment-details">
+    <div class="booking-details">
+      <p class="booking-details-title">Booking Details</p>
+      <div class="booking-details-body">
+        <div class="booking-details-pair">
+          <p>Amount to Pay:</p>
+          <p class="booking-details-value">Zanzibar Experience</p>
+        </div>
+        <div class="booking-details-pair">
+          <p>Currency:</p>
+          <p class="booking-details-value">USD</p>
+        </div>
+        <div class="booking-details-pair">
+          <p>Exchange rate:</p>
+          <P class="booking-details-value">1USD = 3700</P>
+        </div>
+        <div>
+          <p>Additional comments:</p>
+          <textarea placeholder="Comments..."></textarea>
+        </div>
+      </div>
+    </div>
+    <div class="contact-details">
+      <div class="contact-details-title">
+        <p>Contact Information</p>
+        <p>Already have an account? Log in</p>
+      </div>
+      <div class="contact-details-body">
+        <input placeholder="Email">
+        <mat-checkbox>Keep me upto date on news and exclusive offers!</mat-checkbox>
+        <div class="names">
+          <input placeholder="Firstname">
+          <input placeholder="Lastname">
+        </div>
+        <input placeholder="Address">
+        <input placeholder="City">
+        <input placeholder="Country">
+        <input placeholder="Phone">
+        <mat-radio-group aria-label="Select an option">
+          <mat-radio-button value="1">Save this information for next time</mat-radio-button>
+        </mat-radio-group>
+        <div class="buttons">
+          <button class="button button-red">Cancel</button>
+          <button class="button button-red">Confirm</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

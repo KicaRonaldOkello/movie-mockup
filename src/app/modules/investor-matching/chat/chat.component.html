@@ -3,7 +3,9 @@
 </div>
 <div class="body" *ngIf="!loadUserNames || !loadConversations">
   <div class="my-account">
-    <img src="https://placeimg.com/800/300/nature">
+    <div [routerLink]="['/profile']" matTooltip="Go to profile">
+      <img src="https://placeimg.com/800/300/nature">
+    </div>
     <img class="settings-image" src="/assets/settings.svg">
   </div>
   <div class="chats-box">

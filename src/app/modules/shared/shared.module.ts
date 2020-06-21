@@ -10,7 +10,7 @@ import {MatIconModule} from '@angular/material/icon';
 
 
 @NgModule({
-  declarations: [ModalComponent, NotFoundComponent, PaymentModalComponent, ImageModalComponent],
+  declarations: [ModalComponent, NotFoundComponent, PaymentModalComponent, ImageModalComponent, ],
   imports: [
     CommonModule,
     MatDialogModule,
@@ -19,7 +19,7 @@ import {MatIconModule} from '@angular/material/icon';
   ],
   exports: [
     ModalComponent,
-    NotFoundComponent
+    NotFoundComponent,
   ]
 })
 export class SharedModule { }

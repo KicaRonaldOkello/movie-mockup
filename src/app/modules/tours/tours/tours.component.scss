@@ -1,0 +1,124 @@
+.component-body {
+  width: 100vw;
+  .top {
+    background: url("/assets/great_wall_of_china.jpg");
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .search-bar {
+      background-color: rgba(230, 231, 232, 0.85);
+      padding: 20px 5px;
+      width: 80%;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      select {
+        width: 150px;
+        height: 30px;
+        border: none;
+        -webkit-appearance: none;
+        background: url('/assets/down-arrow.svg') no-repeat right white;
+        background-size: 10px;
+        margin-right: 20px;
+        border-radius: 5px;
+        background-position-x: 130px;
+        padding-left: 10px;
+        margin: 5px 5px;
+
+        &:focus {
+          outline: none;
+        }
+
+      }
+
+      select:required:invalid {
+        color: gray;
+        font-size: 12px;
+      }
+      option[value=""][disabled] {
+        display: none;
+      }
+      option {
+        color: black;
+        font-size: 12px;
+
+        &:focus {
+          outline: none;
+        }
+      }
+
+      .name {
+        img {
+          margin-left: -30px;
+          margin-bottom: -5px;
+          margin-right: 30px;
+        }
+      }
+
+      .input-name {
+        width: 150px;
+        border: none;
+        height: 30px;
+        padding-left: 10px;
+        border-radius: 5px;
+        margin-right: 20px;
+        margin: 5px 5px;
+
+
+
+        &:focus {
+          outline: none;
+        }
+      }
+
+      .input-amount {
+        width: 120px;
+        border: none;
+        height: 30px;
+        padding-left: 10px;
+        border-radius: 5px;
+        margin-right: 20px;
+        margin: 5px 5px;
+
+
+
+        &:focus {
+          outline: none;
+        }
+      }
+
+      .button-cover {
+        margin-top: 5px;
+        margin-left: 5px;
+      }
+
+      .button {
+        width: 100px;
+        background-color: red;
+        color: white;
+        margin-top: 5px;
+        height: 30px;
+
+        &:hover {
+          box-shadow: 0px 0px 10px grey;
+        }
+      }
+
+    }
+  }
+
+  .bottom {
+    margin-top: 60px;
+    margin-left: 30px;
+    margin-bottom: 30px;
+
+    .cards {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}

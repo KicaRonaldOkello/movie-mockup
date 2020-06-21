@@ -1,0 +1,40 @@
+<div class="component-body">
+  <div class="top">
+    <div class="search-bar" [formGroup]="toursForm">
+        <span class="name">
+            <input type="text" class="input-name" formControlName="username" placeholder="Location">
+        </span>
+      <span class="name">
+            <input type="text" class="input-amount" #amountMin formControlName="amountMin" placeholder="Amount (Min)" (keyup)="addCommas(amountMin.value, 'amountMin')" (keydown)='isNumber(event)'>
+        </span>
+      <p>-</p>
+      <span class="name">
+            <input type="text" #amountMax class="input-amount" formControlName="amountMax" placeholder="Amount (Max)" (keyup)="addCommas(amountMax.value, 'amountMax')" (keydown)='isNumber(event)'>
+        </span>
+
+      <span class="name">
+            <input type="text" class="input-amount" #returnsMin formControlName="returnsMin" placeholder="Returns (Min)" (keyup)="addCommas(returnsMin.value, 'returnsMin')" (keydown)='isNumber(event)'>
+        </span>
+      <p>-</p>
+      <span class="name">
+            <input type="text" class="input-amount" #returnsMax formControlName="returnsMax" placeholder="Returns (Max)" (keyup)="addCommas(returnsMax.value, 'returnsMax')" (keydown)='isNumber(event)'>
+        </span>
+
+
+      <span class="name">
+            <input type="text" class="input-name" formControlName="username" placeholder="Name">
+            <img src="assets/search.svg" alt="">
+        </span>
+      <span class="button-cover">
+            <button class="button " (click)="searchInvestmentProject()">Search</button>
+        </span>
+    </div>
+  </div>
+  <div class="bottom">
+    <div class="cards">
+      <div *ngFor="let tour of toursData">
+        <app-tours-card></app-tours-card>
+      </div>
+    </div>
+  </div>
+</div>

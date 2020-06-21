@@ -43,7 +43,12 @@
         <p>Investor Matching</p>
       </a>
       <a
-        class="menu-item">
+        class="menu-item"
+        href="/tours"
+        [routerLinkActive]="'menu-item__checked'"
+        (click)="changeNavBarIcon('/blog')"
+        [routerLink]="['tours']"
+      >
         <p>Tours & Travels</p>
     </a>
       <a

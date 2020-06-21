@@ -1,0 +1,83 @@
+<div class="component-body">
+  <div class="top">
+    <div class="search-bar" [formGroup]="tourDetailsForm">
+        <span class="name">
+            <input type="text" class="input-name" formControlName="username" placeholder="Location">
+        </span>
+      <span class="name">
+            <input type="text" class="input-amount" #amountMin formControlName="amountMin" placeholder="Amount (Min)" (keyup)="addCommas(amountMin.value, 'amountMin')" (keydown)='isNumber(event)'>
+        </span>
+      <p>-</p>
+      <span class="name">
+            <input type="text" #amountMax class="input-amount" formControlName="amountMax" placeholder="Amount (Max)" (keyup)="addCommas(amountMax.value, 'amountMax')" (keydown)='isNumber(event)'>
+        </span>
+
+      <span class="name">
+            <input type="text" class="input-amount" #returnsMin formControlName="returnsMin" placeholder="Returns (Min)" (keyup)="addCommas(returnsMin.value, 'returnsMin')" (keydown)='isNumber(event)'>
+        </span>
+      <p>-</p>
+      <span class="name">
+            <input type="text" class="input-amount" #returnsMax formControlName="returnsMax" placeholder="Returns (Max)" (keyup)="addCommas(returnsMax.value, 'returnsMax')" (keydown)='isNumber(event)'>
+        </span>
+
+
+      <span class="name">
+            <input type="text" class="input-name" formControlName="username" placeholder="Name">
+            <img src="assets/search.svg" alt="">
+        </span>
+      <span class="button-cover">
+            <button class="button " (click)="searchInvestmentProject()">Search</button>
+        </span>
+    </div>
+  </div>
+  <div class="middle">
+    <div class="details-image">
+      <img src="https://res.cloudinary.com/grohealth/image/upload/v1583756529/DCUK/Content/iStock-577978980.jpg">
+    </div>
+    <div class="details">
+      <div class="title">
+        Tour Details
+      </div>
+      <div class="details-data">
+        <p>Package Name:</p>
+        <P class="details-data-value">Zanzibar experience</P>
+      </div>
+      <div class="details-data">
+        <p>Location:</p>
+        <p class="details-data-value">Zr, Zanzibar</p>
+      </div>
+      <div class="details-data">
+        <p>Price:</p>
+        <p class="details-data-value">1m UGX</p>
+      </div>
+      <div class="details-data">
+        <p>Number of people:</p>
+        <p class="details-data-value">5</p>
+      </div>
+      <div class="details-data">
+        <p>Start Date:</p>
+        <p class="details-data-value">21.03.2020</p>
+      </div>
+      <div class="buttons">
+        <button class="button button-red button-first">Message Owner</button>
+        <button class="button button-red" [routerLink]="['/tours/package-payment']">Book Now</button>
+      </div>
+    </div>
+  </div>
+  <div class="text-details">
+    <h2>Zanzibar Experience</h2>
+    <p>Zanzibar is the home of idyllic beaches, balmy weather & warm tropical waters.
+      This archipelago is renowned for clear warm waters, coral reefs and rich marine diversity making it
+      a perfect under-water destination for snorkelling and diving.
+      If it is lazy days along white sandy beaches that you are after -
+      Zanzibar is hard to beat. But, in addition to the perfect beach destination,
+      Zanzibar is also full of options for nature lovers, culture vultures, and adventurers.
+    </p>
+    <img src="https://d2g6byanrj0o4m.cloudfront.net/images/1211/14751079841_f33668ea01_k__medium.jpg">
+    <p>Zanzibar is fairly undeveloped and enjoys semi-autonomy from mainland Tanzania.
+      The colourful history and rich heritage can be seen in the strong Arabic, Indian, African, Persian and European influences.
+      Its unique history adds a vibrant dimension to the island.
+      Exploring the cobbled alleyways of historic Stone Town’s old quarter, a UNESCO World Heritage Site,
+      you encounter a captivating mix of diverse architectural styles in the mosques and houses.</p>
+  </div>
+</div>

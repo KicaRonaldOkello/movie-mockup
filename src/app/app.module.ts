@@ -47,7 +47,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     }),
     BlogModule,
   ],
-    exports: [],
+  exports: [
+    AdComponentComponent
+  ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptor,

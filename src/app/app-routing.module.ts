@@ -12,7 +12,9 @@ const routes: Routes = [
   { path: 'auth', loadChildren: './modules/authentication/authentication.module#AuthenticationModule' },
   { path: 'tv', loadChildren: './modules/tv-stations/tv-stations.module#TvStationsModule'},
   { path: 'blog', loadChildren: './modules/blog/blog.module#BlogModule'},
+  { path: 'profile', loadChildren: './modules/profile/profile.module#ProfileModule'},
   { path: 'investor-matching', loadChildren: './modules/investor-matching/investor-matching.module#InvestorMatchingModule'},
+  { path: 'tours', loadChildren: './modules/tours/tours.module#ToursModule'},
   { path: '**', component: NotFoundComponent}
 ];
 
