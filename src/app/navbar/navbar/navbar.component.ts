@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
 import Helpers from 'src/app/helpers/helpers';
 import { ShareDataService } from 'src/app/services/share-data/share-data.service';
 
@@ -14,18 +13,12 @@ export class NavbarComponent implements OnInit {
   username = 'Hello Sign In';
   iconLoaded = 'assets/screen.svg';
   showSignout: boolean;
+  selectedLanguage;
   isAdmin: boolean;
   constructor(
     private router: Router,
     private shareDataService: ShareDataService,
-    public translate: TranslateService,
     ) {
-
-    translate.addLangs(['en', 'fr']);
-    translate.setDefaultLang('en');
-    const browserLang = translate.getBrowserLang();
-    translate.use(browserLang.match(/en|fr/) ? browserLang : 'en');
-
     this.shareDataService.username.subscribe(res => {
       if (res === 'true') {
         const userData = Helpers.getUserData();
@@ -33,7 +26,7 @@ export class NavbarComponent implements OnInit {
         this.isAdmin = userData.roleId.toUpperCase() === 'ADMIN' ? true : false;
         this.showSignout = true;
       }
-    })
+    });
   }
 
   ngOnInit() {
@@ -42,7 +35,7 @@ export class NavbarComponent implements OnInit {
           this.changeNavBarIcon(event['url']);
       }
   });
-  if (Helpers.getUserData()) {
+    if (Helpers.getUserData()) {
     const userData = Helpers.getUserData();
     this.username = userData.authToken.userId;
     this.isAdmin = userData.roleId.toUpperCase() === 'ADMIN' ? true : false;
@@ -55,6 +48,8 @@ export class NavbarComponent implements OnInit {
         this.isAdmin = false;
       }
     });
+
+    this.selectedLanguage = Helpers.getChosenLanguage();
   }
 
   changeNavBarIcon(navBarItem) {
@@ -80,6 +75,15 @@ export class NavbarComponent implements OnInit {
     this.showSignout = false;
     this.isAdmin = false;
     this.shareDataService.loggedOut();
+  }
+
+  changeLanguage(language) {
+    Helpers.saveChosenLanguage(language);
+    history.pushState(null, '', location.href.split('#')[0] + language);
+    if (language === '#googtrans(en|en)') {
+      document.cookie = 'googtrans=/en/en';
+    }
+    window.location.reload();
   }
 
 }

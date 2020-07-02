@@ -1,15 +1,18 @@
-<div class="component-body">
+<span class="spinner" *ngIf="loadingPackages">
+    <mat-spinner></mat-spinner>
+</span>
+<div class="component-body" *ngIf="!loadingPackages">
   <div class="top">
     <div class="search-bar" [formGroup]="toursForm">
         <span class="name">
-            <input type="text" class="input-name" formControlName="username" placeholder="Location">
+            <input type="text" class="input-name" formControlName="location" placeholder="Location">
         </span>
       <span class="name">
-            <input type="text" class="input-amount" #amountMin formControlName="amountMin" placeholder="Amount (Min)" (keyup)="addCommas(amountMin.value, 'amountMin')" (keydown)='isNumber(event)'>
+            <input type="text" class="input-amount" #priceMin formControlName="priceMin" placeholder="Price (Min)" (keyup)="addCommas(priceMin.value, 'priceMin')" (keydown)='isNumber(event)'>
         </span>
       <p>-</p>
       <span class="name">
-            <input type="text" #amountMax class="input-amount" formControlName="amountMax" placeholder="Amount (Max)" (keyup)="addCommas(amountMax.value, 'amountMax')" (keydown)='isNumber(event)'>
+            <input type="text" #priceMax class="input-amount" formControlName="priceMax" placeholder="Price (Max)" (keyup)="addCommas(priceMax.value, 'priceMax')" (keydown)='isNumber(event)'>
         </span>
 
       <span class="name">
@@ -22,7 +25,7 @@
 
 
       <span class="name">
-            <input type="text" class="input-name" formControlName="username" placeholder="Name">
+            <input type="text" class="input-name" formControlName="packageName" placeholder="Package Name">
             <img src="assets/search.svg" alt="">
         </span>
       <span class="button-cover">
@@ -30,11 +33,26 @@
         </span>
     </div>
   </div>
+  <div class="create-tour-package">
+    <button class="button button-red" routerLink="/tours/create-tours-package">Add Tour Package</button>
+  </div>
   <div class="bottom">
+    <span class="search-spinner" *ngIf="searchingPackages">
+    <mat-spinner></mat-spinner>
+</span>
+    <div class="search-spinner" *ngIf="!searchingPackages && packages.length == 0">
+      <p>The travel package you are searching for does not exist.</p>
+    </div>
+    <div *ngIf="!searchingPackages && packages.length > 0">
     <div class="cards">
-      <div *ngFor="let tour of toursData">
-        <app-tours-card></app-tours-card>
+      <div *ngFor="let package of packages">
+        <app-tours-card [data]="package"></app-tours-card>
       </div>
+    </div>
+    <span *ngIf="pageCount > 0" class="arrows">
+        <mat-icon [class.previousPage]="page > 0" class="left-arrow" (click)="previousPage()" svgIcon="previous-page"></mat-icon>
+        <mat-icon [class.previousPage]="page < pageCount" (click)="nextPage()" svgIcon="next-page"></mat-icon>
+    </span>
     </div>
   </div>
 </div>

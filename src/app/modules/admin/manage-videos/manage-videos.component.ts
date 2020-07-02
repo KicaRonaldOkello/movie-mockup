@@ -96,7 +96,8 @@ export class ManageVideosComponent implements OnInit {
     var myWidget = cloudinary.createUploadWidget({
       cloudName: 'do6g6dwlz',
       uploadPreset: 'vdoc0rsk',
-      multiple: false}, (error, result) => {
+      multiple: false
+      }, (error, result) => {
         if (!error && result && result.event === 'success') {
           this.videoForm.patchValue({
                 FileUrl: result.info.secure_url

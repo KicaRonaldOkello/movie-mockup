@@ -1,16 +1,17 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges, Output } from '@angular/core';
+import {Component, OnInit, Input, OnChanges, SimpleChanges, Output, AfterViewInit} from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
 import { GetBlogsService } from 'src/app/services/blog/get-blogs.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { EventEmitter } from '@angular/core';
 import { ShareDataService } from 'src/app/services/share-data/share-data.service';
+import Helpers from '../../../helpers/helpers';
 
 @Component({
   selector: 'app-display-blogs',
   templateUrl: './display-blogs.component.html',
   styleUrls: ['./display-blogs.component.scss']
 })
-export class DisplayBlogsComponent implements OnInit, OnChanges {
+export class DisplayBlogsComponent implements OnInit, OnChanges, AfterViewInit {
   blogs: any = '';
   page = 0;
   pageCount: number;
@@ -30,12 +31,12 @@ export class DisplayBlogsComponent implements OnInit, OnChanges {
 
     ) {
       this.matIconRegistry.addSvgIcon(
-        "previous-page",
-        this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/left-arrow.svg")
+        'previous-page',
+        this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/left-arrow.svg')
       );
       this.matIconRegistry.addSvgIcon(
-        "next-page",
-        this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/right-arrow.svg")
+        'next-page',
+        this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/right-arrow.svg')
       );
 
       this.shareDataService.showAd('true');
@@ -45,11 +46,17 @@ export class DisplayBlogsComponent implements OnInit, OnChanges {
     this.loadBlogs();
   }
 
+  ngAfterViewInit(): void {
+    if (Helpers.getChosenLanguage()) {
+      this.loadBlogs();
+    }
+  }
+
   ngOnChanges(changes: SimpleChanges) {
     if (changes.reload.currentValue === true) {
       this.loadBlogs();
     }
-    if(changes.pageCounts.currentValue !== 'undefined') {
+    if (changes.pageCounts.currentValue !== 'undefined') {
       this.pageCount = this.pageCounts;
     }
   }

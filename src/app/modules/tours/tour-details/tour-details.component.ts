@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {ShareDataService} from '../../../services/share-data/share-data.service';
 import {FormBuilder, FormGroup} from '@angular/forms';
+import {ActivatedRoute} from '@angular/router';
+import {ToursService} from '../../../services/tours/tours.service';
 
 @Component({
   selector: 'app-tour-details',
@@ -9,14 +11,23 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 })
 export class TourDetailsComponent implements OnInit {
   tourDetailsForm: FormGroup;
+  packageId;
+  data;
+  loadingPage = true;
   constructor(
     private shareDataService: ShareDataService,
     private fb: FormBuilder,
+    private activatedRoute: ActivatedRoute,
+    private toursService: ToursService,
   ) {
     this.shareDataService.showAd('false');
   }
 
   ngOnInit(): void {
+    this.activatedRoute.queryParams.subscribe(params => {
+      this.packageId = params.id;
+      this.getSingleTourPackage();
+    });
 
     this.tourDetailsForm = this.fb.group({
       username: [''],
@@ -48,6 +59,13 @@ export class TourDetailsComponent implements OnInit {
       const num2 = Number(num1).toLocaleString('en-US');
       this.tourDetailsForm.patchValue({ [inputField]: num2 });
     }
+  }
+
+  getSingleTourPackage() {
+    this.toursService.getSingleToursPackage(this.packageId).subscribe(res => {
+      this.data = res;
+      this.loadingPage = false;
+    });
   }
 
 }

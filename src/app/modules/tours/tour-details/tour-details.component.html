@@ -1,4 +1,7 @@
-<div class="component-body">
+<div class="spinner" *ngIf="loadingPage">
+  <mat-spinner></mat-spinner>
+</div>
+<div class="component-body" *ngIf="!loadingPage">
   <div class="top">
     <div class="search-bar" [formGroup]="tourDetailsForm">
         <span class="name">
@@ -32,7 +35,7 @@
   </div>
   <div class="middle">
     <div class="details-image">
-      <img src="https://res.cloudinary.com/grohealth/image/upload/v1583756529/DCUK/Content/iStock-577978980.jpg">
+      <img [src]="data.coverImageUrl">
     </div>
     <div class="details">
       <div class="title">
@@ -40,23 +43,23 @@
       </div>
       <div class="details-data">
         <p>Package Name:</p>
-        <P class="details-data-value">Zanzibar experience</P>
+        <P class="details-data-value">{{ data.packageName }}</P>
       </div>
       <div class="details-data">
         <p>Location:</p>
-        <p class="details-data-value">Zr, Zanzibar</p>
+        <p class="details-data-value">{{ data.location }}</p>
       </div>
       <div class="details-data">
         <p>Price:</p>
-        <p class="details-data-value">1m UGX</p>
+        <p class="details-data-value">{{ data.price | number }} {{ data.currencyCode }}</p>
       </div>
       <div class="details-data">
         <p>Number of people:</p>
-        <p class="details-data-value">5</p>
+        <p class="details-data-value">{{ data.numberOfPeople }}</p>
       </div>
       <div class="details-data">
         <p>Start Date:</p>
-        <p class="details-data-value">21.03.2020</p>
+        <p class="details-data-value">{{ data.startDate | date: 'dd-MM-yyyy' }}</p>
       </div>
       <div class="buttons">
         <button class="button button-red button-first">Message Owner</button>
@@ -65,19 +68,7 @@
     </div>
   </div>
   <div class="text-details">
-    <h2>Zanzibar Experience</h2>
-    <p>Zanzibar is the home of idyllic beaches, balmy weather & warm tropical waters.
-      This archipelago is renowned for clear warm waters, coral reefs and rich marine diversity making it
-      a perfect under-water destination for snorkelling and diving.
-      If it is lazy days along white sandy beaches that you are after -
-      Zanzibar is hard to beat. But, in addition to the perfect beach destination,
-      Zanzibar is also full of options for nature lovers, culture vultures, and adventurers.
-    </p>
-    <img src="https://d2g6byanrj0o4m.cloudfront.net/images/1211/14751079841_f33668ea01_k__medium.jpg">
-    <p>Zanzibar is fairly undeveloped and enjoys semi-autonomy from mainland Tanzania.
-      The colourful history and rich heritage can be seen in the strong Arabic, Indian, African, Persian and European influences.
-      Its unique history adds a vibrant dimension to the island.
-      Exploring the cobbled alleyways of historic Stone Town’s old quarter, a UNESCO World Heritage Site,
-      you encounter a captivating mix of diverse architectural styles in the mosques and houses.</p>
+<!--    <h2>Zanzibar Experience</h2>-->
+   <div [innerHTML]="data.description"></div>
   </div>
 </div>

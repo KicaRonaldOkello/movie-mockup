@@ -1,3 +1,11 @@
+.spinner {
+  width: 80vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .component-body {
   width: 100vw;
   .top {
@@ -109,16 +117,57 @@
     }
   }
 
+  .create-tour-package {
+    width: 87%;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 60px;
+
+    .button {
+      padding: 5px;
+    }
+  }
+
   .bottom {
     margin-top: 60px;
     margin-left: 30px;
-    margin-bottom: 30px;
+    margin-bottom: 60px;
+
+    .search-spinner {
+      width: 100%;
+      height: 40vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      p {
+        font-weight: bold;
+        font-size: 18px;
+      }
+    }
 
     .cards {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
       align-items: center;
+    }
+
+    .arrows {
+      width: 87%;
+      display: flex;
+      justify-content: flex-end;
+
+      .left-arrow {
+        margin-right: 20px;
+      }
+
+      .previousPage {
+        &:hover {
+          color: #77222d;
+          transform: scale(1.3);
+        }
+      }
     }
   }
 }

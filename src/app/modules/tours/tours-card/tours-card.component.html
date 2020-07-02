@@ -1,22 +1,22 @@
 <div class="card">
-  <img src="https://www.codelt.nl/wp-content/uploads/2016/05/Moscow-Russia-e1555591392782.jpg">
+  <img [src]="data.coverImageUrl">
   <div class="card_info">
     <div class="card-data">
       <p>Package Name:</p>
-      <p class="card-data-value">Russian Experience</p>
+      <p class="card-data-value">{{ data.packageName }}</p>
     </div>
     <div class="card-data">
       <p>Location:</p>
-      <p class="card-data-value">RU Moscow</p>
+      <p class="card-data-value">{{ data.location }}</p>
     </div>
     <div class="card-data">
       <p>Price:</p>
-      <P class="card-data-value">1M UGX</P>
+      <P class="card-data-value">{{ data.price | number }} {{ data.currencyCode }}</P>
     </div>
     <div class="card-data">
       <p>Number of people:</p>
-      <p class="card-data-value">5</p>
+      <p class="card-data-value">{{ data.numberOfPeople }}</p>
     </div>
-    <button class="button" [routerLink]="['tour-details']">Book Now</button>
+    <button class="button" [routerLink]="['tour-details']"  [queryParams]="{ id: data.id }">Book Now</button>
   </div>
 </div>

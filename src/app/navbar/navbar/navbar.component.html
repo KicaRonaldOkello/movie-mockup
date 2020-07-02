@@ -1,15 +1,16 @@
 <div class="full-page__header">
     <div class="full-page__header__top">
       <img src="{{iconLoaded}}" alt="icon" class="right-icon">
-      <!-- <div class="right-part"> -->
         <span>
           <input name="Search" />
           <button class="search-button">Search</button>
         </span>
         <span class="globe">
-        <select #langSelect (change)="translate.use(langSelect.value)">
-          <option *ngFor="let lang of translate.getLangs()" [value]="lang" [selected]="lang === translate.currentLang">{{
-            lang | uppercase }}</option>
+        <select #langSelect (change)="changeLanguage(langSelect.value)">
+          <option value="#googtrans(en|en)" [selected]="selectedLanguage=='#googtrans(en|en)'">ENG</option>
+          <option value="#googtrans(en|fr)" [selected]="selectedLanguage=='#googtrans(en|fr)'">FR</option>
+          <option value="#googtrans(en|zh-CN)" [selected]="selectedLanguage=='#googtrans(en|zh-CN)'">CHI</option>
+          <option value="#googtrans(en|ja)" [selected]="selectedLanguage=='#googtrans(en|ja)'">JPN</option>
         </select>
 
           <img class="align-globe" src="assets/www.svg" alt="globe">
@@ -22,7 +23,6 @@
           <p *ngIf="username !== 'Hello Sign In'">{{ (username.length>12)? (username | slice:0:12)+'..':(username) }}</p>
           <strong *ngIf="showSignout" (click)="logout()">Sign out</strong>
         </span>
-      <!-- </div> -->
     </div>
     <div class="full-page__header__bottom">
       <a

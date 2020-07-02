@@ -1,0 +1,75 @@
+<div class="spinner" *ngIf="loadingPage">
+  <mat-spinner></mat-spinner>
+</div>
+<div class="component-body" *ngIf="!loadingPage">
+    <div class="form-body" [formGroup]="clientForm">
+      <div class="upload-form">
+            <span class="upload">
+                <span class="upload-avatar" *ngIf="!displayCoverImage">
+                  <mat-icon
+                    class="cover-image-avatar"
+                    matTooltip="Click to upload cover image"
+                    (click)="upload()"
+                    svgIcon="photo"></mat-icon>
+                    <p>UPLOAD COVER IMAGE</p>
+                </span>
+                <span *ngIf="displayCoverImage">
+                  <mat-icon class="load-cover-image-spinner" *ngIf="imageLoader">
+                    <mat-spinner></mat-spinner>
+                  </mat-icon>
+                  <img [hidden]="imageLoader" (load)="this.imageLoader = false;" (click)="upload()" [src]="coverImage" class="cover-image" alt="">
+                </span>
+            </span>
+      <span class="input-fields">
+                <span class="input-fields-title">
+                  <h2>Tour Details</h2>
+                </span>
+                <span>
+                  <label for="">Package Name: </label>
+                  <input class="input-fields-others" placeholder="e.g. Lake Albert Tours" formControlName="packageName" type="text">
+                </span>
+        <span>
+                  <label for="">Location: </label>
+                  <input class="input-fields-others" placeholder="e.g. Kampala, Uganda" formControlName="location" type="text">
+                </span>
+                <span>
+                  <label for="">Currency Code: </label>
+                  <select formControlName="currencyCode" name="location" required id="">
+                      <option *ngFor="let currency of supportedCurrencies" [value]="currency">{{currency}}</option>
+                </select>
+                </span>
+                <span>
+                  <label for="">Price: </label>
+                  <input class="input-fields-others" #price placeholder="e.g. 10,000,000" formControlName="price" type="text" (keyup)="addCommas(price.value, 'price')" (keydown)='isNumber(event)'>
+                </span>
+                <span>
+                  <label for="">Number of People: </label>
+                  <input class="input-fields-others" #numberOfPeople placeholder="e.g. 10" formControlName="numberOfPeople" (keyup)="addCommas(numberOfPeople.value, 'numberOfPeople')" (keydown)='isNumber(event)' type="text">
+                </span>
+                <span class="calendar">
+                  <input placeholder="Start Date"  formControlName="startDate" matInput [matDatepicker]="picker">
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker color="warn"></mat-datepicker>
+                </span>
+
+                <div class="buttons">
+                    <button disabled class="button first-button">Message Owner</button>
+                    <button disabled class="button second-button">Book Now</button>
+                </div>
+            </span>
+    </div>
+  <div class="align-editor">
+    <div class="editor">
+      <quill-editor
+        [styles]="{height: '250px'}"
+        placeholder="Type your package description here..."
+        formControlName="description"
+        required
+      ></quill-editor>
+    </div>
+  </div>
+    </div>
+  <div class="submit-button">
+    <button class="button button-red" (click)="submitTravelPackage()">Create Travel Package</button>
+  </div>
+</div>
