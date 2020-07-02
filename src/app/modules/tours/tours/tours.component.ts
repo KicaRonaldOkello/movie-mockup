@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {ShareDataService} from '../../../services/share-data/share-data.service';
 import {FormBuilder, FormGroup} from '@angular/forms';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-tours',
   templateUrl: './tours.component.html',
-  styleUrls: ['./tours.component.scss']
+  styleUrls: ['./tours.component.scss'],
 })
 export class ToursComponent implements OnInit {
   toursForm: FormGroup;
@@ -14,12 +15,15 @@ export class ToursComponent implements OnInit {
   constructor(
     private shareDataService: ShareDataService,
     private fb: FormBuilder,
+    private router: Router
   ) {
     this.shareDataService.showAd('false');
   }
 
   ngOnInit(): void {
-
+    this.router.events.subscribe((ev) => {
+     window.location.reload();
+    })
     this.toursForm = this.fb.group({
       username: [''],
       location: [''],
@@ -30,11 +34,12 @@ export class ToursComponent implements OnInit {
     });
   }
 
+
   isNumber(evt) {
     const theEvent = evt || window.event;
     let key = theEvent.keyCode || theEvent.which;
     key = String.fromCharCode(key);
-    if (key.length == 0) { return; }
+    if (key.length === 0) { return; }
     const regex = /^[0-9,\b]+$/;
     if (!regex.test(key)) {
       theEvent.returnValue = false;
@@ -52,4 +57,7 @@ export class ToursComponent implements OnInit {
     }
   }
 
+  searchInvestmentProject() {
+
+  }
 }

@@ -1,3 +1,12 @@
+<li class="ct-language">Language <i class="fa fa-arrow-down"></i>
+  <ul class="list-unstyled ct-language__dropdown">
+    <li><a href="tours#googtrans(en|en)" class="lang-en lang-select" data-lang="en">English</a></li>
+    <li><a href="tours#googtrans(en|es)" class="lang-es lang-select" data-lang="es">Spanish</a></li>
+    <li><a href="tours#googtrans(en|fr)" class="lang-es lang-select" data-lang="fr">French</a></li>
+    <li><a href="tours#googtrans(en|zh-CN)" class="lang-es lang-select" data-lang="zh-CN">Chineese</a></li>
+    <li><a href="tours#googtrans(en|ja)" class="lang-es lang-select" data-lang="ja">Japaneese</a></li>
+  </ul>
+</li>
 <div class="component-body">
   <div class="top">
     <div class="search-bar" [formGroup]="toursForm">
@@ -38,3 +47,11 @@
     </div>
   </div>
 </div>
+
+<script>
+  console.log("loaded")
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.FloatPosition.TOP_LEFT}, 'google_translate_element');
+  }
+</script>
+<script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
