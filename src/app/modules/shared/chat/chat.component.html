@@ -15,27 +15,29 @@
         <button class="button" (click)="refreshChatPage()">NEW</button>
       </div>
       <mat-divider></mat-divider>
-      <div *ngFor="let conversation of myConversations">
-        <div class="my-chats__body" (click)="loadConversation(conversation)">
-          <div class="chat-avatar">
-            <img
-              [src]="conversation.toUserDetails.profilePicUrl">
-            <div class="badge">{{conversation.numOfNewMessages}}</div>
-          </div>
-          <div class="my-chats__body__message">
-            <p class="chat-name">
-              {{ (conversation.toUserDetails.name.length > 15) ? (conversation.toUserDetails.name | slice:0:15) + '..' : (conversation.toUserDetails.name) }}</p>
-            <p class="chat-message">
-              {{
-              (conversation.chatMessages[conversation.chatMessages.length - 1].message.length > 22) ?
-                (conversation.chatMessages[conversation.chatMessages.length - 1].message | slice:0:22) +
-                '...' : (conversation.chatMessages[conversation.chatMessages.length - 1].message)
-              }}
-            </p>
-          </div>
-          <div class="my-chats__body__status">
-            <div class="dot"></div>
-            <p class="chat-time">{{conversation.lastCommunicationsDetails.lastComDateTimeString}}</p>
+      <div class="chat-list">
+        <div *ngFor="let conversation of myConversations">
+          <div class="my-chats__body" (click)="loadConversation(conversation)">
+            <div class="chat-avatar">
+              <img
+                [src]="conversation.toUserDetails.profilePicUrl">
+              <div *ngIf="conversation.numOfNewMessages > 0" class="badge">{{conversation.numOfNewMessages}}</div>
+            </div>
+            <div class="my-chats__body__message">
+              <p class="chat-name">
+                {{ (conversation.toUserDetails.name.length > 10) ? (conversation.toUserDetails.name | slice:0:10) + '..' : (conversation.toUserDetails.name) }}</p>
+              <p class="chat-message">
+                {{
+                (conversation.chatMessages[conversation.chatMessages.length - 1].message.length > 22) ?
+                  (conversation.chatMessages[conversation.chatMessages.length - 1].message | slice:0:22) +
+                  '...' : (conversation.chatMessages[conversation.chatMessages.length - 1].message)
+                }}
+              </p>
+            </div>
+            <div class="my-chats__body__status">
+              <div class="dot"></div>
+              <p class="chat-time">{{conversation.lastCommunicationsDetails.lastComDateTimeString}}</p>
+            </div>
           </div>
         </div>
       </div>

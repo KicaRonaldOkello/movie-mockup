@@ -1,10 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {ShareDataService} from '../../../services/share-data/share-data.service';
 import {FormBuilder, FormGroup} from '@angular/forms';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {ToursService} from '../../../services/tours/tours.service';
 import {MatIconRegistry} from '@angular/material/icon';
 import {DomSanitizer} from '@angular/platform-browser';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import Helpers from '../../../helpers/helpers';
 
 @Component({
   selector: 'app-tours',
@@ -19,14 +21,17 @@ export class ToursComponent implements OnInit {
   limit = 12;
   loadingPackages = true;
   searchingPackages = false;
-
+  userData;
+  payment;
   constructor(
     private shareDataService: ShareDataService,
     private fb: FormBuilder,
     private router: Router,
+    private snackBar: MatSnackBar,
     private toursService: ToursService,
     private matIconRegistry: MatIconRegistry,
     private domSanitizer: DomSanitizer,
+    private route: ActivatedRoute,
   ) {
     this.shareDataService.showAd('false');
 
@@ -47,10 +52,16 @@ export class ToursComponent implements OnInit {
       location: [''],
       priceMin: [''],
       priceMax: [''],
-      returnsMin: [''],
-      returnsMax: ['']
+      numberOfPeopleMin: [''],
+      numberOfPeopleMax: [''],
+      ownerId: ['']
     });
     this.getToursPackages({});
+    this.userData = Helpers.getUserData();
+
+    this.payment = this.route.snapshot.queryParamMap.get('payment');
+    this.successMessage();
+    history.pushState(null, '', location.href.split('?')[0]);
   }
 
 
@@ -77,7 +88,8 @@ export class ToursComponent implements OnInit {
   }
 
   searchInvestmentProject() {
-    let { location, packageName, priceMax, priceMin, returnsMax, returnsMin } = this.toursForm.value;
+    let { priceMax, priceMin, numberOfPeopleMax, numberOfPeopleMin } = this.toursForm.value;
+    const { location, packageName, ownerId } = this.toursForm.value;
 
     if (priceMin !== '') {
       priceMin = priceMin.replace(/\,/g, '');
@@ -85,11 +97,19 @@ export class ToursComponent implements OnInit {
     if (priceMax !== '') {
       priceMax = priceMax.replace(/\,/g, '');
     }
+    if (numberOfPeopleMax !== '') {
+      numberOfPeopleMax = numberOfPeopleMax.replace(/\,/g, '');
+    }
+    if (numberOfPeopleMin !== '') {
+      numberOfPeopleMin = numberOfPeopleMin.replace(/\,/g, '');
+    }
 
     const data = {
       Location: location,
       PackageName: packageName,
       Price: `${priceMin}-${priceMax}`,
+      NumberOfPeople: `${numberOfPeopleMin}-${numberOfPeopleMax}`,
+      OwnerId: ownerId
     };
     this.searchingPackages = true;
     this.getToursPackages(data);
@@ -115,6 +135,42 @@ export class ToursComponent implements OnInit {
     if (this.page > 0) {
       this.page = this.page - 1;
       this.getToursPackages({});
+    }
+  }
+
+  deletedItemId(id) {
+    this.toursService.deleteTravelPackage(id).subscribe(res => {
+      if (res.statusCode === '0') {
+        this.packages = this.packages.filter((item) => item.id !== id);
+      } else {
+        this.snackBar.open(res.statusDesc, '', {
+          duration: 6000,
+          panelClass: ['red-snackbar']
+        });
+      }
+    });
+  }
+
+  isChecked(event) {
+    if (event.checked) {
+      this.toursForm.patchValue({
+        ownerId: this.userData.userId
+      });
+    } else {
+      this.toursForm.patchValue({
+        ownerId: ''
+      });
+    }
+  }
+
+  successMessage() {
+    if (this.payment === 'Success') {
+      this.snackBar.open('Your payment has been successful', '', {
+        duration: 5000,
+        verticalPosition: 'bottom',
+        horizontalPosition: 'center',
+        panelClass: ['green-snackbar']
+      });
     }
   }
 }

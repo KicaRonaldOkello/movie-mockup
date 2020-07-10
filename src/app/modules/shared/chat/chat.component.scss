@@ -57,6 +57,27 @@
       }
     }
 
+    .chat-list {
+      height: 70vh;
+      overflow-y: scroll;
+
+      &::-webkit-scrollbar {
+        width: 10px;
+      }
+
+      &::-webkit-scrollbar-track {
+        background: #f1f1f1;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: #888;
+      }
+
+      &::-webkit-scrollbar-thumb:hover {
+        background: #555;
+      }
+    }
+
     &__body {
       margin-top: 10px;
       display: flex;
@@ -220,7 +241,8 @@
           font-size: 12px;
           padding: 10px;
           margin: 0px 20px 10px 10px;
-          max-width: 200px;
+          word-wrap: break-word;
+          max-width: 450px;
         }
 
         .my-speech-bubble:after {
@@ -258,7 +280,8 @@
           font-size: 12px;
           padding: 10px;
           margin: 0px 20px 10px 10px;
-          max-width: 200px;
+          word-wrap: break-word;
+          max-width: 450px;
         }
 
         .your-speech-bubble:after {

@@ -70,6 +70,16 @@
   </div>
     </div>
   <div class="submit-button">
-    <button class="button button-red" (click)="submitTravelPackage()">Create Travel Package</button>
+    <button class="button button-red" (click)="submitTravelPackage()">
+      <span *ngIf="!submittingForm && !editingId">
+        Create Travel Package
+      </span>
+      <span *ngIf="!submittingForm && editingId">
+        Update Travel Package
+      </span>
+      <mat-icon *ngIf="submittingForm"  class="white">
+        <mat-spinner diameter="20"></mat-spinner>
+      </mat-icon>
+    </button>
   </div>
 </div>

@@ -3,10 +3,11 @@ import {ShareDataService} from '../../../services/share-data/share-data.service'
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {MatIconRegistry} from '@angular/material/icon';
 import {DomSanitizer} from '@angular/platform-browser';
-import {MatDatepickerInputEvent} from '@angular/material/datepicker';
 import * as moment from 'moment';
 import {ToursService} from '../../../services/tours/tours.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import Helpers from '../../../helpers/helpers';
+import {ActivatedRoute, Router} from '@angular/router';
 
 declare var cloudinary: any;
 @Component({
@@ -22,6 +23,11 @@ export class CreateToursPackageComponent implements OnInit, AfterViewInit {
   coverImage: any = '';
   imageLoader = true;
   supportedCurrencies;
+  submittingForm = false;
+  userData;
+  packageId;
+  package;
+  editingId;
   constructor(
     private fb: FormBuilder,
     private shareDataService: ShareDataService,
@@ -29,7 +35,9 @@ export class CreateToursPackageComponent implements OnInit, AfterViewInit {
     private domSanitizer: DomSanitizer,
     private cdRef: ChangeDetectorRef,
     private toursService: ToursService,
+    private activatedRoute: ActivatedRoute,
     private snackBar: MatSnackBar,
+    private router: Router
   ) {
     this.shareDataService.showAd('true');
     this.matIconRegistry.addSvgIcon(
@@ -40,6 +48,7 @@ export class CreateToursPackageComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.getSupportedCurrencies();
+    this.userData = Helpers.getUserData();
     this.clientForm = this.fb.group({
       location: [''],
       price: ['0'],
@@ -49,18 +58,44 @@ export class CreateToursPackageComponent implements OnInit, AfterViewInit {
       currencyCode: [''],
       startDate: [''],
     });
+    this.activatedRoute.queryParams.subscribe(params => {
+      this.packageId = params.id;
+      this.packageId ? this.getSingleTourPackage() : null;
+    });
   }
 
   ngAfterViewInit(): void {
-    this.loadingPage = false;
-    this.cdRef.detectChanges();
+    if (!this.packageId) {
+      this.loadingPage = false;
+      this.cdRef.detectChanges();
+    }
+  }
+
+  getSingleTourPackage() {
+    this.toursService.getSingleToursPackage(this.packageId).subscribe(res => {
+      this.package = res;
+      this.displayCoverImage = true;
+      this.coverImage = res.coverImageUrl;
+      this.editingId = res.id;
+      this.clientForm.patchValue({
+        location: res.location,
+        price: res.price.toLocaleString('en-us'),
+        packageName: res.packageName,
+        numberOfPeople: res.numberOfPeople.toLocaleString('en-us'),
+        currencyCode: res.currencyCode,
+        description: res.description,
+        startDate: moment(res.startDate, 'DD/MM/YYYY').toDate()
+      });
+      this.loadingPage = false;
+    });
   }
 
   upload() {
     const myWidget = cloudinary.createUploadWidget({
         cloudName: 'do6g6dwlz',
         uploadPreset: 'vdoc0rsk',
-        multiple: false
+        multiple: false,
+      resourceType: 'image'
       }, (error, result) => {
         if (!error && result && result.event === 'success') {
           this.displayCoverImage = true;
@@ -73,11 +108,11 @@ export class CreateToursPackageComponent implements OnInit, AfterViewInit {
   }
 
   isNumber(evt) {
-    let theEvent = evt || window.event;
+    const theEvent = evt || window.event;
     let key = theEvent.keyCode || theEvent.which;
     key = String.fromCharCode(key);
-    if (key.length == 0) { return; }
-    let regex = /^[0-9,\b]+$/;
+    if (key.length === 0) { return; }
+    const regex = /^[0-9,\b]+$/;
     if (!regex.test(key)) {
       theEvent.returnValue = false;
       if (theEvent.preventDefault) { theEvent.preventDefault(); }
@@ -101,11 +136,12 @@ export class CreateToursPackageComponent implements OnInit, AfterViewInit {
   }
 
   submitTravelPackage() {
+    this.submittingForm = true;
     this.clientForm.value.price = this.clientForm.value.price.replace(/\,/g, '');
     this.clientForm.value.numberOfPeople = this.clientForm.value.numberOfPeople.replace(/\,/g, '');
     const { location, packageName, description, startDate, currencyCode, numberOfPeople, price } = this.clientForm.value;
     const data = {
-      id: 0,
+      id: this.editingId ? this.editingId : 0,
       location,
       packageName,
       coverImageUrl: this.coverImage,
@@ -113,12 +149,15 @@ export class CreateToursPackageComponent implements OnInit, AfterViewInit {
       startDate: moment(startDate).format('DD/MM/YYYY'),
       currencyCode,
       price,
-      numberOfPeople
+      numberOfPeople,
+      ownerId: this.userData.userId
     };
 
     this.toursService.saveTravelPackage(data).subscribe(res => {
-    const message = 'Your package has been created successfully.';
-    if (res.statusDesc === 'SUCCESS') {
+      this.submittingForm = false;
+      const message = this.editingId ? 'Your package has been edited successfully.' : 'Your package has been created successfully.';
+      if (res.statusDesc === 'SUCCESS') {
+        this.router.navigateByUrl('/tours');
         this.snackBar.open(message, '', {
           duration: 5000,
           panelClass: ['green-snackbar']

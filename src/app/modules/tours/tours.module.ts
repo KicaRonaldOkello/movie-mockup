@@ -18,6 +18,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatInputModule} from '@angular/material/input';
 import {MatMomentDateModule} from '@angular/material-moment-adapter';
 import {MAT_DATE_LOCALE} from '@angular/material/core';
+import {SharedModule} from '../shared/shared.module';
 
 
 @NgModule({
@@ -28,20 +29,21 @@ import {MAT_DATE_LOCALE} from '@angular/material/core';
     TourPackagePaymentComponent,
     CreateToursPackageComponent
   ],
-  imports: [
-    CommonModule,
-    ToursRoutingModule,
-    ReactiveFormsModule,
-    MatCheckboxModule,
-    MatRadioModule,
-    MatIconModule,
-    MatProgressSpinnerModule,
-    QuillModule,
-    MatTooltipModule,
-    MatDatepickerModule,
-    MatInputModule,
-    MatMomentDateModule
-  ],
+    imports: [
+        CommonModule,
+        ToursRoutingModule,
+        ReactiveFormsModule,
+        MatCheckboxModule,
+        MatRadioModule,
+        MatIconModule,
+        MatProgressSpinnerModule,
+        QuillModule,
+        MatTooltipModule,
+        MatDatepickerModule,
+        MatInputModule,
+        MatMomentDateModule,
+        SharedModule
+    ],
   providers: [
     {provide: MAT_DATE_LOCALE, useValue: 'en-GB'}
   ],

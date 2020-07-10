@@ -5,6 +5,7 @@
   top: 0 !important;
 
     .body {
+      overflow-x: hidden;
         display: flex;
 
         &:nth-child(1) {

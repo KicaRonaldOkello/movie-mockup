@@ -1,5 +1,5 @@
 .spinner {
-  width: 80vw;
+  width: 100vw;
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -8,12 +8,23 @@
 
 .component-body {
   width: 100vw;
+  background-color: #F2F2F3;
+
+  @media only screen and (max-width: 370px) {
+    .top {
+      height: 450px !important;
+    }
+  }
+
+
   .top {
     background: url("/assets/great_wall_of_china.jpg");
     height: 300px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-bottom: 60px;
     .search-bar {
       background-color: rgba(230, 231, 232, 0.85);
       padding: 20px 5px;
@@ -81,6 +92,10 @@
         }
       }
 
+      .numberOfPeople {
+        width: 150px !important;
+      }
+
       .input-amount {
         width: 120px;
         border: none;
@@ -114,14 +129,48 @@
         }
       }
 
+      ::ng-deep .mat-checkbox-checked .mat-checkbox-background, .mat-checkbox-indeterminate .mat-checkbox-background {
+        background-color: red !important;
+      }
+
+      // overwrite the ripple overlay on hover and click
+      ::ng-deep .mat-checkbox:not(.mat-checkbox-disabled) .mat-checkbox-ripple .mat-ripple-element {
+        background-color: red !important;
+      }
+
     }
   }
 
-  .create-tour-package {
-    width: 87%;
+  .align-bottom {
     display: flex;
-    justify-content: flex-end;
+    width: 100%;
+
+    .align-ad-component {
+      width: 20%;
+    }
+  }
+
+  @media only screen and (max-width: 975px) {
+    .align-bottom {
+      flex-direction: column;
+
+      .bottom {
+        width: 95%;
+      }
+
+      .align-ad-component {
+        width: 95%;
+      }
+    }
+  }
+
+
+  .create-tour-package {
+    width: 100%;
+    display: flex;
+    justify-content: center;
     margin-top: 60px;
+    padding-right: 10px;
 
     .button {
       padding: 5px;
@@ -129,9 +178,12 @@
   }
 
   .bottom {
-    margin-top: 60px;
+    width: 80%;
     margin-left: 30px;
     margin-bottom: 60px;
+    padding-top: 10px;
+    margin-right: 20px;
+    background-color: white;
 
     .search-spinner {
       width: 100%;
@@ -154,7 +206,7 @@
     }
 
     .arrows {
-      width: 87%;
+      width: 80%;
       display: flex;
       justify-content: flex-end;
 
@@ -170,4 +222,13 @@
       }
     }
   }
+}
+
+
+::ng-deep .red-snackbar {
+  background-color: red !important;
+}
+
+::ng-deep .green-snackbar {
+  background-color: green !important;
 }

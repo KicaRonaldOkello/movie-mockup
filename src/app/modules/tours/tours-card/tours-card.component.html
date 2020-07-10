@@ -15,8 +15,12 @@
     </div>
     <div class="card-data">
       <p>Number of people:</p>
-      <p class="card-data-value">{{ data.numberOfPeople }}</p>
+      <p class="card-data-value">{{ data.numberOfPeopleDetails }}</p>
     </div>
-    <button class="button" [routerLink]="['tour-details']"  [queryParams]="{ id: data.id }">Book Now</button>
+    <div>
+      <button class="button" [routerLink]="['tour-details']"  [queryParams]="{ id: data.id }">Book Now</button>
+      <button class="button" *ngIf="userData.userId === data.ownerId" [routerLink]="['create-tours-package']"  [queryParams]="{ id: data.id }">Edit</button>
+      <button class="button" *ngIf="userData.userId === data.ownerId" (click)="openDialog(data.id)">Delete</button>
+    </div>
   </div>
 </div>

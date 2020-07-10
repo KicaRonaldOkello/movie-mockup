@@ -1,17 +1,41 @@
 <div class="full-page__header">
     <div class="full-page__header__top">
-      <img src="{{iconLoaded}}" alt="icon" class="right-icon">
+      <img src="assets/chinee_tv_logo.jpg" alt="icon" class="right-icon">
         <span>
           <input name="Search" />
           <button class="search-button">Search</button>
         </span>
         <span class="globe">
-        <select #langSelect (change)="changeLanguage(langSelect.value)">
-          <option value="#googtrans(en|en)" [selected]="selectedLanguage=='#googtrans(en|en)'">ENG</option>
-          <option value="#googtrans(en|fr)" [selected]="selectedLanguage=='#googtrans(en|fr)'">FR</option>
-          <option value="#googtrans(en|zh-CN)" [selected]="selectedLanguage=='#googtrans(en|zh-CN)'">CHI</option>
-          <option value="#googtrans(en|ja)" [selected]="selectedLanguage=='#googtrans(en|ja)'">JPN</option>
-        </select>
+
+          <div class="custom-select-wrapper" (click)="toggleDropDown()">
+            <div #toggle class="custom-select">
+              <div class="custom-select__trigger"><span>{{selectedLanguage}}</span>
+                <div class="arrow"></div>
+                </div>
+                <div class="custom-options">
+                  <span
+                    class="custom-option" [class.selected]="selectedLanguage === 'EN'"
+                    (click)="changeLanguage('#googtrans(en|en)')" data-value="ENG">
+                    ENG
+                  </span>
+                  <span
+                    class="custom-option" [class.selected]="selectedLanguage === 'FR'"
+                    (click)="changeLanguage('#googtrans(en|fr)')" data-value="FR">
+                    FR
+                  </span>
+                  <span
+                    class="custom-option" [class.selected]="selectedLanguage === 'CHI'"
+                    (click)="changeLanguage('#googtrans(en|zh-CN)')" data-value="CHI">
+                    CHI
+                  </span>
+                  <span
+                    class="custom-option" [class.selected]="selectedLanguage === 'JPN'"
+                    (click)="changeLanguage('#googtrans(en|ja)')" data-value="JPN">
+                    JPN
+                  </span>
+                </div>
+            </div>
+          </div>
 
           <img class="align-globe" src="assets/www.svg" alt="globe">
         </span>

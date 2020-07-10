@@ -16,11 +16,11 @@
         </span>
 
       <span class="name">
-            <input type="text" class="input-amount" #returnsMin formControlName="returnsMin" placeholder="Returns (Min)" (keyup)="addCommas(returnsMin.value, 'returnsMin')" (keydown)='isNumber(event)'>
+            <input type="text" class="input-amount numberOfPeople" #numberOfPeopleMin formControlName="numberOfPeopleMin" placeholder="No. of People (Min)" (keyup)="addCommas(numberOfPeopleMin.value, 'numberOfPeopleMin')" (keydown)='isNumber(event)'>
         </span>
       <p>-</p>
       <span class="name">
-            <input type="text" class="input-amount" #returnsMax formControlName="returnsMax" placeholder="Returns (Max)" (keyup)="addCommas(returnsMax.value, 'returnsMax')" (keydown)='isNumber(event)'>
+            <input type="text" class="input-amount numberOfPeople" #numberOfPeopleMax formControlName="numberOfPeopleMax" placeholder="No. of People (Max)" (keyup)="addCommas(numberOfPeopleMax.value, 'numberOfPeopleMax')" (keydown)='isNumber(event)'>
         </span>
 
 
@@ -28,31 +28,37 @@
             <input type="text" class="input-name" formControlName="packageName" placeholder="Package Name">
             <img src="assets/search.svg" alt="">
         </span>
+      <mat-checkbox (change)="isChecked($event)">View my packages</mat-checkbox>
       <span class="button-cover">
             <button class="button " (click)="searchInvestmentProject()">Search</button>
         </span>
     </div>
-  </div>
-  <div class="create-tour-package">
-    <button class="button button-red" routerLink="/tours/create-tours-package">Add Tour Package</button>
-  </div>
-  <div class="bottom">
-    <span class="search-spinner" *ngIf="searchingPackages">
-    <mat-spinner></mat-spinner>
-</span>
-    <div class="search-spinner" *ngIf="!searchingPackages && packages.length == 0">
-      <p>The travel package you are searching for does not exist.</p>
+    <div class="create-tour-package">
+      <button class="button button-red" routerLink="/tours/create-tours-package">Add Tour Package</button>
     </div>
-    <div *ngIf="!searchingPackages && packages.length > 0">
-    <div class="cards">
-      <div *ngFor="let package of packages">
-        <app-tours-card [data]="package"></app-tours-card>
+  </div>
+  <div class="align-bottom">
+    <div class="bottom">
+      <span class="search-spinner" *ngIf="searchingPackages">
+      <mat-spinner></mat-spinner>
+  </span>
+      <div class="search-spinner" *ngIf="!searchingPackages && packages.length == 0">
+        <p>The travel package you are searching for does not exist.</p>
+      </div>
+      <div *ngIf="!searchingPackages && packages.length > 0">
+      <div class="cards">
+        <div *ngFor="let package of packages">
+          <app-tours-card [data]="package" (deletedItemId)="deletedItemId($event)"></app-tours-card>
+        </div>
+      </div>
+      <span *ngIf="pageCount > 0" class="arrows">
+          <mat-icon [class.previousPage]="page > 0" class="left-arrow" (click)="previousPage()" svgIcon="previous-page"></mat-icon>
+          <mat-icon [class.previousPage]="page < pageCount" (click)="nextPage()" svgIcon="next-page"></mat-icon>
+      </span>
       </div>
     </div>
-    <span *ngIf="pageCount > 0" class="arrows">
-        <mat-icon [class.previousPage]="page > 0" class="left-arrow" (click)="previousPage()" svgIcon="previous-page"></mat-icon>
-        <mat-icon [class.previousPage]="page < pageCount" (click)="nextPage()" svgIcon="next-page"></mat-icon>
-    </span>
+    <div class="align-ad-component">
+      <app-ad-component></app-ad-component>
     </div>
   </div>
 </div>

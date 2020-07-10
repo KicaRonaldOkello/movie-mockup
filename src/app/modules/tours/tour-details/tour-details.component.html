@@ -3,72 +3,50 @@
 </div>
 <div class="component-body" *ngIf="!loadingPage">
   <div class="top">
-    <div class="search-bar" [formGroup]="tourDetailsForm">
-        <span class="name">
-            <input type="text" class="input-name" formControlName="username" placeholder="Location">
-        </span>
-      <span class="name">
-            <input type="text" class="input-amount" #amountMin formControlName="amountMin" placeholder="Amount (Min)" (keyup)="addCommas(amountMin.value, 'amountMin')" (keydown)='isNumber(event)'>
-        </span>
-      <p>-</p>
-      <span class="name">
-            <input type="text" #amountMax class="input-amount" formControlName="amountMax" placeholder="Amount (Max)" (keyup)="addCommas(amountMax.value, 'amountMax')" (keydown)='isNumber(event)'>
-        </span>
-
-      <span class="name">
-            <input type="text" class="input-amount" #returnsMin formControlName="returnsMin" placeholder="Returns (Min)" (keyup)="addCommas(returnsMin.value, 'returnsMin')" (keydown)='isNumber(event)'>
-        </span>
-      <p>-</p>
-      <span class="name">
-            <input type="text" class="input-amount" #returnsMax formControlName="returnsMax" placeholder="Returns (Max)" (keyup)="addCommas(returnsMax.value, 'returnsMax')" (keydown)='isNumber(event)'>
-        </span>
-
-
-      <span class="name">
-            <input type="text" class="input-name" formControlName="username" placeholder="Name">
-            <img src="assets/search.svg" alt="">
-        </span>
-      <span class="button-cover">
-            <button class="button " (click)="searchInvestmentProject()">Search</button>
-        </span>
-    </div>
   </div>
-  <div class="middle">
-    <div class="details-image">
-      <img [src]="data.coverImageUrl">
+  <div class="tours-body">
+    <div class="tour-details--body">
+      <div class="middle">
+        <div class="details-image">
+          <img [src]="data.coverImageUrl">
+        </div>
+        <div class="details">
+          <div class="title">
+            Tour Details
+          </div>
+          <div class="details-data">
+            <p>Package Name:</p>
+            <P class="details-data-value">{{ data.packageName }}</P>
+          </div>
+          <div class="details-data">
+            <p>Location:</p>
+            <p class="details-data-value">{{ data.location }}</p>
+          </div>
+          <div class="details-data">
+            <p>Price:</p>
+            <p class="details-data-value">{{ data.price | number }} {{ data.currencyCode }}</p>
+          </div>
+          <div class="details-data">
+            <p>Number of people:</p>
+            <p class="details-data-value">{{ data.numberOfPeople }}</p>
+          </div>
+          <div class="details-data">
+            <p>Start Date:</p>
+            <p class="details-data-value">{{ data.startDate }}</p>
+          </div>
+          <div class="buttons">
+            <button class="button button-red button-first" [routerLink]="['../../chats']" [queryParams]="{ chatWith: data.ownerId }">Message Owner</button>
+            <button class="button button-red" [routerLink]="['/tours/package-payment']" [queryParams]="{ id: data.id }">Book Now</button>
+          </div>
+        </div>
+      </div>
+      <div class="text-details">
+        <!--    <h2>Zanzibar Experience</h2>-->
+        <div [innerHTML]="data.description"></div>
+      </div>
     </div>
-    <div class="details">
-      <div class="title">
-        Tour Details
-      </div>
-      <div class="details-data">
-        <p>Package Name:</p>
-        <P class="details-data-value">{{ data.packageName }}</P>
-      </div>
-      <div class="details-data">
-        <p>Location:</p>
-        <p class="details-data-value">{{ data.location }}</p>
-      </div>
-      <div class="details-data">
-        <p>Price:</p>
-        <p class="details-data-value">{{ data.price | number }} {{ data.currencyCode }}</p>
-      </div>
-      <div class="details-data">
-        <p>Number of people:</p>
-        <p class="details-data-value">{{ data.numberOfPeople }}</p>
-      </div>
-      <div class="details-data">
-        <p>Start Date:</p>
-        <p class="details-data-value">{{ data.startDate | date: 'dd-MM-yyyy' }}</p>
-      </div>
-      <div class="buttons">
-        <button class="button button-red button-first">Message Owner</button>
-        <button class="button button-red" [routerLink]="['/tours/package-payment']">Book Now</button>
-      </div>
+    <div class="ad-component">
+      <app-ad-component></app-ad-component>
     </div>
-  </div>
-  <div class="text-details">
-<!--    <h2>Zanzibar Experience</h2>-->
-   <div [innerHTML]="data.description"></div>
   </div>
 </div>

@@ -6,8 +6,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar/navbar.component';
-import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AdComponentComponent } from './ad-component/ad-component.component';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { BlogModule } from './modules/blog/blog.module';
@@ -20,7 +19,6 @@ import { TokenInterceptor } from './services/guards/token.interceptor';
   declarations: [
     AppComponent,
     NavbarComponent,
-    AdComponentComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,7 +33,6 @@ import { TokenInterceptor } from './services/guards/token.interceptor';
     BlogModule,
   ],
   exports: [
-    AdComponentComponent
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

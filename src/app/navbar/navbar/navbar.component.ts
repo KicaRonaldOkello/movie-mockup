@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, HostListener, OnInit, ViewChild} from '@angular/core';
 import { Router } from '@angular/router';
 import Helpers from 'src/app/helpers/helpers';
 import { ShareDataService } from 'src/app/services/share-data/share-data.service';
@@ -15,6 +15,7 @@ export class NavbarComponent implements OnInit {
   showSignout: boolean;
   selectedLanguage;
   isAdmin: boolean;
+  @ViewChild('toggle') toggleOpen: ElementRef;
   constructor(
     private router: Router,
     private shareDataService: ShareDataService,
@@ -49,7 +50,7 @@ export class NavbarComponent implements OnInit {
       }
     });
 
-    this.selectedLanguage = Helpers.getChosenLanguage();
+    this.changeLanguageKey(Helpers.getChosenLanguage());
   }
 
   changeNavBarIcon(navBarItem) {
@@ -78,6 +79,7 @@ export class NavbarComponent implements OnInit {
   }
 
   changeLanguage(language) {
+    this.changeLanguageKey(language);
     Helpers.saveChosenLanguage(language);
     history.pushState(null, '', location.href.split('#')[0] + language);
     if (language === '#googtrans(en|en)') {
@@ -85,5 +87,29 @@ export class NavbarComponent implements OnInit {
     }
     window.location.reload();
   }
+
+
+  toggleDropDown() {
+    this.toggleOpen.nativeElement.classList.toggle('open');
+  }
+
+@HostListener('window:click', ['$event'])
+  checkClick(e) {
+    if (!this.toggleOpen.nativeElement.contains(e.target)) {
+      this.toggleOpen.nativeElement.classList.remove('open');
+    }
+}
+
+changeLanguageKey(value) {
+    if (value === '#googtrans(en|en)') {
+      this.selectedLanguage = 'ENG';
+    } else if (value === '#googtrans(en|fr)') {
+      this.selectedLanguage = 'FR';
+    } else if (value === '#googtrans(en|zh-CN)') {
+      this.selectedLanguage = 'CHI';
+    } else if (value === '#googtrans(en|ja)') {
+      this.selectedLanguage = 'JPN';
+    }
+}
 
 }

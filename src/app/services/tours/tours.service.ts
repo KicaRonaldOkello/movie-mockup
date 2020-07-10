@@ -43,4 +43,12 @@ export class ToursService {
       map(data => data)
     );
   }
+
+  deleteTravelPackage(id): Observable<any> {
+    return this.http.delete(
+      `${this.base_url}DeleteTravelPackage`, {params: { Id : id } }
+    ).pipe(
+      map(data => data)
+    );
+  }
 }
