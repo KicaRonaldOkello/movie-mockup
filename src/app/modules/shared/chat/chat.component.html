@@ -73,8 +73,8 @@
               <div class="single-chat">
                 <img
                   src="https://placeimg.com/800/300/nature">
-                <div class="my-speech-bubble">
-                  {{chatMessage.message}}
+                <div [innerHTML]="chatMessage.message" class="my-speech-bubble">
+<!--                  {{chatMessage.message}}-->
                 </div>
               </div>
               <div *ngIf="chatMessage.attachments && chatMessage.attachments.length>0" class="attachments">

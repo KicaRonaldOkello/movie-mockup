@@ -19,8 +19,8 @@
     </div>
     <div>
       <button class="button" [routerLink]="['tour-details']"  [queryParams]="{ id: data.id }">Book Now</button>
-      <button class="button" *ngIf="userData.userId === data.ownerId" [routerLink]="['create-tours-package']"  [queryParams]="{ id: data.id }">Edit</button>
-      <button class="button" *ngIf="userData.userId === data.ownerId" (click)="openDialog(data.id)">Delete</button>
+      <button class="button" *ngIf="userData?.userId === data.ownerId" [routerLink]="['create-tours-package']"  [queryParams]="{ id: data.id }">Edit</button>
+      <button class="button" *ngIf="userData?.userId === data.ownerId" (click)="openDialog(data.id)">Delete</button>
     </div>
   </div>
 </div>

@@ -9,8 +9,8 @@ import { AuthGuardService as AuthGuard } from 'src/app/services/guards/auth-guar
 
 const routes: Routes = [
   {path: '', component: ToursComponent },
-  {path: 'package-payment', component: TourPackagePaymentComponent},
-  {path: 'tour-details', component: TourDetailsComponent},
+  {path: 'package-payment', component: TourPackagePaymentComponent, canActivate: [AuthGuard]},
+  {path: 'tour-details', component: TourDetailsComponent, canActivate: [AuthGuard]},
   {path: 'create-tours-package', component: CreateToursPackageComponent, canActivate: [AuthGuard]},
 ];
 

@@ -8,6 +8,7 @@ import {UsersService} from '../../../services/users/users.service';
 import Helpers from '../../../helpers/helpers';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {ActivatedRoute} from '@angular/router';
+import { DomSanitizer } from '@angular/platform-browser';
 
 declare var cloudinary: any;
 @Component({
@@ -40,6 +41,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
     private snackBar: MatSnackBar,
     private activatedRoute: ActivatedRoute,
     private usersService: UsersService,
+    private sanitizer: DomSanitizer
     ) {
     this.shareDataService.showAd('true');
     this.userData = Helpers.getUserData();
@@ -176,5 +178,9 @@ export class ChatComponent implements OnInit, AfterViewChecked {
 
   openAttachment(link) {
     window.open(link, '_blank');
+  }
+
+  sanitizeMessage(message) {
+    return this.sanitizer.bypassSecurityTrustHtml(message) as string;
   }
 }
