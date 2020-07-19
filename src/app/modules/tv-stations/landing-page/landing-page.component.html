@@ -46,23 +46,35 @@
           <mat-spinner></mat-spinner>
         </span>
         <span class="video-player" *ngIf="!noPlaylistItems && initiallyDisplayPlayButton">
-          <vg-player (onPlayerReady)="onPlayerReady($event)">
-            <video
-            [vgMedia]="media"
-            #media
-            id="singleVideo"
-            preload="auto"
-            [controls]="controls"
-            [autoplay]="true"
-            (mouseenter) ="mouseEnter()"
-            (mouseleave) ="mouseLeave()"
-            >
-              <source *ngFor="let video of sources" [src]="video">
-            </video>
+          <youtube-player
+            *ngIf="sources[0].isYoutubeVideo"
+            suggestedQuality="default"
+            [height]="400"
+            [showBeforeIframeApiLoads]="true"
+            (stateChange)="onStateChange($event)"
+            (ready)="onYoutubePlayerReady($event)"
+            [videoId]="sources[0].fileUrl">
+
+          </youtube-player>
+          <vg-player
+            (onPlayerReady)="onPlayerReady($event)"
+            *ngIf="!sources[0].isYoutubeVideo">
+              <video
+              [vgMedia]="media"
+              #media
+              id="singleVideo"
+              preload="auto"
+              [controls]="controls"
+              [autoplay]="true"
+              (mouseenter) ="mouseEnter()"
+              (mouseleave) ="mouseLeave()"
+              >
+                <source *ngFor="let video of sources" [src]="sources[0].fileUrl">
+              </video>
           </vg-player>
         </span>
           <span (click)="playVideo()" class="vidBtn" *ngIf="!noPlaylistItems">
-            <img *ngIf="displayPlayButton && initiallyDisplayPlayButton" src="assets/play.svg" alt="play">
+            <img *ngIf="displayPlayButton && initiallyDisplayPlayButton && !sources[0].isYoutubeVideo" src="assets/play.svg" alt="play">
           </span>
       </div>
       <div class="movie-covers__title">

@@ -43,8 +43,8 @@
             <button class="button upload-button" (click)="upload()">Upload Video</button>
             <p class="videoUrl">{{videoForm.value.FileUrl}}</p>
         </span>
-        <!-- <input type="file" #videoUpload (change)="videoInputChange($event)" hidden="true" accept="video/mp4,video/x-m4v,video/*"> -->
-        <!-- <input type="text" class="input-title" placeholder="Video Url" formControlName="FileUrl"> -->
+      <h3 [style.color]="'white'">OR</h3>
+      <input type="text" placeholder="Paste YouTube link here" formControlName="FileUrl" class="input-title">
         <button
         class="button submit-button"
         [disabled]="!videoForm.valid"
@@ -59,10 +59,6 @@
         </button>
     </span>
     <p class="title">Videos</p>
-    <!-- <app-display-videos
-    [reload]="reloadVideos"
-    (updateVideoItem)="updateVideo($event)"
-    ></app-display-videos> -->
     <app-display-blogs
         [videos]="videos"
         [displayVideos]="true"

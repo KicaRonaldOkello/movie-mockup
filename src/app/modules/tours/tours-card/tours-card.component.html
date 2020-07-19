@@ -1,0 +1,26 @@
+<div class="card">
+  <img [src]="data.coverImageUrl">
+  <div class="card_info">
+    <div class="card-data">
+      <p>Package Name:</p>
+      <p class="card-data-value">{{ data.packageName }}</p>
+    </div>
+    <div class="card-data">
+      <p>Location:</p>
+      <p class="card-data-value">{{ data.location }}</p>
+    </div>
+    <div class="card-data">
+      <p>Price:</p>
+      <P class="card-data-value">{{ data.price | number }} {{ data.currencyCode }}</P>
+    </div>
+    <div class="card-data">
+      <p>Number of people:</p>
+      <p class="card-data-value">{{ data.numberOfPeopleDetails }}</p>
+    </div>
+    <div>
+      <button class="button" [routerLink]="['tour-details']"  [queryParams]="{ id: data.id }">Book Now</button>
+      <button class="button" *ngIf="userData?.userId === data.ownerId" [routerLink]="['create-tours-package']"  [queryParams]="{ id: data.id }">Edit</button>
+      <button class="button" *ngIf="userData?.userId === data.ownerId" (click)="openDialog(data.id)">Delete</button>
+    </div>
+  </div>
+</div>

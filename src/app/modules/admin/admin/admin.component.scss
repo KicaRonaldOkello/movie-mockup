@@ -3,6 +3,7 @@
     width: 100vw;
     height: 100%;
     background-color: black;
+  display: flex;
 .example-container {
     height: 100%;
 
@@ -39,6 +40,38 @@
         background-color: #D4B867;
     }
 }
+  .side-bar {
+    width: 25%;
+    background-color: #792029;
+    color: #D4B867;
+
+
+    mat-list-item {
+      color: #D4B867;
+      border-bottom: .1px solid gray;
+
+    }
+    mat-list-item:hover {
+      cursor: pointer;
+      background-color: rgb(47, 10, 20);
+    }
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .body {
+    flex-direction: column-reverse;
+
+    .side-bar {
+      width: 100%;
+      margin: 20px 0px;
+
+    }
+
+    .content {
+      width: 100%;
+    }
+  }
 }
 
 .spinner {

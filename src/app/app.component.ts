@@ -27,6 +27,8 @@ export class AppComponent {
     };
   });
 
+  console.log('called>>>>>>>>>>>>>>>>>>>>>>>>');
+
   }
 
   checkRoute(url) {

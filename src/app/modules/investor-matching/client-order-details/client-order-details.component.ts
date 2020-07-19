@@ -68,11 +68,13 @@ export class ClientOrderDetailsComponent implements OnInit {
     this.submitData = true;
     const data = {
       id: 0,
-      orderType: 'INVESTMENT-PROJECT',
+      orderType: 'INVESTMENT_PROJECT',
       totalAmount: this.amountPaid.value.replace(/\,/g, ''),
       payerId: this.userData.userId,
       currencyCode: this.data.currencyCode,
-      comments: this.data.id
+      comments: this.data.id,
+      originalItemId: this.data.id,
+      originalSellerId: this.data.userId
     };
     this.orderService.saveOrder(data).subscribe(res => {
     this.payWithRave(res.id);

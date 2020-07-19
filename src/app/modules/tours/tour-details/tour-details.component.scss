@@ -1,0 +1,155 @@
+.spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+}
+.component-body {
+  width: 100vw;
+
+  .top {
+    background: url("/assets/great_wall_of_china.jpg");
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .tours-body {
+    width: 100%;
+    display: flex;
+
+    .tour-details--body {
+      width: 80%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .ad-component {
+      width: 20vw;
+      margin-top: 60px;
+    }
+
+  }
+
+  @media only screen and (max-width: 975px) {
+    .tours-body {
+      flex-direction: column;
+
+      .ad-component {
+        width: 100%;
+      }
+
+    }
+    .middle {
+      width: 100%;
+      flex-direction: column;
+      align-items: center;
+
+      .details-image {
+        width: 80% !important;
+
+        img {
+          width: 100%;
+        }
+      }
+
+      .details {
+        width: 80% !important;
+        .title {
+          margin-top: 40px;
+        }
+        .buttons {
+          margin-top: 30px !important;
+        }
+      }
+    }
+  }
+
+  .middle {
+    width: 80%;
+    margin-left: 30px;
+    margin-top: 60px;
+    display: flex;
+
+    .details-image {
+      width: 80%;
+      height: 360px;
+      margin-right: 20px;
+
+      img {
+        width: 100%;
+        height: 360px;
+
+      }
+    }
+
+    .details {
+      width: 50%;
+
+      .title {
+        font-weight: bold;
+        font-size: 27px;
+        margin-bottom: 20px;
+      }
+
+      .details-data {
+        display: flex;
+        line-height: 1.6;
+
+         .details-data-value {
+           font-weight: bold;
+           margin-left: 5px;
+         }
+      }
+
+      .buttons {
+        margin-top: 153px;
+        .button {
+          padding: 5px;
+        }
+        .button-first {
+          margin-right: 20px;
+        }
+      }
+    }
+  }
+
+
+  @media only screen and (max-width: 975px) {
+    .text-details {
+      width: 80% !important;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      p {
+        width: 80% !important;
+        text-align: justify;
+      }
+    }
+  }
+
+  .text-details {
+    width: 80%;
+    margin-left: 30px;
+    margin-bottom: 40px;
+    margin-top: 10px;
+
+    h2 {
+      margin: 10px 0px;
+    }
+
+    img {
+      margin: 10px 0px;
+    }
+
+    p {
+      font-size: 14px;
+    }
+  }
+
+}

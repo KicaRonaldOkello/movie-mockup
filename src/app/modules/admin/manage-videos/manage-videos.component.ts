@@ -1,5 +1,5 @@
 import { Component, OnInit, HostListener } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import {FormGroup, FormBuilder, Validators, FormControl} from '@angular/forms';
 import { VideosService } from 'src/app/services/videos/videos.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ShareDataService } from 'src/app/services/share-data/share-data.service';
@@ -27,7 +27,7 @@ export class ManageVideosComponent implements OnInit {
     private fb: FormBuilder,
     private videoService: VideosService,
     private snackBar: MatSnackBar,
-    private shareDataService: ShareDataService
+    private shareDataService: ShareDataService,
     ) {
       this.shareDataService.deletedVideoId.subscribe(id => {
         if (id !== '') {
@@ -41,13 +41,6 @@ export class ManageVideosComponent implements OnInit {
           this.updateVideo(video);
         }
       });
-
-      // this.shareDataService.paginate.subscribe(pages => {
-      //   if (pages != '') {
-      //     this.page = pages;
-      //     this.loadVideos();
-      //   }
-      // });
     }
 
   ngOnInit() {
@@ -69,6 +62,7 @@ export class ManageVideosComponent implements OnInit {
       video.Id = this.updateVideoItemId;
       message = 'Video has been updated successfully';
     } else {
+      video.Id = '0';
       message = 'Video has been created successfully';
     }
     this.videoService.saveVideo(video).subscribe(data => {
@@ -102,7 +96,8 @@ export class ManageVideosComponent implements OnInit {
     var myWidget = cloudinary.createUploadWidget({
       cloudName: 'do6g6dwlz',
       uploadPreset: 'vdoc0rsk',
-      multiple: false}, (error, result) => {
+      multiple: false
+      }, (error, result) => {
         if (!error && result && result.event === 'success') {
           this.videoForm.patchValue({
                 FileUrl: result.info.secure_url
@@ -152,7 +147,6 @@ export class ManageVideosComponent implements OnInit {
       this.videoService.getAllVideos(this.page, this.limit, {}, {}).subscribe(response => {
         this.videos = response.videos;
         this.pageCount = response.pageCount;
-        // this.videosLoading = false;
       });
     }
 

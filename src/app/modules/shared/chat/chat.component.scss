@@ -18,11 +18,21 @@
       width: 30px;
       height: 30px;
       border-radius: 50%;
+
+      &:hover {
+        cursor: pointer;
+      }
     }
+
 
     .settings-image {
       margin-top: 40px;
     }
+  }
+
+  .chats-box {
+    display: flex;
+    width: 100%;
   }
 
   .my-chats {
@@ -44,6 +54,27 @@
         background-color: #7A202A;
         color: white;
         width: 90px;
+      }
+    }
+
+    .chat-list {
+      height: 70vh;
+      overflow-y: scroll;
+
+      &::-webkit-scrollbar {
+        width: 10px;
+      }
+
+      &::-webkit-scrollbar-track {
+        background: #f1f1f1;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: #888;
+      }
+
+      &::-webkit-scrollbar-thumb:hover {
+        background: #555;
       }
     }
 
@@ -210,7 +241,8 @@
           font-size: 12px;
           padding: 10px;
           margin: 0px 20px 10px 10px;
-          max-width: 200px;
+          word-wrap: break-word;
+          max-width: 450px;
         }
 
         .my-speech-bubble:after {
@@ -248,7 +280,8 @@
           font-size: 12px;
           padding: 10px;
           margin: 0px 20px 10px 10px;
-          max-width: 200px;
+          word-wrap: break-word;
+          max-width: 450px;
         }
 
         .your-speech-bubble:after {
@@ -318,6 +351,20 @@
   }
   .spinner {
     width: 100vw;
+  }
+}
+@media only screen and (max-width: 790px) {
+  .chats-box {
+    flex-direction: column-reverse;
+
+    .my-chats {
+      width: 100%;
+      padding-right: 20px;
+    }
+
+    .main-chat {
+      padding-bottom: 20px;
+    }
   }
 }
 

@@ -5,7 +5,6 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import {OrderService} from '../../../services/order/order.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {ActivatedRoute} from '@angular/router';
-import {findLast} from '@angular/compiler/src/directive_resolver';
 
 @Component({
   selector: 'app-dispplay-clients',
@@ -104,7 +103,7 @@ export class DispplayClientsComponent implements OnInit {
     const theEvent = evt || window.event;
     let key = theEvent.keyCode || theEvent.which;
     key = String.fromCharCode(key);
-    if (key.length == 0) { return; }
+    if (key.length === 0) { return; }
     const regex = /^[0-9,\b]+$/;
     if (!regex.test(key)) {
         theEvent.returnValue = false;

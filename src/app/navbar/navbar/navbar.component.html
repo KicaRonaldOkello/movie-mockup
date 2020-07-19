@@ -1,16 +1,41 @@
 <div class="full-page__header">
     <div class="full-page__header__top">
-      <img src="{{iconLoaded}}" alt="icon" class="right-icon">
-      <!-- <div class="right-part"> -->
+      <img src="assets/chinee_tv_logo.jpg" alt="icon" class="right-icon">
         <span>
           <input name="Search" />
           <button class="search-button">Search</button>
         </span>
         <span class="globe">
-        <select #langSelect (change)="translate.use(langSelect.value)">
-          <option *ngFor="let lang of translate.getLangs()" [value]="lang" [selected]="lang === translate.currentLang">{{
-            lang | uppercase }}</option>
-        </select>
+
+          <div class="custom-select-wrapper" (click)="toggleDropDown()">
+            <div #toggle class="custom-select">
+              <div class="custom-select__trigger"><span>{{selectedLanguage}}</span>
+                <div class="arrow"></div>
+                </div>
+                <div class="custom-options">
+                  <span
+                    class="custom-option" [class.selected]="selectedLanguage === 'EN'"
+                    (click)="changeLanguage('#googtrans(en|en)')" data-value="ENG">
+                    ENG
+                  </span>
+                  <span
+                    class="custom-option" [class.selected]="selectedLanguage === 'FR'"
+                    (click)="changeLanguage('#googtrans(en|fr)')" data-value="FR">
+                    FR
+                  </span>
+                  <span
+                    class="custom-option" [class.selected]="selectedLanguage === 'CHI'"
+                    (click)="changeLanguage('#googtrans(en|zh-CN)')" data-value="CHI">
+                    CHI
+                  </span>
+                  <span
+                    class="custom-option" [class.selected]="selectedLanguage === 'JPN'"
+                    (click)="changeLanguage('#googtrans(en|ja)')" data-value="JPN">
+                    JPN
+                  </span>
+                </div>
+            </div>
+          </div>
 
           <img class="align-globe" src="assets/www.svg" alt="globe">
         </span>
@@ -22,46 +47,54 @@
           <p *ngIf="username !== 'Hello Sign In'">{{ (username.length>12)? (username | slice:0:12)+'..':(username) }}</p>
           <strong *ngIf="showSignout" (click)="logout()">Sign out</strong>
         </span>
-      <!-- </div> -->
     </div>
     <div class="full-page__header__bottom">
-      <p
+      <a
         class="menu-item"
-        routerLinkActive="menu-item__checked"
+        href="/tv"
+        [routerLinkActive]="'menu-item__checked'"
         [routerLink]="['tv']"
         >
-        TV Stations
-      </p>
-      <p
+        <p>TV Stations</p>
+      </a>
+      <a
         class="menu-item"
-        routerLinkActive="menu-item__checked"
+        href="/investor-matching"
+        [routerLinkActive]="'menu-item__checked'"
         (click)="changeNavBarIcon('/blog')"
         [routerLink]="['investor-matching']"
         >
-        Investor Matching
-      </p>
-      <p
+        <p>Investor Matching</p>
+      </a>
+      <a
+        class="menu-item"
+        href="/tours"
+        [routerLinkActive]="'menu-item__checked'"
+        (click)="changeNavBarIcon('/blog')"
+        [routerLink]="['tours']"
+      >
+        <p>Tours & Travels</p>
+    </a>
+      <a
         class="menu-item">
-        Tours & Travels
-    </p>
-      <p
-        class="menu-item">
-        Translator Services
-      </p>
-      <p
+        <p>Translator Services</p>
+      </a>
+      <a
         class="menu-item"
         routerLinkActive="menu-item__checked"
         (click)="changeNavBarIcon('/blog')"
+        href="/blog"
         [routerLink]="['blog']">
-        Blogging
-      </p>
-      <p
+        <p>Blogging</p>
+      </a>
+      <a
         *ngIf="isAdmin"
         class="menu-item"
         routerLinkActive="menu-item__checked"
         (click)="changeNavBarIcon('/blog')"
+        href="/admin"
         [routerLink]="['admin']">
-        Admin
-      </p>
+        <p>Admin</p>
+      </a>
     </div>
   </div>

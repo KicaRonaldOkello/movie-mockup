@@ -1,11 +1,10 @@
 .full-page {
     &__header {
     background-color: #ED1C24;
-    height: 80px;
+    height: 95px;
     width: 100%;
     display: flex;
     flex-direction: column;
-
 
     &__top {
         display: flex;
@@ -13,7 +12,10 @@
         align-items: center;
         flex-wrap: wrap;
 
-
+        img {
+          margin-top: 15px;
+          height: 40px;
+        }
             .right-icon {
             flex-basis: 0 0 20%;
             padding-left: 60px;
@@ -50,6 +52,12 @@
             }
         }
 
+        @media only screen and (max-width: 980px) {
+            input {
+                width: 400px;
+            }
+        }
+
         @media only screen and (max-width: 900px) {
             input {
                 width: 300px;
@@ -62,7 +70,7 @@
             }
             input {
                 margin-left: 50px;
-            
+
             }
         }
 
@@ -108,7 +116,24 @@
         display: flex;
         justify-content: center;
         color: #fff;
-        
+
+        a {
+          text-decoration: none;
+          &:hover {
+            text-decoration: underline;
+          }
+          &:visited {
+            color: white;
+          }
+          &:link {
+            color: white;
+          }
+          &:active {
+            color: var(--gold-color);
+          }
+
+        }
+
     }
 
     @media only screen and (max-width: 450px) {
@@ -121,7 +146,7 @@
     }
 }
 
-    @media only screen and (max-width: 700px) {
+    @media only screen and (max-width: 739px) {
         &__header {
         height: 150px;
         }
@@ -129,7 +154,7 @@
 
     @media only screen and (max-width: 450px) {
         &__header {
-        height: 240px;
+        height: 320px;
         }
     }
 }
@@ -142,7 +167,9 @@
 
 
     &__checked {
-        color: #ffb229;
+      p {
+        color: var(--gold-color);
+      }
         font-weight: bold;
     }
 
@@ -167,12 +194,116 @@
     padding-top: 15px;
     align-items: flex-start;
 
-    .align-globe {
+
+  .custom-select-wrapper {
+    //position: relative;
+    user-select: none;
+    width: 100%;
+  }
+  .custom-select {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 3px;
+  }
+  .custom-select__trigger {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 15px;
+    font-weight: 300;
+    color: white;
+    height: 30px;
+    line-height: 30px;
+    background: red;
+    cursor: pointer;
+  }
+  .custom-options {
+    position: absolute;
+    display: block;
+    top: 100%;
+    left: 0;
+    right: 0;
+    border-top: 0;
+    background: #fff;
+    transition: all 0.5s;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    z-index: 2;
+  }
+  .custom-select.open .custom-options {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: all;
+  }
+  .custom-option {
+    position: relative;
+    display: block;
+    font-size: 15px;
+    font-weight: 300;
+    color: #3b3b3b;
+    line-height: 30px;
+    cursor: pointer;
+    transition: all 0.5s;
+  }
+  .custom-option:hover {
+    cursor: pointer;
+    background-color: #b2b2b2;
+  }
+  .custom-option.selected {
+    color: #ffffff;
+    background-color: #305c91;
+  }
+
+  .arrow {
+    position: relative;
+    height: 15px;
+    width: 15px;
+    margin-left: 10px;
+    margin-bottom: 5px;
+  }
+  .arrow::before, .arrow::after {
+    content: "";
+    position: absolute;
+    bottom: 0px;
+    width: 0.1rem;
+    height: 60%;
+    transition: all 0.5s;
+  }
+  .arrow::before {
+    left: -3px;
+    transform: rotate(45deg);
+    background-color: white;
+  }
+  .arrow::after {
+    left: 3px;
+    transform: rotate(-45deg);
+    background-color: white;
+  }
+  .open .arrow::before {
+    left: -3px;
+    transform: rotate(-45deg);
+  }
+  .open .arrow::after {
+    left: 3px;
+    transform: rotate(45deg);
+  }
+
+
+
+
+
+
+
+
+  .align-globe {
         margin-left: 5px;
     }
 
     select {
-        background-color: #c5343f;
+        background-color: red;
         color: white;
         border: none;
     }
@@ -181,7 +312,7 @@
         outline: none;
     }
 
-    
+
 }
 .globe img {
     margin-top: -2px;

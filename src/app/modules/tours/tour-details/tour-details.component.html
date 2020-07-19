@@ -1,0 +1,52 @@
+<div class="spinner" *ngIf="loadingPage">
+  <mat-spinner></mat-spinner>
+</div>
+<div class="component-body" *ngIf="!loadingPage">
+  <div class="top">
+  </div>
+  <div class="tours-body">
+    <div class="tour-details--body">
+      <div class="middle">
+        <div class="details-image">
+          <img [src]="data.coverImageUrl">
+        </div>
+        <div class="details">
+          <div class="title">
+            Tour Details
+          </div>
+          <div class="details-data">
+            <p>Package Name:</p>
+            <P class="details-data-value">{{ data.packageName }}</P>
+          </div>
+          <div class="details-data">
+            <p>Location:</p>
+            <p class="details-data-value">{{ data.location }}</p>
+          </div>
+          <div class="details-data">
+            <p>Price:</p>
+            <p class="details-data-value">{{ data.price | number }} {{ data.currencyCode }}</p>
+          </div>
+          <div class="details-data">
+            <p>Number of people:</p>
+            <p class="details-data-value">{{ data.numberOfPeople }}</p>
+          </div>
+          <div class="details-data">
+            <p>Start Date:</p>
+            <p class="details-data-value">{{ data.startDate }}</p>
+          </div>
+          <div class="buttons">
+            <button class="button button-red button-first" [routerLink]="['../../chats']" [queryParams]="{ chatWith: data.ownerId }">Message Owner</button>
+            <button class="button button-red" [routerLink]="['/tours/package-payment']" [queryParams]="{ id: data.id }">Book Now</button>
+          </div>
+        </div>
+      </div>
+      <div class="text-details">
+        <!--    <h2>Zanzibar Experience</h2>-->
+        <div [innerHTML]="data.description"></div>
+      </div>
+    </div>
+    <div class="ad-component">
+      <app-ad-component></app-ad-component>
+    </div>
+  </div>
+</div>

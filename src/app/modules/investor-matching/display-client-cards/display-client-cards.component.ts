@@ -10,7 +10,7 @@ import { ShareDataService } from 'src/app/services/share-data/share-data.service
 })
 export class DisplayClientCardsComponent implements OnInit {
 
-  @Input() data:any;
+  @Input() data: any;
   @Input() pageCount: number;
   @Input() page: number;
   constructor(
@@ -19,19 +19,19 @@ export class DisplayClientCardsComponent implements OnInit {
     private shareDataService: ShareDataService,
     ) {
       this.matIconRegistry.addSvgIcon(
-        "previous-page",
-        this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/double-arrow-left.svg")
+        'previous-page',
+        this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/double-arrow-left.svg')
       );
       this.matIconRegistry.addSvgIcon(
-        "next-page",
-        this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/double-arrow-right.svg")
+        'next-page',
+        this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/double-arrow-right.svg')
       );
   }
 
   ngOnInit() {
   }
 
-  
+
   nextPage() {
     if (this.page < this.pageCount) {
     const pageNumber = this.page + 1;
@@ -42,7 +42,7 @@ export class DisplayClientCardsComponent implements OnInit {
   previousPage() {
     if (this.page > 0) {
       const pageNumber = this.page - 1;
-    this.shareDataService.traverseToPage(pageNumber);
+      this.shareDataService.traverseToPage(pageNumber);
     }
   }
 

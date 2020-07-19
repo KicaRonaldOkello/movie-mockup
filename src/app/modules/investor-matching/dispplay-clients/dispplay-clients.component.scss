@@ -164,7 +164,13 @@
 
 @media only screen and (max-width: 975px) {
     .body {
-        width: 100vw;
+      width: 100vw;
+      align-items: center;
+
+      .create-investment-project-button {
+        align-self: flex-end;
+        margin-right: 10%;
+      }
     }
 }
 

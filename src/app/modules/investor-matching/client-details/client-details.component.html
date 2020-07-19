@@ -37,7 +37,7 @@
                     <p>{{data.category}} Company</p>
                 </div>
                 <div class="buttons">
-                    <button class="button first-button" [routerLink]="['../contact-owner']" [queryParams]="{ chatWith: data.userId }">Contact Owner</button>
+                    <button class="button first-button" [routerLink]="['../../chats']" [queryParams]="{ chatWith: data.userId }">Contact Owner</button>
                     <button class="button second-button" (click)="sendDataToOrderDetails()" [routerLink]="['../order-details', data.id]">Invest Now</button>
                 </div>
             </span>

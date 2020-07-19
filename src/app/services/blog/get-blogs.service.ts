@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, TimeoutError, throwError } from 'rxjs';
-import { retry, catchError, map } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 
 import { environment } from '../../../environments/environment';
 
@@ -13,9 +13,9 @@ export class GetBlogsService {
   base_url = environment.base_url;
 
   constructor(private http: HttpClient) { }
-  getBlogs(page, limit=12):Observable<any> {
+  getBlogs(page, limit= 12): Observable<any> {
     return this.http.get(
-      `${this.base_url}GetAllBlogArticles?limit=${limit}&page=${page}`,{headers:{'skip':"true"} }
+      `${this.base_url}GetAllBlogArticles?limit=${limit}&page=${page}`
     ).pipe(
       map(data => data),
       catchError((error) => { // Error...
@@ -23,16 +23,16 @@ export class GetBlogsService {
         if (error instanceof TimeoutError) {
            return throwError('Timeout Exception');
         }
-     
+
         // Return other errors
         return throwError(error);
       })
-    )
+    );
   }
 
-  getSingleBlog(id):Observable<any> {
+  getSingleBlog(id): Observable<any> {
     return this.http.get(
-      `${this.base_url}GetBlogArticle?Id=${id}`,{headers:{'skip':"true"} }
+      `${this.base_url}GetBlogArticle?Id=${id}`,{ headers:{'skip':'true'} }
     ).pipe(
       map(data => data)
     )

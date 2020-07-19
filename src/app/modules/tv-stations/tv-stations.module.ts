@@ -11,10 +11,11 @@ import { VgControlsModule } from 'videogular2/controls';
 import { VgOverlayPlayModule } from 'videogular2/overlay-play';
 import { VgBufferingModule } from 'videogular2/buffering';
 import { VideoListComponent } from './video-list/video-list.component';
-import {MatMenuModule} from '@angular/material';
+import {MatMenuModule} from '@angular/material/menu';
 import {MinuteSecondsPipe} from '../../utils/minute-seconds.pipe';
 import {SharedModule} from '../shared/shared.module';
 import {PaymentModalComponent} from '../shared/payment-modal/payment-modal.component';
+import {YouTubePlayerModule} from '@angular/youtube-player';
 
 
 
@@ -31,7 +32,8 @@ import {PaymentModalComponent} from '../shared/payment-modal/payment-modal.compo
         MatProgressSpinnerModule,
         MatMenuModule,
         SharedModule,
-        MatDialogModule
+        MatDialogModule,
+        YouTubePlayerModule
 
     ],
     bootstrap: [PaymentModalComponent],

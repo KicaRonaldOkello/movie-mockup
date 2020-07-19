@@ -20,8 +20,8 @@ export class AdComponentComponent implements OnInit {
   videoId;
   postingComment = false;
   constructor(private router: Router,
-    private shareDataService: ShareDataService,
-    private commentsService: CommentsService) {
+              private shareDataService: ShareDataService,
+              private commentsService: CommentsService) {
   }
 
 
@@ -41,7 +41,7 @@ export class AdComponentComponent implements OnInit {
        this.writtenComment.setValue('');
        this.loadComments(res);
      }
-   })
+   });
   }
 
   checkRoute(url) {
@@ -64,7 +64,7 @@ export class AdComponentComponent implements OnInit {
         this.noComments = false;
         this.comments = res.comments;
       }
-    })
+    });
   }
 
   submitComment() {
@@ -76,7 +76,7 @@ export class AdComponentComponent implements OnInit {
         profilePic: "https://placeimg.com/300/300/people",
         UserId:"testUser",
       }
-  
+
       this.commentsService.saveComment(comment).subscribe(result => {
         this.comments.push({comment: this.writtenComment.value})
         this.postingComment = false;

@@ -1,0 +1,60 @@
+<div class="spinner" *ngIf="loadingPage">
+  <mat-spinner></mat-spinner>
+</div>
+<div class="component-body" *ngIf="!loadingPage">
+  <div class="top">
+  </div>
+  <div class="tours-package-body">
+    <div class="tours-package--detail">
+      <div class="middle">
+        <div class="details-image">
+          <img [src]="data.coverImageUrl">
+        </div>
+        <div class="details">
+          <div class="title">
+            Tour Details
+          </div>
+          <div class="details-data">
+            <p>Package Name:</p>
+            <P class="details-data-value">{{ data.packageName }}</P>
+          </div>
+          <div class="details-data">
+            <p>Location:</p>
+            <p class="details-data-value">{{ data.location }}</p>
+          </div>
+          <div class="details-data">
+            <p>Price:</p>
+            <p class="details-data-value">{{ data.price | number }} {{ data.currencyCode }}</p>
+          </div>
+          <div class="details-data">
+            <p>Number of people:</p>
+            <p class="details-data-value">{{ data.numberOfPeopleDetails }}</p>
+          </div>
+          <div class="details-data">
+            <p>Start Date:</p>
+            <p class="details-data-value">{{ data.startDate }}</p>
+          </div>
+          <div class="booking-details">
+            <p class="booking-details-title">Booking Details:</p>
+            <div class="booking-details-body">
+              <div>
+                <!--            <p>Additional comments:</p>-->
+                <label>
+                  <textarea placeholder="Comments..." [formControl]="comments"></textarea>
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="buttons">
+            <button class="button button-red button-first" routerLink="/tours/tour-details" [queryParams]="{ id: data.id }">Cancel</button>
+            <button class="button button-red" (click)="submitPaymentData()">Proceed to Payment</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ad-component">
+      <app-ad-component></app-ad-component>
+    </div>
+  </div>
+
+</div>

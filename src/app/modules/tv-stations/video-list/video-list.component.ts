@@ -8,7 +8,7 @@ import {ActivatedRoute} from '@angular/router';
 import {OrderService} from '../../../services/order/order.service';
 import {SubscriptionsService} from '../../../services/subscriptions/subscriptions.service';
 import Helpers from '../../../helpers/helpers';
-import {MatDialog} from '@angular/material';
+import {MatDialog} from '@angular/material/dialog';
 import {PaymentModalComponent} from '../../shared/payment-modal/payment-modal.component';
 
 declare var getpaidSetup: any;

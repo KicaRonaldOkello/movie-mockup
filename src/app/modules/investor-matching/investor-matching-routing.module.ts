@@ -5,7 +5,7 @@ import { ClientDetailsComponent } from './client-details/client-details.componen
 import { ClientOrderDetailsComponent } from './client-order-details/client-order-details.component';
 import { CreateClientComponent } from './create-client/create-client.component';
 import { AuthGuardService as AuthGuard } from 'src/app/services/guards/auth-guard.service';
-import {ChatComponent} from './chat/chat.component';
+import {ChatComponent} from '../shared/chat/chat.component';
 
 
 const routes: Routes = [
@@ -13,7 +13,7 @@ const routes: Routes = [
   { path: 'create-investment-project', component: CreateClientComponent, canActivate: [AuthGuard]},
   { path: 'order-details/:id', component: ClientOrderDetailsComponent,  canActivate: [AuthGuard]},
   { path: 'view-project-details', component: ClientDetailsComponent},
-  { path: 'contact-owner', component: ChatComponent,  canActivate: [AuthGuard]},
+  // { path: 'contact-owner', component: ChatComponent,  canActivate: [AuthGuard]},
 ];
 
 @NgModule({

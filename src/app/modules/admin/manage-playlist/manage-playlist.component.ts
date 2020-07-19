@@ -92,7 +92,7 @@ export class ManagePlaylistComponent implements OnInit {
     this.videoService.savePlaylistItems(data).subscribe(res => {
       this.uploadingVideoList = false;
       if (res.statusDesc === 'SUCCESS') {
-        this.snackBar.open('Playlist has been updated succesfully', '', {
+        this.snackBar.open('Playlist has been updated successfully', '', {
           duration: 5000,
           panelClass: ['green-snackbar']
         });

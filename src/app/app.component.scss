@@ -2,8 +2,10 @@
     width: 100%;
     height: 100%;
     position: absolute;
-    
+  top: 0 !important;
+
     .body {
+      overflow-x: hidden;
         display: flex;
 
         &:nth-child(1) {
@@ -40,7 +42,7 @@
             height: 80px;
             width: 100px;
         }
-        
+
         .footer-icon-dragon {
             z-index: 2;
             position: relative;
