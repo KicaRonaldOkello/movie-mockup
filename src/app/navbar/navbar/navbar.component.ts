@@ -40,6 +40,7 @@ export class NavbarComponent implements OnInit {
     } else {
       this.language = '#googtrans(en|en)';
     }
+
     this.setLanguageCookie(this.language);
     this.router.events.subscribe((event) => {
       if (event['url']) {
