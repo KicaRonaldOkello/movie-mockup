@@ -8,6 +8,7 @@ import {ToursService} from '../../../services/tours/tours.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import Helpers from '../../../helpers/helpers';
 import {ActivatedRoute, Router} from '@angular/router';
+import {environment} from '../../../../environments/environment';
 
 declare var cloudinary: any;
 @Component({
@@ -95,7 +96,8 @@ export class CreateToursPackageComponent implements OnInit, AfterViewInit {
         cloudName: 'do6g6dwlz',
         uploadPreset: 'vdoc0rsk',
         multiple: false,
-      resourceType: 'image'
+      clientAllowedFormats: environment.clientAllowedImageFormats,
+      maxImageFileSize: environment.maxImageFileSize
       }, (error, result) => {
         if (!error && result && result.event === 'success') {
           this.displayCoverImage = true;

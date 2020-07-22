@@ -6,6 +6,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import Helpers from 'src/app/helpers/helpers';
+import {environment} from '../../../../environments/environment';
 
 
 declare var cloudinary: any;
@@ -107,9 +108,11 @@ export class CreateClientComponent implements OnInit, OnDestroy {
 
   upload() {
     let myWidget = cloudinary.createUploadWidget({
-      cloudName: 'do6g6dwlz',
-      uploadPreset: 'vdoc0rsk',
-      multiple: false
+        cloudName: 'do6g6dwlz',
+        uploadPreset: 'vdoc0rsk',
+        multiple: false,
+        clientAllowedFormats: environment.clientAllowedImageFormats,
+        maxImageFileSize: environment.maxImageFileSize
     }, (error, result) => {
       if (!error && result && result.event === 'success') {
         this.displayCoverImage = true;
@@ -173,6 +176,8 @@ export class CreateClientComponent implements OnInit, OnDestroy {
       multiple: true,
       maxImageWidth: 180,
       maxImageHeight: 160,
+        clientAllowedFormats: environment.clientAllowedImageFormats,
+        maxImageFileSize: environment.maxImageFileSize
     }, (error, result) => {
       if (!error && result && result.event === 'success') {
         this.officeImages.push(result.info.secure_url);
