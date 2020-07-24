@@ -90,11 +90,11 @@ export class ManageVideosComponent implements OnInit {
         });
         this.savingVideo = false;
       }
-    })
+    });
   }
 
   upload() {
-    var myWidget = cloudinary.createUploadWidget({
+    const myWidget = cloudinary.createUploadWidget({
       cloudName: 'do6g6dwlz',
       uploadPreset: 'vdoc0rsk',
       multiple: false,

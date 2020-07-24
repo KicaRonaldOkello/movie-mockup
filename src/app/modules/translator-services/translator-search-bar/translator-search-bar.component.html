@@ -1,0 +1,38 @@
+<div class="search-bar" [formGroup]="translatorForm">
+
+    <span>
+      <select name="cars" required #fromLang (change)="selectedFromLanguage(fromLang.value)">
+        <option [selected]="true" disabled="true" value="null">From Language</option>
+        <option *ngFor="let fromLanguage of fromLanguages" [value]="fromLanguage.name">{{fromLanguage.name}}</option>
+      </select>
+    </span>
+    <span class="middle-text"><p>to</p></span>
+    <span>
+      <select name="cars" required #toLang (change)="selectedToLanguage(toLang.value)">
+        <option [selected]="true" disabled="true" value="null">To Language</option>
+         <option *ngFor="let toLanguage of toLanguages" [value]="toLanguage.name">{{toLanguage.name}}</option>
+      </select>
+    </span>
+
+    <span class="name">
+      <input type="text" class="input-amount" #amountMin formControlName="priceMin" placeholder="Price (Min)" (keyup)="addCommas(amountMin.value, 'priceMin')" (keydown)='isNumber(event)'>
+    </span>
+    <p>-</p>
+    <span class="name">
+      <input type="text" #amountMax class="input-amount" formControlName="priceMax" placeholder="Price (Max)" (keyup)="addCommas(amountMax.value, 'priceMax')" (keydown)='isNumber(event)'>
+    </span>
+
+    <span>
+      <select name="Type" required formControlName="Type">
+        <option [selected]="true" disabled="true" value="null">Type</option>
+        <option value="AUDIO">AUDIO</option>
+        <option value="VIDEO">VIDEO</option>
+        <option value="LIVE">LIVE</option>
+        <option value="TEXT">TEXT</option>
+      </select>
+    </span>
+  <mat-checkbox (change)="isChecked($event)">View my packages</mat-checkbox>
+    <span class="button-cover">
+            <button class="button " (click)="searchTranslationPackages()">Search</button>
+        </span>
+  </div>

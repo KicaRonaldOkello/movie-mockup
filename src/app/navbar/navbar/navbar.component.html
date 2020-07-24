@@ -76,7 +76,12 @@
         <p>Tours & Travels</p>
     </a>
       <a
-        class="menu-item">
+        class="menu-item"
+        href="/translation"
+        [routerLinkActive]="'menu-item__checked'"
+        (click)="changeNavBarIcon('/blog')"
+        [routerLink]="['translation']"
+      >
         <p>Translator Services</p>
       </a>
       <a

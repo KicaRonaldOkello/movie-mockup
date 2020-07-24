@@ -107,7 +107,7 @@ export class CreateClientComponent implements OnInit, OnDestroy {
   }
 
   upload() {
-    let myWidget = cloudinary.createUploadWidget({
+    const myWidget = cloudinary.createUploadWidget({
         cloudName: 'do6g6dwlz',
         uploadPreset: 'vdoc0rsk',
         multiple: false,

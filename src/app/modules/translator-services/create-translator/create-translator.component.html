@@ -1,0 +1,97 @@
+<div class="spinner" *ngIf="loadingCurrencyCode && loadingLanguages">
+  <mat-spinner></mat-spinner>
+</div>
+<div class="component-body" *ngIf="!loadingCurrencyCode || !loadingLanguages">
+  <app-translator-search-bar></app-translator-search-bar>
+  <div [formGroup]="createTranslatorForm" class="translator-form">
+    <div class="profile-picture">
+      <img [src]="coverImage" matTooltip="Click to change this image" [hidden]="loadingProfileImage" (load)="loadingProfileImage=false;" (click)="upload()">
+      <div *ngIf="loadingProfileImage" class="profile-image-spinner">
+        <mat-spinner diameter="30"></mat-spinner>
+      </div>
+    </div>
+    <div class="translator-details">
+      <span>
+        <label>Translator Name: </label>
+        <input class="input-fields-others" placeholder="e.g. Jane Whitewidow" formControlName="translatorName" type="text">
+      </span>
+      <span class="calendar">
+        <input placeholder="Date of Birth"  formControlName="dateOfBirth" matInput [matDatepicker]="picker">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker color="warn"></mat-datepicker>
+      </span>
+      <span>
+        <label class="bio-title">Bio: </label>
+        <textarea class="input-fields-others" placeholder="Type bio here..." rows="5" formControlName="bio" type="text"></textarea>
+      </span>
+      <div class="card">
+        <p class="title">Package Information</p>
+        <div class="align-languages">
+          <span class="chooseLanguages">
+            <select id="fromLanguage" #lang (change)="selectedFromLanguage(lang.value)" required>
+              <option [selected]="true" [disabled]="true">From Language</option>
+              <option *ngFor="let fromLanguage of fromLanguages" [value]="fromLanguage.name">{{fromLanguage.name}}</option>
+            </select>
+            <div class="error" *ngIf="fromLanguageError"><p>*From Language field is required.</p></div>
+          </span>
+          <p class="middle-text">to</p>
+          <span class="chooseLanguages">
+            <select id="toLanguage"  #language (change)="selectedToLanguage(language.value)" required>
+              <option [selected]="true" [disabled]="true">To Language</option>
+              <option *ngFor="let toLanguage of toLanguages" [value]="toLanguage.name">{{toLanguage.name}}</option>
+            </select>
+            <div class="error" *ngIf="toLanguageError"><p>*To Language field is required.</p></div>
+          </span>
+        </div>
+        <span class="currencyCode">
+          <label for="">Currency Code: </label>
+          <select formControlName="currencyCode" required id="">
+            <option *ngFor="let currency of supportedCurrencies" [value]="currency">{{currency}}</option>
+          </select>
+        </span>
+        <span class="bio-details">
+        <label>Audio Translation: </label>
+        <input class="input-fields-others" #audioPrice placeholder="e.g. 5000" formControlName="audioTranslationPrice" (keyup)="addCommas(audioPrice.value, 'audioTranslationPrice')" (keydown)='isNumber(event)' type="text">
+          <div class="checkboxes">
+            <mat-checkbox class="first-checkbox" [disabled]="isAudioNotOffered" (change)="isChecked($event, 'isAudioFree', 'audioTranslationPrice')">Free</mat-checkbox>
+            <mat-checkbox [disabled]="isAudioFree" (change)="isChecked($event, 'isAudioNotOffered', 'audioTranslationPrice')">Not Offered</mat-checkbox>
+          </div>
+      </span>
+        <span class="bio-details">
+        <label>Video Translation: </label>
+        <input class="input-fields-others" #videoPrice placeholder="e.g. 5000" formControlName="videoTranslationPrice" (keyup)="addCommas(videoPrice.value, 'videoTranslationPrice')" (keydown)='isNumber(event)' type="text">
+          <div class="checkboxes">
+            <mat-checkbox class="first-checkbox" [disabled]="isVideoNotOffered" (change)="isChecked($event, 'isVideoFree', 'videoTranslationPrice')">Free</mat-checkbox>
+            <mat-checkbox [disabled]="isVideoFree" (change)="isChecked($event, 'isVideoNotOffered', 'videoTranslationPrice')">Not Offered</mat-checkbox>
+          </div>
+      </span>
+        <span class="bio-details">
+        <label>Live Translation: </label>
+        <input class="input-fields-others" placeholder="e.g. 5000" #livePrice formControlName="liveTranslationPrice" (keyup)="addCommas(livePrice.value, 'liveTranslationPrice')" (keydown)='isNumber(event)' type="text">
+          <div class="checkboxes">
+            <mat-checkbox class="first-checkbox" [disabled]="isLiveNotOffered" (change)="isChecked($event, 'isLiveFree', 'liveTranslationPrice')">Free</mat-checkbox>
+            <mat-checkbox [disabled]="isLiveFree" (change)="isChecked($event, 'isLiveNotOffered', 'liveTranslationPrice')">Not Offered</mat-checkbox>
+          </div>
+      </span>
+        <span class="bio-details">
+        <label>Text Translation: </label>
+        <input class="input-fields-others" placeholder="e.g. 5000" #textPrice formControlName="textTranslationPrice" (keyup)="addCommas(textPrice.value, 'textTranslationPrice')" (keydown)='isNumber(event)' type="text">
+          <div class="checkboxes">
+            <mat-checkbox class="first-checkbox" [disabled]="isTextNotOffered" (change)="isChecked($event, 'isTextFree', 'textTranslationPrice')">Free</mat-checkbox>
+            <mat-checkbox [disabled]="isTextFree" (change)="isChecked($event, 'isTextNotOffered', 'textTranslationPrice')">Not Offered</mat-checkbox>
+          </div>
+      </span>
+      </div>
+    </div>
+  </div>
+  <div class="submit-button">
+    <button class="button button-red" (click)="ensureLanguagesChosen()">
+      <span *ngIf="!submittingTranslator">
+        Submit
+      </span>
+      <mat-icon *ngIf="submittingTranslator"  class="white">
+        <mat-spinner diameter="20"></mat-spinner>
+      </mat-icon>
+    </button>
+  </div>
+</div>

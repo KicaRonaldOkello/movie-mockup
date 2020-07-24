@@ -39,6 +39,9 @@ export class ShareDataService {
   private logout = new BehaviorSubject('');
   logoutState = this.logout.asObservable();
 
+  private searchTranslationPackage = new BehaviorSubject('');
+  translationParameters = this.searchTranslationPackage.asObservable();
+
   constructor() { }
 
   newVideoId(id) {
@@ -83,5 +86,9 @@ export class ShareDataService {
 
   loggedOut() {
     this.logout.next('true');
+  }
+
+  searchTranslations(data) {
+    this.searchTranslationPackage.next(data);
   }
 }

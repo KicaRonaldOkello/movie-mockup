@@ -14,6 +14,7 @@ const routes: Routes = [
   { path: 'tv', loadChildren: './modules/tv-stations/tv-stations.module#TvStationsModule'},
   { path: 'profile', loadChildren: './modules/profile/profile.module#ProfileModule'},
   { path: 'blog', loadChildren: './modules/blog/blog.module#BlogModule'},
+  { path: 'translation', loadChildren: './modules/translator-services/translator-services.module#TranslatorServicesModule'},
   { path: 'investor-matching', loadChildren: './modules/investor-matching/investor-matching.module#InvestorMatchingModule'},
   { path: 'tours', loadChildren: './modules/tours/tours.module#ToursModule'},
   { path: 'chats', loadChildren: './modules/shared/shared.module#SharedModule', canActivate: [AuthGuard]},

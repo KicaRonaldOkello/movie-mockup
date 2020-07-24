@@ -1,0 +1,223 @@
+.spinner {
+  width: 80vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.component-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  app-translator-search-bar {
+    width: 80%;
+  }
+
+  @media only screen and (max-width: 620px) {
+    .body {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+
+  .body {
+    display: flex;
+    font-size: 14px;
+    width: 80%;
+    .profile-picture {
+      img {
+        width: 220px;
+        height: 220px;
+        border-radius: 50%;
+        border: 10px grey solid;
+      }
+
+      .profile-image-spinner {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 220px;
+        height: 220px;
+        border-radius: 50%;
+        border: 10px grey solid;
+      }
+      margin-right: 30px;
+    }
+
+    .details {
+      margin-top: 40px;
+
+      .bio-details {
+        display: flex;
+        margin-bottom: 20px;
+
+        .value {
+          font-weight: bold;
+          margin-left: 3px;
+        }
+      }
+
+      .align-bio {
+        margin-bottom: 20px;
+      }
+
+      .email {
+        img {
+          height: 20px;
+          margin: 20px 0px;
+
+          &:hover {
+            cursor: pointer;
+          }
+        }
+      }
+
+      .card {
+        width: 300px;
+        height: 450px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        box-shadow: 0px 0px 5px grey;
+        margin-bottom: 40px;
+        margin-top: 15px;
+        background-color: #F5F6F8;
+
+        .title {
+          background-color: #7A202A;
+          width: 300px;
+          color: white;
+          text-align: center;
+          padding: 12px 0px;
+          font-weight: 600;
+          margin-bottom: 20px;
+        }
+
+        .calendar {
+          margin-bottom: 5px;
+          margin-left: 5px;
+          margin-top: -10px;
+          .mat-input-element {
+            border: none !important;
+            width: 100px;
+            height: 30px;
+            //color: gray;
+            font-weight: 500;
+            font-size: 12px;
+
+            &:focus {
+              outline: none;
+            }
+          }
+        }
+
+        .ngx-timepicker-field-example {
+          margin-bottom: 10px;
+          ::ng-deep .ngx-timepicker {
+            border-bottom: none !important;
+          }
+          ::ng-deep .ngx-timepicker-control__input {
+            font-size: 12px !important;
+          }
+        }
+
+
+        .bio-details {
+          font-size: 12px;
+          margin-left: 5px;
+          margin-bottom: 10px;
+
+          .url-value {
+            word-wrap: break-word;
+            width: 200px;
+          }
+
+          select {
+            width: 170px;
+            height: 30px;
+            border: none;
+            -webkit-appearance: none;
+            background: url('/assets/down-arrow.svg') no-repeat right white;
+            background-size: 10px;
+            border-radius: 5px;
+            background-position-x: 150px;
+            padding-left: 10px;
+            margin: 0px 5px;
+
+            &:focus {
+              outline: none;
+            }
+
+          }
+
+          select:required:invalid {
+            color: gray;
+            font-size: 12px;
+          }
+          option[value=""][disabled] {
+            display: none;
+          }
+          option {
+            color: black;
+            font-size: 12px;
+
+            &:focus {
+              outline: none;
+            }
+          }
+
+          .upload-title {
+            margin-top: 7px;
+            margin-right: 5px;
+          }
+
+          .meeting-link {
+            border: none;
+            width: 200px;
+            height: 30px;
+            font-size: 12px;
+          }
+        }
+
+        .align-button {
+          width: 100%;
+          margin-top: 30px;
+          display: flex;
+          justify-content: center;
+        }
+
+
+        .button {
+          font-size: 8px;
+          padding: 5px 10px;
+          background-color: #7A202A;
+          color: white;
+
+          &:hover {
+            cursor: pointer;
+          }
+          &:disabled {
+            background-color: #745155;
+            cursor: default;
+
+          }
+        }
+      }
+      .align-cards {
+        display: flex;
+        justify-content: space-between;
+
+        .first {
+          margin-right: 30px;
+        }
+      }
+    }
+  }
+}
+
+::ng-deep .red-snackbar {
+  background-color: red !important;
+}

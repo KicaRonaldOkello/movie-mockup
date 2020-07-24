@@ -1,0 +1,68 @@
+<span class="card">
+  <div class="head">
+  </div>
+  <div class="profileImage">
+    <img [src]="data.coverImageUrl" [hidden]="loadingProfileImage" (load)="loadingProfileImage=false;">
+     <div *ngIf="loadingProfileImage" class="profile-image-spinner">
+       <mat-spinner diameter="30"></mat-spinner>
+     </div>
+  </div>
+
+  <div class="card-body">
+    <div class="card-details">
+      <p class="title">Name:</p>
+      <p class="value">{{data.ownerName}}</p>
+    </div>
+    <div class="card-details">
+      <p>Package Name:</p>
+      <p class="value">{{data.packageName}}</p>
+    </div>
+    <div class="card-details">
+      <p>Currency Code:</p>
+      <p class="value">{{data.currencyCode}}</p>
+    </div>
+    <div class="card-details">
+      <p>Live Translation Price:</p>
+      <p class="value">{{data.liveTranslationPrice}}</p>
+    </div>
+    <div class="card-details">
+      <p>Video Translation Price:</p>
+      <p class="value">{{data.videoTranslationPrice}}</p>
+    </div>
+    <div class="card-details">
+      <p>Audio Translation Price:</p>
+      <p class="value">{{data.audioTranslationPrice}}</p>
+    </div>
+    <div class="card-details">
+      <p>Text Translation Price:</p>
+      <p class="value">{{data.textTranslationPrice}}</p>
+    </div>
+  </div>
+
+    <button
+      class="button button-red"
+      [routerLink]="['/translation/translator-details']" [queryParams]="{ id: data.id }"
+    >Request</button>
+<!--    <span class="action-buttons">-->
+<!--        <mat-icon-->
+<!--          class="deleteButton"-->
+<!--          matTooltip="Delete blog"-->
+<!--          *ngIf="displayDeleteButton"-->
+<!--          (click)="deleteBlog(data.id)"-->
+<!--          svgIcon="delete"></mat-icon>-->
+
+<!--        <mat-icon-->
+<!--          class="deleteButton"-->
+<!--          matTooltip="Read blog"-->
+<!--          *ngIf="displayDeleteButton"-->
+<!--          (click)="readThisBlog(data.id)"-->
+<!--          svgIcon="read"></mat-icon>-->
+
+<!--        <mat-icon-->
+<!--          class="deleteButton"-->
+<!--          matTooltip="Update blog"-->
+<!--          *ngIf="displayDeleteButton"-->
+<!--          (click)="updateThisBlog(data)"-->
+<!--          svgIcon="refresh"></mat-icon>-->
+<!--    </span>-->
+</span>
