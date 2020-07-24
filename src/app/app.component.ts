@@ -27,7 +27,6 @@ export class AppComponent {
     };
   });
 
-  console.log('called>>>>>>>>>>>>>>>>>>>>>>>>');
 
   }
 
