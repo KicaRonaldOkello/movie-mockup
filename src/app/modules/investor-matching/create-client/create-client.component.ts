@@ -7,6 +7,7 @@ import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import Helpers from 'src/app/helpers/helpers';
 import {environment} from '../../../../environments/environment';
+import {ActivatedRoute} from '@angular/router';
 
 
 declare var cloudinary: any;
@@ -17,6 +18,7 @@ declare var cloudinary: any;
 })
 export class CreateClientComponent implements OnInit, OnDestroy {
 
+  itemId;
   displayCoverImage = false;
   coverImage: any = '';
   officeImages: string[] = [];
@@ -31,12 +33,12 @@ export class CreateClientComponent implements OnInit, OnDestroy {
   myIvestmentProjects = [];
   editData: any = '';
   isShow: boolean;
-  topPosToStartShowing = 100;
-  loadingMyInvestmentProjects: boolean;
+  loadingMyInvestmentProject = true;
   constructor(
     private shareDataService: ShareDataService,
     private fb: FormBuilder,
     private snackBar: MatSnackBar,
+    private activatedRoute: ActivatedRoute,
     private investmentProjectService: InvestmentProjectService,
     private matIconRegistry: MatIconRegistry,
     private domSanitizer: DomSanitizer,
@@ -51,16 +53,12 @@ export class CreateClientComponent implements OnInit, OnDestroy {
       'plus',
       this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/plus.svg')
     );
-
-    this.shareDataService.deletedProjectId.subscribe(res => {
-      if (res !== '') {
-        this.loadingMyInvestmentProjects = true;
-        this.deleteProject(res);
-      }
-    });
   }
 
   ngOnInit() {
+    this.activatedRoute.queryParams.subscribe(params => {
+      this.itemId = params.id;
+    });
     this.clientForm = this.fb.group({
       location: [''],
       amountRequested: ['0'],
@@ -71,10 +69,16 @@ export class CreateClientComponent implements OnInit, OnDestroy {
       currencyCode: [''],
       category: [''],
     });
-    this.getInvestmentProjects();
+    if (this.itemId) {
+      this.loadingMyInvestmentProject = true;
+      this.getInvestmentProject(this.itemId);
+    } else {
+      this.loadingMyInvestmentProject = false;
+    }
+  }
 
-    this.shareDataService.editInvestmentProject.subscribe(res => {
-      this.editData = res;
+  editInvestmentProject(data) {
+      this.editData = data;
       if (this.editData !== '') {
         const {
           location,
@@ -101,9 +105,8 @@ export class CreateClientComponent implements OnInit, OnDestroy {
         this.coverImage = coverImage;
         this.officeImages = otherImages;
         this.displayCoverImage = true;
-        this.gotoTop();
+        // this.gotoTop();
       }
-    });
   }
 
   upload() {
@@ -158,7 +161,7 @@ export class CreateClientComponent implements OnInit, OnDestroy {
         this.coverImage = '';
         this.officeImages = [];
         this.displayCoverImage = false;
-        this.getInvestmentProjects();
+        // this.getInvestmentProjects();
       } else {
         this.snackBar.open(res.statusDesc, '', {
           duration: 6000,
@@ -170,7 +173,7 @@ export class CreateClientComponent implements OnInit, OnDestroy {
   }
 
   uploadOfficeImages() {
-    let myWidget = cloudinary.createUploadWidget({
+    const myWidget = cloudinary.createUploadWidget({
       cloudName: 'do6g6dwlz',
       uploadPreset: 'vdoc0rsk',
       multiple: true,
@@ -214,44 +217,15 @@ export class CreateClientComponent implements OnInit, OnDestroy {
     }
 
 
-    getInvestmentProjects() {
-      this.loadingMyInvestmentProjects = true;
-      const userData = Helpers.getUserData();
-      this.investmentProjectService.getAllInvestmentProjects(0, 12, { UserId: userData.userId })
+    getInvestmentProject(Id) {
+      this.loadingMyInvestmentProject = true;
+      this.investmentProjectService.getSingleInvestmentProject(Id)
       .subscribe(res => {
-        this.loadingMyInvestmentProjects = false;
-        this.myIvestmentProjects = res.projects;
+        this.loadingMyInvestmentProject = false;
+        this.editInvestmentProject(res);
       });
     }
 
-    @HostListener('window:scroll')
-    checkScroll() {
-      const scrollPosition = window.pageYOffset
-      || document.documentElement.scrollTop
-      || document.body.scrollTop || 0;
-
-      if (scrollPosition >= this.topPosToStartShowing) {
-        this.isShow = true;
-      } else {
-        this.isShow = false;
-      }
-    }
-
-    gotoTop() {
-      window.scroll({
-        top: 0,
-        left: 0,
-        behavior: 'smooth'
-      });
-    }
-
-    deleteProject(id) {
-      this.investmentProjectService.deleteInvestmentProject(id).subscribe(res => {
-        if (res.statusCode) {
-          this.getInvestmentProjects();
-        }
-      });
-    }
 
     ngOnDestroy(): void {
       this.shareDataService.showEditable('false');

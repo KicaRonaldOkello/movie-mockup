@@ -117,6 +117,12 @@
         }
 
         .ngx-timepicker-field-example {
+          display: flex;
+
+          .time {
+            margin-top: 10px;
+            margin-left: 5px;
+          }
           margin-bottom: 10px;
           ::ng-deep .ngx-timepicker {
             border-bottom: none !important;
@@ -182,9 +188,10 @@
 
           .meeting-link {
             border: none;
-            width: 200px;
+            width: 190px;
             height: 30px;
             font-size: 12px;
+            margin-right: 10px;
           }
         }
 

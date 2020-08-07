@@ -82,16 +82,24 @@
           </div>
           <div *ngIf="isLiveTranslation" [formGroup]="liveTranslationForm">
             <div class="calendar">
-              <input placeholder="Choose a Date"  formControlName="date" matInput [matDatepicker]="picker">
+              <label>Date: </label>
+              <label>
+                <input placeholder="Choose a Date"  formControlName="date" matInput [matDatepicker]="picker">
+              </label>
               <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
               <mat-datepicker #picker color="warn"></mat-datepicker>
             </div>
             <div class="ngx-timepicker-field-example">
-              <ngx-timepicker-field [format]="24" (timeChanged)="chosenTime($event)"></ngx-timepicker-field>
+              <label class="time">Time: </label>
+              <label>
+                <ngx-timepicker-field [format]="24" (timeChanged)="chosenTime($event)"></ngx-timepicker-field>
+              </label>
             </div>
             <div class="bio-details">
               <p class="upload-title">Meeting link:</p>
-              <input class="meeting-link" formControlName="meetingLink">
+              <label>
+                <input class="meeting-link" formControlName="meetingLink">
+              </label>
             </div>
           </div>
           <div class="bio-details" *ngIf="!isLiveTranslation">

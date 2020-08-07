@@ -1,3 +1,10 @@
+.spinner {
+  width: 80vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .body {
     width: 80vw;
     background-color: #f5f6f8;
@@ -29,29 +36,29 @@
             .upload {
                 width: 100%;
             }
-            
+
             .input-fields {
                 width: 100%;
                 margin-top: 20px;
             }
         }
     }
-    
+
     @media only screen and (max-width: 620px) {
         .upload-form {
             width: 100%;
         }
         .upload {
             width: 100%;
-            
+
             .cover-image {
                 width: 100%;
             }
-            
+
             .cover-image-avatar {
                 width: 100%;
             }
-            
+
             .upload-avatar {
                 width: 100%;
                 height: auto;
@@ -116,7 +123,7 @@
         margin-top: 15px;
         margin-left: 10px;
         width: 40%;
-        
+
         label {
             font-size: 10px;
             color: gray;
@@ -234,7 +241,7 @@
         .image {
             display: flex;
             flex-wrap: wrap;
-            
+
             .avatar-background {
                 height: 160px;
                 background-color: #F4F4F4;
@@ -251,7 +258,7 @@
                     font-weight: bold;
                 }
             }
-            
+
             mat-icon {
                 height: 80px;
                 margin-top: 20px;
@@ -278,21 +285,6 @@
             width: 100%;
             margin-top: -10px;
          }
-
-        textarea {
-            width: 100%;
-            background-color: #F4F4F4;
-            border: none;
-            padding: 10px;
-            border-radius: 8px;
-            resize: none;
-            font-size: 10px;
-            color: gray;
-
-            &:focus {
-                outline: none;
-            }
-        }
     }
 
     .submit-button {
@@ -339,7 +331,7 @@
 ::ng-deep .green-snackbar {
     background-color: green !important;
   }
-  
+
   ::ng-deep .red-snackbar {
     background-color: red !important;
   }

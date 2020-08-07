@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ModalComponent } from '../../shared/modal/modal.component';
 
 import * as moment from 'moment';
+import Helpers from '../../../helpers/helpers';
 
 @Component({
   selector: 'app-client-card',
@@ -16,7 +17,9 @@ import * as moment from 'moment';
 export class ClientCardComponent implements OnInit {
 
   @Input() cardData: any;
-  showEditable = false;
+  // showEditable = false;
+  userData;
+  showIcons = false;
   constructor(
     private shareDataService: ShareDataService,
     private matIconRegistry: MatIconRegistry,
@@ -24,34 +27,26 @@ export class ClientCardComponent implements OnInit {
     public dialog: MatDialog,
     private domSanitizer: DomSanitizer,
     ) {
-    this.shareDataService.makeClientCardEditable.subscribe(res => {
-      if (res === 'true') {
-        this.showEditable = true;
-      }
-    });
+    // this.shareDataService.makeClientCardEditable.subscribe(res => {
+    //   if (res === 'true') {
+    //     this.showEditable = true;
+    //   }
+    // });
     this.matIconRegistry.addSvgIcon(
       'delete',
       this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/delete.svg')
     );
     this.matIconRegistry.addSvgIcon(
-      'read',
-      this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/book.svg')
-    );
-    this.matIconRegistry.addSvgIcon(
       'refresh',
       this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/refresh.svg')
     );
+    this.userData = Helpers.getUserData();
   }
 
   ngOnInit() {
-  }
-
-  displayInvestmentProject(id) {
-    this.router.navigateByUrl(`/investor-matching/${id}`);
-  }
-
-  updateThisProject(cardData) {
-    this.shareDataService.editProject(cardData);
+    if (this.cardData.userId === this.userData.userId) {
+      this.showIcons = true;
+    }
   }
 
   deleteProject(id) {

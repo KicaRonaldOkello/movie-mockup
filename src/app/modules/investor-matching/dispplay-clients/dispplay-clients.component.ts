@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import {OrderService} from '../../../services/order/order.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {ActivatedRoute} from '@angular/router';
+import Helpers from '../../../helpers/helpers';
 
 @Component({
   selector: 'app-dispplay-clients',
@@ -15,6 +16,7 @@ export class DispplayClientsComponent implements OnInit {
 
   loadingInvestmentProjects = true;
   page = 0;
+  userData;
   pageCount: number;
   data = [];
   limit = 12;
@@ -38,6 +40,12 @@ export class DispplayClientsComponent implements OnInit {
         this.getAllInvestmentProjects({});
       }
     });
+    this.shareDataService.deletedProjectId.subscribe(res => {
+      if (res !== '') {
+        this.deleteProject(res);
+      }
+    });
+    this.userData = Helpers.getUserData();
   }
 
   ngOnInit() {
@@ -48,7 +56,8 @@ export class DispplayClientsComponent implements OnInit {
      amountMin: [''],
      amountMax: [''],
      returnsMin: [''],
-     returnsMax: ['']
+     returnsMax: [''],
+     ownerId: [''],
    });
 
    this.payment = this.route.snapshot.queryParamMap.get('payment');
@@ -74,9 +83,22 @@ export class DispplayClientsComponent implements OnInit {
 
   }
 
+  isChecked(event) {
+    if (event.checked) {
+      this.projectsForm.patchValue({
+        ownerId: this.userData.userId
+      });
+    } else {
+      this.projectsForm.patchValue({
+        ownerId: ''
+      });
+    }
+  }
+
   searchInvestmentProject() {
     this.loadingInvestmentProjects = true;
-    let { location, username, amountMax, amountMin, returnsMax, returnsMin } = this.projectsForm.value;
+    let { amountMax, amountMin, returnsMax, returnsMin } = this.projectsForm.value;
+    const { location, username, ownerId } = this.projectsForm.value;
     if (amountMin !== '') {
       amountMin = amountMin.replace(/\,/g, '');
     }
@@ -90,6 +112,7 @@ export class DispplayClientsComponent implements OnInit {
       returnsMax = returnsMax.replace(/\,/g, '');
     }
     const data = {
+      userId: ownerId,
       Title: username,
       Location: location,
       AmountRequested: `${amountMin}-${amountMax}`,
@@ -130,6 +153,25 @@ export class DispplayClientsComponent implements OnInit {
         panelClass: ['green-snackbar']
       });
     }
+  }
+
+  deleteProject(id) {
+    this.getAllInvestmentProjectsService.deleteInvestmentProject(id).subscribe(res => {
+      if (res.statusCode === '0') {
+        this.data = this.data.filter((item) => item.id !== id);
+        this.snackBar.open('Investment project deleted successfully.', '', {
+          duration: 5000,
+          verticalPosition: 'bottom',
+          horizontalPosition: 'center',
+          panelClass: ['green-snackbar']
+        });
+      } else {
+        this.snackBar.open(res.statusDesc, '', {
+          duration: 6000,
+          panelClass: ['red-snackbar']
+        });
+      }
+    });
   }
 
 }

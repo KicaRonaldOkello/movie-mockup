@@ -1,4 +1,7 @@
-<div class="body">
+<div class="spinner" *ngIf="loadingMyInvestmentProject">
+  <mat-spinner></mat-spinner>
+</div>
+<div class="body" *ngIf="!loadingMyInvestmentProject">
     <div class="form-body" [formGroup]="clientForm">
         <div class="upload-form">
             <span class="upload">
@@ -101,8 +104,13 @@
           </span>
         </div>
         <div class="description">
-            <p>Description</p>
-            <textarea formControlName="description" cols="30" rows="10"></textarea>
+          <p>Description</p>
+          <quill-editor
+            [styles]="{height: '250px'}"
+            placeholder="Type your package description here..."
+            formControlName="description"
+            required
+          ></quill-editor>
             <p class="error"
                 *ngIf="clientForm.controls.description.invalid && (clientForm.controls.description.dirty || clientForm.controls.description.touched)">
                 *Description is required
@@ -116,21 +124,12 @@
             <span *ngIf="!uploadingInvestmentProjectDetail">
               Submit
             </span>
-            <mat-icon *ngIf="uploadingInvestmentProjectDetail">
-              <mat-spinner diameter="20"></mat-spinner>
-            </mat-icon>
+            <span class="gold" *ngIf="uploadingInvestmentProjectDetail">
+              <mat-icon class="gold">
+                <mat-spinner diameter="20"></mat-spinner>
+              </mat-icon>
+            </span>
           </button>
-        </span>
-    </div>
-    <div class="bottom">
-        <p  *ngIf="myIvestmentProjects.length > 0 && !loadingMyInvestmentProjects">Other Clients</p>
-        <span class="bottom-spinner" *ngIf="loadingMyInvestmentProjects">
-          <mat-spinner diameter="60"></mat-spinner>
-        </span>
-        <span *ngIf="!loadingMyInvestmentProjects">
-          <app-display-client-cards
-          [data]="myIvestmentProjects"
-          ></app-display-client-cards>
         </span>
     </div>
 </div>

@@ -61,7 +61,7 @@
       <mat-icon
         class="deleteButton"
         matTooltip="Delete package"
-        *ngIf="displayDeleteButton"
+        *ngIf="displayDeleteButton || (this.userData.roleId === 'ADMIN')"
         (click)="openDialog(data.id)"
         svgIcon="delete">
       </mat-icon>
