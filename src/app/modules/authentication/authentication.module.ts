@@ -7,11 +7,13 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ChangePasswordComponent } from './change-password/change-password.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 
 
 @NgModule({
-  declarations: [LoginComponent, SingupComponent],
+  declarations: [LoginComponent, SingupComponent, ChangePasswordComponent, ForgotPasswordComponent],
   imports: [
     CommonModule,
     AuthenticationRoutingModule,

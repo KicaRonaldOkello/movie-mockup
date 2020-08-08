@@ -7,38 +7,38 @@ import {map} from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class UsersService {
+export class LiquidationService {
 
   base_url = environment.base_url;
   constructor(private http: HttpClient) { }
 
-  getUserByName(name): Observable<any> {
+  getUserEarnings(userId): Observable<any> {
     return this.http.get(
-      `${this.base_url}GetAllUsers`, {params: name }
+      `${this.base_url}GetUserEarnings`, {params: { UserId: userId }}
     ).pipe(
       map(data => data)
     );
   }
 
-  updateUser(updatedData): Observable<any> {
-    return this.http.post(
-      `${this.base_url}UpdateUser`, updatedData
+  getAllLiquidationChannels(): Observable<any> {
+    return this.http.get(
+      `${this.base_url}GetAllLiquidationChannelTypes`
     ).pipe(
       map(data => data)
     );
   }
 
-  changeUserPassword(updatedData): Observable<any> {
-    return this.http.post(
-      `${this.base_url}ChangeUserPassword`, updatedData
+  getAllIdTypes(): Observable<any> {
+    return this.http.get(
+      `${this.base_url}GetAllKycIDTypes`
     ).pipe(
       map(data => data)
     );
   }
 
-  forgotPassword(userId): Observable<any> {
+  initiateLiquidation(liquidationData): Observable<any> {
     return this.http.post(
-      `${this.base_url}ForgotPassword`, userId
+      `${this.base_url}InitiateLiquidation`, liquidationData
     ).pipe(
       map(data => data)
     );

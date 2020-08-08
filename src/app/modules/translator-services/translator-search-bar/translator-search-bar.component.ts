@@ -58,7 +58,6 @@ export class TranslatorSearchBarComponent implements OnInit {
       PackageName,
       Price: `${priceMin}-${priceMax}`,
     };
-    // console.log(data, '>>>>>>>>>>>>>>>>>');
     this.searchData.emit(data);
   }
 

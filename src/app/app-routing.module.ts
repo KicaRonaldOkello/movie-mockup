@@ -12,7 +12,7 @@ const routes: Routes = [
   } },
   { path: 'auth', loadChildren: './modules/authentication/authentication.module#AuthenticationModule' },
   { path: 'tv', loadChildren: './modules/tv-stations/tv-stations.module#TvStationsModule'},
-  { path: 'profile', loadChildren: './modules/profile/profile.module#ProfileModule'},
+  { path: 'profile', loadChildren: './modules/profile/profile.module#ProfileModule', canActivate: [AuthGuard]},
   { path: 'blog', loadChildren: './modules/blog/blog.module#BlogModule'},
   { path: 'translation', loadChildren: './modules/translator-services/translator-services.module#TranslatorServicesModule'},
   { path: 'investor-matching', loadChildren: './modules/investor-matching/investor-matching.module#InvestorMatchingModule'},

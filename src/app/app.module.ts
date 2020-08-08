@@ -17,6 +17,7 @@ import { TokenInterceptor } from './services/guards/token.interceptor';
 import { TranslatorServicesModule } from './modules/translator-services/translator-services.module';
 import {NgxMaterialTimepickerContainerComponent} from 'ngx-material-timepicker/src/app/material-timepicker/components/ngx-material-timepicker-container/ngx-material-timepicker-container.component';
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
+import { RemoveUnderscorePipe } from './utils/removeUnderscore/remove-underscore.pipe';
 
 @NgModule({
   declarations: [

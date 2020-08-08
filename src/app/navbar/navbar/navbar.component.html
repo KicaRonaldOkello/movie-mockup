@@ -1,105 +1,126 @@
 <div class="full-page__header">
-    <div class="full-page__header__top">
-      <img src="assets/chinee_tv_logo.jpg" alt="icon" class="right-icon">
-        <span>
-          <input name="Search" />
+  <div class="full-page__header__top">
+    <img alt="icon" class="right-icon" src="assets/chinee_tv_logo.jpg">
+    <span>
+          <input name="Search"/>
           <button class="search-button">Search</button>
         </span>
-        <span class="globe">
+    <span class="globe">
 
-          <div class="custom-select-wrapper" (click)="toggleDropDown()">
+          <div (click)="toggleDropDown()" class="custom-select-wrapper">
             <div #toggle class="custom-select">
               <div class="custom-select__trigger"><span>{{selectedLanguage}}</span>
                 <div class="arrow"></div>
                 </div>
                 <div class="custom-options">
                   <span
-                    class="custom-option" [class.selected]="selectedLanguage === 'EN'"
-                    (click)="changeLanguage('#googtrans(en|en)')" data-value="ENG">
+                    (click)="changeLanguage('#googtrans(en|en)')" [class.selected]="selectedLanguage === 'EN'"
+                    class="custom-option" data-value="ENG">
                     ENG
                   </span>
                   <span
-                    class="custom-option" [class.selected]="selectedLanguage === 'FR'"
-                    (click)="changeLanguage('#googtrans(en|fr)')" data-value="FR">
+                    (click)="changeLanguage('#googtrans(en|fr)')" [class.selected]="selectedLanguage === 'FR'"
+                    class="custom-option" data-value="FR">
                     FR
                   </span>
                   <span
-                    class="custom-option" [class.selected]="selectedLanguage === 'CHI'"
-                    (click)="changeLanguage('#googtrans(en|zh-CN)')" data-value="CHI">
+                    (click)="changeLanguage('#googtrans(en|zh-CN)')" [class.selected]="selectedLanguage === 'CHI'"
+                    class="custom-option" data-value="CHI">
                     CHI
                   </span>
                   <span
-                    class="custom-option" [class.selected]="selectedLanguage === 'JPN'"
-                    (click)="changeLanguage('#googtrans(en|ja)')" data-value="JPN">
+                    (click)="changeLanguage('#googtrans(en|ja)')" [class.selected]="selectedLanguage === 'JPN'"
+                    class="custom-option" data-value="JPN">
                     JPN
                   </span>
                 </div>
             </div>
           </div>
 
-          <img class="align-globe" src="assets/www.svg" alt="globe">
+          <img alt="globe" class="align-globe" src="assets/www.svg">
         </span>
-        <span class="signin">
-          <span *ngIf="username === 'Hello Sign In'">
-            <p>Hello @User</p>
-            <p class="username" (click)="login()">Sign In</p>
-          </span>
-          <p *ngIf="username !== 'Hello Sign In'">{{ (username.length>12)? (username | slice:0:12)+'..':(username) }}</p>
-          <strong *ngIf="showSignout" (click)="logout()">Sign out</strong>
-        </span>
-    </div>
-    <div class="full-page__header__bottom">
-      <a
-        class="menu-item"
-        href="/tv"
-        [routerLinkActive]="'menu-item__checked'"
-        [routerLink]="['tv']"
-        >
-        <p>TV Stations</p>
-      </a>
-      <a
-        class="menu-item"
-        href="/investor-matching"
-        [routerLinkActive]="'menu-item__checked'"
-        (click)="changeNavBarIcon('/blog')"
-        [routerLink]="['investor-matching']"
-        >
-        <p>Investor Matching</p>
-      </a>
-      <a
-        class="menu-item"
-        href="/tours"
-        [routerLinkActive]="'menu-item__checked'"
-        (click)="changeNavBarIcon('/blog')"
-        [routerLink]="['tours']"
-      >
-        <p>Tours & Travels</p>
-    </a>
-      <a
-        class="menu-item"
-        href="/translation"
-        [routerLinkActive]="'menu-item__checked'"
-        (click)="changeNavBarIcon('/blog')"
-        [routerLink]="['translation']"
-      >
-        <p>Translator Services</p>
-      </a>
-      <a
-        class="menu-item"
-        routerLinkActive="menu-item__checked"
-        (click)="changeNavBarIcon('/blog')"
-        href="/blog"
-        [routerLink]="['blog']">
-        <p>Blogging</p>
-      </a>
-      <a
-        *ngIf="isAdmin"
-        class="menu-item"
-        routerLinkActive="menu-item__checked"
-        (click)="changeNavBarIcon('/blog')"
-        href="/admin"
-        [routerLink]="['admin']">
-        <p>Admin</p>
-      </a>
+    <div class="signin">
+      <div (click)="toggleProfileDropDown()" class="custom-select-wrapper">
+        <div #toggleProfileOptions class="custom-select">
+          <div *ngIf="username === 'Hello Sign In'" class="custom-select__trigger"><p (click)="login()" class="username">Sign In</p>
+            <div class="arrow"></div>
+          </div>
+          <div *ngIf="username !== 'Hello Sign In'" class="custom-select__trigger">
+            <span>{{ (username.length > 12) ? (username | slice:0:12) + '..' : (username) }}</span>
+            <div class="arrow"></div>
+          </div>
+          <div class="custom-options" *ngIf="showSignout">
+            <span
+              [class.selected]="selectedLanguage === 'CHI'" class="custom-option" data-value="CHI"
+              routerLink="/profile">
+              Profile
+            </span>
+            <span class="custom-option" data-value="JPN" routerLink="/chats">
+              Messages
+            </span>
+            <span class="custom-option" data-value="JPN">
+              <a [href]="emailstring" target="_blank">Contact help</a>
+            </span>
+            <span (click)="logout()" class="custom-option" data-value="JPN">
+              SignOut
+            </span>
+        </div>
+      </div>
     </div>
   </div>
+</div>
+<div class="full-page__header__bottom">
+  <a
+    [routerLinkActive]="'menu-item__checked'"
+    [routerLink]="['tv']"
+    class="menu-item"
+    href="/tv"
+  >
+    <p>TV Stations</p>
+  </a>
+  <a
+    (click)="changeNavBarIcon('/blog')"
+    [routerLinkActive]="'menu-item__checked'"
+    [routerLink]="['investor-matching']"
+    class="menu-item"
+    href="/investor-matching"
+  >
+    <p>Investor Matching</p>
+  </a>
+  <a
+    (click)="changeNavBarIcon('/blog')"
+    [routerLinkActive]="'menu-item__checked'"
+    [routerLink]="['tours']"
+    class="menu-item"
+    href="/tours"
+  >
+    <p>Tours & Travels</p>
+  </a>
+  <a
+    (click)="changeNavBarIcon('/blog')"
+    [routerLinkActive]="'menu-item__checked'"
+    [routerLink]="['translation']"
+    class="menu-item"
+    href="/translation"
+  >
+    <p>Translator Services</p>
+  </a>
+  <a
+    (click)="changeNavBarIcon('/blog')"
+    [routerLink]="['blog']"
+    class="menu-item"
+    href="/blog"
+    routerLinkActive="menu-item__checked">
+    <p>Blogging</p>
+  </a>
+  <a
+    (click)="changeNavBarIcon('/blog')"
+    *ngIf="isAdmin"
+    [routerLink]="['admin']"
+    class="menu-item"
+    href="/admin"
+    routerLinkActive="menu-item__checked">
+    <p>Admin</p>
+  </a>
+</div>
+</div>

@@ -12,7 +12,9 @@ export const environment = {
   clientAllowedDocumentFormats: ['pdf', 'doc', 'ppt', 'odt', 'xls', 'psd'],
   maxImageFileSize: 5000000,
   maxVideoFileSize: 50000000,
-  maxFileSizeForChats: 5000000
+  maxFileSizeForChats: 5000000,
+  contactHelpEmail: 'test@test.com',
+  contactHelpTitle: 'I NEED SOME HELP'
 };
 
 /*

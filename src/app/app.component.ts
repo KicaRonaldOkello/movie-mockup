@@ -24,7 +24,7 @@ export class AppComponent {
   this.shareDataService.displayAdComponent.subscribe(res => {
     if (res === 'true') {
       this.displayAdComponent = res;
-    };
+    }
   });
 
 

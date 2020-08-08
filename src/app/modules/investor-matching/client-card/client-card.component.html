@@ -9,7 +9,6 @@
         <p>{{cardData.timeSinceCreation}}</p>
     </div>
     <div class="card__body">
-        <p>Owner: {{(cardData.userId.length>23)? (cardData.userId | slice:0:23)+'..':(cardData.userId)}}</p>
         <p>Location: {{cardData.location}}</p>
         <p>Amount Required: {{cardData.currencyCode}} {{cardData.amountRequested | number}}</p>
         <span class="card__body__returns">

@@ -106,7 +106,7 @@ export class TourPackagePaymentComponent implements OnInit {
         window.location.replace(`${window.location.href}?paymentVerification=Fail`);
       }
     });
-  }
+  };
 
   failureMessage() {
     let message = '';

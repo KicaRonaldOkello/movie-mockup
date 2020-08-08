@@ -171,7 +171,7 @@ export class TanslatorDetailsComponent implements OnInit {
         window.location.replace(`${window.location.href}?paymentVerification=Fail`);
       }
     });
-  }
+  };
 
   failureMessage() {
     let message = '';
