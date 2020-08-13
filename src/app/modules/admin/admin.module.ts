@@ -19,6 +19,10 @@ import { VideoCardComponent } from './video-card/video-card.component';
 import { DisplayVideosComponent } from './display-videos/display-videos.component';
 import { ManagePlaylistComponent } from './manage-playlist/manage-playlist.component';
 import {TvStationsModule} from '../tv-stations/tv-stations.module';
+import { ManageUsersComponent } from './manage-users/manage-users.component';
+import {TranslatorServicesModule} from '../translator-services/translator-services.module';
+import { LiquidationRequestsComponent } from './liquidation-requests/liquidation-requests.component';
+import {MatTableModule} from '@angular/material/table';
 
 
 
@@ -31,35 +35,39 @@ import {TvStationsModule} from '../tv-stations/tv-stations.module';
       VideoCardComponent,
       DisplayVideosComponent,
       ManagePlaylistComponent,
+      ManageUsersComponent,
+      LiquidationRequestsComponent,
 
   ],
-    imports: [
-        CommonModule,
-        AdminRoutingModule,
-        MatProgressSpinnerModule,
-        MatIconModule,
-        MatListModule,
-        MatSidenavModule,
-        MatInputModule,
-        ReactiveFormsModule,
-        MatRadioModule,
-        DragDropModule,
-        BlogModule,
-        QuillModule.forRoot({
-            // modules: {
-            //   toolbar: [
-            //     ['bold', 'italic', 'underline', 'strike'],
-            //     ['blockquote', 'code-block'],
-            //     [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-            //     [{ 'script': 'sub'}, { 'script': 'super' }],
-            //     [{ 'indent': '-1'}, { 'indent': '+1' }],
-            //     [{ 'direction': 'rtl' }],
-            //     [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-            //   ]
-            // }
-        }),
-        TvStationsModule,
-    ],
+  imports: [
+    CommonModule,
+    AdminRoutingModule,
+    MatProgressSpinnerModule,
+    MatIconModule,
+    MatListModule,
+    MatSidenavModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    MatRadioModule,
+    DragDropModule,
+    BlogModule,
+    QuillModule.forRoot({
+      // modules: {
+      //   toolbar: [
+      //     ['bold', 'italic', 'underline', 'strike'],
+      //     ['blockquote', 'code-block'],
+      //     [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+      //     [{ 'script': 'sub'}, { 'script': 'super' }],
+      //     [{ 'indent': '-1'}, { 'indent': '+1' }],
+      //     [{ 'direction': 'rtl' }],
+      //     [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+      //   ]
+      // }
+    }),
+    TvStationsModule,
+    TranslatorServicesModule,
+    MatTableModule,
+  ],
   exports: [
   ]
 })

@@ -16,17 +16,18 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MAT_DATE_LOCALE} from '@angular/material/core';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 
 
 @NgModule({
-  declarations: [
-    DisplayTranslatorsComponent,
-    TranslatorCardsComponent,
-    TanslatorDetailsComponent,
-    CreateTranslatorComponent,
-    TranslatorSearchBarComponent,
-  ],
+    declarations: [
+        DisplayTranslatorsComponent,
+        TranslatorCardsComponent,
+        TanslatorDetailsComponent,
+        CreateTranslatorComponent,
+        TranslatorSearchBarComponent,
+    ],
   imports: [
     CommonModule,
     TranslatorServicesRoutingModule,
@@ -39,9 +40,13 @@ import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
     MatTooltipModule,
     MatProgressSpinnerModule,
     NgxMaterialTimepickerModule,
+    MatSlideToggleModule,
   ],
-  providers: [
-    {provide: MAT_DATE_LOCALE, useValue: 'en-GB'}
-  ]
+    exports: [
+        TranslatorCardsComponent
+    ],
+    providers: [
+        {provide: MAT_DATE_LOCALE, useValue: 'en-GB'}
+    ]
 })
 export class TranslatorServicesModule { }

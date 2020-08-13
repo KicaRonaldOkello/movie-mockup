@@ -1,0 +1,12 @@
+<span>
+    <p *ngIf="action === 'grant'">Are you sure that you want to {{action}} this user ADMIN rights ?</p>
+    <p *ngIf="action === 'revoke'">Are you sure that you want to {{action}} this user's ADMIN rights ?</p>
+    <span class="action-buttons">
+        <!-- <mat-dialog-actions> -->
+            <button class="button" (click)="onNoClick('action')">Yes</button>
+            <button class="button cancel-button" (click)="onRevokeClick('action')">No</button>
+<!--            <button class="button cancel-button" *ngIf="action === 'grant'" (click)="onCancelClick('action')">No</button>-->
+      <!-- </mat-dialog-actions> -->
+    </span>
+</span>
+

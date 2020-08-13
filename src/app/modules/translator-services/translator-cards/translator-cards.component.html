@@ -1,14 +1,20 @@
 <span class="card">
   <div class="head">
   </div>
-  <div class="profileImage">
+  <div class="profileImage" *ngIf="!showUserInfo">
     <img [src]="data.coverImageUrl" [hidden]="loadingProfileImage" (load)="loadingProfileImage=false;">
      <div *ngIf="loadingProfileImage" class="profile-image-spinner">
        <mat-spinner diameter="30"></mat-spinner>
      </div>
   </div>
+  <div class="profileImage" *ngIf="showUserInfo">
+    <img [src]="data.profilePicUrl" [hidden]="loadingProfileImage" (load)="loadingProfileImage=false;">
+     <div *ngIf="loadingProfileImage" class="profile-image-spinner">
+       <mat-spinner diameter="30"></mat-spinner>
+     </div>
+  </div>
 
-  <div class="card-body">
+  <div class="card-body" *ngIf="!showUserInfo">
     <div class="card-details">
       <p class="title">Name:</p>
       <p class="value">{{data.ownerName}}</p>
@@ -43,8 +49,27 @@
     </div>
   </div>
 
+  <div class="card-body" *ngIf="showUserInfo">
+    <div class="card-details">
+      <p class="title">Name:</p>
+      <p class="value">{{data.name}}</p>
+    </div>
+    <div class="card-details">
+      <p class="title">UserId:</p>
+      <p class="value">{{data.userId}}</p>
+    </div>
+    <div class="card-details">
+      <p class="title">Email:</p>
+      <p class="value">{{data.userId}}</p>
+    </div>
+    <div class="card-details">
+      <p class="title">Created On:</p>
+      <p class="value">{{data.createdOn}}</p>
+    </div>
+  </div>
 
-    <span class="action-buttons">
+
+    <span class="action-buttons" *ngIf="!showUserInfo">
       <mat-icon
         class="deleteButton"
         matTooltip="Edit package"
@@ -65,6 +90,11 @@
         (click)="openDialog(data.id)"
         svgIcon="delete">
       </mat-icon>
-
     </span>
+
+
+  <span class="action-buttons" *ngIf="showUserInfo">
+    <mat-slide-toggle (change)="toggleAdminState($event, data.userId, data.roleId)" [checked]="data.roleId ==='ADMIN'">Admin</mat-slide-toggle>
+    <mat-slide-toggle (change)="toggleDeleteState($event, data.userId, data.isBlocked)" [checked]="data.isBlocked">Block</mat-slide-toggle>
+  </span>
 </span>

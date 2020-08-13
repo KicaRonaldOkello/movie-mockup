@@ -42,6 +42,9 @@ export class ShareDataService {
   private searchTranslationPackage = new BehaviorSubject('');
   translationParameters = this.searchTranslationPackage.asObservable();
 
+  private displayUser = new BehaviorSubject('');
+  displayUserInfo = this.displayUser.asObservable();
+
   constructor() { }
 
   newVideoId(id) {
@@ -90,5 +93,9 @@ export class ShareDataService {
 
   searchTranslations(data) {
     this.searchTranslationPackage.next(data);
+  }
+
+  showUserInfo() {
+    this.displayUser.next('true');
   }
 }

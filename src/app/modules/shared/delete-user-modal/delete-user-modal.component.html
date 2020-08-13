@@ -1,0 +1,13 @@
+<span class="body">
+    <p>Are you sure that you want to {{action}} this user ?</p>
+    <span class="action-buttons">
+      <div *ngIf="action === 'block'">
+        <textarea [formControl]="reason" rows="5" placeholder="Enter reason here..."></textarea>
+      </div>
+      <div class="buttons" [style.margin-top]="action === 'block' ? '10px' : '40px'">
+        <button class="button" (click)="onYesClick('action')">Yes</button>
+        <button class="button cancel-button" (click)="onNoClick('action')">No</button>
+      </div>
+    </span>
+</span>
+

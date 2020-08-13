@@ -14,10 +14,9 @@ import { ModalComponent } from './modules/shared/modal/modal.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from './modules/shared/shared.module';
 import { TokenInterceptor } from './services/guards/token.interceptor';
-import { TranslatorServicesModule } from './modules/translator-services/translator-services.module';
-import {NgxMaterialTimepickerContainerComponent} from 'ngx-material-timepicker/src/app/material-timepicker/components/ngx-material-timepicker-container/ngx-material-timepicker-container.component';
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
-import { RemoveUnderscorePipe } from './utils/removeUnderscore/remove-underscore.pipe';
+import {UserModalComponent} from './modules/shared/user-modal/user-modal.component';
+import {DeleteUserModalComponent} from './modules/shared/delete-user-modal/delete-user-modal.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +44,6 @@ import { RemoveUnderscorePipe } from './utils/removeUnderscore/remove-underscore
     multi: true
   }],
   bootstrap: [AppComponent],
-  entryComponents: [ModalComponent]
+  entryComponents: [ModalComponent, UserModalComponent, DeleteUserModalComponent]
 })
 export class AppModule { }
