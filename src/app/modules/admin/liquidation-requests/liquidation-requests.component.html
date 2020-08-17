@@ -17,7 +17,10 @@
       </span>
     </div>
   </div>
-  <mat-table [dataSource]="data">
+  <div class="spinner" *ngIf="loadingTableData">
+    <mat-spinner></mat-spinner>
+  </div>
+  <mat-table *ngIf="!loadingTableData" [dataSource]="data">
     <ng-container matColumnDef="requesterId">
       <mat-header-cell *matHeaderCellDef> RequesterId </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.requesterId}} </mat-cell>
@@ -38,14 +41,19 @@
       <mat-cell *matCellDef="let element"> {{element.amount}} </mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="liquidationChannel">
-      <mat-header-cell *matHeaderCellDef> Liquidation Channel </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.liquidationChannel}} </mat-cell>
-    </ng-container>
+<!--    <ng-container matColumnDef="liquidationChannel">-->
+<!--      <mat-header-cell *matHeaderCellDef> Liquidation Channel </mat-header-cell>-->
+<!--      <mat-cell *matCellDef="let element"> {{element.liquidationChannel}} </mat-cell>-->
+<!--    </ng-container>-->
 
     <ng-container matColumnDef="liquidationStatus">
       <mat-header-cell *matHeaderCellDef> Liquidation Status </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.liquidationStatus}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="liquidationChannelAccountDetails">
+      <mat-header-cell *matHeaderCellDef> Liquidation Account Details </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.liquidationChannelAccountDetails}} </mat-cell>
     </ng-container>
 
 

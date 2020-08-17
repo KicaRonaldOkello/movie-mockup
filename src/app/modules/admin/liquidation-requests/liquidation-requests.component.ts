@@ -9,7 +9,8 @@ import {LiquidationService} from '../../../services/liquidation/liquidation.serv
 export class LiquidationRequestsComponent implements OnInit {
 
   data;
-  displayedColumns = ['requesterId', 'kycIDType', 'kycIDNumber', 'amount', 'liquidationStatus', 'liquidationChannel'];
+  loadingTableData = true;
+  displayedColumns = ['requesterId', 'kycIDType', 'kycIDNumber', 'amount', 'liquidationStatus', 'liquidationChannelAccountDetails'];
   constructor(private liquidationService: LiquidationService) { }
 
   ngOnInit(): void {
@@ -19,6 +20,7 @@ export class LiquidationRequestsComponent implements OnInit {
 
   getAllLiquidations() {
     this.liquidationService.getAllLiquidations().subscribe(res => {
+      this.loadingTableData = false;
       console.log(res.items, '>>>>>>>');
       this.data = res.items;
     });

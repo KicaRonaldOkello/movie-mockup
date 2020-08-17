@@ -14,6 +14,7 @@ export class SingupComponent implements OnInit {
 
   signupForm: FormGroup;
   submitUserDetail = false;
+  agreedTermsAndConditions = false;
   constructor(
     private shareDataService: ShareDataService,
     private fb: FormBuilder,
@@ -57,4 +58,7 @@ export class SingupComponent implements OnInit {
     });
   }
 
+  agreeTerms(event) {
+    this.agreedTermsAndConditions = event.checked;
+  }
 }
