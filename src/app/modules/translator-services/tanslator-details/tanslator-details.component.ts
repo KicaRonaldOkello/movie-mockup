@@ -32,6 +32,7 @@ export class TanslatorDetailsComponent implements OnInit {
   hasChosenTranslationType = false;
   liveTranslationForm: FormGroup;
   isSubmitted = false;
+  revealEmail = false;
   constructor(
     private shareDataService: ShareDataService,
     private activatedRoute: ActivatedRoute,

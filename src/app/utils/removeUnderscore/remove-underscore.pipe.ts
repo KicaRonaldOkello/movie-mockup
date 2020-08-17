@@ -6,7 +6,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class RemoveUnderscorePipe implements PipeTransform {
 
   transform(value: string): string {
-    return value.replace('_', ' ');
+    return value.replace(/_/g, ' ');
   }
 
 }

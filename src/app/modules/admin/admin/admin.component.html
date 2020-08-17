@@ -8,7 +8,9 @@
           <mat-list-item role="listitem" (click)="loadVideo()">Manage Videos</mat-list-item>
           <mat-list-item role="listitem" (click)="loadPlaylist()">Manage Playlists</mat-list-item>
           <mat-list-item role="listitem" (click)="loadUsers()">Manage Users</mat-list-item>
-          <mat-list-item role="listitem" (click)="loadliquidationRequests()">Liquidation Requests</mat-list-item>
+          <mat-list-item role="listitem" (click)="loadLiquidationRequests()">Liquidation Requests</mat-list-item>
+          <mat-list-item role="listitem" (click)="loadPayments()">Payments</mat-list-item>
+          <mat-list-item role="listitem" (click)="loadSystemSettings()">System Settings</mat-list-item>
         </mat-list>
       </div>
       <div class="content">
@@ -17,5 +19,7 @@
         <app-manage-playlist *ngIf="loadManagePlaylist"></app-manage-playlist>
         <app-manage-users *ngIf="loadManageUsers"></app-manage-users>
         <app-liquidation-requests *ngIf="loadManageLiquidationRequests"></app-liquidation-requests>
+        <app-payments *ngIf="loadManagePayments"></app-payments>
+        <app-system-settings *ngIf="loadManageSystemSettings"></app-system-settings>
       </div>
 </div>

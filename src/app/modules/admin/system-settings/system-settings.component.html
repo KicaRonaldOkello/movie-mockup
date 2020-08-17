@@ -1,0 +1,64 @@
+<div class="body">
+  <h2>System Settings</h2>
+
+  <div class="align-search-bar">
+    <div [formGroup]="systemSettingsForm" class="search-bar">
+      <span class="name">
+        <input class="input-name" formControlName="settingCode" placeholder="Setting Id" type="text">
+      </span>
+
+      <span class="name">
+        <input class="input-name" formControlName="settingValue" placeholder="Setting Value" type="text">
+      </span>
+      <span class="button-cover">
+        <button (click)="searchSystemSettings()" class="button ">Search</button>
+      </span>
+    </div>
+  </div>
+
+  <div *ngIf="loadingSystemSettings" class="spinner">
+    <mat-spinner></mat-spinner>
+  </div>
+  <div class="spinner" *ngIf="!loadingSystemSettings && data.length === 0">
+    <p>The system setting that you have searched for does not exist.</p>
+  </div>
+
+  <div class="align-table" *ngIf="!loadingSystemSettings && data.length > 0">
+    <mat-table [dataSource]="data">
+
+      <ng-container matColumnDef="settingId">
+        <mat-header-cell *matHeaderCellDef> Setting Id</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.settingCode | removeUnderscore | uppercase}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="settingValue">
+        <mat-header-cell *matHeaderCellDef> Setting Value</mat-header-cell>
+        <mat-cell matTooltip="Click to edit setting value" (click)="editValue(element.settingValue, element.id)" *matCellDef="let element"> {{element.settingValue}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="settingDesc">
+        <mat-header-cell *matHeaderCellDef> Setting Description</mat-header-cell>
+        <mat-cell *matCellDef="let element" matTooltip="Click to edit setting description" (click)="editSettingDesc(element.settingDesc, element.id)"> {{element.settingDesc}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="update">
+        <mat-header-cell *matHeaderCellDef> Action</mat-header-cell>
+        <mat-cell *matCellDef="let element"><button class="button button-red" (click)="updateSystemSetting(element.id)">
+          <span *ngIf="!savingSystemSetting  || !(savedItemId == element.id)">
+            Update
+          </span>
+          <span class="white">
+            <mat-icon  class="white" *ngIf="savingSystemSetting && (savedItemId == element.id)">
+              <mat-spinner diameter="20"></mat-spinner>
+            </mat-icon>
+          </span>
+        </button>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+    <mat-paginator [pageSize]="limit" [hidePageSize]="true" (page)="nextOrPreviousPage($event)" [length]="length"></mat-paginator>
+  </div>
+</div>

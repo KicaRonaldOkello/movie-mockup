@@ -15,6 +15,8 @@ export class AdminComponent implements OnInit {
   displayAdminComponent = true;
   smallScreensize = false;
   loadManageLiquidationRequests = false;
+  loadManagePayments = false;
+  loadManageSystemSettings = false;
   modes = 'side';
   constructor(private cdRef: ChangeDetectorRef, public breakpointObserver: BreakpointObserver) {
   }
@@ -45,6 +47,8 @@ export class AdminComponent implements OnInit {
     this.loadManagePlaylist = false;
     this.loadManageUsers = false;
     this.loadManageLiquidationRequests = false;
+    this.loadManagePayments = false;
+    this.loadManageSystemSettings = false;
   }
 
   loadVideo() {
@@ -54,6 +58,8 @@ export class AdminComponent implements OnInit {
     this.loadManagePlaylist = false;
     this.loadManageUsers = false;
     this.loadManageLiquidationRequests = false;
+    this.loadManagePayments = false;
+    this.loadManageSystemSettings = false;
   }
 
   loadPlaylist() {
@@ -63,6 +69,8 @@ export class AdminComponent implements OnInit {
     this.loadManageBlog = false;
     this.loadManageUsers = false;
     this.loadManageLiquidationRequests = false;
+    this.loadManagePayments = false;
+    this.loadManageSystemSettings = false;
   }
 
   loadUsers() {
@@ -72,14 +80,40 @@ export class AdminComponent implements OnInit {
     this.loadManageVideo = false;
     this.loadManageBlog = false;
     this.loadManageLiquidationRequests = false;
+    this.loadManagePayments = false;
+    this.loadManageSystemSettings = false;
   }
 
-  loadliquidationRequests() {
+  loadLiquidationRequests() {
     window.scroll(0, 0);
     this.loadManageLiquidationRequests = true;
     this.loadManageUsers = false;
     this.loadManagePlaylist = false;
     this.loadManageVideo = false;
     this.loadManageBlog = false;
+    this.loadManagePayments = false;
+    this.loadManageSystemSettings = false;
+  }
+
+  loadPayments() {
+    window.scroll(0, 0);
+    this.loadManageLiquidationRequests = false;
+    this.loadManageUsers = false;
+    this.loadManagePlaylist = false;
+    this.loadManageVideo = false;
+    this.loadManageBlog = false;
+    this.loadManagePayments = true;
+    this.loadManageSystemSettings = false;
+  }
+
+  loadSystemSettings() {
+    window.scroll(0, 0);
+    this.loadManageLiquidationRequests = false;
+    this.loadManageUsers = false;
+    this.loadManagePlaylist = false;
+    this.loadManageVideo = false;
+    this.loadManageBlog = false;
+    this.loadManagePayments = false;
+    this.loadManageSystemSettings = true;
   }
 }

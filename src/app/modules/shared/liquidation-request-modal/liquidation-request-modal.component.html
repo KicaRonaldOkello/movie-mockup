@@ -1,0 +1,19 @@
+<span>
+    <p *ngIf="action === 'COMPLETE'">Are you sure that you want to complete this liquidation request ? If YES,
+    you will be required to upload an image of a receipt.</p>
+    <p *ngIf="action === 'REJECT'">Are you sure that you want to reject this liquidation request ?</p>
+  <span class="action-buttons">
+    <span class="buttons" *ngIf="action === 'COMPLETE'" [style.margin-top]="'40px'">
+      <button class="button" (click)="onYesClick('complete')">Proceed</button>
+      <button class="button cancel-button" (click)="onNoClick('complete')">Cancel</button>
+    </span>
+    <div *ngIf="action === 'REJECT'">
+        <textarea [formControl]="reason" rows="5" placeholder="Enter reason here..."></textarea>
+    </div>
+    <span class="buttons" *ngIf="action === 'REJECT'" [style.margin-top]="'10px'">
+        <button class="button" (click)="onYesClick('reject')">Proceed</button>
+        <button class="button cancel-button" (click)="onNoClick('reject')">Cancel</button>
+    </span>
+  </span>
+</span>
+
