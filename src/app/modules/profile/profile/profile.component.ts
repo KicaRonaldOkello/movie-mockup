@@ -75,7 +75,6 @@ export class ProfileComponent implements OnInit {
     const myWidget = cloudinary.createUploadWidget({
         cloudName: 'do6g6dwlz',
         uploadPreset: 'vdoc0rsk',
-        clientAllowedFormats: environment.clientAllowedImageFormats,
         maxImageFileSize: environment.maxImageFileSize,
         multiple: false
       }, (error, result) => {
@@ -158,7 +157,6 @@ export class ProfileComponent implements OnInit {
     const myWidget = cloudinary.createUploadWidget({
         cloudName: 'do6g6dwlz',
         uploadPreset: 'vdoc0rsk',
-        clientAllowedFormats: environment.clientAllowedImageFormats,
         maxImageFileSize: environment.maxImageFileSize,
         multiple: false
       }, (error, result) => {

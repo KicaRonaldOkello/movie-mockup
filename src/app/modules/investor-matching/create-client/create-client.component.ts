@@ -114,7 +114,6 @@ export class CreateClientComponent implements OnInit, OnDestroy {
         cloudName: 'do6g6dwlz',
         uploadPreset: 'vdoc0rsk',
         multiple: false,
-        clientAllowedFormats: environment.clientAllowedImageFormats,
         maxImageFileSize: environment.maxImageFileSize
     }, (error, result) => {
       if (!error && result && result.event === 'success') {
@@ -179,7 +178,6 @@ export class CreateClientComponent implements OnInit, OnDestroy {
       multiple: true,
       maxImageWidth: 180,
       maxImageHeight: 160,
-        clientAllowedFormats: environment.clientAllowedImageFormats,
         maxImageFileSize: environment.maxImageFileSize
     }, (error, result) => {
       if (!error && result && result.event === 'success') {

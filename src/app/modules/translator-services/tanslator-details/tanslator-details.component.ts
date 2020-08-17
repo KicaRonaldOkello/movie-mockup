@@ -91,11 +91,6 @@ export class TanslatorDetailsComponent implements OnInit {
         cloudName: 'do6g6dwlz',
         uploadPreset: 'vdoc0rsk',
         multiple: false,
-        clientAllowedFormats:
-          [
-            ...environment.clientAllowedVideoFormats,
-            ...environment.clientAllowedAudioFormats,
-          ],
         maxVideoFileSize: environment.maxVideoFileSize,
         maxAudioFileSize: environment.maxVideoFileSize,
       }, (error, result) => {
@@ -125,7 +120,7 @@ export class TanslatorDetailsComponent implements OnInit {
       originalSellerId: this.package.ownerId,
     };
 
-    !this.isLiveTranslation ? data['attachments'] = this.uploadUrl : null;
+    !this.isLiveTranslation ? data['attachments'] = [this.uploadUrl] : null;
 
     this.orderService.saveOrder(data).subscribe(res => {
       this.payWithRave(res.id);
@@ -136,7 +131,7 @@ export class TanslatorDetailsComponent implements OnInit {
     if (this.isLiveTranslation) {
       const { date, time, meetingLink } = this.liveTranslationForm.value;
       const finalDate = moment(date).format('DD/MM/YYYY');
-      return `LIVE:${finalDate}:${time}:${meetingLink}`;
+      return `Type=LIVE,Date=${finalDate},Time=${time},MeetingLink=${meetingLink}`;
     } else {
       return this.chosenTranslationType.slice(0, -16).toUpperCase();
     }
