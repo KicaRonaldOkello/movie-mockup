@@ -1,0 +1,100 @@
+<span class="card">
+  <div class="head">
+  </div>
+  <div class="profileImage" *ngIf="!showUserInfo">
+    <img [src]="data.coverImageUrl" [hidden]="loadingProfileImage" (load)="loadingProfileImage=false;">
+     <div *ngIf="loadingProfileImage" class="profile-image-spinner">
+       <mat-spinner diameter="30"></mat-spinner>
+     </div>
+  </div>
+  <div class="profileImage" *ngIf="showUserInfo">
+    <img [src]="data.profilePicUrl" [hidden]="loadingProfileImage" (load)="loadingProfileImage=false;">
+     <div *ngIf="loadingProfileImage" class="profile-image-spinner">
+       <mat-spinner diameter="30"></mat-spinner>
+     </div>
+  </div>
+
+  <div class="card-body" *ngIf="!showUserInfo">
+    <div class="card-details">
+      <p class="title">Name:</p>
+      <p class="value">{{data.ownerName}}</p>
+    </div>
+    <div class="card-details">
+      <p>Package Name:</p>
+      <p class="value">{{data.packageName}}</p>
+    </div>
+    <div class="card-details">
+      <p>Currency Code:</p>
+      <p class="value">{{data.currencyCode}}</p>
+    </div>
+    <div class="card-details">
+      <p>Live Translation Price:</p>
+      <p class="value" *ngIf="data.liveTranslationPrice == 'NOT_OFFERED'">Not Offered</p>
+      <p class="value" *ngIf="data.liveTranslationPrice !== 'NOT_OFFERED'">{{data.liveTranslationPrice | number}}</p>
+    </div>
+    <div class="card-details">
+      <p>Video Translation Price:</p>
+      <p class="value" *ngIf="data.videoTranslationPrice == 'NOT_OFFERED'">Not Offered</p>
+      <p class="value" *ngIf="data.videoTranslationPrice !== 'NOT_OFFERED'">{{data.videoTranslationPrice | number}}</p>
+    </div>
+    <div class="card-details">
+      <p>Audio Translation Price:</p>
+      <p class="value" *ngIf="data.audioTranslationPrice == 'NOT_OFFERED'">Not Offered</p>
+      <p class="value" *ngIf="data.audioTranslationPrice !== 'NOT_OFFERED'">{{data.audioTranslationPrice | number}}</p>
+    </div>
+    <div class="card-details">
+      <p>Text Translation Price:</p>
+      <p class="value" *ngIf="data.textTranslationPrice == 'NOT_OFFERED'">Not Offered</p>
+      <p class="value" *ngIf="data.textTranslationPrice !== 'NOT_OFFERED'">{{data.textTranslationPrice | number}}</p>
+    </div>
+  </div>
+
+  <div class="card-body" *ngIf="showUserInfo">
+    <div class="card-details">
+      <p class="title">Name:</p>
+      <p class="value">{{data.name}}</p>
+    </div>
+    <div class="card-details">
+      <p class="title">UserId:</p>
+      <p class="value">{{data.userId}}</p>
+    </div>
+    <div class="card-details">
+      <p class="title">Email:</p>
+      <p class="value">{{data.userId}}</p>
+    </div>
+    <div class="card-details">
+      <p class="title">Created On:</p>
+      <p class="value">{{data.createdOn}}</p>
+    </div>
+  </div>
+
+
+    <span class="action-buttons" *ngIf="!showUserInfo">
+      <mat-icon
+        class="deleteButton"
+        matTooltip="Edit package"
+        *ngIf="displayDeleteButton"
+        [routerLink]="['/translation/create-translator']" [queryParams]="{ id: data.id }"
+        svgIcon="refresh">
+      </mat-icon>
+
+        <button
+          class="button button-red"
+          [routerLink]="['/translation/translator-details']" [queryParams]="{ id: data.id }"
+        >Request</button>
+
+      <mat-icon
+        class="deleteButton"
+        matTooltip="Delete package"
+        *ngIf="displayDeleteButton || (this.userData.roleId === 'ADMIN')"
+        (click)="openDialog(data.id)"
+        svgIcon="delete">
+      </mat-icon>
+    </span>
+
+
+  <span class="action-buttons" *ngIf="showUserInfo">
+    <mat-slide-toggle (change)="toggleAdminState($event, data.userId, data.roleId)" [checked]="data.roleId ==='ADMIN'">Admin</mat-slide-toggle>
+    <mat-slide-toggle (change)="toggleDeleteState($event, data.userId, data.isBlocked)" [checked]="data.isBlocked">Block</mat-slide-toggle>
+  </span>
+</span>

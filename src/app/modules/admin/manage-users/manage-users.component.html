@@ -1,0 +1,34 @@
+<div class="body">
+  <div class="align-search-bar">
+    <div class="search-bar" [formGroup]="usersForm">
+      <span class="name">
+        <input type="text" class="input-name" formControlName="name" placeholder="Name">
+        <img src="assets/search.svg" alt="">
+      </span>
+      <span class="name">
+        <input type="text" class="input-name" formControlName="userId" placeholder="UserId">
+      </span>
+      <span>
+        <select #role name="Type" required (change)="selectRole(role.value)">
+          <option [selected]="true" disabled="true" value="null">Role</option>
+          <option *ngFor="let role of roles" [value]="role">{{role}}</option>
+        </select>
+      </span>
+      <span class="button-cover">
+        <button class="button " (click)="searchUsers()">Search</button>
+      </span>
+    </div>
+  </div>
+  <div class="spinner" *ngIf="loadingUsers">
+    <mat-spinner></mat-spinner>
+  </div>
+  <div class="user-cards" *ngIf="!loadingUsers">
+    <div *ngFor="let user of users" class="single-card">
+      <app-translator-cards (blockUser)="blockOrUnblockUser($event)" (userRights)="addOrRemoveAdmin($event)" [data]="user"></app-translator-cards>
+    </div>
+    <span *ngIf="pageCount > 0" class="arrows">
+      <mat-icon [class.previousPage]="page > 0" class="left-arrow" (click)="previousPage()" svgIcon="previous-page"></mat-icon>
+      <mat-icon [class.previousPage]="page < pageCount" (click)="nextPage()" svgIcon="next-page"></mat-icon>
+    </span>
+  </div>
+</div>

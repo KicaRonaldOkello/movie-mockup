@@ -3,6 +3,7 @@ import {FormGroup, FormBuilder, Validators, FormControl} from '@angular/forms';
 import { VideosService } from 'src/app/services/videos/videos.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ShareDataService } from 'src/app/services/share-data/share-data.service';
+import {environment} from '../../../../environments/environment';
 
 
 declare var cloudinary: any;
@@ -89,14 +90,16 @@ export class ManageVideosComponent implements OnInit {
         });
         this.savingVideo = false;
       }
-    })
+    });
   }
 
   upload() {
-    var myWidget = cloudinary.createUploadWidget({
+    const myWidget = cloudinary.createUploadWidget({
       cloudName: 'do6g6dwlz',
       uploadPreset: 'vdoc0rsk',
-      multiple: false
+      multiple: false,
+      clientAllowedFormats: environment.clientAllowedVideoFormats,
+      maxVideoFileSize: environment.maxVideoFileSize
       }, (error, result) => {
         if (!error && result && result.event === 'success') {
           this.videoForm.patchValue({

@@ -2,6 +2,7 @@ import {AfterViewInit, Component, ElementRef, HostListener, OnInit, ViewChild} f
 import { Router } from '@angular/router';
 import Helpers from 'src/app/helpers/helpers';
 import { ShareDataService } from 'src/app/services/share-data/share-data.service';
+import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'app-navbar',
@@ -18,7 +19,9 @@ export class NavbarComponent implements OnInit {
   currentUrl;
   chosenLanguage;
   language;
+  emailstring = '';
   @ViewChild('toggle') toggleOpen: ElementRef;
+  @ViewChild('toggleProfileOptions') toggleProfileOpen: ElementRef;
   constructor(
     private router: Router,
     private shareDataService: ShareDataService,
@@ -62,6 +65,10 @@ export class NavbarComponent implements OnInit {
     });
 
     this.changeLanguageKey(this.language);
+
+    const contactHelpEmail = environment.contactHelpEmail;
+    const title = environment.contactHelpTitle;
+    this.emailstring = `mailto:${contactHelpEmail}?Subject=${title}&body=`;
   }
 
   changeNavBarIcon(navBarItem) {
@@ -100,6 +107,10 @@ export class NavbarComponent implements OnInit {
 
   toggleDropDown() {
     this.toggleOpen.nativeElement.classList.toggle('open');
+  }
+
+  toggleProfileDropDown() {
+    this.toggleProfileOpen.nativeElement.classList.toggle('open');
   }
 
 @HostListener('window:click', ['$event'])

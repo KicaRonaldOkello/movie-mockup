@@ -116,6 +116,15 @@
             }
         }
 
+      ::ng-deep .mat-checkbox-checked .mat-checkbox-background, .mat-checkbox-indeterminate .mat-checkbox-background {
+        background-color: red !important;
+      }
+
+      // overwrite the ripple overlay on hover and click
+      ::ng-deep .mat-checkbox:not(.mat-checkbox-disabled) .mat-checkbox-ripple .mat-ripple-element {
+        background-color: red !important;
+      }
+
     }
 
     .create-investment-project-button {

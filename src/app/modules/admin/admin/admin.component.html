@@ -7,11 +7,15 @@
           <mat-list-item role="listitem" (click)="loadBlog()">Manage Blogs</mat-list-item>
           <mat-list-item role="listitem" (click)="loadVideo()">Manage Videos</mat-list-item>
           <mat-list-item role="listitem" (click)="loadPlaylist()">Manage Playlists</mat-list-item>
+          <mat-list-item role="listitem" (click)="loadUsers()">Manage Users</mat-list-item>
+          <mat-list-item role="listitem" (click)="loadliquidationRequests()">Liquidation Requests</mat-list-item>
         </mat-list>
       </div>
       <div class="content">
         <app-manage-videos *ngIf="loadManageVideo"></app-manage-videos>
         <app-manage-blog *ngIf="loadManageBlog"></app-manage-blog>
         <app-manage-playlist *ngIf="loadManagePlaylist"></app-manage-playlist>
+        <app-manage-users *ngIf="loadManageUsers"></app-manage-users>
+        <app-liquidation-requests *ngIf="loadManageLiquidationRequests"></app-liquidation-requests>
       </div>
 </div>

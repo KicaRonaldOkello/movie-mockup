@@ -15,6 +15,8 @@ import {SharedRoutingModule} from './shared-routing.module';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import { UserModalComponent } from './user-modal/user-modal.component';
+import { DeleteUserModalComponent } from './delete-user-modal/delete-user-modal.component';
 
 
 @NgModule({
@@ -24,7 +26,9 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     PaymentModalComponent,
     ImageModalComponent,
     AdComponentComponent,
-    ChatComponent
+    ChatComponent,
+    UserModalComponent,
+    DeleteUserModalComponent
   ],
   imports: [
     CommonModule,

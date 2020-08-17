@@ -1,48 +1,130 @@
-<div class="component-body">
+<div class="spinner" *ngIf="loadChannelTypes">
+  <mat-spinner></mat-spinner>
+</div>
+<div class="component-body" *ngIf="!loadChannelTypes">
   <div class="side-bar">
     <img class="settings-image" src="/assets/settings.svg">
   </div>
   <div class="main-body">
     <div class="profile-image">
-      <img src="https://placeimg.com/800/300/nature">
+      <img (click)="upload()" (load)="loadingProfileImage=false;" [hidden]="loadingProfileImage"
+           [src]="coverImage" matTooltip="Click to change this image">
+      <div *ngIf="loadingProfileImage" class="profile-image-spinner">
+        <mat-spinner diameter="30"></mat-spinner>
+      </div>
       <div class="username">
-        <p>Some One Nemesis</p>
+        <p>{{profileFrom.get('name').value}}</p>
         <div class="dot"></div>
       </div>
-      <div class="bio">
-        <p>A human resource specialist with a decade of successful experience in hiring
-          and employee management.Thane specialises in human resource technologies and regularly attends
-          national training sessions to showcase the new HR tech trends, such as self service, wellness apps and
-          and people analytic tools.
+
+      <div class="card" [formGroup]="liquidationForm">
+        <p class="title">
+          User Earnings
         </p>
+        <mat-accordion>
+          <mat-expansion-panel hideToggle>
+          </mat-expansion-panel>
+          <mat-expansion-panel (opened)="panelOpenState = true"
+                               (closed)="panelOpenState = false">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <div class="card-body amount-earned" *ngIf="!showAmountEarned">
+                  <label>Total Amount Earned: </label>
+                  <button class="button earnings" (click)="getUserEarnings()">
+                    <span *ngIf="!loadEarnings">
+                      View Earnings
+                    </span>
+                    <mat-icon *ngIf="loadEarnings"  class="white">
+                      <mat-spinner diameter="20"></mat-spinner>
+                    </mat-icon>
+                  </button>
+                </div>
+                <div class="card-body" *ngIf="showAmountEarned">
+                  <p>Total Amount Earned:</p>
+                  <p class="amount-value">{{amountEarned}}</p>
+                </div>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="card-body">
+              <label>Phone Number:</label>
+              <input formControlName="phoneNumber" placeholder="+256734000000">
+            </div>
+            <div class="choose-channel">
+              <label>Id Type:</label>
+              <select #chosenIdType (change)="chooseIdType(chosenIdType.value)" required>
+                <option selected disabled>Choose Id</option>
+                <option *ngFor="let id of idTypes" [value]="id">{{id | removeUnderscore | titlecase}}</option>
+              </select>
+            </div>
+            <div class="card-body">
+              <label>Id Number:</label>
+              <input formControlName="kycIDNumber">
+            </div>
+            <div class="card-body">
+              <label>Id:</label>
+              <button class="button" (click)="uploadId()">Upload</button>
+            </div>
+            <div class="card-body" *ngIf="uploadUrl">
+              <p>Upload Url: </p>
+              <p class="amount-value">{{uploadUrl}}</p>
+            </div>
+            <div class="choose-channel">
+              <label>Liquidation channel:</label>
+              <select #chosenChannel (change)="chooseChannel(chosenChannel.value)" required>
+                <option selected disabled>Choose Channel</option>
+                <option *ngFor="let channel of liquidationChannels" [value]="channel">{{channel | removeUnderscore | titlecase}}</option>
+              </select>
+            </div>
+            <div class="card-body">
+              <label>Account details:</label>
+              <textarea
+                rows="7"
+                [placeholder]="accountDetailsPlaceholder"
+                formControlName="liquidationChannelAccountDetails">
+              </textarea>
+            </div>
+            <div class="submit-button">
+              <button class="button" (click)="submitData()">
+                <span *ngIf="!submittingLiquidationForm">Initiate Liquidation</span>
+                <mat-icon *ngIf="submittingLiquidationForm" class="white">
+                  <mat-spinner diameter="20"></mat-spinner>
+                </mat-icon>
+              </button>
+            </div>
+          </mat-expansion-panel>
+        </mat-accordion>
       </div>
     </div>
-    <div class="profile-settings">
+    <div class="profile-settings" [formGroup]="profileFrom">
       <div class="title">
         <p>USER PROFILE SETTINGS</p>
       </div>
       <div class="profile-settings-body">
-        <div class="input-pair">
-          <p>Full Names:</p>
-          <p class="input-value">Some One Nemesis</p>
-        </div>
-        <div class="input-pair">
-          <p>User Id:</p>
-          <p class="input-value">SamOne@yearofthat.com</p>
-        </div>
-        <div class="input-pair">
-          <p>Email:</p>
-          <p class="input-value">SamOne@yearofthat.com</p>
-        </div>
-        <div class="input-pair">
-          <p>Preferred Language:</p>
-          <p class="input-value">English</p>
-        </div>
-        <div class="input-pair">
-          <p>Sex:</p>
-          <p class="input-value">Male</p>
-        </div>
-        <button class="button">Save</button>
+        <span class="input-pair">
+          <label>Full Names: </label>
+          <input class="input-field" formControlName="name" placeholder="e.g. James" type="text">
+        </span>
+        <span class="input-pair">
+          <label>User Id: </label>
+          <input class="input-field" disabled formControlName="userId" placeholder="e.g. paul@yahoo.com" type="text">
+        </span>
+        <span class="input-pair">
+          <label>Email: </label>
+          <input class="input-field" formControlName="email" placeholder="e.g. paul@yahoo.com" type="text">
+        </span>
+        <span>
+          <button (click)="updateUserData()" class="button">
+            <span *ngIf="!submittingForm">
+              Save
+            </span>
+            <span>
+              <mat-icon *ngIf="submittingForm" class="white">
+                <mat-spinner diameter="20"></mat-spinner>
+              </mat-icon>
+            </span>
+          </button>
+          <button class="button password-button" routerLink="/auth/change-password">Change Password</button>
+        </span>
       </div>
     </div>
   </div>

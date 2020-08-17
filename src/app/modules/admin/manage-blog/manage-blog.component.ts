@@ -2,6 +2,7 @@ import { Component, OnInit, HostListener, AfterViewInit, ChangeDetectorRef } fro
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { GetBlogsService } from 'src/app/services/blog/get-blogs.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import {environment} from '../../../../environments/environment';
 
 declare var cloudinary: any;
 @Component({
@@ -165,6 +166,8 @@ export class ManageBlogComponent implements OnInit, AfterViewInit {
       let myWidget = cloudinary.createUploadWidget({
         cloudName: 'do6g6dwlz',
         uploadPreset: 'vdoc0rsk',
+        clientAllowedFormats: environment.clientAllowedImageFormats,
+        maxImageFileSize: environment.maxImageFileSize,
         multiple: false}, (error, result) => {
           if (!error && result && result.event === 'success') {
             this.coverImage = result.info.secure_url;

@@ -1,0 +1,28 @@
+.spinner {
+  width: 80vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+@media only screen and (max-width: 975px) {
+  .spinner {
+    width: 100vw;
+  }
+}
+
+
+.component-body {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  min-height: 100vh;
+
+  h2 {
+    margin: 30px 0px;
+  }
+
+  p {
+    width: 80%;
+  }
+}

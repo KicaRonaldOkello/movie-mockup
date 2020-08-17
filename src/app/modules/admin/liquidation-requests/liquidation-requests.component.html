@@ -1,0 +1,63 @@
+<div class="body">
+  <div class="align-search-bar">
+    <div class="search-bar" [formGroup]="usersForm">
+      <span class="name">
+        <input type="text" class="input-name" formControlName="userId" placeholder="RequesterId">
+      </span>
+      <span>
+        <select #role name="Type" required (change)="selectRole(role.value)">
+          <option [selected]="true" disabled="true" value="null">Status</option>
+<!--          <option *ngFor="let role of roles" [value]="role">{{role}}</option>-->
+          <option value="PENDING">Pending</option>
+          <option value="COMPLETE">Complete</option>
+        </select>
+      </span>
+      <span class="button-cover">
+        <button class="button " (click)="searchUsers()">Search</button>
+      </span>
+    </div>
+  </div>
+  <div class="spinner" *ngIf="loadingTableData">
+    <mat-spinner></mat-spinner>
+  </div>
+  <mat-table *ngIf="!loadingTableData" [dataSource]="data">
+    <ng-container matColumnDef="requesterId">
+      <mat-header-cell *matHeaderCellDef> RequesterId </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.requesterId}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="kycIDType">
+      <mat-header-cell *matHeaderCellDef> ID Type </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.kycIDType}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="kycIDNumber">
+      <mat-header-cell *matHeaderCellDef> kyc ID </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.kycIDNumber}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="amount">
+      <mat-header-cell *matHeaderCellDef> Amount </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.amount}} </mat-cell>
+    </ng-container>
+
+<!--    <ng-container matColumnDef="liquidationChannel">-->
+<!--      <mat-header-cell *matHeaderCellDef> Liquidation Channel </mat-header-cell>-->
+<!--      <mat-cell *matCellDef="let element"> {{element.liquidationChannel}} </mat-cell>-->
+<!--    </ng-container>-->
+
+    <ng-container matColumnDef="liquidationStatus">
+      <mat-header-cell *matHeaderCellDef> Liquidation Status </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.liquidationStatus}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="liquidationChannelAccountDetails">
+      <mat-header-cell *matHeaderCellDef> Liquidation Account Details </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.liquidationChannelAccountDetails}} </mat-cell>
+    </ng-container>
+
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+</div>

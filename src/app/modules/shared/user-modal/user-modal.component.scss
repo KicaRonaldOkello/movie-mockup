@@ -1,0 +1,19 @@
+.button {
+  width: 80px;
+}
+
+.cancel-button {
+  background-color: red !important;
+  color: white;
+}
+
+p {
+  font-weight: bold;
+}
+
+.action-buttons {
+  margin-top: 40px;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}

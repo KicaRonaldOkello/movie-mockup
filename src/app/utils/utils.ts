@@ -12,4 +12,9 @@ export class Utils {
       if (theEvent.preventDefault) theEvent.preventDefault();
     }
   }
+
+  static modifyNotOffered(value) {
+    const answer = value.split('_');
+    return `${answer[0]} ${answer[1]}`;
+  }
 }

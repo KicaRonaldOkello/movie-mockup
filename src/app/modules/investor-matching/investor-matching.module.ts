@@ -24,6 +24,8 @@ import {MatBadgeModule} from '@angular/material/badge';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {QuillModule} from 'ngx-quill';
 
 
 
@@ -54,7 +56,9 @@ import {MatInputModule} from '@angular/material/input';
     MatBadgeModule,
     MatFormFieldModule,
     MatInputModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatCheckboxModule,
+    QuillModule
   ],
   entryComponents: [
     ImageModalComponent

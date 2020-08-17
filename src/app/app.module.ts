@@ -14,6 +14,9 @@ import { ModalComponent } from './modules/shared/modal/modal.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from './modules/shared/shared.module';
 import { TokenInterceptor } from './services/guards/token.interceptor';
+import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
+import {UserModalComponent} from './modules/shared/user-modal/user-modal.component';
+import {DeleteUserModalComponent} from './modules/shared/delete-user-modal/delete-user-modal.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +34,7 @@ import { TokenInterceptor } from './services/guards/token.interceptor';
     SharedModule,
     MatSnackBarModule,
     BlogModule,
+    NgxMaterialTimepickerModule.setLocale('en-GB')
   ],
   exports: [
   ],
@@ -40,6 +44,6 @@ import { TokenInterceptor } from './services/guards/token.interceptor';
     multi: true
   }],
   bootstrap: [AppComponent],
-  entryComponents: [ModalComponent]
+  entryComponents: [ModalComponent, UserModalComponent, DeleteUserModalComponent]
 })
 export class AppModule { }

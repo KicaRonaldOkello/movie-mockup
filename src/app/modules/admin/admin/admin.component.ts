@@ -11,8 +11,10 @@ export class AdminComponent implements OnInit {
   loadManageBlog = true;
   loadManageVideo = false;
   loadManagePlaylist = false;
+  loadManageUsers = false;
   displayAdminComponent = true;
   smallScreensize = false;
+  loadManageLiquidationRequests = false;
   modes = 'side';
   constructor(private cdRef: ChangeDetectorRef, public breakpointObserver: BreakpointObserver) {
   }
@@ -41,6 +43,8 @@ export class AdminComponent implements OnInit {
     this.loadManageBlog = true;
     this.loadManageVideo = false;
     this.loadManagePlaylist = false;
+    this.loadManageUsers = false;
+    this.loadManageLiquidationRequests = false;
   }
 
   loadVideo() {
@@ -48,11 +52,33 @@ export class AdminComponent implements OnInit {
     this.loadManageVideo = true;
     this.loadManageBlog = false;
     this.loadManagePlaylist = false;
+    this.loadManageUsers = false;
+    this.loadManageLiquidationRequests = false;
   }
 
   loadPlaylist() {
     window.scroll(0, 0);
     this.loadManagePlaylist = true;
+    this.loadManageVideo = false;
+    this.loadManageBlog = false;
+    this.loadManageUsers = false;
+    this.loadManageLiquidationRequests = false;
+  }
+
+  loadUsers() {
+    window.scroll(0, 0);
+    this.loadManageUsers = true;
+    this.loadManagePlaylist = false;
+    this.loadManageVideo = false;
+    this.loadManageBlog = false;
+    this.loadManageLiquidationRequests = false;
+  }
+
+  loadliquidationRequests() {
+    window.scroll(0, 0);
+    this.loadManageLiquidationRequests = true;
+    this.loadManageUsers = false;
+    this.loadManagePlaylist = false;
     this.loadManageVideo = false;
     this.loadManageBlog = false;
   }

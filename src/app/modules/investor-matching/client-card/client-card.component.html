@@ -9,7 +9,6 @@
         <p>{{cardData.timeSinceCreation}}</p>
     </div>
     <div class="card__body">
-        <p>Owner: {{(cardData.userId.length>23)? (cardData.userId | slice:0:23)+'..':(cardData.userId)}}</p>
         <p>Location: {{cardData.location}}</p>
         <p>Amount Required: {{cardData.currencyCode}} {{cardData.amountRequested | number}}</p>
         <span class="card__body__returns">
@@ -23,32 +22,30 @@
     <div class="card__company-type">
         <p>{{cardData.category}} Company</p>
     </div>
-    <button
-    class="button"
-    [routerLink]="['view-project-details']"
-    [queryParams]="{ id: cardData.id }"
-    *ngIf="!showEditable"
-    >Invest</button>
     <span class="action-buttons">
-        <mat-icon
+      <mat-icon
         class="deleteButton"
-        matTooltip="Delete project"
-        *ngIf="showEditable"
-        (click)="deleteProject(cardData.id)"
-        svgIcon="delete"></mat-icon>
-
-        <mat-icon
-        class="deleteButton"
-        matTooltip="View project details"
-        *ngIf="showEditable"
-        (click)="displayInvestmentProject(cardData.id)"
-        svgIcon="read"></mat-icon>
-
-        <mat-icon
-        class="deleteButton"
-        *ngIf="showEditable"
+        *ngIf="showIcons"
+        [routerLink]="['create-investment-project']"
+        [queryParams]="{ id: cardData.id }"
+        matTooltipClass="my-custom-tooltip"
         matTooltip="Edit project"
-        (click)="updateThisProject(cardData)"
-        svgIcon="refresh"></mat-icon>
+        svgIcon="refresh">
+      </mat-icon>
+
+      <button
+        class="button"
+        [routerLink]="['view-project-details']"
+        [queryParams]="{ id: cardData.id }"
+      >Invest</button>
+
+      <mat-icon
+        class="deleteButton"
+        *ngIf="showIcons || (this.userData.roleId === 'ADMIN')"
+        matTooltipClass="my-custom-tooltip"
+        matTooltip="Delete project"
+        (click)="deleteProject(cardData.id)"
+        svgIcon="delete">
+      </mat-icon>
     </span>
 </span>

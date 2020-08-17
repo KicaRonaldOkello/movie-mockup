@@ -1,0 +1,24 @@
+<div class="spinner" *ngIf="loadingPage">
+  <mat-spinner></mat-spinner>
+</div>
+<div class="component-body" *ngIf="!loadingPage">
+  <app-translator-search-bar (searchData)="searchTranslationPackage($event)"></app-translator-search-bar>
+  <div class="create-translator">
+    <button class="button button-red" routerLink="/translation/create-translator">Create Translator</button>
+  </div>
+  <div class="body">
+    <div *ngIf="loadingTranslatorPackages"><mat-spinner diameter="70"></mat-spinner></div>
+    <div *ngIf="!loadingTranslatorPackages && translatorPackages.length == 0">
+      <p class="empty-message">The translator package that you are searching for does not exist.</p>
+    </div>
+    <div *ngIf="!loadingTranslatorPackages && translatorPackages.length > 0" class="display-cards">
+      <div *ngFor="let card of translatorPackages" class="single-card">
+        <app-translator-cards (deletedTranslatorPackageId)="deletePackage($event)" [data]="card"></app-translator-cards>
+      </div>
+        <span *ngIf="pageCount > 0" class="arrows">
+            <mat-icon [class.previousPage]="page > 0" class="left-arrow" (click)="previousPage()" svgIcon="previous-page"></mat-icon>
+            <mat-icon [class.previousPage]="page < pageCount" (click)="nextPage()" svgIcon="next-page"></mat-icon>
+        </span>
+    </div>
+  </div>
+</div>

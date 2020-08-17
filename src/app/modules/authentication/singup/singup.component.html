@@ -6,7 +6,10 @@
             <input type="text" formControlName="email" placeholder="Email">
             <input type="password" formControlName="password" placeholder="Password">
             <input type="password" formControlName="confirmedPassword" placeholder="Confirm Password">
-            <button class="button" (click)="sumitData()">
+            <div class="terms-and-conditions">
+              <mat-checkbox (change)="agreeTerms($event)">I have read and agree to the </mat-checkbox><a routerLink="/terms-and-conditions"> terms and conditions</a>
+            </div>
+            <button class="button" [disabled]="!agreedTermsAndConditions" (click)="sumitData()">
                 <span *ngIf="!submitUserDetail">
                     Signup
                 </span>

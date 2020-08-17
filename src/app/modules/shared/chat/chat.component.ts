@@ -9,6 +9,7 @@ import Helpers from '../../../helpers/helpers';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {ActivatedRoute} from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
+import {environment} from '../../../../environments/environment';
 
 declare var cloudinary: any;
 @Component({
@@ -156,7 +157,15 @@ export class ChatComponent implements OnInit, AfterViewChecked {
     const myWidget = cloudinary.createUploadWidget({
         cloudName: 'do6g6dwlz',
         uploadPreset: 'vdoc0rsk',
-        multiple: true
+        multiple: true,
+        clientAllowedFormats:
+          [
+            ...environment.clientAllowedImageFormats,
+            ...environment.clientAllowedVideoFormats,
+            ...environment.clientAllowedAudioFormats,
+            ...environment.clientAllowedDocumentFormats
+          ],
+        maxFileSIze: environment.maxFileSizeForChats
       }, (error, result) => {
         if (!error && result && result.event === 'success') {
           this.attachments.push(result.info.secure_url);

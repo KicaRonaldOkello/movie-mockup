@@ -75,10 +75,10 @@ export class AdComponentComponent implements OnInit {
         Comment: this.writtenComment.value,
         profilePic: "https://placeimg.com/300/300/people",
         UserId:"testUser",
-      }
+      };
 
       this.commentsService.saveComment(comment).subscribe(result => {
-        this.comments.push({comment: this.writtenComment.value})
+        this.comments.push({comment: this.writtenComment.value});
         this.postingComment = false;
         this.writtenComment.setValue('');
       });
