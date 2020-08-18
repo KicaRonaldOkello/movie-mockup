@@ -50,7 +50,6 @@ export class TanslatorDetailsComponent implements OnInit {
     this.activatedRoute.queryParams.subscribe(params => {
       this.getTranslationPackage(params.id);
     });
-
     this.liveTranslationForm = this.fb.group({
       date: ['', Validators.required],
       time: ['', Validators.required],
