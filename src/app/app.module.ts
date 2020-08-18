@@ -17,6 +17,9 @@ import { TokenInterceptor } from './services/guards/token.interceptor';
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 import {UserModalComponent} from './modules/shared/user-modal/user-modal.component';
 import {DeleteUserModalComponent} from './modules/shared/delete-user-modal/delete-user-modal.component';
+import {ImageModalComponent} from './modules/shared/image-modal/image-modal.component';
+import {LiquidationRequestModalComponent} from './modules/shared/liquidation-request-modal/liquidation-request-modal.component';
+import {SystemSettingModalComponent} from './modules/shared/system-setting-modal/system-setting-modal.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +47,13 @@ import {DeleteUserModalComponent} from './modules/shared/delete-user-modal/delet
     multi: true
   }],
   bootstrap: [AppComponent],
-  entryComponents: [ModalComponent, UserModalComponent, DeleteUserModalComponent]
+  entryComponents: [
+    ModalComponent,
+    UserModalComponent,
+    DeleteUserModalComponent,
+    ImageModalComponent,
+    LiquidationRequestModalComponent,
+    SystemSettingModalComponent
+  ]
 })
 export class AppModule { }

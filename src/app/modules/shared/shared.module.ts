@@ -17,6 +17,8 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { UserModalComponent } from './user-modal/user-modal.component';
 import { DeleteUserModalComponent } from './delete-user-modal/delete-user-modal.component';
+import { LiquidationRequestModalComponent } from './liquidation-request-modal/liquidation-request-modal.component';
+import { SystemSettingModalComponent } from './system-setting-modal/system-setting-modal.component';
 
 
 @NgModule({
@@ -28,7 +30,9 @@ import { DeleteUserModalComponent } from './delete-user-modal/delete-user-modal.
     AdComponentComponent,
     ChatComponent,
     UserModalComponent,
-    DeleteUserModalComponent
+    DeleteUserModalComponent,
+    LiquidationRequestModalComponent,
+    SystemSettingModalComponent
   ],
   imports: [
     CommonModule,

@@ -1,0 +1,19 @@
+<span class="body">
+    <p *ngIf="action === 'editingValue'">Edit setting value.</p>
+    <p *ngIf="action === 'editingDescription'">Edit setting description.</p>
+    <span class="action-buttons">
+      <div>
+        <textarea [formControl]="settingValues" rows="5" placeholder="Type here..."></textarea>
+      </div>
+      <div class="buttons" *ngIf="action === 'editingValue'">
+        <button class="button" (click)="onClick('confirm editValue')">Proceed</button>
+        <button class="button cancel-button" (click)="onClick('cancel editValue')">No</button>
+      </div>
+
+      <div class="buttons" *ngIf="action === 'editingDescription'">
+        <button class="button" (click)="onClick('confirm editDescription')">Proceed</button>
+        <button class="button cancel-button" (click)="onClick('cancel editDescription')">No</button>
+      </div>
+    </span>
+</span>
+

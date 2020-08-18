@@ -36,9 +36,17 @@ export class LiquidationService {
     );
   }
 
-  getAllLiquidations(): Observable<any> {
+  getAllLiquidations(searchData): Observable<any> {
     return this.http.get(
-      `${this.base_url}GetAllLiquidations`
+      `${this.base_url}GetAllLiquidations`, {params: searchData }
+    ).pipe(
+      map(data => data)
+    );
+  }
+
+  completeLiquidation(liquidationData): Observable<any> {
+    return this.http.post(
+      `${this.base_url}CompleteLiquidation`, liquidationData
     ).pipe(
       map(data => data)
     );

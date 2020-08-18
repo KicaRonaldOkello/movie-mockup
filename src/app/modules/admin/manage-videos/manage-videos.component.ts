@@ -98,7 +98,6 @@ export class ManageVideosComponent implements OnInit {
       cloudName: 'do6g6dwlz',
       uploadPreset: 'vdoc0rsk',
       multiple: false,
-      clientAllowedFormats: environment.clientAllowedVideoFormats,
       maxVideoFileSize: environment.maxVideoFileSize
       }, (error, result) => {
         if (!error && result && result.event === 'success') {

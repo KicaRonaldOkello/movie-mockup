@@ -15,15 +15,14 @@
     margin: 30px 0px;
     background-color: #E6E7E8;
     padding: 20px 5px;
-    width: 80%;
+    width: 94%;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    //box-shadow: 10px 10px 10px -5px grey;
 
     select {
-      width: 150px;
+      width: 200px;
       height: 30px;
       border: none;
       -webkit-appearance: none;
@@ -31,7 +30,7 @@
       background-size: 10px;
       margin-right: 20px;
       border-radius: 5px;
-      background-position-x: 130px;
+      background-position-x: 180px;
       padding-left: 10px;
       margin: 5px 5px;
 
@@ -68,7 +67,7 @@
     }
 
     .input-name {
-      width: 150px;
+      width: 220px;
       border: none;
       height: 30px;
       padding-left: 10px;
@@ -121,5 +120,167 @@
     display: flex;
     justify-content: center;
     align-items: center;
+
+    p {
+      color: var(--gold-color);
+      font-size: 18px;
+    }
   }
+
+  .align-table {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 60px;
+  }
+  mat-table {
+    width: 94%;
+  }
+
+  mat-cell {
+    font-size: 11px !important;
+  }
+
+  mat-row:hover {
+    box-shadow: 0px 0px 5px 1px grey;
+    transform: scale(1);
+  }
+
+  mat-header-cell {
+    background-color: #7A202A;
+    color: var(--gold-color);
+  }
+
+  mat-paginator {
+    width: 94%;
+  }
+  .mat-column-requesterId {
+    word-wrap: break-word !important;
+    white-space: unset !important;
+    flex: 0 0 12% !important;
+    width: 12% !important;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+
+    word-break: break-word;
+
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+  }
+  .mat-column-kycIDNumber {
+    white-space: unset !important;
+    flex: 0 0 6% !important;
+    width: 6% !important;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+
+    word-break: break-word;
+
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+  }
+
+  .mat-column-kycIDType {
+    flex: 0 0 9% !important;
+    width: 9% !important;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    white-space: unset !important;
+
+    word-break: break-word;
+
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+  }
+
+  .mat-column-amount {
+    flex: 0 0 12% !important;
+    width: 12% !important;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    white-space: unset !important;
+
+    word-break: break-word;
+
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+  }
+
+  .mat-column-liquidationStatus {
+    flex: 0 0 8% !important;
+    width: 8% !important;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    white-space: unset !important;
+
+    word-break: break-word;
+
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+  }
+
+  .mat-column-kycIDUrl {
+    flex: 0 0 13% !important;
+    width: 13% !important;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    white-space: unset !important;
+
+    word-break: break-word;
+
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+
+    &:hover {
+      cursor: pointer;
+      text-decoration: underline;
+    }
+  }
+
+  .mat-column-phoneNumber {
+    flex: 0 0 11% !important;
+    width: 11% !important;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    white-space: unset !important;
+
+    word-break: break-word;
+
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+  }
+
+  .mat-column-liquidationAccountDetails {
+    flex: 0 0 20% !important;
+    width: 20% !important;
+    white-space: unset !important;
+  }
+
+  .mat-column-actions {
+    flex: 0 0 11% !important;
+    width: 11% !important;
+  }
+}
+
+::ng-deep .green-snackbar {
+  background-color: green !important;
+}
+
+::ng-deep .red-snackbar {
+  background-color: red !important;
 }

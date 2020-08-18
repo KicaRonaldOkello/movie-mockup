@@ -158,13 +158,6 @@ export class ChatComponent implements OnInit, AfterViewChecked {
         cloudName: 'do6g6dwlz',
         uploadPreset: 'vdoc0rsk',
         multiple: true,
-        clientAllowedFormats:
-          [
-            ...environment.clientAllowedImageFormats,
-            ...environment.clientAllowedVideoFormats,
-            ...environment.clientAllowedAudioFormats,
-            ...environment.clientAllowedDocumentFormats
-          ],
         maxFileSIze: environment.maxFileSizeForChats
       }, (error, result) => {
         if (!error && result && result.event === 'success') {

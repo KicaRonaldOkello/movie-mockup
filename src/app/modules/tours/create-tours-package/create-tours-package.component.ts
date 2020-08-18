@@ -96,7 +96,6 @@ export class CreateToursPackageComponent implements OnInit, AfterViewInit {
         cloudName: 'do6g6dwlz',
         uploadPreset: 'vdoc0rsk',
         multiple: false,
-      clientAllowedFormats: environment.clientAllowedImageFormats,
       maxImageFileSize: environment.maxImageFileSize
       }, (error, result) => {
         if (!error && result && result.event === 'success') {

@@ -23,6 +23,12 @@ import { ManageUsersComponent } from './manage-users/manage-users.component';
 import {TranslatorServicesModule} from '../translator-services/translator-services.module';
 import { LiquidationRequestsComponent } from './liquidation-requests/liquidation-requests.component';
 import {MatTableModule} from '@angular/material/table';
+import {ProfileModule} from '../profile/profile.module';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatSelectModule} from '@angular/material/select';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import { PaymentsComponent } from './payments/payments.component';
+import { SystemSettingsComponent } from './system-settings/system-settings.component';
 
 
 
@@ -37,6 +43,8 @@ import {MatTableModule} from '@angular/material/table';
       ManagePlaylistComponent,
       ManageUsersComponent,
       LiquidationRequestsComponent,
+      PaymentsComponent,
+      SystemSettingsComponent,
 
   ],
   imports: [
@@ -67,6 +75,10 @@ import {MatTableModule} from '@angular/material/table';
     TvStationsModule,
     TranslatorServicesModule,
     MatTableModule,
+    ProfileModule,
+    MatTooltipModule,
+    MatSelectModule,
+    MatPaginatorModule,
   ],
   exports: [
   ]

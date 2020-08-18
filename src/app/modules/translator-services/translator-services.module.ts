@@ -17,6 +17,7 @@ import {MAT_DATE_LOCALE} from '@angular/material/core';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 
 
@@ -28,20 +29,21 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
         CreateTranslatorComponent,
         TranslatorSearchBarComponent,
     ],
-  imports: [
-    CommonModule,
-    TranslatorServicesRoutingModule,
-    ReactiveFormsModule,
-    MatIconModule,
-    MatDatepickerModule,
-    MatMomentDateModule,
-    MatInputModule,
-    MatCheckboxModule,
-    MatTooltipModule,
-    MatProgressSpinnerModule,
-    NgxMaterialTimepickerModule,
-    MatSlideToggleModule,
-  ],
+    imports: [
+        CommonModule,
+        TranslatorServicesRoutingModule,
+        ReactiveFormsModule,
+        MatIconModule,
+        MatDatepickerModule,
+        MatMomentDateModule,
+        MatInputModule,
+        MatCheckboxModule,
+        MatTooltipModule,
+        MatProgressSpinnerModule,
+        NgxMaterialTimepickerModule,
+        MatSlideToggleModule,
+        MatExpansionModule,
+    ],
     exports: [
         TranslatorCardsComponent
     ],

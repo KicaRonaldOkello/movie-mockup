@@ -21,9 +21,9 @@ export class OrderService {
     );
   }
 
-  verifyFlutterWavePayment(data) {
+  verifyFlutterWavePayment(paymentData) {
     return this.http.get(
-      `${this.base_url}VerifyAndSaveFlutterwavePayment`, { params: data }
+      `${this.base_url}VerifyAndSaveFlutterwavePayment`, { params: paymentData }
     ).pipe(
       map(data => data)
     );

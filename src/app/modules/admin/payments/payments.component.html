@@ -1,0 +1,71 @@
+<div class="full-body-spinner" *ngIf="loadingCurrencyCode && loadingPaymentTypes">
+  <mat-spinner></mat-spinner>
+</div>
+<div class="body" *ngIf="!loadingCurrencyCode || !loadingPaymentTypes">
+  <h2>Payments</h2>
+
+  <div class="align-search-bar">
+    <div [formGroup]="paymentsForm" class="search-bar">
+      <span class="name">
+        <input class="input-name" formControlName="payerId" placeholder="PayerId" type="text">
+      </span>
+      <span>
+        <select #role formControlName="currencyCode" name="Type" required>
+          <option [selected]="true" value="">Currency Code</option>
+          <option *ngFor="let currency of supportedCurrencies" [value]="currency">{{currency}}</option>
+        </select>
+      </span>
+
+      <span>
+        <select #role formControlName="paymentType" name="Type" required>
+          <option [selected]="true" value="">Payment Type</option>
+          <option *ngFor="let paymentType of supportedPaymentTypes" [value]="paymentType">{{paymentType | removeUnderscore | titlecase}}</option>
+        </select>
+      </span>
+      <span class="button-cover">
+        <button (click)="searchPayments()" class="button ">Search</button>
+      </span>
+    </div>
+  </div>
+
+  <div *ngIf="loadingTableData" class="spinner">
+    <mat-spinner></mat-spinner>
+  </div>
+  <div class="spinner" *ngIf="!loadingTableData && data.length === 0">
+    <p>The payment that you have searched for does not exist.</p>
+  </div>
+
+  <div class="align-table">
+    <mat-table [dataSource]="data">
+
+      <ng-container matColumnDef="orderId">
+        <mat-header-cell *matHeaderCellDef> OrderId</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.orderId}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="payerId">
+        <mat-header-cell *matHeaderCellDef> PayerId</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.payerId}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="paymentType">
+        <mat-header-cell *matHeaderCellDef> Payment Type</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.paymentType |removeUnderscore | titlecase}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="currencyCode">
+        <mat-header-cell *matHeaderCellDef> Currency Code</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.currencyCode}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="amountPaid">
+        <mat-header-cell *matHeaderCellDef> Amount Paid</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.amountPaid | number}} </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+    <mat-paginator [pageSize]="limit" [hidePageSize]="true" (page)="nextOrPreviousPage($event)" [length]="length"></mat-paginator>
+  </div>
+</div>
