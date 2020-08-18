@@ -28,7 +28,7 @@
                 {{ (conversation.toUserDetails.name.length > 10) ? (conversation.toUserDetails.name | slice:0:10) + '..' : (conversation.toUserDetails.name) }}</p>
               <p class="chat-message">
                 {{
-                (conversation.chatMessages[conversation.chatMessages.length - 1].message.length > 22) ?
+                  (conversation.chatMessages[conversation.chatMessages.length - 1].message.length > 22) ?
                   (conversation.chatMessages[conversation.chatMessages.length - 1].message | slice:0:22) +
                   '...' : (conversation.chatMessages[conversation.chatMessages.length - 1].message)
                 }}
