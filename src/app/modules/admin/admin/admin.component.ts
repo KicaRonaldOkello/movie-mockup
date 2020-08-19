@@ -17,6 +17,7 @@ export class AdminComponent implements OnInit {
   loadManageLiquidationRequests = false;
   loadManagePayments = false;
   loadManageSystemSettings = false;
+  loadManageVideoCategories = false;
   modes = 'side';
   constructor(private cdRef: ChangeDetectorRef, public breakpointObserver: BreakpointObserver) {
   }
@@ -49,6 +50,7 @@ export class AdminComponent implements OnInit {
     this.loadManageLiquidationRequests = false;
     this.loadManagePayments = false;
     this.loadManageSystemSettings = false;
+    this.loadManageVideoCategories = false;
   }
 
   loadVideo() {
@@ -60,6 +62,7 @@ export class AdminComponent implements OnInit {
     this.loadManageLiquidationRequests = false;
     this.loadManagePayments = false;
     this.loadManageSystemSettings = false;
+    this.loadManageVideoCategories = false;
   }
 
   loadPlaylist() {
@@ -71,6 +74,7 @@ export class AdminComponent implements OnInit {
     this.loadManageLiquidationRequests = false;
     this.loadManagePayments = false;
     this.loadManageSystemSettings = false;
+    this.loadManageVideoCategories = false;
   }
 
   loadUsers() {
@@ -82,6 +86,7 @@ export class AdminComponent implements OnInit {
     this.loadManageLiquidationRequests = false;
     this.loadManagePayments = false;
     this.loadManageSystemSettings = false;
+    this.loadManageVideoCategories = false;
   }
 
   loadLiquidationRequests() {
@@ -93,6 +98,7 @@ export class AdminComponent implements OnInit {
     this.loadManageBlog = false;
     this.loadManagePayments = false;
     this.loadManageSystemSettings = false;
+    this.loadManageVideoCategories = false;
   }
 
   loadPayments() {
@@ -104,6 +110,7 @@ export class AdminComponent implements OnInit {
     this.loadManageBlog = false;
     this.loadManagePayments = true;
     this.loadManageSystemSettings = false;
+    this.loadManageVideoCategories = false;
   }
 
   loadSystemSettings() {
@@ -115,5 +122,18 @@ export class AdminComponent implements OnInit {
     this.loadManageBlog = false;
     this.loadManagePayments = false;
     this.loadManageSystemSettings = true;
+    this.loadManageVideoCategories = false;
+  }
+
+  loadVideoCategories() {
+    window.scroll(0, 0);
+    this.loadManageLiquidationRequests = false;
+    this.loadManageUsers = false;
+    this.loadManagePlaylist = false;
+    this.loadManageVideo = false;
+    this.loadManageBlog = false;
+    this.loadManagePayments = false;
+    this.loadManageSystemSettings = false;
+    this.loadManageVideoCategories = true;
   }
 }

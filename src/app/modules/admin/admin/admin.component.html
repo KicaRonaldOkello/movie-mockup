@@ -11,6 +11,7 @@
           <mat-list-item role="listitem" (click)="loadLiquidationRequests()">Liquidation Requests</mat-list-item>
           <mat-list-item role="listitem" (click)="loadPayments()">Payments</mat-list-item>
           <mat-list-item role="listitem" (click)="loadSystemSettings()">System Settings</mat-list-item>
+          <mat-list-item role="listitem" (click)="loadVideoCategories()">Video Categories</mat-list-item>
         </mat-list>
       </div>
       <div class="content">
@@ -21,5 +22,6 @@
         <app-liquidation-requests *ngIf="loadManageLiquidationRequests"></app-liquidation-requests>
         <app-payments *ngIf="loadManagePayments"></app-payments>
         <app-system-settings *ngIf="loadManageSystemSettings"></app-system-settings>
+        <app-video-categories *ngIf="loadManageVideoCategories"></app-video-categories>
       </div>
 </div>

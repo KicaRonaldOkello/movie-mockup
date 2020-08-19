@@ -29,6 +29,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { PaymentsComponent } from './payments/payments.component';
 import { SystemSettingsComponent } from './system-settings/system-settings.component';
+import { VideoCategoriesComponent } from './video-categories/video-categories.component';
 
 
 
@@ -45,6 +46,7 @@ import { SystemSettingsComponent } from './system-settings/system-settings.compo
       LiquidationRequestsComponent,
       PaymentsComponent,
       SystemSettingsComponent,
+      VideoCategoriesComponent,
 
   ],
   imports: [

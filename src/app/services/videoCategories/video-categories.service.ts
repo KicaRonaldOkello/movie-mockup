@@ -19,4 +19,12 @@ export class VideoCategoriesService {
       map(data => data)
     );
   }
+
+  createVideoCategory(videoData): Observable<any> {
+    return this.http.post(
+      `${this.base_url}SaveVideoCategory`, videoData
+    ).pipe(
+      map(data => data)
+    );
+  }
 }

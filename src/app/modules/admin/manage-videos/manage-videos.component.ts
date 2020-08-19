@@ -4,6 +4,8 @@ import { VideosService } from 'src/app/services/videos/videos.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ShareDataService } from 'src/app/services/share-data/share-data.service';
 import {environment} from '../../../../environments/environment';
+import {VideoCategoriesService} from '../../../services/videoCategories/video-categories.service';
+import Helpers from '../../../helpers/helpers';
 
 
 declare var cloudinary: any;
@@ -24,11 +26,15 @@ export class ManageVideosComponent implements OnInit {
   page: any = 0;
   pageCount: any;
   limit = 12;
+  userData;
+  videoCategories = [];
+  loadingVideoCategories = true;
   constructor(
     private fb: FormBuilder,
     private videoService: VideosService,
     private snackBar: MatSnackBar,
     private shareDataService: ShareDataService,
+    private videoCategoriesService: VideoCategoriesService
     ) {
       this.shareDataService.deletedVideoId.subscribe(id => {
         if (id !== '') {
@@ -42,18 +48,19 @@ export class ManageVideosComponent implements OnInit {
           this.updateVideo(video);
         }
       });
+      this.userData = Helpers.getUserData();
     }
 
   ngOnInit() {
     this.videoForm = this.fb.group({
       Name: ['', Validators.required],
       Description: ['', Validators.required],
-      Genre: ['', Validators.required],
       RecommendedAge: ['', Validators.required],
       CategoryId: ['', Validators.required],
       FileUrl: ['', Validators.required]
     });
     this.loadVideos();
+    this.getAllVideoCategories();
   }
 
   submitVideo(video) {
@@ -164,5 +171,12 @@ export class ManageVideosComponent implements OnInit {
     removeDeletedItemFromCurrentData(videoId) {
       const nonDeletedBlogs = this.videos.filter(item => item.id !== videoId);
       this.videos = nonDeletedBlogs;
+    }
+
+    getAllVideoCategories() {
+      this.videoCategoriesService.getAllVideoCategories(0, 30, null).subscribe(res => {
+        this.loadingVideoCategories = false;
+        this.videoCategories = res.items;
+      });
     }
 }

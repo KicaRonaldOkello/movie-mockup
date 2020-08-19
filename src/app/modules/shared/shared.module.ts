@@ -19,6 +19,7 @@ import { UserModalComponent } from './user-modal/user-modal.component';
 import { DeleteUserModalComponent } from './delete-user-modal/delete-user-modal.component';
 import { LiquidationRequestModalComponent } from './liquidation-request-modal/liquidation-request-modal.component';
 import { SystemSettingModalComponent } from './system-setting-modal/system-setting-modal.component';
+import { VideoCategoriesModalComponent } from './video-categories-modal/video-categories-modal.component';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { SystemSettingModalComponent } from './system-setting-modal/system-setti
     UserModalComponent,
     DeleteUserModalComponent,
     LiquidationRequestModalComponent,
-    SystemSettingModalComponent
+    SystemSettingModalComponent,
+    VideoCategoriesModalComponent
   ],
   imports: [
     CommonModule,

@@ -68,6 +68,7 @@
               [autoplay]="true"
               (mouseenter) ="mouseEnter()"
               (mouseleave) ="mouseLeave()"
+              (loadedmetadata)="onMetadata($event)"
               >
                 <source *ngFor="let video of sources" [src]="sources[0].fileUrl">
               </video>
@@ -79,16 +80,19 @@
       </div>
       <div class="movie-covers__title">
         <img src="assets/eye-small.svg" alt="watch-small">
-        <span>
-          <div>
-            <span class="movie-title-arrange">
-              <p class="movie-title">Title: </p>
-              <p>{{videoTitle}}</p>
-            </span>
+        <span class="movie-title-align-description">
+          <div class="space-description">
+            <div>
+              <span class="movie-title-arrange">
+                <p class="movie-title">Title: </p>
+                <p>{{videoTitle}}</p>
+              </span>
+            </div>
+            <p *ngIf="loadedVideoDuration">Duration: {{loadedVideoDuration | minuteSeconds }}</p>
+            <p>Rating: {{videoCategory}}</p>
+            <p>Age: {{videoRecommendedAge}}</p>
           </div>
-          <p>Genre: {{videoGenre}}</p>
-          <p>Rating: {{videoCategory}}</p>
-          <p>Age: {{videoRecommendedAge}}</p>
+          <p class="description">Description: {{videoDescription}}</p>
         </span>
       </div>
       <div class="movie-covers__footer" *ngIf="defaultTvDisplay">

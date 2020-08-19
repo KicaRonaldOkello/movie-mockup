@@ -1,0 +1,19 @@
+<span class="body">
+    <p *ngIf="action === 'categoryCode'">Category Name.</p>
+    <p *ngIf="action === 'coverImageUrl'">Video Category Image Url.</p>
+    <span class="action-buttons">
+      <div>
+        <textarea [formControl]="actionData" rows="5" placeholder="Type here..."></textarea>
+      </div>
+      <div class="buttons" *ngIf="action === 'categoryCode'">
+        <button class="button" (click)="onClick('confirm categoryCode')">Proceed</button>
+        <button class="button cancel-button" (click)="onClick('cancel categoryCode')">No</button>
+      </div>
+
+      <div class="buttons" *ngIf="action === 'coverImageUrl'">
+        <button class="button" (click)="onClick('confirm coverImageUrl')">Proceed</button>
+        <button class="button cancel-button" (click)="onClick('cancel coverImageUrl')">No</button>
+      </div>
+    </span>
+</span>
+

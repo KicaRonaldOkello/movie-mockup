@@ -20,6 +20,7 @@ import {DeleteUserModalComponent} from './modules/shared/delete-user-modal/delet
 import {ImageModalComponent} from './modules/shared/image-modal/image-modal.component';
 import {LiquidationRequestModalComponent} from './modules/shared/liquidation-request-modal/liquidation-request-modal.component';
 import {SystemSettingModalComponent} from './modules/shared/system-setting-modal/system-setting-modal.component';
+import {VideoCategoriesModalComponent} from './modules/shared/video-categories-modal/video-categories-modal.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import {SystemSettingModalComponent} from './modules/shared/system-setting-modal
     DeleteUserModalComponent,
     ImageModalComponent,
     LiquidationRequestModalComponent,
-    SystemSettingModalComponent
+    SystemSettingModalComponent,
+    VideoCategoriesModalComponent
   ]
 })
 export class AppModule { }

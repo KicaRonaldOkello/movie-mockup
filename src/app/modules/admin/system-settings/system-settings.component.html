@@ -33,7 +33,9 @@
 
       <ng-container matColumnDef="settingValue">
         <mat-header-cell *matHeaderCellDef> Setting Value</mat-header-cell>
-        <mat-cell matTooltip="Click to edit setting value" (click)="editValue(element.settingValue, element.id)" *matCellDef="let element"> {{element.settingValue}} </mat-cell>
+        <mat-cell matTooltip="Click to edit setting value" (click)="editValue(element.settingValue, element.id)" *matCellDef="let element">
+          {{ (element.settingValue.length > 120) ? (element.settingValue | slice:0:120) + '...' : (element.settingValue) }}
+        </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="settingDesc">

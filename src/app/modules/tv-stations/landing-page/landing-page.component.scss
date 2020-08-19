@@ -152,6 +152,20 @@
             img {
                 padding: 0px 20px;
             }
+
+          .movie-title-align-description {
+            display: flex;
+            flex-wrap: wrap;
+          }
+
+          .space-description {
+            margin-right: 20px;
+          }
+
+          .description {
+            word-wrap: break-word;
+            margin-right: 5px;
+          }
         }
 
         &__footer {

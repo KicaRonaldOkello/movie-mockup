@@ -38,6 +38,7 @@ export class LandingPageComponent implements OnInit {
   videoGenre = '';
   videoCategory = '';
   videoRecommendedAge = '';
+  videoDescription = '';
   loadingPage = true;
   videoCategories = [];
   loadCategories = true;
@@ -45,6 +46,7 @@ export class LandingPageComponent implements OnInit {
   userData;
   subscribing = false;
   subscribedCategoryId;
+  loadedVideoDuration;
   preselectedCategories = {
     sports: {
       id: 'VideoCategory-637258478209573904',
@@ -122,7 +124,6 @@ export class LandingPageComponent implements OnInit {
     });
   }
 
-
   setCurrentVideo(source) {
     this.sources = [];
     if (source.isYoutubeVideo) {
@@ -133,6 +134,7 @@ export class LandingPageComponent implements OnInit {
     this.videoGenre = source.genre;
     this.videoCategory = source.categoryId;
     this.videoRecommendedAge = source.recommendedAge;
+    this.videoDescription = source.description;
     this.shareDataService.videoComments(source.id);
   }
 
@@ -310,6 +312,7 @@ export class LandingPageComponent implements OnInit {
 
   onYoutubePlayerReady(event) {
     event.target.playVideo();
+    this.loadedVideoDuration = event.target.getDuration();
   }
 
   onStateChange(event) {

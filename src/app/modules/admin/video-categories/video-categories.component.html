@@ -1,0 +1,39 @@
+<div class="body">
+  <h2>System Settings</h2>
+
+  <mat-table [dataSource]="data">
+
+    <ng-container matColumnDef="createVideoCategory">
+      <mat-header-cell *matHeaderCellDef> Create Category</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.createVideoCategory}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="categoryCode">
+      <mat-header-cell *matHeaderCellDef> Category Name</mat-header-cell>
+      <mat-cell matTooltip="Click to add category name" *matCellDef="let element" (click)="addCategoryName()">{{element.categoryCode}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="coverImageUrl">
+      <mat-header-cell *matHeaderCellDef> Cover Image Url</mat-header-cell>
+      <mat-cell matTooltip="Click to add cover image url" *matCellDef="let element" (click)="upload()">{{element.coverImageUrl}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="update">
+      <mat-header-cell *matHeaderCellDef> Action</mat-header-cell>
+      <mat-cell *matCellDef="let element"><button class="button button-red" (click)="createVideoCategory()">
+          <span *ngIf="!savingVideoCategory">
+            Update
+          </span>
+        <span class="white">
+            <mat-icon  class="white" *ngIf="savingVideoCategory">
+              <mat-spinner diameter="20"></mat-spinner>
+            </mat-icon>
+          </span>
+      </button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+</div>

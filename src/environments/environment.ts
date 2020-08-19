@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  base_url: 'https://herbertazurefunctionsprod.azurewebsites.net/api/',
-  //base_url: 'https://hebertazurefunctions.azurewebsites.net/api/',
+  // base_url: 'https://herbertazurefunctionsprod.azurewebsites.net/api/',
+  base_url: 'https://hebertazurefunctions.azurewebsites.net/api/',
   rave_publicKey: 'FLWPUBK_TEST-b7a6d0a478d201ceae721033e1f39c95-X',
   clientAllowedImageFormats: ['png', 'jpg', 'jpeg', 'gif'],
   clientAllowedVideoFormats: ['mp4', 'mov', 'avi', 'mpg', 'ogv', '3gp', '3g2'],
