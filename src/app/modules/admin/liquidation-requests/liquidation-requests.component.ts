@@ -33,11 +33,11 @@ export class LiquidationRequestsComponent implements OnInit {
   ];
   displayedColumns = [
     'requesterId',
-    'kycIDType',
     'kycIDNumber',
     'kycIDUrl',
     'amount',
     'liquidationStatus',
+    'reason',
     'phoneNumber',
     'liquidationChannelAccountDetails',
     'actions',
