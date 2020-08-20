@@ -27,4 +27,12 @@ export class VideoCategoriesService {
       map(data => data)
     );
   }
+
+  deleteVideoCategory(videoId): Observable<any> {
+    return this.http.delete(
+      `${this.base_url}DeleteVideoCategory`, { params: { Id: videoId } }
+    ).pipe(
+      map(data => data)
+    );
+  }
 }

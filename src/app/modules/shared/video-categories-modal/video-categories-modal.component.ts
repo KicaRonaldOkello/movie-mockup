@@ -10,12 +10,15 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 export class VideoCategoriesModalComponent implements OnInit {
 
   action;
+  categoryCode;
   actionData = new FormControl('');
   constructor(public dialogRef: MatDialogRef<VideoCategoriesModalComponent>,
   @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit(): void {
     this.action = this.data.action;
+    this.categoryCode = this.data.categoryCode;
+    this.actionData.setValue(this.categoryCode);
   }
 
   onClick(data): void {

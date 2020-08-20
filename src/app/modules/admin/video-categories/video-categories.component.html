@@ -1,31 +1,48 @@
 <div class="body">
-  <h2>System Settings</h2>
+  <h2>Video Categories</h2>
 
-  <mat-table [dataSource]="data">
-
-    <ng-container matColumnDef="createVideoCategory">
-      <mat-header-cell *matHeaderCellDef> Create Category</mat-header-cell>
-      <mat-cell *matCellDef="let element">{{element.createVideoCategory}}</mat-cell>
-    </ng-container>
+  <div class="spinner" *ngIf="loadVideoCategories">
+    <mat-spinner></mat-spinner>
+  </div>
+  <mat-table [dataSource]="data" *ngIf="!loadVideoCategories">
 
     <ng-container matColumnDef="categoryCode">
       <mat-header-cell *matHeaderCellDef> Category Name</mat-header-cell>
-      <mat-cell matTooltip="Click to add category name" *matCellDef="let element" (click)="addCategoryName()">{{element.categoryCode}}</mat-cell>
+      <mat-cell matTooltip="Click to add category name" *matCellDef="let element" (click)="addCategoryName(element.id, element.categoryCode)">{{element.categoryCode}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="coverImageUrl">
       <mat-header-cell *matHeaderCellDef> Cover Image Url</mat-header-cell>
-      <mat-cell matTooltip="Click to add cover image url" *matCellDef="let element" (click)="upload()">{{element.coverImageUrl}}</mat-cell>
+      <mat-cell matTooltip="Click to add cover image url" *matCellDef="let element" (click)="upload(element.id)">{{element.coverImageUrl}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="update">
-      <mat-header-cell *matHeaderCellDef> Action</mat-header-cell>
-      <mat-cell *matCellDef="let element"><button class="button button-red" (click)="createVideoCategory()">
-          <span *ngIf="!savingVideoCategory">
+      <mat-header-cell *matHeaderCellDef> Update</mat-header-cell>
+      <mat-cell
+        *matCellDef="let element"><button
+        class="button button-red"
+        [disabled]="(!updatedCategoryName || !updateCoverImageUrl) && (element.id === '0')"
+        (click)="createVideoCategory(element.id)">
+          <span *ngIf="!savingVideoCategory  || !(savedItemId == element.id)">
             Update
           </span>
         <span class="white">
-            <mat-icon  class="white" *ngIf="savingVideoCategory">
+            <mat-icon  class="white" *ngIf="savingVideoCategory && (savedItemId == element.id)">
+              <mat-spinner diameter="20"></mat-spinner>
+            </mat-icon>
+          </span>
+      </button>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="delete">
+      <mat-header-cell *matHeaderCellDef> Delete</mat-header-cell>
+      <mat-cell *matCellDef="let element"><button class="button button-red" *ngIf="element.id !== '0'" (click)="deleteCategory(element.id)">
+          <span *ngIf="!deletingVideoCategory  || !(savedItemId == element.id)">
+            Delete
+          </span>
+        <span class="white">
+            <mat-icon  class="white" *ngIf="deletingVideoCategory && (savedItemId == element.id)">
               <mat-spinner diameter="20"></mat-spinner>
             </mat-icon>
           </span>

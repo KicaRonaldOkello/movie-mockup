@@ -3,17 +3,19 @@ import {
   HttpRequest,
   HttpHandler,
   HttpEvent,
-  HttpInterceptor
+  HttpInterceptor, HttpErrorResponse
 } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import {Observable, throwError} from 'rxjs';
 import Helpers from 'src/app/helpers/helpers';
+import {tap} from 'rxjs/operators';
+import {Router} from '@angular/router';
 
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
   private excludedUrlsRegex: RegExp[];
   private excludedUrls = [ '.svg' ];
-  constructor() {
+  constructor(private router: Router) {
     this.excludedUrlsRegex =
       this.excludedUrls.map(urlPattern => new RegExp(urlPattern, 'i')) || [];
   }
@@ -35,7 +37,17 @@ export class TokenInterceptor implements HttpInterceptor {
             token
           }
         });
-        return next.handle(request);
+        return next.handle(request).pipe(tap(() => {},
+          (err: any) => {
+              if (err instanceof HttpErrorResponse) {
+                if (err.status !== 401) {
+                  return;
+                }
+                this.router.navigateByUrl('/auth');
+                return throwError(err);
+              }
+          }
+          ));
 
       }
 
