@@ -93,8 +93,8 @@ export class CreateToursPackageComponent implements OnInit, AfterViewInit {
 
   upload() {
     const myWidget = cloudinary.createUploadWidget({
-        cloudName: 'do6g6dwlz',
-        uploadPreset: 'vdoc0rsk',
+        cloudName: environment.cloudName,
+        uploadPreset: environment.uploadPreset,
         multiple: false,
       maxImageFileSize: environment.maxImageFileSize
       }, (error, result) => {

@@ -35,18 +35,18 @@ export class GetBlogsService {
       `${this.base_url}GetBlogArticle?Id=${id}`,{ headers:{'skip':'true'} }
     ).pipe(
       map(data => data)
-    )
+    );
   }
 
-  createBlog(blog):Observable<any> {
+  createBlog(blog): Observable<any> {
     return this.http.post(
       `${this.base_url}SaveBlogArticle?`, blog
     ).pipe(
       map(data => data)
-    )
+    );
   }
 
-  deleteBlog(id):Observable<any> {
+  deleteBlog(id): Observable<any> {
     return this.http.delete(
       `${this.base_url}DeleteBlogArticle?Id=${id}&code=tjNVpZgpeDGDhSfGWpOHsV25A0T7EFOzkPigTNsoE7NpLQxfqtEIRA==`
     ).pipe(

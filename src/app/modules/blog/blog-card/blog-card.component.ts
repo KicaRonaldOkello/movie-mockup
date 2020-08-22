@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { GetBlogsService } from 'src/app/services/blog/get-blogs.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatIconRegistry } from '@angular/material/icon';
-import { DomSanitizer } from '@angular/platform-browser';
+import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { ShareDataService } from 'src/app/services/share-data/share-data.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -20,6 +20,7 @@ export class BlogCardComponent implements OnInit {
   @Input() displayVideo = false;
   @Output() deletedItemId = new EventEmitter();
   @Output() updateBlogItem = new EventEmitter();
+  videoUrl: SafeResourceUrl = '';
   controls = false;
   constructor(
     private blogService: GetBlogsService,
@@ -45,9 +46,9 @@ export class BlogCardComponent implements OnInit {
     }
 
   ngOnInit() {
-    if(this.data.isYoutubeVideo) {
-      this.data.fileUrl = this.data.fileUrl.replace('watch?v=', 'embed/');
-      this.data.fileUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(this.data.fileUrl);
+    if (this.data.isYoutubeVideo) {
+      const url = this.data.fileUrl.replace('watch?v=', 'embed/');
+      this.videoUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(url);
     }
   }
 

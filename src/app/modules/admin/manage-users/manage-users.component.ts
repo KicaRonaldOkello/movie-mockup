@@ -52,7 +52,7 @@ export class ManageUsersComponent implements OnInit {
       this.loadingUsers = false;
       this.users = res.items;
       this.pageCount = res.pageCount;
-      this.shareDataService.showUserInfo();
+      this.shareDataService.showUserInfo('true');
     });
   }
 

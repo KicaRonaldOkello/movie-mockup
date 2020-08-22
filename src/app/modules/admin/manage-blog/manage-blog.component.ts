@@ -53,16 +53,6 @@ export class ManageBlogComponent implements OnInit, AfterViewInit {
       const blog = {
         author: {
           id: 0,
-          authorName: 'Mwooyo Gwa Janzi',
-          authorId: '@kanzukazaha',
-          authorBio: 'Mwooyo Gwa Janzi is a leading Author on Medium with over 5 years of experience in the field',
-          profilePic: 'https://placeimg.com/300/300/people',
-          facebookLink: '#',
-          twitterLink: '#',
-          instagramLink: '#',
-          linkedInLink: '#',
-          modifiedOn: '2020-03-29T18:34:23.6606922+00:00',
-          createdOn: '2020-03-29T18:34:23.6606901+00:00'
         },
         id: 0,
         coverImage: 'https://placeimg.com/800/300/nature',
@@ -163,9 +153,9 @@ export class ManageBlogComponent implements OnInit, AfterViewInit {
     }
 
     upload() {
-      let myWidget = cloudinary.createUploadWidget({
-        cloudName: 'do6g6dwlz',
-        uploadPreset: 'vdoc0rsk',
+      const myWidget = cloudinary.createUploadWidget({
+        cloudName: environment.cloudName,
+        uploadPreset: environment.uploadPreset,
         maxImageFileSize: environment.maxImageFileSize,
         multiple: false}, (error, result) => {
           if (!error && result && result.event === 'success') {

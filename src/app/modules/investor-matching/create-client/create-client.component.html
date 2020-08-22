@@ -28,7 +28,10 @@
                 </span>
                 <span>
                   <label for="">Currency Code: </label>
-                  <input class="input-fields-others" placeholder="e.g. UGX" formControlName="currencyCode" type="text">
+                  <select formControlName="currencyCode" name="location" required>
+                    <option selected value="">Choose currency</option>
+                    <option *ngFor="let currency of supportedCurrencies" [value]="currency">{{currency}}</option>
+                </select>
                 </span>
                 <span>
                   <label for="">Amount Requested: </label>

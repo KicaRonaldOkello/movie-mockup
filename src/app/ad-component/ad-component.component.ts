@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ShareDataService } from '../services/share-data/share-data.service';
 import { CommentsService } from '../services/comments/comments.service';
 import { FormControl } from '@angular/forms';
+import Helpers from '../helpers/helpers';
 
 @Component({
   selector: 'app-ad-component',
@@ -19,23 +20,26 @@ export class AdComponentComponent implements OnInit {
   writtenComment = new FormControl('');
   videoId;
   postingComment = false;
-  constructor(private router: Router,
-              private shareDataService: ShareDataService,
-              private commentsService: CommentsService) {
+  userData;
+  constructor(
+    private router: Router,
+    private shareDataService: ShareDataService,
+    private commentsService: CommentsService) {
+    this.userData = Helpers.getUserData();
   }
 
 
   ngOnInit() {
     this.router.events.subscribe((event) => {
-      if(event['url']) {
+      if (event['url']) {
           this.checkRoute(event['url']);
       }
   });
 
-  if (this.router.url === '/' || this.router.url === '/tv') {
+    if (this.router.url === '/' || this.router.url === '/tv') {
     this.checkRoute('/tv');
   }
-   this.shareDataService.videoCommentId.subscribe(res => {
+    this.shareDataService.videoCommentId.subscribe(res => {
      if (res !== '') {
        this.videoId = res;
        this.writtenComment.setValue('');
@@ -56,11 +60,10 @@ export class AdComponentComponent implements OnInit {
   loadComments(id) {
     this.loadingComments = true;
     this.commentsService.getComments(`Video_${id}`).subscribe(res => {
-      if (res.comments.length === 0) {
+        this.loadingComments = false;
+        if (res.comments.length === 0) {
         this.noComments = true;
-        this.loadingComments = false;
       } else {
-        this.loadingComments = false;
         this.noComments = false;
         this.comments = res.comments;
       }
@@ -72,13 +75,14 @@ export class AdComponentComponent implements OnInit {
       this.postingComment = true;
       const comment = {
         PageId: `Video_${this.videoId}`,
-        Comment: this.writtenComment.value,
-        profilePic: "https://placeimg.com/300/300/people",
-        UserId:"testUser",
+        comment: this.writtenComment.value,
+        profilePic: this.userData.profilePicUrl,
+        userId: this.userData.userId,
       };
 
       this.commentsService.saveComment(comment).subscribe(result => {
-        this.comments.push({comment: this.writtenComment.value});
+        this.comments.push(comment);
+        this.noComments = false;
         this.postingComment = false;
         this.writtenComment.setValue('');
       });

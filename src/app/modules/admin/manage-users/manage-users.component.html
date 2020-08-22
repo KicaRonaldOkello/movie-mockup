@@ -11,7 +11,7 @@
       </span>
       <span>
         <select #role name="Type" required (change)="selectRole(role.value)">
-          <option [selected]="true" disabled="true" value="null">Role</option>
+          <option [selected]="true" value="">Role</option>
           <option *ngFor="let role of roles" [value]="role">{{role}}</option>
         </select>
       </span>

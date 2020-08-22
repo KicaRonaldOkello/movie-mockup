@@ -134,8 +134,8 @@ export class LiquidationRequestsComponent implements OnInit {
 
   upload(requestId) {
     const myWidget = cloudinary.createUploadWidget({
-        cloudName: 'do6g6dwlz',
-        uploadPreset: 'vdoc0rsk',
+        cloudName: environment.cloudName,
+        uploadPreset: environment.uploadPreset,
         maxImageFileSize: environment.maxImageFileSize,
         multiple: false
       }, (error, result) => {

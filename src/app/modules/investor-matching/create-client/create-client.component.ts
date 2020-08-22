@@ -8,6 +8,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import Helpers from 'src/app/helpers/helpers';
 import {environment} from '../../../../environments/environment';
 import {ActivatedRoute} from '@angular/router';
+import {ToursService} from '../../../services/tours/tours.service';
 
 
 declare var cloudinary: any;
@@ -34,6 +35,7 @@ export class CreateClientComponent implements OnInit, OnDestroy {
   editData: any = '';
   isShow: boolean;
   loadingMyInvestmentProject = true;
+  supportedCurrencies;
   constructor(
     private shareDataService: ShareDataService,
     private fb: FormBuilder,
@@ -42,6 +44,7 @@ export class CreateClientComponent implements OnInit, OnDestroy {
     private investmentProjectService: InvestmentProjectService,
     private matIconRegistry: MatIconRegistry,
     private domSanitizer: DomSanitizer,
+    private toursService: ToursService
   ) {
     this.shareDataService.showAd('true');
     this.shareDataService.showEditable('true');
@@ -73,8 +76,16 @@ export class CreateClientComponent implements OnInit, OnDestroy {
       this.loadingMyInvestmentProject = true;
       this.getInvestmentProject(this.itemId);
     } else {
-      this.loadingMyInvestmentProject = false;
+      this.loadingMyInvestmentProject = true;
     }
+    this.getSupportedCurrencies();
+  }
+
+  getSupportedCurrencies() {
+    this.toursService.getAllSupportedCurrencies().subscribe(res => {
+      this.loadingMyInvestmentProject = false;
+      this.supportedCurrencies = res.supportedCurrencies;
+    });
   }
 
   editInvestmentProject(data) {
@@ -111,8 +122,8 @@ export class CreateClientComponent implements OnInit, OnDestroy {
 
   upload() {
     const myWidget = cloudinary.createUploadWidget({
-        cloudName: 'do6g6dwlz',
-        uploadPreset: 'vdoc0rsk',
+        cloudName: environment.cloudName,
+        uploadPreset: environment.uploadPreset,
         multiple: false,
         maxImageFileSize: environment.maxImageFileSize
     }, (error, result) => {
@@ -173,8 +184,8 @@ export class CreateClientComponent implements OnInit, OnDestroy {
 
   uploadOfficeImages() {
     const myWidget = cloudinary.createUploadWidget({
-      cloudName: 'do6g6dwlz',
-      uploadPreset: 'vdoc0rsk',
+      cloudName: environment.cloudName,
+      uploadPreset: environment.uploadPreset,
       multiple: true,
       maxImageWidth: 180,
       maxImageHeight: 160,

@@ -33,7 +33,7 @@ export class DisplayClientCardsComponent implements OnInit {
 
 
   nextPage() {
-    if (this.page < this.pageCount) {
+    if ((this.pageCount - this.page) > 1) {
     const pageNumber = this.page + 1;
     this.shareDataService.traverseToPage(pageNumber);
     }

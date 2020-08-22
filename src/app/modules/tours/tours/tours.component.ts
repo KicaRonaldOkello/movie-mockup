@@ -111,6 +111,7 @@ export class ToursComponent implements OnInit {
       NumberOfPeople: `${numberOfPeopleMin}-${numberOfPeopleMax}`,
       OwnerId: ownerId
     };
+    this.page = 0;
     this.searchingPackages = true;
     this.getToursPackages(data);
   }
@@ -125,7 +126,7 @@ export class ToursComponent implements OnInit {
   }
 
   nextPage() {
-    if (this.page < this.pageCount) {
+    if ((this.pageCount - this.page) > 1) {
       this.page = this.page + 1;
       this.getToursPackages({});
     }

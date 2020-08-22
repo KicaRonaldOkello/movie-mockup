@@ -29,7 +29,7 @@ export class DisplayTranslatorsComponent implements OnInit {
     private route: ActivatedRoute,
   ) {
     this.shareDataService.showAd('true');
-
+    this.shareDataService.showUserInfo('');
     this.matIconRegistry.addSvgIcon(
       'previous-page',
       this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/double-arrow-left.svg')
@@ -63,7 +63,7 @@ export class DisplayTranslatorsComponent implements OnInit {
   }
 
   nextPage() {
-    if (this.page < this.pageCount) {
+    if ((this.pageCount - this.page) > 1) {
       this.page = this.page + 1;
       this.loadingTranslatorPackages = true;
       this.getAllTranslatorPackages({});
@@ -79,6 +79,7 @@ export class DisplayTranslatorsComponent implements OnInit {
   }
 
   searchTranslationPackage(data) {
+    this.page = 0;
     this.loadingTranslatorPackages = true;
     this.getAllTranslatorPackages(data);
   }

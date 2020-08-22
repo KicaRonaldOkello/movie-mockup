@@ -6,8 +6,8 @@ import {CreateTranslatorComponent} from './create-translator/create-translator.c
 import { AuthGuardService as AuthGuard } from 'src/app/services/guards/auth-guard.service';
 
 const routes: Routes = [
-  { path: '', component: DisplayTranslatorsComponent, canActivate: [AuthGuard] },
-  { path: 'translator-details', component: TanslatorDetailsComponent, canActivate: [AuthGuard] },
+  { path: '', component: DisplayTranslatorsComponent, },
+  { path: 'translator-details', component: TanslatorDetailsComponent },
   { path: 'create-translator', component: CreateTranslatorComponent, canActivate: [AuthGuard] },
 ];
 

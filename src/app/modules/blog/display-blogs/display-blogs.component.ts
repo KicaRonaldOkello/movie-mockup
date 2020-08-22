@@ -21,8 +21,9 @@ export class DisplayBlogsComponent implements OnInit, OnChanges, AfterViewInit {
   @Input() reload;
   @Input() videos: any;
   @Input() displayVideos = false;
-  @Input() pageCounts;
+  @Input() videoPageCount;
   @Output() updateBlog = new EventEmitter();
+  @Output() nextVideos = new EventEmitter();
   constructor(
     private blogService: GetBlogsService,
     private matIconRegistry: MatIconRegistry,
@@ -57,7 +58,7 @@ export class DisplayBlogsComponent implements OnInit, OnChanges, AfterViewInit {
       this.loadBlogs();
     }
     if (changes.pageCounts.currentValue !== 'undefined') {
-      this.pageCount = this.pageCounts;
+      this.pageCount = this.videoPageCount;
     }
   }
 
@@ -83,11 +84,7 @@ export class DisplayBlogsComponent implements OnInit, OnChanges, AfterViewInit {
   }
 
   nextPage() {
-    // if ((this.videos != 'undefined') && (this.page >= this.pageCount)) {
-    //   this.page += 1;
-    //   this.shareDataService.traverseToPage(this.page);
-    // } else
-    if (this.page >= this.pageCount) {
+    if ((this.pageCount - this.page) <= 1) {
       return;
     } else {
     this.page += 1;
@@ -95,12 +92,16 @@ export class DisplayBlogsComponent implements OnInit, OnChanges, AfterViewInit {
     }
   }
 
+  nextVideoPage() {
+    if ((this.videoPageCount - this.page) <= 1) {
+      return;
+    } else {
+      this.page += 1;
+      this.nextVideos.emit(this.page);
+    }
+  }
+
   previousPage() {
-    // this.openDialog();
-    // if ((this.videos != 'undefined') && (this.page < 1)) {
-    //   this.page -= 1;
-    //   this.shareDataService.traverseToPage(this.page);
-    // } else
     if (this.page < 1) {
       return;
     } else {
@@ -108,6 +109,15 @@ export class DisplayBlogsComponent implements OnInit, OnChanges, AfterViewInit {
     this.loadBlogs();
   }
 }
+
+  previousVideoPage() {
+    if (this.page < 1) {
+      return;
+    } else {
+      this.page -= 1;
+      this.nextVideos.emit(this.page);
+    }
+  }
 
 deletedItem(BlogId) {
   const nonDeletedBlogs = this.blogs.filter(item => item.id !== BlogId);

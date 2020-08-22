@@ -50,6 +50,7 @@
         [displayVideos]="true"
         [displayBlogInAdmin]="true"
         [reload]="false"
-        [pageCounts]="pageCount"
+        [videoPageCount]="pageCount"
+        (nextVideos)="nextPage($event)"
 ></app-display-blogs>
 </div>

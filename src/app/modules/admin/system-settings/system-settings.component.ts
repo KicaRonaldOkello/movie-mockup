@@ -72,7 +72,6 @@ export class SystemSettingsComponent implements OnInit {
         const objIndex = this.data.findIndex((obj => obj.id === settingId));
         this.data[objIndex].settingValue = result.returnedSettingValue;
         delete this.data[objIndex].status;
-        console.log(this.data[objIndex]);
       } else if (result.reply === 'cancel editValue') {
       }
     });

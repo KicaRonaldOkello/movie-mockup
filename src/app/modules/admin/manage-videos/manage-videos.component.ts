@@ -22,7 +22,7 @@ export class ManageVideosComponent implements OnInit {
   updateVideoItemId = '';
   isShow: boolean;
   topPosToStartShowing = 100;
-  videos:any = '';
+  videos: any = '';
   page: any = 0;
   pageCount: any;
   limit = 12;
@@ -102,8 +102,8 @@ export class ManageVideosComponent implements OnInit {
 
   upload() {
     const myWidget = cloudinary.createUploadWidget({
-      cloudName: 'do6g6dwlz',
-      uploadPreset: 'vdoc0rsk',
+      cloudName: environment.cloudName,
+      uploadPreset: environment.uploadPreset,
       multiple: false,
       maxVideoFileSize: environment.maxVideoFileSize
       }, (error, result) => {
@@ -179,4 +179,9 @@ export class ManageVideosComponent implements OnInit {
         this.videoCategories = res.items;
       });
     }
+
+  nextPage(page) {
+    this.page = page;
+    this.loadVideos();
+  }
 }

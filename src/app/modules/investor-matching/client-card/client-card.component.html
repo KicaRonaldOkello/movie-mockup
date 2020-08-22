@@ -41,7 +41,7 @@
 
       <mat-icon
         class="deleteButton"
-        *ngIf="showIcons || (this.userData.roleId === 'ADMIN')"
+        *ngIf="showIcons || (this.userData?.roleId === 'ADMIN')"
         matTooltipClass="my-custom-tooltip"
         matTooltip="Delete project"
         (click)="deleteProject(cardData.id)"

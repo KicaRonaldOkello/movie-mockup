@@ -119,6 +119,7 @@ export class DispplayClientsComponent implements OnInit {
       Returns: `${returnsMin}-${returnsMax}`
 
     };
+    this.page = 0;
     this.getAllInvestmentProjects(data);
   }
 

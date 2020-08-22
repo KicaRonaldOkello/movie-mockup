@@ -115,6 +115,10 @@ export class LandingPageComponent implements OnInit {
 
   }
 
+  onMetadata(e) {
+    this.loadedVideoDuration = parseInt(e.target.duration, 10);
+  }
+
   getVideo(videoId) {
     this.videoService.getSingleVideo(videoId).subscribe(res => {
       this.videos = [res];

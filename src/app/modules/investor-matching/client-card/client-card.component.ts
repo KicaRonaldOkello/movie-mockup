@@ -44,7 +44,7 @@ export class ClientCardComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.cardData.userId === this.userData.userId) {
+    if (this.cardData.userId === this.userData?.userId) {
       this.showIcons = true;
     }
   }

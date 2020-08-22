@@ -2,14 +2,14 @@
 
     <span>
       <select name="cars" required #fromLang (change)="selectedFromLanguage(fromLang.value)">
-        <option [selected]="true" disabled="true" value="null">From Language</option>
+        <option [selected]="true" value="">From Language</option>
         <option *ngFor="let fromLanguage of fromLanguages" [value]="fromLanguage.name">{{fromLanguage.name}}</option>
       </select>
     </span>
     <span class="middle-text"><p>to</p></span>
     <span>
       <select name="cars" required #toLang (change)="selectedToLanguage(toLang.value)">
-        <option [selected]="true" disabled="true" value="null">To Language</option>
+        <option [selected]="true" value="">To Language</option>
          <option *ngFor="let toLanguage of toLanguages" [value]="toLanguage.name">{{toLanguage.name}}</option>
       </select>
     </span>
@@ -24,7 +24,7 @@
 
     <span>
       <select name="Type" required formControlName="Type">
-        <option [selected]="true" disabled="true" value="null">Type</option>
+        <option [selected]="true" value="">Type</option>
         <option value="AUDIO">AUDIO</option>
         <option value="VIDEO">VIDEO</option>
         <option value="LIVE">LIVE</option>

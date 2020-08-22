@@ -43,7 +43,7 @@ export class TranslatorCardsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.userData.userId === this.data.ownerId) {
+    if (this.userData?.userId === this.data.ownerId) {
       this.displayDeleteButton = true;
     }
     this.shareDataService.displayUserInfo.subscribe(res => {

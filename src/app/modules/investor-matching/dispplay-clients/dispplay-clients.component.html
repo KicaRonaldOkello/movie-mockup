@@ -29,7 +29,7 @@
             <input type="text" class="input-name" formControlName="username" placeholder="Name">
             <img src="assets/search.svg" alt="">
         </span>
-      <mat-checkbox (change)="isChecked($event)">View my packages</mat-checkbox>
+      <mat-checkbox *ngIf="userData?.userId" (change)="isChecked($event)">View my packages</mat-checkbox>
         <span class="button-cover">
             <button class="button " (click)="searchInvestmentProject()">Search</button>
         </span>

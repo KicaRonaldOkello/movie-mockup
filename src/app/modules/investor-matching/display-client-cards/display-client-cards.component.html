@@ -5,8 +5,8 @@
     <span *ngFor="let cardData of data" class="cards" [style.margin-bottom]="pageCount <= 0 ? '100px' : '0px'">
         <app-client-card [cardData]="cardData"></app-client-card>
     </span>
-    <span *ngIf="pageCount > 0" class="arrows">
+    <span *ngIf="pageCount > 1" class="arrows">
         <mat-icon [class.previousPage]="page > 0" class="left-arrow" (click)="previousPage()" svgIcon="previous-page"></mat-icon>
-        <mat-icon [class.previousPage]="page < pageCount" (click)="nextPage()" svgIcon="next-page"></mat-icon>
+        <mat-icon [class.previousPage]="(pageCount - page) > 1" (click)="nextPage()" svgIcon="next-page"></mat-icon>
     </span>
 </div>

@@ -1,5 +1,8 @@
-<div class="spinner" *ngIf="loadingPage">
+<div class="spinner" *ngIf="loadingPage && !notFound">
   <mat-spinner></mat-spinner>
+</div>
+<div class="spinner" *ngIf="notFound">
+  <p>{{notFound}}</p>
 </div>
 <div class="component-body" *ngIf="!loadingPage">
   <div class="top">

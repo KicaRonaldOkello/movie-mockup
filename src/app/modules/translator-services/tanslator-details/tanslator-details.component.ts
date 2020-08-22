@@ -33,6 +33,7 @@ export class TanslatorDetailsComponent implements OnInit {
   liveTranslationForm: FormGroup;
   isSubmitted = false;
   revealEmail = false;
+  notFound;
   constructor(
     private shareDataService: ShareDataService,
     private activatedRoute: ActivatedRoute,
@@ -70,8 +71,12 @@ export class TanslatorDetailsComponent implements OnInit {
 
   getTranslationPackage(id) {
     this.translationService.getTranslatorPackage(id).subscribe(res => {
-      this.package = res;
       this.loadingPage = false;
+      if (res.status.statusCode === '100') {
+        this.notFound = res.status.statusDesc;
+      } else if (res.status.statusCode === '0') {
+        this.package = res;
+      }
     });
   }
 
@@ -88,8 +93,8 @@ export class TanslatorDetailsComponent implements OnInit {
 
   upload() {
     const myWidget = cloudinary.createUploadWidget({
-        cloudName: 'do6g6dwlz',
-        uploadPreset: 'vdoc0rsk',
+        cloudName: environment.cloudName,
+        uploadPreset: environment.uploadPreset,
         multiple: false,
         maxVideoFileSize: environment.maxVideoFileSize,
         maxAudioFileSize: environment.maxVideoFileSize,

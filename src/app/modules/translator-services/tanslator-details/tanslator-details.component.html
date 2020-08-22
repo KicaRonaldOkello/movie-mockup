@@ -1,7 +1,10 @@
-<div class="spinner" *ngIf="loadingPage">
+<div class="spinner" *ngIf="loadingPage && !notFound">
   <mat-spinner></mat-spinner>
 </div>
-<div class="component-body" *ngIf="!loadingPage">
+<div class="spinner" *ngIf="notFound">
+  <p>{{notFound}}</p>
+</div>
+<div class="component-body" *ngIf="!loadingPage && !notFound">
   <app-translator-search-bar (searchData)="searchTranslationPackage($event)"></app-translator-search-bar>
   <div class="body">
     <div class="profile-picture">
@@ -58,115 +61,13 @@
             <p class="value" *ngIf="package.textTranslationPrice !== 'NOT_OFFERED'">{{package.textTranslationPrice | number}}</p>
           </div>
         </div>
-<!--        <div class="payment-card">-->
-<!--          <p class="title">-->
-<!--            Payment Information-->
-<!--          </p>-->
-<!--          <mat-accordion>-->
-<!--            <mat-expansion-panel hideToggle>-->
-<!--            </mat-expansion-panel>-->
-<!--            <mat-expansion-panel (opened)="panelOpenState = true"-->
-<!--                                 (closed)="panelOpenState = false">-->
-<!--              <mat-expansion-panel-header [collapsedHeight]="'270px'" [expandedHeight]="'300px'">-->
-<!--                <mat-panel-title>-->
-<!--                  <div class="bio-details">-->
-<!--                    <span class="chooseLanguages">-->
-<!--                      <p>Package:</p>-->
-<!--                      <select #chosenPackage (change)="packageToPay(chosenPackage.value)" required>-->
-<!--                        <option selected disabled>Choose Package</option>-->
-<!--                        <option *ngIf="package.audioTranslationPrice != 'NOT_OFFERED'" value="audioTranslationPrice">Audio Translation</option>-->
-<!--                        <option *ngIf="package.videoTranslationPrice != 'NOT_OFFERED'" value="videoTranslationPrice">Video Translation</option>-->
-<!--                        <option *ngIf="package.liveTranslationPrice != 'NOT_OFFERED'" value="liveTranslationPrice">Live Translation</option>-->
-<!--                        <option *ngIf="package.textTranslationPrice != 'NOT_OFFERED'" value="textTranslationPrice">Text Translation</option>-->
-<!--                      </select>-->
-<!--                    </span>-->
-<!--                  </div>-->
-<!--                  <div class="bio-details">-->
-<!--                    <p>Amount to Pay:</p>-->
-<!--                    <p class="value">{{amountToPay | number}}</p>-->
-<!--                  </div>-->
-<!--                  <div class="bio-details">-->
-<!--                    <p>Currency:</p>-->
-<!--                    <p class="value">{{package.currencyCode}}</p>-->
-<!--                  </div>-->
-<!--                  <div class="bio-details" *ngIf="uploadUrl">-->
-<!--                    <p class="upload-title">Uploaded file url:</p>-->
-<!--                    <p class="value url-value">{{uploadUrl}}</p>-->
-<!--                  </div>-->
-<!--                  <div *ngIf="isLiveTranslation" [formGroup]="liveTranslationForm">-->
-<!--                    <div class="calendar">-->
-<!--                      <label>Date: </label>-->
-<!--                      <label>-->
-<!--                        <input placeholder="Choose a Date"  formControlName="date" matInput [matDatepicker]="picker">-->
-<!--                      </label>-->
-<!--                      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>-->
-<!--                      <mat-datepicker #picker color="warn"></mat-datepicker>-->
-<!--                    </div>-->
-<!--                    <div class="ngx-timepicker-field-example">-->
-<!--                      <label class="time">Time: </label>-->
-<!--                      <label>-->
-<!--                        <ngx-timepicker-field [format]="24" (timeChanged)="chosenTime($event)"></ngx-timepicker-field>-->
-<!--                      </label>-->
-<!--                    </div>-->
-<!--                    <div class="bio-details">-->
-<!--                      <p class="upload-title">Meeting link:</p>-->
-<!--                      <label>-->
-<!--                        <input class="meeting-link" formControlName="meetingLink">-->
-<!--                      </label>-->
-<!--                    </div>-->
-<!--                  </div>-->
-<!--                  <div class="bio-details" *ngIf="!isLiveTranslation">-->
-<!--                    <p class="upload-title">File to be translated:</p>-->
-<!--                    <button class="button" (click)="upload()">Upload</button>-->
-<!--                  </div>-->
-<!--                  <div class="bio-details" *ngIf="uploadUrl">-->
-<!--                    <p class="upload-title">Uploaded file url:</p>-->
-<!--                    <p class="value url-value">{{uploadUrl}}</p>-->
-<!--                  </div>-->
-<!--                </mat-panel-title>-->
-<!--              </mat-expansion-panel-header>-->
-<!--              <div class="bio-details">-->
-<!--                <p class="upload-title">Email:</p>-->
-<!--                <label>-->
-<!--                  <input class="meeting-link" formControlName="meetingLink">-->
-<!--                </label>-->
-<!--              </div>-->
-<!--              <div class="bio-details" *ngIf="uploadUrl">-->
-<!--                <p class="upload-title">Uploaded file url:</p>-->
-<!--                <p class="value url-value">{{uploadUrl}}</p>-->
-<!--              </div>-->
-<!--              <div *ngIf="isLiveTranslation" class="align-button">-->
-<!--                <button class="button" routerLink="/translation">Cancel</button>-->
-<!--                <button class="button" [disabled]="!liveTranslationForm.valid" (click)="payNow()">-->
-<!--                  <span *ngIf="!isSubmitted">Pay Now</span>-->
-<!--                  <span class="white" *ngIf="isSubmitted">-->
-<!--                <mat-icon>-->
-<!--                  <mat-spinner diameter="20" class="white"></mat-spinner>-->
-<!--                </mat-icon>-->
-<!--              </span>-->
-<!--                </button>-->
-<!--              </div>-->
-<!--              <div *ngIf="!isLiveTranslation" class="align-button">-->
-<!--                <button class="button"  routerLink="/translation">Cancel</button>-->
-<!--                <button class="button" [disabled]="!hasChosenTranslationType || !uploadUrl" (click)="payNow()">-->
-<!--                  <span *ngIf="!isSubmitted">Pay Now</span>-->
-<!--                  <span class="white" *ngIf="isSubmitted">-->
-<!--                <mat-icon>-->
-<!--                  <mat-spinner diameter="20" class="white"></mat-spinner>-->
-<!--                </mat-icon>-->
-<!--              </span>-->
-<!--                </button>-->
-<!--              </div>-->
-<!--            </mat-expansion-panel>-->
-<!--          </mat-accordion>-->
-<!--        </div>-->
         <div class="card" [class.liveSelected]="isLiveTranslation || uploadUrl">
           <p class="title">Payment Information</p>
           <div class="bio-details">
           <span class="chooseLanguages">
             <label>Package:</label>
             <select #chosenPackage (change)="packageToPay(chosenPackage.value)" required>
-              <option selected disabled>Choose Package</option>
+              <option selected value="">Choose Package</option>
               <option *ngIf="package.audioTranslationPrice != 'NOT_OFFERED'" value="audioTranslationPrice">Audio Translation</option>
               <option *ngIf="package.videoTranslationPrice != 'NOT_OFFERED'" value="videoTranslationPrice">Video Translation</option>
               <option *ngIf="package.liveTranslationPrice != 'NOT_OFFERED'" value="liveTranslationPrice">Live Translation</option>
@@ -221,7 +122,7 @@
             <p class="upload-title">Uploaded file url:</p>
             <p class="value url-value">{{uploadUrl}}</p>
           </div>
-          <div *ngIf="isLiveTranslation" class="align-button">
+          <div *ngIf="isLiveTranslation && userData?.userId" class="align-button">
             <button class="button" routerLink="/translation">Cancel</button>
             <button class="button" [disabled]="!liveTranslationForm.valid" (click)="payNow()">
               <span *ngIf="!isSubmitted">Pay Now</span>
@@ -232,7 +133,7 @@
               </span>
             </button>
           </div>
-          <div *ngIf="!isLiveTranslation" class="align-button">
+          <div *ngIf="!isLiveTranslation && userData?.userId" class="align-button">
             <button class="button"  routerLink="/translation">Cancel</button>
             <button class="button" [disabled]="!hasChosenTranslationType || !uploadUrl" (click)="payNow()">
               <span *ngIf="!isSubmitted">Pay Now</span>

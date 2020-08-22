@@ -9,5 +9,7 @@ export const environment = {
   maxVideoFileSize: 50000000,
   maxFileSizeForChats: 5000000,
   contactHelpEmail: 'test@test.com',
-  contactHelpTitle: 'I NEED SOME HELP'
+  contactHelpTitle: 'I NEED SOME HELP',
+  cloudName: '',
+  uploadPreset: ''
 };

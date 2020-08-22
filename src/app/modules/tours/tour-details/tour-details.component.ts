@@ -14,6 +14,7 @@ export class TourDetailsComponent implements OnInit {
   packageId;
   data;
   loadingPage = true;
+  notFound = '';
   constructor(
     private shareDataService: ShareDataService,
     private fb: FormBuilder,
@@ -65,6 +66,11 @@ export class TourDetailsComponent implements OnInit {
     this.toursService.getSingleToursPackage(this.packageId).subscribe(res => {
       this.data = res;
       this.loadingPage = false;
+      if (res.status.statusCode === '100') {
+        this.notFound = res.status.statusDesc;
+      } else if (res.status.statusCode === '0') {
+        this.data = res;
+      }
     });
   }
 

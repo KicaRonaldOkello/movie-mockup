@@ -155,8 +155,8 @@ export class ChatComponent implements OnInit, AfterViewChecked {
 
   upload() {
     const myWidget = cloudinary.createUploadWidget({
-        cloudName: 'do6g6dwlz',
-        uploadPreset: 'vdoc0rsk',
+        cloudName: environment.cloudName,
+        uploadPreset: environment.uploadPreset,
         multiple: true,
         maxFileSIze: environment.maxFileSizeForChats
       }, (error, result) => {

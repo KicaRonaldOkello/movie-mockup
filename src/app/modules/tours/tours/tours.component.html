@@ -28,7 +28,7 @@
             <input type="text" class="input-name" formControlName="packageName" placeholder="Package Name">
             <img src="assets/search.svg" alt="">
         </span>
-      <mat-checkbox (change)="isChecked($event)">View my packages</mat-checkbox>
+      <mat-checkbox *ngIf="userData?.userId" (change)="isChecked($event)">View my packages</mat-checkbox>
       <span class="button-cover">
             <button class="button " (click)="searchInvestmentProject()">Search</button>
         </span>
@@ -51,9 +51,9 @@
           <app-tours-card [data]="package" (deletedItemId)="deletedItemId($event)"></app-tours-card>
         </div>
       </div>
-      <span *ngIf="pageCount > 0" class="arrows">
+      <span *ngIf="pageCount > 1" class="arrows">
           <mat-icon [class.previousPage]="page > 0" class="left-arrow" (click)="previousPage()" svgIcon="previous-page"></mat-icon>
-          <mat-icon [class.previousPage]="page < pageCount" (click)="nextPage()" svgIcon="next-page"></mat-icon>
+          <mat-icon [class.previousPage]="(pageCount - page) > 1" (click)="nextPage()" svgIcon="next-page"></mat-icon>
       </span>
       </div>
     </div>

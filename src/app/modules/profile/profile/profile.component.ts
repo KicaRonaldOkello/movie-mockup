@@ -73,8 +73,8 @@ export class ProfileComponent implements OnInit {
 
   upload() {
     const myWidget = cloudinary.createUploadWidget({
-        cloudName: 'do6g6dwlz',
-        uploadPreset: 'vdoc0rsk',
+        cloudName: environment.cloudName,
+        uploadPreset: environment.uploadPreset,
         maxImageFileSize: environment.maxImageFileSize,
         multiple: false
       }, (error, result) => {
@@ -155,8 +155,8 @@ export class ProfileComponent implements OnInit {
 
   uploadId() {
     const myWidget = cloudinary.createUploadWidget({
-        cloudName: 'do6g6dwlz',
-        uploadPreset: 'vdoc0rsk',
+        cloudName: environment.cloudName,
+        uploadPreset: environment.uploadPreset,
         maxImageFileSize: environment.maxImageFileSize,
         multiple: false
       }, (error, result) => {

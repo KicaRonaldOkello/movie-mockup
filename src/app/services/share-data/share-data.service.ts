@@ -95,7 +95,7 @@ export class ShareDataService {
     this.searchTranslationPackage.next(data);
   }
 
-  showUserInfo() {
-    this.displayUser.next('true');
+  showUserInfo(data) {
+    this.displayUser.next(data);
   }
 }
