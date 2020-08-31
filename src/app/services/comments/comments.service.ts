@@ -13,20 +13,19 @@ export class CommentsService {
   base_url = environment.base_url;
   constructor(private http: HttpClient) { }
 
-  getComments(commentId):Observable<any> {
+  getComments(commentId): Observable<any> {
     return this.http.get(
-      `${this.base_url}GetAllPageComments?PageId=${commentId}&code=tjNVpZgpeDGDhSfGWpOHsV25A0T7EFOzkPigTNsoE7NpLQxfqtEIRA==`,{headers:{skip:"true"} }
+      `${this.base_url}GetAllPageComments?PageId=${commentId}`, { headers: { skip: 'true'} }
     ).pipe(
       map(data => data)
-    )
+    );
   }
 
-  saveComment(comment):Observable<any> {
+  saveComment(comment): Observable <any> {
     return this.http.post(
-      `${this.base_url}SavePageComment?&code=tjNVpZgpeDGDhSfGWpOHsV25A0T7EFOzkPigTNsoE7NpLQxfqtEIRA==`,
+      `${this.base_url}SavePageComment`,
     comment).pipe(
       map(data => data)
-    )
+    );
   }
-  
 }

@@ -81,7 +81,7 @@ export class AdComponentComponent implements OnInit {
       };
 
       this.commentsService.saveComment(comment).subscribe(result => {
-        this.comments.push(comment);
+        this.comments.unshift(comment);
         this.noComments = false;
         this.postingComment = false;
         this.writtenComment.setValue('');

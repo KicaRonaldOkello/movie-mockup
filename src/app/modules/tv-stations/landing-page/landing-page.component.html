@@ -45,11 +45,12 @@
         <span class="no-video" *ngIf="!noPlaylistItems && !initiallyDisplayPlayButton">
           <mat-spinner></mat-spinner>
         </span>
-        <span class="video-player" *ngIf="!noPlaylistItems && initiallyDisplayPlayButton">
+        <span class="video-player" (window:resize)="onResized($event)" *ngIf="!noPlaylistItems && initiallyDisplayPlayButton">
           <youtube-player
             *ngIf="sources[0].isYoutubeVideo"
             suggestedQuality="default"
             [height]="400"
+            [width]="youtubeVideoWidth"
             [showBeforeIframeApiLoads]="true"
             (stateChange)="onStateChange($event)"
             (ready)="onYoutubePlayerReady($event)"

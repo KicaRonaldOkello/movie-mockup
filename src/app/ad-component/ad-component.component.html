@@ -3,7 +3,20 @@
       <img src="assets/toyota.jpg" alt="toyota">
       <img src="assets/camry.jpg" alt="toyota">
     </span>
-    <p *ngIf="displayComments">Comments</p>
+    <p class="comments-title"  *ngIf="displayComments">Comments</p>
+  <span *ngIf="displayComments && userData?.userId" class="post-comments">
+      <textarea placeholder="Enter comment here" [formControl]="writtenComment"></textarea>
+      <button (click)="submitComment()" class="button comment-button">
+        <span *ngIf="!postingComment">
+          Comment
+        </span>
+        <span *ngIf="postingComment">
+          <mat-icon>
+            <mat-spinner diameter="20"></mat-spinner>
+          </mat-icon>
+        </span>
+      </button>
+    </span>
     <span class="comments" *ngIf="displayComments">
 
       <p class="no-comments" *ngIf="noComments && !loadingComments">
@@ -23,18 +36,5 @@
           </div>
         </span>
       </span>
-    </span>
-    <span *ngIf="displayComments && userData?.userId" class="post-comments">
-      <textarea placeholder="Enter comment here" [formControl]="writtenComment"></textarea>
-      <button (click)="submitComment()" class="button comment-button">
-        <span *ngIf="!postingComment">
-          Comment
-        </span>
-        <span *ngIf="postingComment">
-          <mat-icon>
-            <mat-spinner diameter="20"></mat-spinner>
-          </mat-icon>
-        </span>
-      </button>
     </span>
   </div>
