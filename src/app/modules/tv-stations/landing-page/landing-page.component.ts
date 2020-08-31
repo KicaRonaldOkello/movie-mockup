@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {AfterViewInit, Component, ElementRef, HostListener, NgZone, OnInit, ViewChild} from '@angular/core';
 import { VgAPI } from 'videogular2/core';
 import { VideosService } from 'src/app/services/videos/videos.service';
 import { ShareDataService } from 'src/app/services/share-data/share-data.service';
@@ -17,6 +17,7 @@ import * as getVideoId from 'get-video-id';
   styleUrls: ['./landing-page.component.scss']
 })
 export class LandingPageComponent implements OnInit {
+  @ViewChild('resizeVideo') private myVideoContainer: ElementRef;
   controls = false;
   defaultTvDisplay = true;
   chosenCategory;
@@ -47,6 +48,7 @@ export class LandingPageComponent implements OnInit {
   subscribing = false;
   subscribedCategoryId;
   loadedVideoDuration;
+  youtubeVideoWidth;
   preselectedCategories = {
     sports: {
       id: 'VideoCategory-637258478209573904',
@@ -90,7 +92,8 @@ export class LandingPageComponent implements OnInit {
     private route: ActivatedRoute,
     private orderService: OrderService,
     private subscriptionService: SubscriptionsService,
-    private videoCategoryService: VideoCategoriesService
+    private videoCategoryService: VideoCategoriesService,
+    private zone: NgZone
     ) {
 
     this.sources = [];
@@ -153,8 +156,19 @@ export class LandingPageComponent implements OnInit {
     this.payment = this.route.snapshot.queryParamMap.get('payment');
     this.failureMessage();
     history.pushState(null, '', location.href.split('?')[0]);
+
   }
 
+  @HostListener('window:resize', ['$event'])
+  onResized(event) {
+    if (event.target.innerWidth > 975) {
+      this.youtubeVideoWidth = event.target.innerWidth * 0.8 * 0.8;
+    } else if ((801 < event.target.innerWidth) && (event.target.innerWidth < 975)) {
+      this.youtubeVideoWidth = event.target.innerWidth * 0.8;
+    } else {
+      this.youtubeVideoWidth = event.target.innerWidth;
+    }
+  }
 
   mouseEnter() {
     this.controls = true;
